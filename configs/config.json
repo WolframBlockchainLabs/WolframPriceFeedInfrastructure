@@ -1,0 +1,120 @@
+{
+    "appPort": "{{PORT}}",
+    "appTestPort": "3002",
+    "mainUrl": "{{MAIN_URL}}",
+    "https" : false,
+    "projectName": "{{PROJECT_NAME}}",
+    "packageName": "{{npm_package_name}}",
+    "db" : {
+        "username": "{{DB_USERNAME}}",
+        "password": "{{DB_PASSWORD}}",
+        "database": "{{DB_DATABASE}}",
+        "dialect": "{{DB_DIALECT}}",
+        "host": "{{DB_HOST}}",
+        "port": "{{DB_PORT}}"
+    },
+    "test-db": {
+        "username": "{{TEST_DB_USERNAME}}",
+        "password": "{{TEST_DB_PASSWORD}}",
+        "database": "{{TEST_DB_DATABASE}}",
+        "dialect": "{{TEST_DB_DIALECT}}",
+        "host": "{{TEST_DB_HOST}}",
+        "port": "{{TEST_DB_PORT}}"
+    },
+    "sessions" : {
+        "secure" : {{SESSIONS_SECURE}},
+        "secret":  "{{SECRET}}",
+        "name" : "skeleton.sid",
+        "expires": 43200000
+    },
+    "actions": {
+        "ACTIVATION_MEASUREMENT": "{{ACTIVATION_MEASUREMENT}}",
+        "ACTIVATION_TIMEOUT": "{{ACTIVATION_TIMEOUT}}"
+    },
+    "images": {
+        "avatar" : {
+            "path": "storage/avatars",
+            "sizes" : {
+                "s" : {
+                    "width"   : 120,
+                    "height"  : 120,
+                    "quality" : 90
+                },
+                "m" : {
+                    "width"   : 200,
+                    "height"  : 200,
+                    "quality" : 90
+                },
+                "l" : {
+                    "width"   : 500,
+                    "height"  : 500,
+                    "quality" : 90
+                }
+            }
+        },
+    },
+    "logs" : [
+        {
+            "isPlainText": "{{IS_PLAIN_TEXT}}",
+            "name" : "api",
+            "level": "info",
+            "transports": [
+                {
+                    "type": "daily-file",
+                    "filename": "logs/api-%DATE%.log",
+                    "maxFiles": "7d"
+                },
+                {
+                    "type": "console",
+                    "level": "warning",
+                    "pretty": true
+                },
+                {
+                    "type": "mail",
+                    "level": "emerg"
+                }
+            ]
+        },
+        {
+            "isPlainText": "{{IS_PLAIN_TEXT}}",
+            "name" : "workers",
+            "level": "info",
+            "transports": [
+                {
+                    "type": "daily-file",
+                    "filename": "logs/workers-%DATE%.log",
+                    "maxFiles": "7d"
+                },
+                {
+                    "type": "console",
+                    "level": "debug",
+                    "pretty": true
+                },
+                {
+                    "type": "mail",
+                    "level": "emerg"
+                }
+            ]
+        },
+        {
+            "isPlainText": "{{IS_PLAIN_TEXT}}",
+            "name" : "application",
+            "level": "info",
+            "transports": [
+                {
+                    "type": "daily-file",
+                    "filename": "logs/application-%DATE%.log",
+                    "maxFiles": "7d"
+                },
+                {
+                    "type": "console",
+                    "level": "debug"
+                },
+                {
+                    "type": "mail",
+                    "level": "emerg"
+                }
+            ]
+        }
+    ]
+}

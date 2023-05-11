@@ -1,0 +1,12 @@
+node_modules/
+npm-debug.log
+coverage/*
+uploads/*
+logs/*
+.env
+geojsonData/
+bin/generator/tmp
+storage/*
+uploads/*
+coverage
+**/.DS_Store

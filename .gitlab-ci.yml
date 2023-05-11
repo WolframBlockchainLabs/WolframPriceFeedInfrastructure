@@ -1,0 +1,51 @@
+image: docker
+
+services:
+  - name: docker:dind
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  # DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  DOCKER_HOST: "tcp://docker:2375"
+
+stages:
+  - build
+  - test
+  - push
+
+before_script:
+  - export BUILD_TAG=$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME/\//-}
+  - export LOCAL_BUILD_TAG=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker build -t $LOCAL_BUILD_TAG .
+    - docker push $LOCAL_BUILD_TAG
+
+tests:
+  stage: test
+  script:
+    - BUILD_TAG=${LOCAL_BUILD_TAG} docker-compose -f docker-compose.ci.yml --project-name skeleton up --remove-orphans -d
+    - docker exec -i skeleton-be npm run --prefix /app ci:wait-mysql
+    - docker exec -i skeleton-be npm run test:lint
+    - docker exec -i skeleton-be npm run --prefix /app migration:test
+    # - docker exec -i skeleton-be npm run --prefix /app test:audit 
+    - docker exec -i skeleton-be npm run --prefix /app test:ava 
+    - docker exec -i skeleton-be npm run --prefix /app test:coverage 
+
+push:
+  stage: push
+  script:
+    - docker tag $LOCAL_BUILD_TAG $BUILD_TAG
+    - docker push $BUILD_TAG
+  only:
+    - master
+    - develop
+    - /^release\/.*$/
+    - tags
+
+after_script:
+  # - docker ps
+  - BUILD_TAG=${BUILD_TAG} docker-compose -f docker-compose.ci.yml --project-name skeleton down
