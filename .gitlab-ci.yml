@@ -21,7 +21,7 @@ build:
     - docker build -t $BUILD_TAG .
     - docker push $BUILD_TAG
   only:
-    - master
+    - main
     - develop
     - /^release\/.*$/
     - tags
