@@ -3,23 +3,20 @@ version: '3.9'
 services:
     be:
         image: ${BUILD_TAG}
-        container_name: skeleton-be
+        container_name: ccdb
         depends_on: ['test-db']
         environment:
             TZ: Europe/Kiev
             MODE: application
         env_file: .env.ci
-    test-db:
-        image: mysql:8.0.25
+    postgres:
+        image: postgres:15
         command: --default-authentication-plugin=mysql_native_password --skip-log-bin --disable-log-bin
         restart: always
         environment:
-            MYSQL_DATABASE: skeleton_test
-            MYSQL_USER: skeleton
-            MYSQL_PASSWORD: password
-            MYSQL_ROOT_PASSWORD: password
-            TZ: Europe/Kiev
-            LC_ALL: en_US.UTF-8
-            LANG: en_US.UTF-8
-        container_name: skeleton-test-db
+            POSTGRES_DATABASE: ccdb_test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_ROOT_PASSWORD: password
+        container_name: ccdb-test-db
 

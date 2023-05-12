@@ -13,20 +13,6 @@
         "host": "{{DB_HOST}}",
         "port": "{{DB_PORT}}"
     },
-    "test-db": {
-        "username": "{{TEST_DB_USERNAME}}",
-        "password": "{{TEST_DB_PASSWORD}}",
-        "database": "{{TEST_DB_DATABASE}}",
-        "dialect": "{{TEST_DB_DIALECT}}",
-        "host": "{{TEST_DB_HOST}}",
-        "port": "{{TEST_DB_PORT}}"
-    },
-    "sessions" : {
-        "secure" : {{SESSIONS_SECURE}},
-        "secret":  "{{SECRET}}",
-        "name" : "skeleton.sid",
-        "expires": 43200000
-    },
     "actions": {
         "ACTIVATION_MEASUREMENT": "{{ACTIVATION_MEASUREMENT}}",
         "ACTIVATION_TIMEOUT": "{{ACTIVATION_TIMEOUT}}"
@@ -51,7 +37,7 @@
                     "quality" : 90
                 }
             }
-        },
+        }
     },
     "logs" : [
         {

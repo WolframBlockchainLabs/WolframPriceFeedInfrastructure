@@ -1,16 +1,16 @@
 {
-    "extends": "webbylab",
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "sourceType": "module"
-    },
-    "rules": {
-        "linebreak-style": [
-            "error",
-            "unix"
-        ]
-    },
-    "plugins": [
-        "ava"
-    ]
+  "extends": "webbylab",
+  "parser": "babel-eslint",
+  "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2021
+  },
+  "rules": {
+    "align-import/align-import": 1,
+    "linebreak-style": 0
+  },
+  "plugins": [
+      "ava",
+      "align-import"
+  ]
 }
