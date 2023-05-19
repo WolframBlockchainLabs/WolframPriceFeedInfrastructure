@@ -1,5 +1,5 @@
-import ImportDB        from './../lib/workers/database/Import.js';
-import AppCliProvider  from './../lib/AppCliProvider.js';
+import ImportDB       from './../lib/workers/database/Import.js';
+import AppCliProvider from './../lib/AppCliProvider.js';
 
 const provider = AppCliProvider.create();
 

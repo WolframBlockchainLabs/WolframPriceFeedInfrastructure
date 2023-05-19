@@ -1,4 +1,4 @@
-import AppCliProvider  from './../lib/AppCliProvider.js';
+import AppCliProvider from './../lib/AppCliProvider.js';
 
 const provider = AppCliProvider.create();
 
@@ -9,7 +9,7 @@ provider.initApp(async () => {
         type  : provider.sequelize.QueryTypes.SELECT
     });
 
-    console.log('MySql is ready');
+    console.log('DB is ready');
 
     await provider.shutdown();
 

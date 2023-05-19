@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --max-old-space-size=8192 app.js",
-    "nodemon": "nodemon --max-old-space-size=8192 app.js",
+    "start": "node --max-old-space-size=8192  app.js",
+    "nodemon": "nodemon --max-old-space-size=8192 --legacy-watch  app.js",
     "tasks:news": "MODE=application node --max-old-space-size=8192 lib/workers/news/app.js run",
-    "docker:up": "docker-compose -f docker/docker-compose.yml --project-name ccdb up",
+    "docker:up": "docker compose -f docker/docker-compose.yml --project-name ccdb up",
     "docker:build": "docker-compose -f docker/docker-compose.yml --project-name ccdb build",
     "docker:exec:be": "docker exec -it ccdb /bin/sh",
     "docker:exec:db": "docker exec -it ccdb-db /bin/sh",
@@ -32,7 +32,7 @@
     "migration:test": "sequelize db:migrate --config lib/config.cjs --env test-db",
     "migration:rollback:db": "sequelize db:migrate:undo --config lib/config.cjs --env db",
     "migration:rollback:test": "sequelize db:migrate:undo --config lib/config.cjs --env test-db",
-    "ci:wait-mysql": "MODE=test node --max-old-space-size=8192 seeders/Ci.js"
+    "ci:wait-pg": "MODE=test node --max-old-space-size=8192 seeders/Ci.js"
   },
   "pre-commit": [
     "test:lint"
