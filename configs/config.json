@@ -4,7 +4,6 @@
   "mainUrl": "{{MAIN_URL}}",
   "https": false,
   "projectName": "{{PROJECT_NAME}}",
-  "packageName": "{{npm_package_name}}",
   "db": {
     "username": "{{DB_USERNAME}}",
     "password": "{{DB_PASSWORD}}",
@@ -108,5 +107,16 @@
         }
       ]
     }
-  ]
+  ],
+
+  // "collectorManager": {
+  //   "exchanges": {
+  //     "binance": {
+  //       "name": "Binance",
+  //       "apiKey":"",
+  //       "apiSecret": "",
+  //       "markets": ["BTC/EUR", "BTC/USDT"]
+  //     }
+  //   }
+  // }
 }
