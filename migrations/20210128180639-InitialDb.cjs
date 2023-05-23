@@ -23,8 +23,8 @@ module.exports = {
         await queryInterface.createTable('OrderBooks', {
             id        : { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true  },
             marketId  : { type: Sequelize.INTEGER, allowNull: false, references: { model: 'Markets', key: 'id' } },
-            bids      : { type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.INTEGER)), allowNull: false },
-            asks      : { type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.INTEGER)), allowNull: false },
+            bids      : { type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.FLOAT)), allowNull: false },
+            asks      : { type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.FLOAT)), allowNull: false },
             createdAt : { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') }
         });
     },
