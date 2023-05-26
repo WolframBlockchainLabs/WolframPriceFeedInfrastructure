@@ -10,4 +10,4 @@ storage/*
 uploads/*
 coverage
 **/.DS_Store
-logs.*
+logs.*
