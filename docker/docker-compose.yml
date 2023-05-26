@@ -29,6 +29,7 @@ services:
     prometheus:
         image: prom/prometheus:v2.28.1
         container_name: ccdb-prometheus
+        user: root
         volumes:
             - ./prometheus:/etc/prometheus
             - ~/docker-volumes/ccdb/prometheus:/prometheus
@@ -37,6 +38,7 @@ services:
     grafana:
         image: grafana/grafana:8.0.6
         container_name: ccdb-grafana
+        user: root
         volumes:
             - ./grafana/provisioning:/etc/grafana/provisioning
             - ./grafana/config.ini:/etc/grafana/config.ini

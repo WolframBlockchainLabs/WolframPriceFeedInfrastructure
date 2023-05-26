@@ -9,7 +9,7 @@ module.exports = {
 
         await queryInterface.createTable('Markets', {
             id               : { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true  },
-            externalMarketId : { type: Sequelize.STRING, allowNull: false, unique: true },
+            externalMarketId : { type: Sequelize.STRING, allowNull: false },
             symbol           : { type: Sequelize.STRING, allowNull: false },
             base             : { type: Sequelize.STRING, allowNull: false },
             quote            : { type: Sequelize.STRING, allowNull: false },

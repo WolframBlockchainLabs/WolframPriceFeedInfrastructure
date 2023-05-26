@@ -9,7 +9,7 @@ provider.initApp(async () => {
         type  : provider.sequelize.QueryTypes.SELECT
     });
 
-    console.log('DB is ready');
+    console.log('DataBase is ready');
 
     await provider.shutdown();
 
