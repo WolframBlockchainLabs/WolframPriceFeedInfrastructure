@@ -25,7 +25,7 @@ services:
             POSTGRES_ROOT_PASSWORD: strong-password
         container_name: ccdb-db
         volumes:
-          - ~/docker-volumes/ccdb/db:/var/lib/
+            - ~/docker-volumes/ccdb/data/db:/var/lib/postgresql/data
     prometheus:
         image: prom/prometheus:v2.28.1
         container_name: ccdb-prometheus
