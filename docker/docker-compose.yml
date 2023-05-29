@@ -23,6 +23,7 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
             POSTGRES_ROOT_PASSWORD: strong-password
+        command: postgres -c 'max_connections=1000'
         container_name: ccdb-db
         volumes:
           - ~/docker-volumes/ccdb/db:/var/lib/
