@@ -21,16 +21,16 @@ module.exports = {
             bidVolume     : { type: Sequelize.FLOAT, allowNull: true },
             ask           : { type: Sequelize.FLOAT, allowNull: false },
             askVolume     : { type: Sequelize.FLOAT, allowNull: true },
-            vwap          : { type: Sequelize.FLOAT, allowNull: false },//must be true
+            vwap          : { type: Sequelize.FLOAT, allowNull: true },
             open          : { type: Sequelize.FLOAT, allowNull: true },
-            close         : { type: Sequelize.FLOAT, allowNull: false },
-            last          : { type: Sequelize.FLOAT, allowNull: false },
+            close         : { type: Sequelize.FLOAT, allowNull: true },
+            last          : { type: Sequelize.FLOAT, allowNull: true },
             previousClose : { type: Sequelize.FLOAT, allowNull: true },
             change        : { type: Sequelize.FLOAT, allowNull: true },
             percentage    : { type: Sequelize.FLOAT, allowNull: true },
             average       : { type: Sequelize.FLOAT, allowNull: true },
-            baseVolume    : { type: Sequelize.FLOAT, allowNull: false },
-            quoteVolume   : { type: Sequelize.FLOAT, allowNull: false },
+            baseVolume    : { type: Sequelize.FLOAT, allowNull: true },
+            quoteVolume   : { type: Sequelize.FLOAT, allowNull: true },
             createdAt     : { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') }
         });
 
