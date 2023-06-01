@@ -4,10 +4,6 @@ module.exports = {
         await queryInterface.createTable('Trades', {
             id         : { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true  },
             marketId   : { type: Sequelize.INTEGER, allowNull: false, references: { model: 'Markets', key: 'id' } },
-            // side      : { type: Sequelize.BOOLEAN, allowNull: false },
-            // price     : { type: Sequelize.FLOAT, allowNull: false },
-            // amount    : { type: Sequelize.FLOAT, allowNull: false },
-            // timestamp : { type: Sequelize.INTEGER, allowNull: false },
             tradesInfo : { type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.FLOAT)), allowNull: true },
             createdAt  : { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') }
         });
