@@ -32,7 +32,7 @@
     "migration:rollback:db": "sequelize db:migrate:undo --config lib/config.cjs --env db",
     "migration:rollback:test": "sequelize db:migrate:undo --config lib/config.cjs --env test-db",
     "ci:wait-pg": "MODE=test node --max-old-space-size=8192 seeders/Ci.js",
-    "collector:run": "node --max-old-space-size=8192 ./lib/collector/collectorRunner.js",
+    "collector:run": "node --max-old-space-size=8192 ./lib/collector/bootstrap.js",
     "docker:collector:run": "docker exec -i ccdb npm run collector:run"
   },
   "pre-commit": [
