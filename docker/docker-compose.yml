@@ -7,6 +7,7 @@ services:
             dockerfile: Dockerfile
         container_name: ccdb
         ports: [ '8000:8000', '3002:3002' ]
+        image: gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend
         depends_on: ['db']
         volumes:
           - ./../:/app

@@ -7,6 +7,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   # DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
   DOCKER_HOST: "tcp://docker:2375"
+  BUILD_TAG: "gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend"
 
 stages:
   - build
