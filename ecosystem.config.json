@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "script": "./lib/collector/bootstrap.js",
+      "name": "collector",
+      "exec_mode": "cluster",
+      "instances": 1,
+      "cron_restart": "* * * * *",
+      "watch": false,
+      "autorestart": false
+    }
+  ]
+}

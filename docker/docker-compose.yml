@@ -7,16 +7,24 @@ services:
             dockerfile: Dockerfile
         container_name: ccdb
         ports: [ '8000:8000', '3002:3002' ]
-        image: gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend
+        #image: gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend
         depends_on: ['db']
         volumes:
           - ./../:/app
-          # - ~/docker-volumes/ccdb/be/node_modules:/app/node_modules
         environment:
             MODE: application
-        command: sh -c "npm i && rm -rf node_modules/multer/node_modules/busboy && npm run nodemon"
+        command: sh -c "npm run nodemon"
+    collectors: 
+        build: 
+            context: ./../
+            dockerfile: Dockerfile
+        container_name: ccdb-collectors
+        depends_on: ['db']
+        #volumes maybe need for prometeus
+        command: sh -c "npm i -g pm2 && pm2-runtime start ./ecosystem.config.json"    
     db:
         image: timescale/timescaledb:latest-pg15
+        container_name: ccdb-db
         restart: always
         ports: ['5432:5432']
         environment:
@@ -25,7 +33,6 @@ services:
             POSTGRES_PASSWORD: password
             POSTGRES_ROOT_PASSWORD: strong-password
         command: postgres -c 'max_connections=500'
-        container_name: ccdb-db
         volumes:
             - ~/docker-volumes/ccdb/data/db:/var/lib/postgresql/data
     prometheus:
