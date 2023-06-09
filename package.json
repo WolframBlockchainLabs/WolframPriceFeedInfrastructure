@@ -84,6 +84,7 @@
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "ava": "^5.2.0",
     "babel-eslint": "^10.1.0",
     "c8": "^7.1.2",
@@ -100,7 +101,6 @@
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-security": "^1.4.0",
-    "faker": "^4.1.0",
     "form-data": "^2.5.0",
     "mkcert": "^1.5.1",
     "node-fetch": "^2.6.7",
