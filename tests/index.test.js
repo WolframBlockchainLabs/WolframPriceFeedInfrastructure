@@ -43,8 +43,6 @@ for (const item of tests) {
 async function runTest(item, baseTestParams) {
     let exception = null;
 
-    console.log('TEST RUN');
-
     let prevResult = {};
 
     if (item.before) {
@@ -79,7 +77,6 @@ async function runTest(item, baseTestParams) {
         throw exception;
     }
 }
-
 
 test.after(async () => {
     await server.shutdown();

@@ -1,25 +1,11 @@
-import { faker } from '@faker-js/faker';
-import Exchange from './../lib/domain-model/Exchange.js';
-// import Market    from './../lib/domain-model/Market.js';
-// import OrderBook   from './../lib/domain-model/OrderBook.js';
+import { exchangeData, marketData, orderBookData } from './test-data.js';
+import Exchange                                    from './../lib/domain-model/Exchange.js';
+import Market                                      from './../lib/domain-model/Market.js';
+import OrderBook                                   from './../lib/domain-model/OrderBook.js';
 // import Trade       from './../lib/domain-model/Trade.js';
 // import Ticker      from './../lib/domain-model/Ticker.js';
 // import CandleStick from './../lib/domain-model/CandleStick.js';
 
-const exchangeData = {
-    externalExchangeId : faker.word.noun(),
-    name               : faker.word.noun()
-};
-
-// const markeData = {
-//     externalMarketId : faker.word.noun(),
-//     symbol           : faker.word.noun(),
-//     base             : faker.word.noun(),
-//     quote            : faker.word.noun(),
-//     baseId           : faker.word.noun(),
-//     quoteId          : faker.word.noun(),
-//     active: faker.datatype.boolean()
-// };
 
 export default class TestFactory {
     async createExchange() {
@@ -28,13 +14,26 @@ export default class TestFactory {
         return exchange;
     }
 
-    // async createMarket() {
-    //     const { exchangeId } = await Exchange.create(exchangeData);
+    async createMarket() {
+        const { id:exchangeId, name: exchangeName } = await this.createExchange();
 
-    //     await Market.create({ exchangeId });
-    // }
+        const { id:marketId, symbol } = await Market.create({ ...marketData, exchangeId });
+
+        return { marketId, symbol, exchangeName };
+    }
+
+    async createOrderBook() {
+        const { marketId, symbol, exchangeName } = await this.createMarket();
+        const { bids, asks } = orderBookData;
+
+        const newOrderBook = await OrderBook.create({ marketId, bids, asks });
+
+        return { exchangeName, marketId, symbol, newOrderBook };
+    }
 
     async cleanup() {
-        await Exchange.destroy({ where: {} });
+        await OrderBook.destroy({ truncate: { cascade: true } });
+        await Market.destroy({ truncate: { cascade: true } });
+        await Exchange.destroy({ truncate: { cascade: true } });
     }
 }
