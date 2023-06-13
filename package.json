@@ -69,6 +69,7 @@
     "node-2fa": "^2.0.1",
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
+    "pm2": "^5.3.0",
     "prom-client": "^13.1.0",
     "rename-keys": "^2.0.1",
     "request-ip": "^2.1.3",

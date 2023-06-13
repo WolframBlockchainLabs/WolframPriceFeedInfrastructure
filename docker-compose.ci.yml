@@ -6,17 +6,14 @@ services:
         container_name: ccdb
         depends_on: ['test-db']
         environment:
-            TZ: Europe/Kiev
             MODE: application
         env_file: .env.ci
     postgres:
-        image: postgres:15
-        command: --default-authentication-plugin=mysql_native_password --skip-log-bin --disable-log-bin
+        image: timescale/timescaledb:latest-pg15
         restart: always
         environment:
             POSTGRES_DATABASE: ccdb_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
-            POSTGRES_ROOT_PASSWORD: password
         container_name: ccdb-test-db
 

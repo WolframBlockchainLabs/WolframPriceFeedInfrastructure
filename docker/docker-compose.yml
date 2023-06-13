@@ -14,14 +14,14 @@ services:
         environment:
             MODE: application
         command: sh -c "npm run nodemon"
-    #collectors: 
-        #build: 
-        #    context: ./../
-        #    dockerfile: Dockerfile
-        #container_name: ccdb-collectors
-        #depends_on: ['db']
-        ##volumes maybe need for prometeus
-        #command: sh -c "npm i -g pm2 && pm2-runtime start ./ecosystem.config.json"
+    collectors: 
+        build: 
+           context: ./../
+           dockerfile: Dockerfile
+        container_name: ccdb-collectors
+        depends_on: ['db']
+        #volumes maybe need for prometeus
+        command: sh -c "npm i -g pm2 && pm2-runtime start ./ecosystem.config.json"
 
     db:
         image: timescale/timescaledb:latest-pg15
