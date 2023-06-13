@@ -107,7 +107,8 @@
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.20",
     "pre-commit": "^1.2.2",
-    "query-string": "^7.0.0"
+    "query-string": "^7.0.0",
+    "sinon": "^15.1.2"
   },
   "description": "NodeJS Backend CCDB",
   "main": "app.js",
