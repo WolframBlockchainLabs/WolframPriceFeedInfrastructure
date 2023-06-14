@@ -8,7 +8,7 @@ module.exports = {
     serial  : true,
     verbose : false,
     files   : [
-        // 'tests/index.test.js',
+        'tests/index.test.js',
         'tests/unit/**.js'
     ],
     concurrency          : 1,

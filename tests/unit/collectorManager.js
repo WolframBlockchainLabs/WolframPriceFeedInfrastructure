@@ -42,7 +42,7 @@ test.afterEach(() => {
 });
 
 
-test.skip('Collector Manager process method', async (t) => {
+test('Collector Manager process method', async (t) => {
     const exchange = 'binance';
     const symbols = [ faker.word.noun() ];
     const db = { sequelize: faker.word.noun() };

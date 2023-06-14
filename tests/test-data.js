@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { faker } from '@faker-js/faker';
 
 export const exchangeData = {
@@ -21,12 +22,11 @@ export const orderBookData = {
 };
 
 
-// eslint-disable-next-line no-magic-numbers
 export function generateCandleStickData(length = 3) {
     return Array.from({ length }, () => Array.from({ length: 5 }, () => faker.number.float()));
 }
 
-// eslint-disable-next-line no-magic-numbers
+
 export function generateTradeData(length = 3) {
     return Array.from({ length }, () => Array.from({ length: 4 }, () => faker.number.float()));
 }
