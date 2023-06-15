@@ -50,4 +50,4 @@ Set the names of the exchanges and markets where data will be collected by colle
 
 ## Support
 
-##Contributing
+## Contributing
