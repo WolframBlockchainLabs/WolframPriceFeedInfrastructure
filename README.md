@@ -16,7 +16,7 @@ Retrieval of saved data by users within a specified range
 Setup application need to take the following steps:
 
 1. Have installed **Node.js®** version not lower than v. 18;
-2. Have installed ** docker-cli (_demon_)** to run docker environment;
+2. Have installed **docker-cli (_demon_)** to run docker environment;
 3. git clone  ??????????????????????
 4. Make sure the docker daemon is running
 5. Run ```npm run docker:up``` command, which will create all necessary images and containers for the stable working of the application.
