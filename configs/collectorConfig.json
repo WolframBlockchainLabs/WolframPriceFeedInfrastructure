@@ -1,5 +1,6 @@
 {
     "collectorManager": {
+      "interval": 60000;
         "exchanges": {
           "binance": {
             "id": "binance",
