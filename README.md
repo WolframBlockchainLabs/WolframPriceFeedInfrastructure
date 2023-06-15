@@ -46,6 +46,35 @@ To customize configurations for different parts of the application, make the nec
 To modify secure configuration options, use the **".env.default"** file found in the root directory of the application.
 To specify the exchanges and markets from which data will be collected, set these in the section **"collectorManager"** of the **config.json**. This is where you configure the data collectors for each exchange and market.
 
+| Variable name     | TYPE      | EXAMPLE      |
+| ----------------- | ---------- | -------- |
+| appPort           | Number       |3000|
+| appTestPort           | Number       |3002|
+| mainUrl           | String       |"http://localhost:8000"|
+| projectName           | String       |ccdb|
+||**db**||
+| username           | String       |pgUserName|
+| password           | String       |yourPassword|
+| database           | String       |yourDatabese|
+| dialect           | String       |postgres|
+| host           | String       |localhost|
+| port           | Number       |5432|
+||**test-db**||
+| username           | String       |pgUserNameTest|
+| password           | String       |yourPasswordTest|
+| database           | String       |yourDatabeseTest|
+| dialect           | String       |postgres|
+| host           | String       |localhost|
+| port           | Number       |5432|
+||**collectorManager**||
+| id (in ccxt library)           | String       |binance|
+| name (oficial)| String       |Binance|
+| apiKey           | String       |jfddsddsf78988!!!85fddsfadd|
+| apiSecret           | String       |sdafasdfsaljfasf==-l122113kjlfsad11!!@|
+| symbols           | String[]       |BTC/USDT, ETH/USDT|
+
+
+
 **2. Docker**
 
 The **_docker_** directory contains configuration files that are essential for setting up the Docker environment. In particular, the _docker-compose.yml_ file holds the foundational setup for all application services. These services run in Docker containers and are generated when you execute the ```npm run docker:up``` command.
