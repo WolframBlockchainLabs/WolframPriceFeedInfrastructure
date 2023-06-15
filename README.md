@@ -1,92 +1,110 @@
-# Backend
+# CCDB application
+
+## Feature 
+Launching collectors to receive and store data on specific symbols (_markets_) from exchanges.
+
+Data is received in four directions: 
+- order book 
+- trade
+- ticker
+- candlestick
+
+Retrieval of saved data by users within a specified range.
+
+## Required 
+1. **Node.js®** version not lower than v. 18;
+
+2. **docker-cli (_demon_)** to run docker environment;
+
+## Setup 
+
+1. Make sure the docker daemon is running
+
+2. Run ```npm run docker:up``` command, which will create all necessary images and containers for the stable working of the application.
+This command will create the containers of the application, database, test-database, and the collector launcher service (You can find the list of services and their corresponding containers within the _docker-compose.yml_ file, located in the 'docker' directory).
+Also, this command starts the **application server** on port _8000_ and **collectors service** for fetching and saving the data.
+
+3. Run ```npm run docker:migration:db``` which will create the necessary entities in the database;
+
+4. After running migrations, use ```npm run docker:seed:database``` which will create five default exchanges in the database (_Binance, Kraken, Gemini, Kucoin and Bitfinex_);
+
+5. To rollback migrations use ```npm run docker:migration:rollback:db```; 
+
+6. To stop the service use ```npm run docker:down``` command.
+
+## Testing
+
+1. Run ```npm run docker:up```;
+2. Run ```npm run docker:migration:test```;
+3. Run ```npm run docker:test:ava```.
+
+## Project structure
+
+**1. Configs**
+
+To customize configurations for different parts of the application, make the necessary changes in the **config.json** file. 
+To modify secure configuration options, use the **".env.default"** file found in the root directory of the application.
+To specify the exchanges and markets from which data will be collected, set these in the section **"collectorManager"** of the **config.json**. This is where you configure the data collectors for each exchange and market.
+
+| Variable name     | TYPE      | EXAMPLE      |
+| ----------------- | ---------- | -------- |
+| appPort           | Number       |3000|
+| appTestPort           | Number       |3002|
+| mainUrl           | String       |"http://localhost:8000"|
+| projectName           | String       |ccdb|
+||**db**||
+| username           | String       |pgUserName|
+| password           | String       |yourPassword|
+| database           | String       |yourDatabese|
+| dialect           | String       |postgres|
+| host           | String       |localhost|
+| port           | Number       |5432|
+||**test-db**||
+| username           | String       |pgUserNameTest|
+| password           | String       |yourPasswordTest|
+| database           | String       |yourDatabeseTest|
+| dialect           | String       |postgres|
+| host           | String       |localhost|
+| port           | Number       |5432|
+||**collectorManager**||
+| id (in ccxt library)           | String       |binance|
+| name (oficial)| String       |Binance|
+| apiKey           | String       |jfddsddsf78988!!!85fddsfadd|
+| apiSecret           | String       |sdafasdfsaljfasf==-l122113kjlfsad11!!@|
+| symbols           | String[]       |BTC/USDT, ETH/USDT|
 
 
 
-## Getting started
+**2. Docker**
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The **_docker_** directory contains configuration files that are essential for setting up the Docker environment. In particular, the _docker-compose.yml_ file holds the foundational setup for all application services. These services run in Docker containers and are generated when you execute the ```npm run docker:up``` command.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+**3. Lib**
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+1). The **_api/rest-api_**  directory contains all necessary middlewares, routes, and controllers that facilitate user interactions with the application. Specifically, the 'router' file includes essential endpoints used on the backend, which enable users to make requests to the web server. More detailed information regarding these endpoints can be found within this [document](https://docs.google.com/document/d/19uerp83M06Sk8KeAF8MmpmZ2xkDFXb596DnAGadW3AU/edit#heading=h.n62o7iyrbu46).
 
-```
-cd existing_repo
-git remote add origin https://gitlab-ee.webbylab.com/ccdb/exchange-analyzer/backend.git
-git branch -M main
-git push -uf origin main
-```
+2). The **_collectors_** directory contains the fundamental logic for initiating and operating the application's collectors. There are four primary collectors in the application: OrderBookCollector, CandleStickCollector, TradeCollector and TickerCollector. These collectors extract data from various exchanges, as specified in the _config.json_ file, using the [CCXT](https://docs.ccxt.com/#/) library. They operate at regular intervals, with the default interval set at 60000 milliseconds. Upon successful data retrieval, the collectors store this information into the database. The application utilizes the **TimescaleDB** database for its data storage needs.
 
-## Integrate with your tools
+3). The **_domain-model_** directory contains the sequelize's entities. Those are: Exchange, Markets, OrderBook, CandleStick, Ticker and Trade. 
 
-- [ ] [Set up project integrations](https://gitlab-ee.webbylab.com/ccdb/exchange-analyzer/backend/-/settings/integrations)
+4). The **_infrastructure_** directory contains general logger that is used in the application. It helps to make the logging process of the application more convenient and understandable.
 
-## Collaborate with your team
+5). The **_use-cases_** directory houses the core logic necessary for interacting with the fundamental entities of the application. Additionally, it includes the logic responsible for validating data received from the application's endpoints.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+**4. Migrations**
 
-Use the built-in continuous integration in GitLab.
+The **_migrations_** directory contains definitions of database migrations.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+**5. Seeders**
 
-***
+The **_seeders_** directory contains the logic for creating initial exchange entries in the application's database.
 
-# Editing this README
+**6. Tests**
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+The **_tests_** directory houses both end-to-end and unit tests. The end-to-end tests are used to evaluate the application's endpoints that users interact with. On the other hand, unit tests are utilized to verify the fundamental logic of the application's data collectors.
 
 ## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.

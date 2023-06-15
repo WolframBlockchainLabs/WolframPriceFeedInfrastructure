@@ -20,32 +20,6 @@
     "host": "{{TEST_DB_HOST}}",
     "port": "{{TEST_DB_PORT}}"
 },
-  "actions": {
-    "ACTIVATION_MEASUREMENT": "{{ACTIVATION_MEASUREMENT}}",
-    "ACTIVATION_TIMEOUT": "{{ACTIVATION_TIMEOUT}}"
-  },
-  "images": {
-    "avatar": {
-      "path": "storage/avatars",
-      "sizes": {
-        "s": {
-          "width": 120,
-          "height": 120,
-          "quality": 90
-        },
-        "m": {
-          "width": 200,
-          "height": 200,
-          "quality": 90
-        },
-        "l": {
-          "width": 500,
-          "height": 500,
-          "quality": 90
-        }
-      }
-    }
-  },
   "logs": [
     {
       "isPlainText": "{{IS_PLAIN_TEXT}}",
