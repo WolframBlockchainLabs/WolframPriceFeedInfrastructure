@@ -21,7 +21,7 @@ services:
         container_name: ccdb-collectors
         depends_on: ['db']
         #volumes maybe need for prometeus
-        command: sh -c "npx pm2 start ./ccxt-collector.config.cjs"
+        command: sh -c "npx pm2-runtime start ./ecosystem.config.cjs"
 
     db:
         image: timescale/timescaledb:latest-pg15
