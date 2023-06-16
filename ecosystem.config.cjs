@@ -26,4 +26,3 @@ const ccxtCollectorsCluster = exchangesArray.reduce((acc, exchange) => {
 
 module.exports = ccxtCollectorsCluster;
 
-// `--exchange=${exchange.id} --symbol=${symbol} --interval=${interval}`
