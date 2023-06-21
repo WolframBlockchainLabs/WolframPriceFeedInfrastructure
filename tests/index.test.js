@@ -1,33 +1,33 @@
-// eslint-disable-next-line import/no-unresolved
-import test            from 'ava';
+import test from 'ava';
 import AppTestProvider from './../lib/AppTestProvider.js';
-import TestFactory     from './TestFactory.js';
-import APIclient       from './APIclient.js';
-import apiTests        from './api/index.js';
+import TestFactory from './TestFactory.js';
+import APIclient from './APIclient.js';
+import apiTests from './api/index.js';
 
 const factory = new TestFactory();
 
-
-let tests = [ ...apiTests ];
+let tests = [...apiTests];
 
 if (tests.find(({ only }) => only)) {
     tests = tests.filter(({ only }) => only);
 }
 
-const server   = AppTestProvider.create().initApp();
-const config   = server.config;
+const server = AppTestProvider.create().initApp();
+const config = server.config;
 
-const coreAPI  = new APIclient(factory, 'api/v1');
+const coreAPI = new APIclient(factory, 'api/v1');
 
 test.before(async () => {
     await server.start();
 });
 
-
 for (const item of tests) {
     test.serial(item.label, async (t) => {
         const baseTestParams = {
-            t, coreAPI, factory, config
+            t,
+            coreAPI,
+            factory,
+            config,
         };
 
         try {
@@ -55,7 +55,8 @@ async function runTest(item, baseTestParams) {
 
     if (item.test) {
         try {
-            const testResult = await item.test({ ...baseTestParams, ...prevResult }) || {};
+            const testResult =
+                (await item.test({ ...baseTestParams, ...prevResult })) || {};
 
             if (testResult) {
                 prevResult = { ...prevResult, ...testResult };
@@ -68,7 +69,8 @@ async function runTest(item, baseTestParams) {
     }
 
     if (item.after) {
-        prevResult = await item.after({ ...baseTestParams, ...prevResult }) || {};
+        prevResult =
+            (await item.after({ ...baseTestParams, ...prevResult })) || {};
     } else {
         await factory.cleanup();
     }

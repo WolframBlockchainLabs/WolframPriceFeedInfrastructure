@@ -1,19 +1,20 @@
-import ImportDB       from './../lib/workers/database/Import.js';
+import ImportDB from './../lib/workers/database/Import.js';
 import AppCliProvider from './../lib/AppCliProvider.js';
 
 const provider = AppCliProvider.create();
 
-provider.initApp(async () => {
-    const worker = new ImportDB();
+provider
+    .initApp(async () => {
+        const worker = new ImportDB();
 
-    try {
-        await worker.process({});
-    } catch (e) {
-        console.log(e.stack);
-    }
+        try {
+            await worker.process({});
+        } catch (e) {
+            console.log(e.stack);
+        }
 
-    await provider.shutdown();
+        await provider.shutdown();
 
-    // process.exit();
-}).start();
-
+        // process.exit();
+    })
+    .start();

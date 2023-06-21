@@ -9,6 +9,5 @@ async function main() {
 main().catch((err) => {
     console.error(err);
 
-    // eslint-disable-next-line no-undef
     process.exit(1);
 });

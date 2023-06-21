@@ -1,13 +1,11 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
-import test                    from 'ava';
-import sinon                   from 'sinon';
-import ccxt                    from 'ccxt';
-import { faker }               from '@faker-js/faker';
-import  { OrderBookCollector } from '../../lib/collectors/OrderBook.js';
-import { initLogger }          from '../../lib/infrastructure/logger/logger.js';
-
+import test from 'ava';
+import sinon from 'sinon';
+import ccxt from 'ccxt';
+import { faker } from '@faker-js/faker';
+import { OrderBookCollector } from '../../lib/collectors/OrderBook.js';
+import { initLogger } from '../../lib/infrastructure/logger/logger.js';
 
 let sandbox;
 
@@ -24,41 +22,45 @@ const orderBookId = faker.number.int();
 
 const fetchOrderBookStubResult = {
     symbol,
-    'bids' : [ [ faker.number.float() ] ],
-    'asks' : [ [ faker.number.float() ] ]
+    bids: [[faker.number.float()]],
+    asks: [[faker.number.float()]],
 };
 
-test.beforeEach(t => {
+test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     sequelize = {
-        OrderBook : {
-            create : sinon.stub()
-        }
+        OrderBook: {
+            create: sinon.stub(),
+        },
     };
 
     ccxtStub = sandbox.stub(ccxt, 'binance').returns({
-        loadMarkets : sandbox.stub().resolves({
-            [symbol] : {
-                id      : 'externalMarketId',
-                base    : 'base',
-                quote   : 'quote',
-                baseId  : 'baseId',
-                quoteId : 'quoteId',
-                active  : true
-            }
+        loadMarkets: sandbox.stub().resolves({
+            [symbol]: {
+                id: 'externalMarketId',
+                base: 'base',
+                quote: 'quote',
+                baseId: 'baseId',
+                quoteId: 'quoteId',
+                active: true,
+            },
         }),
-        fetchOrderBook : sandbox.stub().resolves(fetchOrderBookStubResult)
+        fetchOrderBook: sandbox.stub().resolves(fetchOrderBookStubResult),
     });
 
-    t.context.orderBookCollector = new OrderBookCollector({ exchange, symbol }, sequelize, marketId);
+    t.context.orderBookCollector = new OrderBookCollector(
+        { exchange, symbol },
+        sequelize,
+        marketId,
+    );
 });
 
 test.afterEach(() => {
     sandbox.restore();
 });
 
-test('fetch data should return existing orderBook info', async t => {
+test('fetch data should return existing orderBook info', async (t) => {
     const { orderBookCollector } = t.context;
     const exchangeApiStub = new ccxt[exchange]();
 
@@ -69,7 +71,7 @@ test('fetch data should return existing orderBook info', async t => {
     t.is(undefined, sinon.assert.calledOnce(exchangeApiStub.fetchOrderBook));
 });
 
-test('save data should call model.create', async t => {
+test('save data should call model.create', async (t) => {
     const { orderBookCollector } = t.context;
     const { bids, asks } = fetchOrderBookStubResult;
 
@@ -79,4 +81,3 @@ test('save data should call model.create', async t => {
 
     t.is(undefined, sinon.assert.calledOnce(sequelize.OrderBook.create));
 });
-

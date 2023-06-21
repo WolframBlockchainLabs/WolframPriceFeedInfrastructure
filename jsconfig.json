@@ -4,8 +4,5 @@
         "target": "es2016",
         "strictFunctionTypes": true
     },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+    "exclude": ["node_modules", "**/node_modules/*"]
 }

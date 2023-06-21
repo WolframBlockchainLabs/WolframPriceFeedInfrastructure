@@ -1,5 +1,5 @@
-import fetch  from 'node-fetch';
-import qs     from 'query-string';
+import fetch from 'node-fetch';
+import qs from 'query-string';
 import config from './../lib/config.cjs';
 
 const { appTestPort } = config;
@@ -12,18 +12,31 @@ export default class APIclient {
         this.factory = factory;
     }
 
-
-    async request({ endpoint, method, body, params = {}, headers = {}, asJson = true }) {
-        const { head, url } = await this.prepareRequest({ endpoint, params, headers });
+    async request({
+        endpoint,
+        method,
+        body,
+        params = {},
+        headers = {},
+        asJson = true,
+    }) {
+        const { head, url } = await this.prepareRequest({
+            endpoint,
+            params,
+            headers,
+        });
 
         const res = await fetch(url, {
             method,
-            headers     : head,
-            credentials : 'include',
-            body        : body ? JSON.stringify(body) : undefined
+            headers: head,
+            credentials: 'include',
+            body: body ? JSON.stringify(body) : undefined,
         });
 
-        if (res.headers.get('content-type').includes('application/json') && asJson) {
+        if (
+            res.headers.get('content-type').includes('application/json') &&
+            asJson
+        ) {
             const json = await res.json();
 
             return json;
@@ -41,14 +54,21 @@ export default class APIclient {
     async prepareRequest({ endpoint, params = {}, headers = {} }) {
         const head = { ...headers };
 
-        const query = Object.keys(params).length ? `?${qs.stringify(params)}` : '';
+        const query = Object.keys(params).length
+            ? `?${qs.stringify(params)}`
+            : '';
         const url = `http://localhost:${appTestPort}/${this.apiPrefix}${endpoint}${query}`;
 
         return { head, url };
     }
 
     get(endpoint, params, headers, asJson = true) {
-        return this.request({ endpoint, method: 'GET', params, headers, asJson });
+        return this.request({
+            endpoint,
+            method: 'GET',
+            params,
+            headers,
+            asJson,
+        });
     }
 }
-

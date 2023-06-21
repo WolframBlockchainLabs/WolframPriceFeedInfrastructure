@@ -1,10 +1,17 @@
-import { exchangeData, marketData, orderBookData, tickerData, generateCandleStickData, generateTradeData } from './test-data.js';
-import Exchange                                                                                            from './../lib/domain-model/Exchange.js';
-import Market                                                                                              from './../lib/domain-model/Market.js';
-import OrderBook                                                                                           from './../lib/domain-model/OrderBook.js';
-import Trade                                                                                               from './../lib/domain-model/Trade.js';
-import Ticker                                                                                              from './../lib/domain-model/Ticker.js';
-import CandleStick                                                                                         from './../lib/domain-model/CandleStick.js';
+import {
+    exchangeData,
+    marketData,
+    orderBookData,
+    tickerData,
+    generateCandleStickData,
+    generateTradeData,
+} from './test-data.js';
+import Exchange from './../lib/domain-model/Exchange.js';
+import Market from './../lib/domain-model/Market.js';
+import OrderBook from './../lib/domain-model/OrderBook.js';
+import Trade from './../lib/domain-model/Trade.js';
+import Ticker from './../lib/domain-model/Ticker.js';
+import CandleStick from './../lib/domain-model/CandleStick.js';
 
 export default class TestFactory {
     async createExchange() {
@@ -14,9 +21,13 @@ export default class TestFactory {
     }
 
     async createMarket() {
-        const { id:exchangeId, name: exchangeName } = await this.createExchange();
+        const { id: exchangeId, name: exchangeName } =
+            await this.createExchange();
 
-        const { id:marketId, symbol } = await Market.create({ ...marketData, exchangeId });
+        const { id: marketId, symbol } = await Market.create({
+            ...marketData,
+            exchangeId,
+        });
 
         return { marketId, symbol, exchangeName };
     }

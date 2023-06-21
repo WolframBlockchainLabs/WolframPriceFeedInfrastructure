@@ -16,4 +16,3 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
         container_name: ccdb-test-db
-
