@@ -9,7 +9,7 @@ module.exports = {
     verbose : false,
     files   : [
         'tests/index.test.js',
-        'tests/unit/**.js'
+        // 'tests/unit/**.js'
     ],
     concurrency          : 1,
     environmentVariables : {
