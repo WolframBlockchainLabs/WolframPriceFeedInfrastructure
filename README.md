@@ -44,9 +44,9 @@ For running tests need to take the following steps:
 
 ## Configs 
 
-For setting different configs for different pars of application using **config.json**. 
+For setting different configs for different pars of application using **system.config.json**. 
 For setting secure config options using file **".env.default"** that is located in the root folder.
-Set the names of the exchanges and markets where data will be collected by collectors making in **config.json** in the section **"collectorManager"**. 
+Set the names of the exchanges and markets where data will be collected by collectors making in **collectors.config.json**. 
 
 ## Support
 

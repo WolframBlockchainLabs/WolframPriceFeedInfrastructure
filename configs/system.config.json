@@ -19,7 +19,7 @@
     "dialect": "{{TEST_DB_DIALECT}}",
     "host": "{{TEST_DB_HOST}}",
     "port": "{{TEST_DB_PORT}}"
-},
+  },
   "logs": [
     {
       "isPlainText": "{{IS_PLAIN_TEXT}}",
@@ -118,4 +118,3 @@
     }
   ]
 }
-
