@@ -3,11 +3,11 @@
 import test                     from 'ava';
 import sinon                    from 'sinon';
 import { faker }                from '@faker-js/faker';
-import startCollectors          from '../../lib/collector/startCollectors.js';
-import { OrderBookCollector }   from '../../lib/collector/OrderBook.js';
-import { CandleStickCollector } from '../../lib/collector/CandleStick.js';
-import { TickerCollector }      from '../../lib/collector/Ticker.js';
-import { TradeCollector }       from '../../lib/collector/Trade.js';
+import startCollectors          from '../../lib/collectors/ccxt/startCollectors.js';
+import { OrderBookCollector }   from '../../lib/collectors/ccxt/OrderBook.js';
+import { CandleStickCollector } from '../../lib/collectors/ccxt/CandleStick.js';
+import { TickerCollector }      from '../../lib/collectors/ccxt/Ticker.js';
+import { TradeCollector }       from '../../lib/collectors/ccxt/Trade.js';
 
 
 let sandbox;

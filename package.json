@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --max-old-space-size=8192  app.js",
     "nodemon": "nodemon --max-old-space-size=8192 --legacy-watch  app.js",
-    "collector:run": "npx pm2-runtime start ./ecosystem.config.cjs",
+    "collector:run": "MODE=application npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
     "test:lint": "eslint lib tests app.js --ext js",
     "test:ava": "ava --verbose",
     "test:coverage": "c8 npm run test:ava",

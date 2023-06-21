@@ -6,7 +6,7 @@ import test               from 'ava';
 import sinon              from 'sinon';
 import ccxt               from 'ccxt';
 import { faker }          from '@faker-js/faker';
-import { TradeCollector } from '../../lib/collector/Trade.js';
+import { TradeCollector } from '../../lib/collectors/Trade.js';
 import { initLogger }     from '../../lib/infrastructure/logger/logger.js';
 
 let sandbox;
