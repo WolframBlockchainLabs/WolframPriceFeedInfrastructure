@@ -3,7 +3,7 @@
 import test                     from 'ava';
 import sinon                    from 'sinon';
 import { faker }                from '@faker-js/faker';
-import startCollectors          from '../../lib/collectors/ccxt/startCollectors.js';
+import startCollectors          from '../../lib/cli/ccxt_collectors/start_collectors.js';
 import { OrderBookCollector }   from '../../lib/collectors/ccxt/OrderBook.js';
 import { CandleStickCollector } from '../../lib/collectors/ccxt/CandleStick.js';
 import { TickerCollector }      from '../../lib/collectors/ccxt/Ticker.js';
