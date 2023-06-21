@@ -5,23 +5,25 @@ services:
         build: 
             context: ./../
             dockerfile: Dockerfile
+            args:
+                PORT: 8000
         container_name: ccdb
         ports: [ '8000:8000' ]
-        #image: gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend
+        image: gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend
         depends_on: ['db']
         volumes:
           - ./../:/app
         environment:
             MODE: application
         command: sh -c "npm run nodemon"
+
     collectors: 
         build: 
            context: ./../
            dockerfile: Dockerfile
         container_name: ccdb-collectors
         depends_on: ['db']
-        #volumes maybe need for prometeus
-        command: sh -c "npx pm2-runtime start ./ccxt-collector.config.json"
+        command: sh -c "npm run collector:run"
 
     db:
         image: timescale/timescaledb:latest-pg15

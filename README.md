@@ -42,9 +42,12 @@ Also, this command starts the **application server** on port _8000_ and **collec
 
 **1. Configs**
 
-To customize configurations for different parts of the application, make the necessary changes in the **config.json** file. 
-To modify secure configuration options, use the **".env.default"** file found in the root directory of the application.
-To specify the exchanges and markets from which data will be collected, set these in the section **"collectorManager"** of the **config.json**. This is where you configure the data collectors for each exchange and market.
+For setting different configs for different pars of application using **_system.config.json_**.
+For setting secure config options using file ".env.default" that is located in the root folder.
+Set the names of the exchanges and markets where data will be collected by collectors making in **_collectors.config.json_**.
+
+1) **_system.config_**
+
 
 | Variable name     | TYPE      | EXAMPLE      |
 | ----------------- | ---------- | -------- |
@@ -66,14 +69,17 @@ To specify the exchanges and markets from which data will be collected, set thes
 | dialect           | String       |postgres|
 | host           | String       |localhost|
 | port           | Number       |5432|
-||**collectorManager**||
+
+2) **_collectors.config.json_**
+
+| Variable name     | TYPE      | EXAMPLE      |
+| ----------------- | ---------- | -------- |
+| interval           | Number       |60000|
 | id (in ccxt library)           | String       |binance|
-| name (oficial)| String       |Binance|
+| name (official)| String       |Binance|
 | apiKey           | String       |jfddsddsf78988!!!85fddsfadd|
 | apiSecret           | String       |sdafasdfsaljfasf==-l122113kjlfsad11!!@|
 | symbols           | String[]       |BTC/USDT, ETH/USDT|
-
-
 
 **2. Docker**
 

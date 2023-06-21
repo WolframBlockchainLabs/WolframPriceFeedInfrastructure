@@ -5,7 +5,7 @@ import test                    from 'ava';
 import sinon                   from 'sinon';
 import ccxt                    from 'ccxt';
 import { faker }               from '@faker-js/faker';
-import  { OrderBookCollector } from '../../lib/collector/OrderBook.js';
+import  { OrderBookCollector } from '../../lib/collectors/OrderBook.js';
 import { initLogger }          from '../../lib/infrastructure/logger/logger.js';
 
 

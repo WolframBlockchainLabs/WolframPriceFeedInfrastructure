@@ -5,7 +5,7 @@ import test                 from 'ava';
 import sinon                from 'sinon';
 import ccxt                 from 'ccxt';
 import { faker }            from '@faker-js/faker';
-import  { TickerCollector } from '../../lib/collector/Ticker.js';
+import  { TickerCollector } from '../../lib/collectors/Ticker.js';
 import { initLogger }       from '../../lib/infrastructure/logger/logger.js';
 import { tickerData }       from '../test-data.js';
 
