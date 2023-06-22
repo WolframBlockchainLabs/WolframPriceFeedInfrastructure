@@ -1,26 +1,28 @@
-image: docker
+image: docker:23.0.6
 
 services:
-    - name: docker:dind
+    - docker:23.0.6-dind
 
 variables:
-    DOCKER_TLS_CERTDIR: ''
-    # DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
-    DOCKER_HOST: 'tcp://docker:2375'
-    BUILD_TAG: 'gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend'
+    PROJECT_NAME: ccdb
+    PATH_TO_COMPOSE: ./docker/ci/docker-compose.yml
+    BACKEND_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
+    BACKEND_CONTAINER_NAME: ccdb-be
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_HOST: "tcp://docker:2375"
 
 stages:
-    - build
+    - push
 
 before_script:
-    - export BUILD_TAG=$CI_REGISTRY_IMAGE
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-build:
-    stage: build
+docker_build_push:
+    stage: push
     script:
-        - docker build -t $BUILD_TAG .
-        - docker push $BUILD_TAG
+        - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" build
+        - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" push
     only:
         - main
         - develop
