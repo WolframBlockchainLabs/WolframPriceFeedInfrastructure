@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-commonjs
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.createTable('Exchanges', {
