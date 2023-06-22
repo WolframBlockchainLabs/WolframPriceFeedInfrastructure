@@ -1,8 +1,8 @@
 import test from 'ava';
-import AppTestProvider from './../lib/AppTestProvider.js';
+import AppTestProvider from './AppTestProvider.js';
 import TestFactory from './TestFactory.js';
 import APIclient from './APIclient.js';
-import apiTests from './api/index.js';
+import apiTests from './api.js';
 
 const factory = new TestFactory();
 
@@ -12,7 +12,7 @@ if (tests.find(({ only }) => only)) {
     tests = tests.filter(({ only }) => only);
 }
 
-const server = AppTestProvider.create().initApp();
+const server = new AppTestProvider();
 const config = server.config;
 
 const coreAPI = new APIclient(factory, 'api/v1');

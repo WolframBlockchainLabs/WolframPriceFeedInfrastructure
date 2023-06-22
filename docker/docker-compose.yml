@@ -15,9 +15,12 @@ services:
                 condition: service_healthy
         environment:
             MODE: application
+        env_file: ./env/.env.backend
         command: sh -c "npm run nodemon"
         volumes:
             - ../:/app
+            - /app/node_modules
+
 
     collectors:
         image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
@@ -25,7 +28,11 @@ services:
         depends_on:
             timescale:
                 condition: service_healthy
+        env_file: ./env/.env.backend
         command: sh -c "npm run collector:run"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
     timescale:
         image: timescale/timescaledb:latest-pg15
@@ -37,10 +44,7 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-        environment:
-            POSTGRES_DB: ccdb
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+        env_file: ./env/.env.database
         command: postgres -c 'max_connections=500'
         volumes:
             - ~/docker-volumes/ccdb/database:/var/lib/postgresql/data
@@ -55,9 +59,6 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-        environment:
-            POSTGRES_DB: ccdb_test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+        env_file: ./env/.env.database
         volumes:
             - ~/docker-volumes/ccdb/timescale-test:/var/lib/postgresql/data
