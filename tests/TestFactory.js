@@ -1,16 +1,16 @@
-import { dumpExchange }                                                                                        from '../lib/use-cases/utils/dumps.js';
-import { exchangeData, fakeMarketData, orderBookData, tickerData, generateCandleStickData, generateTradeData } from './test-data.js';
-import Exchange                                                                                                from './../lib/domain-model/Exchange.js';
-import Market                                                                                                  from './../lib/domain-model/Market.js';
-import OrderBook                                                                                               from './../lib/domain-model/OrderBook.js';
-import Trade                                                                                                   from './../lib/domain-model/Trade.js';
-import Ticker                                                                                                  from './../lib/domain-model/Ticker.js';
-import CandleStick                                                                                             from './../lib/domain-model/CandleStick.js';
+import { dumpExchange, dumpMarket }                                                                             from '../lib/use-cases/utils/dumps.js';
+import { exchangeData, fakeMarketsData, orderBookData, tickerData, generateCandleStickData, generateTradeData } from './test-data.js';
+import Exchange                                                                                                 from './../lib/domain-model/Exchange.js';
+import Market                                                                                                   from './../lib/domain-model/Market.js';
+import OrderBook                                                                                                from './../lib/domain-model/OrderBook.js';
+import Trade                                                                                                    from './../lib/domain-model/Trade.js';
+import Ticker                                                                                                   from './../lib/domain-model/Ticker.js';
+import CandleStick                                                                                              from './../lib/domain-model/CandleStick.js';
 
 export default class TestFactory {
-    async createExchanges(data = exchangeData) {
+    async createExchanges() {
         try {
-            for (const exchange of data) {
+            for (const exchange of exchangeData) {
                 await Exchange.create({ externalExchangeId: exchange.externalExchangeId, name: exchange.name });
             }
 
@@ -25,31 +25,20 @@ export default class TestFactory {
     }
 
     async createMarkets() {
-        const exchanges = await this.createExchanges(exchangeData);
+        const exchanges = await this.createExchanges();
 
-        const marketsData = fakeMarketData();
+        const marketsData = fakeMarketsData();
 
-        for (const exchange of exchanges) {
-            for (const market of marketsData) {
-                console.log(market);
-                console.log(exchange.id);
-                await Market.create({ externalMarketId : market.externalMarketId,
-                    symbol           : market.symbol,
-                    base             : market.base,
-                    quote            : market.quote,
-                    baseId           : market.baseId,
-                    quoteId          : market.quoteId,
-                    active           : market.active,
-                    exchangeId       : exchange.id });
-                // await Market.create({ ...market, exchangeId: exchange.id });
-            }
+
+        for (const [ index, exchange ] of exchanges.entries()) {
+            await Market.create({ ...marketsData[index], exchangeId: exchange.id });
         }
 
-        const markets = await Market.findAll();
+        const createMarket = await Market.findAll();
 
-        console.log('MARKETS', markets);
-
-        return markets;
+        return createMarket.map((market) => {
+            return dumpMarket(market);
+        });
     }
 
     async createOrderBook() {
@@ -57,15 +46,9 @@ export default class TestFactory {
 
         const { bids, asks } = orderBookData;
 
-
         for (const market of markets) {
-            console.log('running');
             await OrderBook.create({ marketId: market.id, bids, asks });
         }
-
-        const test = await OrderBook.findAll();
-
-        console.log('test---', test);
     }
 
     async createCandleStick() {

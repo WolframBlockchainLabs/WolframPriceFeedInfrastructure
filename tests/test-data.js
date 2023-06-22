@@ -20,7 +20,7 @@ export const exchangeData = [
     }
 ];
 
-export function fakeMarketData(amount = 4) {
+export function fakeMarketsData(amount = 4) {
     return Array.from(new Array(amount)).map(() => ({
         externalMarketId : faker.word.noun(Math.floor(Math.random() * 10)),
         symbol           : 'BTC/USDT',
