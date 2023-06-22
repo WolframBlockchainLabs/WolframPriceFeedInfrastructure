@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
 import { TradeCollector } from '../../lib/collectors/Trade.js';
-import { initLogger } from '../../lib/infrastructure/logger/logger.js';
 
 let sandbox;
 
@@ -15,8 +14,6 @@ let sequelize;
 let ccxtStub;
 
 let fetchedData;
-
-initLogger();
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';

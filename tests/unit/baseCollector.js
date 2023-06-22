@@ -5,15 +5,12 @@ import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
 import Collector from '../../lib/collectors/Base.js';
-import { initLogger } from '../../lib/infrastructure/logger/logger.js';
 
 let sandbox;
 
 let sequelize;
 
 let ccxtStub;
-
-initLogger();
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';

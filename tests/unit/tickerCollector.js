@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
 import { TickerCollector } from '../../lib/collectors/Ticker.js';
-import { initLogger } from '../../lib/infrastructure/logger/logger.js';
 import { tickerData } from '../test-data.js';
 
 let sandbox;
@@ -13,8 +12,6 @@ let sandbox;
 let sequelize;
 
 let ccxtStub;
-
-initLogger();
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
