@@ -4,7 +4,6 @@
     "exclude": [
         "**/lib/workers/**",
         "**/lib/infrastructure/**",
-        "**/lib/queues/**",
         "**/lib/utils",
         "**/AppProvider.js",
         "**/AppCliProvider.js",
@@ -12,10 +11,7 @@
         "**/middlewares.js",
         "**/collectorRunner.js",
         "**/registerValidationRules.js",
-        "**/testLogger.js",
-        "**/bootstrap.js",
-        "**/chista.js",
-        "**/middlewares.mjs"
+        "**/chista.js"
     ],
     "reporter": ["text", "html"],
     "check-coverage": true,
