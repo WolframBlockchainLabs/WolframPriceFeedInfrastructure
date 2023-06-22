@@ -5,7 +5,7 @@ import test from 'ava';
 import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
-import { CandleStickCollector } from '../../lib/collectors/ccxt/CandleStick.js/index.js';
+import { CandleStickCollector } from '../../lib/collectors/ccxt/CandleStick.js';
 
 let sandbox;
 

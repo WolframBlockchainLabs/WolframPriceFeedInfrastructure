@@ -6,12 +6,12 @@ import {
     generateCandleStickData,
     generateTradeData,
 } from './test-data.js';
-import Exchange from './../lib/domain-model/Exchange.js';
-import Market from './../lib/domain-model/Market.js';
-import OrderBook from './../lib/domain-model/OrderBook.js';
-import Trade from './../lib/domain-model/Trade.js';
-import Ticker from './../lib/domain-model/Ticker.js';
-import CandleStick from './../lib/domain-model/CandleStick.js';
+import Exchange from '../lib/domain-model/entities/Exchange.js';
+import Market from '../lib/domain-model/entities/Market.js';
+import OrderBook from '../lib/domain-model/entities/OrderBook.js';
+import Trade from '../lib/domain-model/entities/Trade.js';
+import Ticker from '../lib/domain-model/entities/Ticker.js';
+import CandleStick from '../lib/domain-model/entities/CandleStick.js';
 
 export default class TestFactory {
     async createExchange() {

@@ -4,7 +4,7 @@ import test from 'ava';
 import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
-import { MarketService } from '../../lib/collectors/MarketService.js/index.js';
+import { MarketService } from '../../lib/collectors/MarketService.js';
 
 let sandbox;
 
