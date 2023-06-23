@@ -1,17 +1,27 @@
-import { dumpExchange, dumpMarket }                                                                             from '../lib/use-cases/utils/dumps.js';
-import { exchangeData, fakeMarketsData, orderBookData, tickerData, generateCandleStickData, generateTradeData } from './test-data.js';
-import Exchange                                                                                                 from './../lib/domain-model/Exchange.js';
-import Market                                                                                                   from './../lib/domain-model/Market.js';
-import OrderBook                                                                                                from './../lib/domain-model/OrderBook.js';
-import Trade                                                                                                    from './../lib/domain-model/Trade.js';
-import Ticker                                                                                                   from './../lib/domain-model/Ticker.js';
-import CandleStick                                                                                              from './../lib/domain-model/CandleStick.js';
+import { dumpExchange, dumpMarket } from '../lib/use-cases/utils/dumps.js';
+import {
+    exchangeData,
+    fakeMarketsData,
+    orderBookData,
+    tickerData,
+    generateCandleStickData,
+    generateTradeData,
+} from './test-data.js';
+import Exchange from './../lib/domain-model/Exchange.js';
+import Market from './../lib/domain-model/Market.js';
+import OrderBook from './../lib/domain-model/OrderBook.js';
+import Trade from './../lib/domain-model/Trade.js';
+import Ticker from './../lib/domain-model/Ticker.js';
+import CandleStick from './../lib/domain-model/CandleStick.js';
 
 export default class TestFactory {
     async createExchanges() {
         try {
             for (const exchange of exchangeData) {
-                await Exchange.create({ externalExchangeId: exchange.externalExchangeId, name: exchange.name });
+                await Exchange.create({
+                    externalExchangeId: exchange.externalExchangeId,
+                    name: exchange.name,
+                });
             }
 
             const exchanges = await Exchange.findAll();
@@ -29,9 +39,11 @@ export default class TestFactory {
 
         const marketsData = fakeMarketsData();
 
-
-        for (const [ index, exchange ] of exchanges.entries()) {
-            await Market.create({ ...marketsData[index], exchangeId: exchange.id });
+        for (const [index, exchange] of exchanges.entries()) {
+            await Market.create({
+                ...marketsData[index],
+                exchangeId: exchange.id,
+            });
         }
 
         const createMarket = await Market.findAll();

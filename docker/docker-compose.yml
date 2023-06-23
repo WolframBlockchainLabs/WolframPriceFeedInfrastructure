@@ -1,75 +1,63 @@
-version: '3.3'
+version: '3.9'
 
 services:
-    app:
-        build: 
-            context: ./../
-            dockerfile: Dockerfile
+    backend:
+        build:
+            context: ../
+            dockerfile: ./docker/config/backend/Dockerfile
             args:
                 PORT: 8000
-        container_name: ccdb
-        ports: [ '8000:8000' ]
-        image: gitlab-ee.webbylab.com:5050/ccdb/exchange-analyzer/backend
-        depends_on: ['db']
-        volumes:
-          - ./../:/app
+        container_name: ccdb-backend
+        ports: ['8000:8000']
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        depends_on:
+            timescale:
+                condition: service_healthy
         environment:
             MODE: application
+        env_file: ./env/.env.backend
         command: sh -c "npm run nodemon"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
-    collectors: 
-        build: 
-           context: ./../
-           dockerfile: Dockerfile
+    collectors:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
         container_name: ccdb-collectors
-        depends_on: ['db']
+        depends_on:
+            timescale:
+                condition: service_healthy
+        env_file: ./env/.env.backend
         command: sh -c "npm run collector:run"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
-    db:
+    timescale:
         image: timescale/timescaledb:latest-pg15
-        container_name: ccdb-db
+        container_name: ccdb-timescale
         restart: always
         ports: ['5432:5432']
-        environment:
-            POSTGRES_DB: ccdb
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -d ccdb -U postgres']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        env_file: ./env/.env.database
         command: postgres -c 'max_connections=500'
         volumes:
-            - ~/docker-volumes/ccdb/data/db:/var/lib/postgresql/data
+            - ~/docker-volumes/ccdb/database:/var/lib/postgresql/data
 
-    test-db:
+    timescale-test:
         image: timescale/timescaledb:latest-pg15
-        container_name: ccdb-test-db
+        container_name: ccdb-timescale-test
         restart: always
         ports: ['5431:5432']
-        environment:
-            POSTGRES_DB: ccdb_test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -d ccdb_test -U postgres']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        env_file: ./env/.env.database
         volumes:
-            - ~/docker-volumes/ccdb/data/test-db:/var/lib/postgresql/data
-    prometheus:
-        image: prom/prometheus:v2.28.1
-        container_name: ccdb-prometheus
-        user: root
-        volumes:
-            - ./prometheus:/etc/prometheus
-            - ~/docker-volumes/ccdb/prometheus:/prometheus
-        ports:
-            - 9090:9090
-    grafana:
-        image: grafana/grafana:8.0.6
-        container_name: ccdb-grafana
-        user: root
-        volumes:
-            - ./grafana/provisioning:/etc/grafana/provisioning
-            - ./grafana/config.ini:/etc/grafana/config.ini
-            - ./grafana/dashboards:/var/lib/grafana/dashboards
-            - ~/docker-volumes/ccdb/grafana:/var/lib/grafana
-        environment:
-            - GF_AUTH_DISABLE_LOGIN_FORM=true
-            - GF_AUTH_ANONYMOUS_ENABLED=true
-            - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-        ports:
-            - 3001:3000
+            - ~/docker-volumes/ccdb/timescale-test:/var/lib/postgresql/data

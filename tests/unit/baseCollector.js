@@ -1,13 +1,10 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
-import test           from 'ava';
-import sinon          from 'sinon';
-import ccxt           from 'ccxt';
-import { faker }      from '@faker-js/faker';
-import   Collector    from '../../lib/collectors/Base.js';
-import { initLogger } from '../../lib/infrastructure/logger/logger.js';
-
+import test from 'ava';
+import sinon from 'sinon';
+import ccxt from 'ccxt';
+import { faker } from '@faker-js/faker';
+import Collector from '../../lib/collectors/Base.js';
 
 let sandbox;
 
@@ -15,34 +12,35 @@ let sequelize;
 
 let ccxtStub;
 
-initLogger();
-
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
 
 const fetchOrderBookStubResult = {
     symbol,
-    'bids' : [ [ faker.number.float() ] ],
-    'asks' : [ [ faker.number.float() ] ]
+    bids: [[faker.number.float()]],
+    asks: [[faker.number.float()]],
 };
 
-test.beforeEach(t => {
+test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     sequelize = {};
 
     ccxtStub = sandbox.stub(ccxt, 'binance').returns({});
 
-    t.context.collector = new Collector({ exchange, symbol }, sequelize, marketId);
+    t.context.collector = new Collector(
+        { exchange, symbol },
+        sequelize,
+        marketId,
+    );
 });
 
 test.afterEach(() => {
     sandbox.restore();
 });
 
-
-test('start method should call fetch and save data', async t => {
+test('start method should call fetch and save data', async (t) => {
     const { collector } = t.context;
 
     const exchangeApiStub = new ccxt[exchange]();

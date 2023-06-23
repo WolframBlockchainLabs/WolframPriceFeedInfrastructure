@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+    backend:
+        build:
+            context: ../../
+            dockerfile: ./docker/config/backend/Dockerfile
+            args:
+                PORT: 8000
+        image: ${BACKEND_IMAGE}
+        container_name: ${BACKEND_CONTAINER_NAME}
+        depends_on:
+            timescale:
+                condition: service_healthy
+        environment:
+            MODE: application
+        env_file: ./.env.backend
+        entrypoint: 'tail -f /dev/null'
+
+    timescale:
+        image: timescale/timescaledb:latest-pg15
+        restart: always
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -d ccdb_test -U postgres']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        environment:
+            POSTGRES_DB: ccdb_test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+        container_name: ccdb-timescale-test

@@ -1,120 +1,33 @@
 {
-  "appPort": "{{PORT}}",
-  "appTestPort": "3002",
-  "mainUrl": "{{MAIN_URL}}",
-  "https": false,
-  "projectName": "{{PROJECT_NAME}}",
-  "db": {
-    "username": "{{DB_USERNAME}}",
-    "password": "{{DB_PASSWORD}}",
-    "database": "{{DB_DATABASE}}",
-    "dialect": "{{DB_DIALECT}}",
-    "host": "{{DB_HOST}}",
-    "port": "{{DB_PORT}}"
-  },
-  "test-db": {
-    "username": "{{TEST_DB_USERNAME}}",
-    "password": "{{TEST_DB_PASSWORD}}",
-    "database": "{{TEST_DB_DATABASE}}",
-    "dialect": "{{TEST_DB_DIALECT}}",
-    "host": "{{TEST_DB_HOST}}",
-    "port": "{{TEST_DB_PORT}}"
-  },
-  "logs": [
-    {
-      "isPlainText": "{{IS_PLAIN_TEXT}}",
-      "name": "api",
-      "level": "info",
-      "transports": [
-        {
-          "type": "daily-file",
-          "filename": "logs/api-%DATE%.log",
-          "maxFiles": "7d"
-        },
-        {
-          "type": "console",
-          "level": "warning",
-          "pretty": true
-        },
-        {
-          "type": "console",
-          "level": "error",
-          "pretty": true
-        },
-        {
-          "type": "console",
-          "level": "info",
-          "pretty": true
-        }
-      ]
+    "appPort": "{{PORT}}",
+    "appTestPort": "3002",
+    "appMode": "{{NODE_ENV}}",
+    "mainUrl": "{{MAIN_URL}}",
+    "projectName": "{{PROJECT_NAME}}",
+    "db": {
+        "username": "{{DB_USERNAME}}",
+        "password": "{{DB_PASSWORD}}",
+        "database": "{{DB_DATABASE}}",
+        "dialect": "{{DB_DIALECT}}",
+        "host": "{{DB_HOST}}",
+        "port": "{{DB_PORT}}"
     },
-    {
-      "isPlainText": "{{IS_PLAIN_TEXT}}",
-      "name": "workers",
-      "level": "info",
-      "transports": [
-        {
-          "type": "daily-file",
-          "filename": "logs/workers-%DATE%.log",
-          "maxFiles": "7d"
-        },
-        {
-          "type": "console",
-          "level": "debug",
-          "pretty": true
-        },
-        {
-          "type": "mail",
-          "level": "emerg"
-        }
-      ]
+    "test-db": {
+        "username": "{{TEST_DB_USERNAME}}",
+        "password": "{{TEST_DB_PASSWORD}}",
+        "database": "{{TEST_DB_DATABASE}}",
+        "dialect": "{{TEST_DB_DIALECT}}",
+        "host": "{{TEST_DB_HOST}}",
+        "port": "{{TEST_DB_PORT}}"
     },
-    {
-      "isPlainText": "{{IS_PLAIN_TEXT}}",
-      "name": "application",
-      "level": "info",
-      "transports": [
-        {
-          "type": "daily-file",
-          "filename": "logs/application-%DATE%.log",
-          "maxFiles": "7d"
-        },
-        {
-          "type": "console",
-          "level": "debug"
-        },
-        {
-          "type": "mail",
-          "level": "emerg"
-        }
-      ]
-    },
-    {
-      "isPlainText": "{{IS_PLAIN_TEXT}}",
-      "name": "collector",
-      "level": "info",
-      "transports": [
-        {
-          "type": "daily-file",
-          "filename": "logs/collector-%DATE%.log",
-          "maxFiles": "7d"
-        },
-        {
-          "type": "console",
-          "level": "warning",
-          "pretty": true
-        },
-        {
-          "type": "console",
-          "level": "error",
-          "pretty": true
-        },
-        {
-          "type": "console",
-          "level": "info",
-          "pretty": true
-        }
-      ]
+    "logger": {
+        "isPlainText": "{{LOGGER_PLAIN_TEXT}}",
+        "level": "{{LOGGER_LEVEL}}",
+        "transports": [
+            {
+                "type": "console",
+                "pretty": true
+            }
+        ]
     }
-  ]
 }
