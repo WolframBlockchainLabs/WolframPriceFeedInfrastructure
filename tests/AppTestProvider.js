@@ -1,6 +1,6 @@
 import AppProvider from '../lib/AppProvider.js';
 
-export default class AppTestProvider extends AppProvider {
+class AppTestProvider extends AppProvider {
     start() {
         return super.start(this.config.appTestPort);
     }
@@ -13,3 +13,5 @@ export default class AppTestProvider extends AppProvider {
         return this;
     }
 }
+
+export default AppTestProvider;

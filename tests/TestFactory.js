@@ -14,7 +14,7 @@ import Trade from './../lib/domain-model/Trade.js';
 import Ticker from './../lib/domain-model/Ticker.js';
 import CandleStick from './../lib/domain-model/CandleStick.js';
 
-export default class TestFactory {
+class TestFactory {
     async createExchanges() {
         try {
             for (const exchange of exchangeData) {
@@ -99,3 +99,5 @@ export default class TestFactory {
         await Exchange.destroy({ truncate: { cascade: true } });
     }
 }
+
+export default TestFactory;
