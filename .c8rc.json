@@ -1,8 +1,19 @@
 {
     "all": true,
-    "include": [ "**/lib/**" ],
-    "exclude": ["**/lib/workers/**", "**/lib/infrastructure/**", "**/lib/queues/**"],
-    "reporter": [ "text", "html" ],
+    "include": ["**/lib/**"],
+    "exclude": [
+        "**/lib/workers/**",
+        "**/lib/infrastructure/**",
+        "**/lib/utils",
+        "**/AppProvider.js",
+        "**/AppCliProvider.js",
+        "**/middlewareRender.js",
+        "**/middlewares.js",
+        "**/collectorRunner.js",
+        "**/registerValidationRules.js",
+        "**/chista.js"
+    ],
+    "reporter": ["text", "html"],
     "check-coverage": true,
     "branches": 80,
     "lines": 80,

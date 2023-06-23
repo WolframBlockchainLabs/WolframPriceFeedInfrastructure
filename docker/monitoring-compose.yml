@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+    prometheus:
+        image: prom/prometheus:v2.28.1
+        container_name: ccdb-prometheus
+        user: 'root'
+        restart: unless-stopped
+        depends_on: ['backend']
+        volumes:
+            - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+            - ~/docker-volumes/ccdb/prometheus:/prometheus
+        ports: ['9090:9090']
+
+    grafana:
+        image: grafana/grafana:8.0.6
+        container_name: ccdb-grafana
+        user: 'root'
+        restart: unless-stopped
+        depends_on: ['prometheus']
+        volumes:
+            - ./config/grafana/provisioning:/etc/grafana/provisioning
+            - ./config/grafana/config.ini:/etc/grafana/config.ini
+            - ./config/grafana/dashboards:/var/lib/grafana/dashboards
+            - ~/docker-volumes/ccdb/grafana:/var/lib/grafana
+        env_file: ./env/.env.grafana
+        ports: ['3000:3000']
