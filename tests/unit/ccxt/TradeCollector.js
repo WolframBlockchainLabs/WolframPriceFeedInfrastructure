@@ -1,11 +1,9 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 import test from 'ava';
 import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
-import { TickerCollector } from '../../lib/collectors/Ticker.js';
-import { tickerData } from '../test-data.js';
+import { TradeCollector } from '../../lib/collectors/Trade.js';
 
 let sandbox;
 
@@ -13,18 +11,22 @@ let sequelize;
 
 let ccxtStub;
 
+let fetchedData;
+
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
-const tickerId = faker.number.int();
+const tradeId = faker.number.int();
 
-const fetchTickerStubResult = tickerData;
+const fetchTradeStubResult = [
+    { side: 'sell', price: 0.066754, amount: 0.055, timestamp: 1684141361369 },
+];
 
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     sequelize = {
-        Ticker: {
+        Trade: {
             create: sinon.stub(),
         },
     };
@@ -40,10 +42,11 @@ test.beforeEach((t) => {
                 active: true,
             },
         }),
-        fetchTicker: sandbox.stub().resolves(fetchTickerStubResult),
+        fetchTrades: sandbox.stub().resolves(fetchTradeStubResult),
+        milliseconds: sandbox.stub().resolves(6000),
     });
 
-    t.context.tickerCollector = new TickerCollector(
+    t.context.tradeCollector = new TradeCollector(
         { exchange, symbol },
         sequelize,
         marketId,
@@ -54,23 +57,22 @@ test.afterEach(() => {
     sandbox.restore();
 });
 
-test('fetch data should return existing ticker info', async (t) => {
-    const { tickerCollector } = t.context;
+test('fetch data should return existing trade info', async (t) => {
+    const { tradeCollector } = t.context;
     const exchangeApiStub = new ccxt[exchange]();
 
-    const result = await tickerCollector.fetchData();
+    fetchedData = await tradeCollector.fetchData();
 
-    t.deepEqual(result, fetchTickerStubResult);
     t.is(undefined, sinon.assert.calledOnce(exchangeApiStub.loadMarkets));
-    t.is(undefined, sinon.assert.calledOnce(exchangeApiStub.fetchTicker));
+    t.is(undefined, sinon.assert.calledOnce(exchangeApiStub.fetchTrades));
 });
 
 test('save data should call model.create', async (t) => {
-    const { tickerCollector } = t.context;
+    const { tradeCollector } = t.context;
 
-    tickerCollector.sequelize.Ticker.create.resolves(tickerId);
+    tradeCollector.sequelize.Trade.create.resolves(tradeId);
 
-    await tickerCollector.saveData(marketId, fetchTickerStubResult);
+    await tradeCollector.saveData(marketId, fetchedData);
 
-    t.is(undefined, sinon.assert.calledOnce(sequelize.Ticker.create));
+    t.is(undefined, sinon.assert.calledOnce(sequelize.Trade.create));
 });

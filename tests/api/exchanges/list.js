@@ -8,9 +8,7 @@ export default [
         test: async ({ t, coreAPI }) => {
             const res = await coreAPI.get('/exchanges');
 
-            console.log(res.length);
-
-            t.is(res.length, 4);
+            t.is(res.data.length, 4);
         },
 
         after: async ({ factory }) => {

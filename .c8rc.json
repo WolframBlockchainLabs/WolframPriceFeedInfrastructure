@@ -1,17 +1,9 @@
 {
     "all": true,
-    "include": ["**/lib/**"],
+    "include": ["**/use-cases/**", "**/collectors/**"],
     "exclude": [
-        "**/lib/workers/**",
-        "**/lib/infrastructure/**",
-        "**/lib/utils",
-        "**/AppProvider.js",
-        "**/AppCliProvider.js",
-        "**/middlewareRender.js",
-        "**/middlewares.js",
-        "**/collectorRunner.js",
-        "**/registerValidationRules.js",
-        "**/chista.js"
+        "**/use-cases/BaseUseCase.js",
+        "**/use-cases/utils/**"
     ],
     "reporter": ["text", "html"],
     "check-coverage": true,

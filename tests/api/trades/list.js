@@ -5,17 +5,54 @@ export default [
             const { exchangeName, symbol, newTrade } =
                 await factory.createTrade();
 
-            return { exchangeName, symbol, newTrade };
+            return {
+                exchangeName,
+                symbol: symbol.replace(/\//g, '_'),
+                newTrade,
+            };
         },
         test: async ({ t, coreAPI, exchangeName, symbol, newTrade }) => {
             const res = await coreAPI.get(
                 `/exchanges/${exchangeName}/markets/${symbol}/trades`,
             );
 
-            t.is(res[0].id, newTrade.id);
-            t.is(res[0].marketId, newTrade.marketId);
-            t.deepEqual(res[0].tradesInfo, newTrade.tradesInfo);
-            // t.is(res[0].bid, newTrade.bid);
+            t.is(res.data[0].id, newTrade.id);
+            t.is(res.data[0].marketId, newTrade.marketId);
+            t.deepEqual(res.data[0].tradesInfo, newTrade.tradesInfo);
+            t.is(res.data[0].bid, newTrade.bid);
+        },
+        after: async ({ factory }) => {
+            await factory.cleanup();
+        },
+    },
+    {
+        label: 'Positive: trades list with date ranges',
+        before: async ({ factory }) => {
+            const { exchangeName, symbol, newTrade } =
+                await factory.createTrade();
+
+            return {
+                exchangeName,
+                symbol: symbol.replace(/\//g, '_'),
+                newTrade,
+            };
+        },
+        test: async ({ t, coreAPI, exchangeName, symbol, newTrade }) => {
+            const oneYearAgo = new Date(
+                new Date().setFullYear(new Date().getFullYear() - 1),
+            ).toISOString();
+            const oneYearFromNow = new Date(
+                new Date().setFullYear(new Date().getFullYear() + 1),
+            ).toISOString();
+
+            const res = await coreAPI.get(
+                `/exchanges/${exchangeName}/markets/${symbol}/trades?rangeDateStart=${oneYearAgo}&rangeDateEnd=${oneYearFromNow}`,
+            );
+
+            t.is(res.data[0].id, newTrade.id);
+            t.is(res.data[0].marketId, newTrade.marketId);
+            t.deepEqual(res.data[0].tradesInfo, newTrade.tradesInfo);
+            t.is(res.data[0].bid, newTrade.bid);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
@@ -26,14 +63,14 @@ export default [
         before: async ({ factory }) => {
             const { exchangeName, symbol } = await factory.createTrade();
 
-            return { exchangeName, symbol };
+            return { exchangeName, symbol: symbol.replace(/\//g, '_') };
         },
         test: async ({ t, coreAPI, symbol }) => {
             const res = await coreAPI.get(
                 `/exchanges/test/markets/${symbol}/trades`,
             );
 
-            t.is(res.error.code, 'EXCHANGE_NOT_FOUND');
+            t.is(res.data.length, 0);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
@@ -51,7 +88,7 @@ export default [
                 `/exchanges/${exchangeName}/markets/test/trades`,
             );
 
-            t.is(res.error.code, 'MARKET_NOT_FOUND');
+            t.is(res.data.length, 0);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
@@ -62,7 +99,7 @@ export default [
         before: async ({ factory }) => {
             const { exchangeName, symbol } = await factory.createTrade();
 
-            return { exchangeName, symbol };
+            return { exchangeName, symbol: symbol.replace(/\//g, '_') };
         },
         test: async ({ t, coreAPI, exchangeName, symbol }) => {
             const res = await coreAPI.get(
@@ -84,7 +121,7 @@ export default [
         before: async ({ factory }) => {
             const { exchangeName, symbol } = await factory.createTrade();
 
-            return { exchangeName, symbol };
+            return { exchangeName, symbol: symbol.replace(/\//g, '_') };
         },
         test: async ({ t, coreAPI, exchangeName, symbol }) => {
             const res = await coreAPI.get(

@@ -2,7 +2,7 @@ import test from 'ava';
 import AppTestProvider from './AppTestProvider.js';
 import TestFactory from './TestFactory.js';
 import APIclient from './APIclient.js';
-import apiTests from './api.js';
+import apiTests from './api/index.js';
 
 const factory = new TestFactory();
 
@@ -18,7 +18,11 @@ const config = server.config;
 const coreAPI = new APIclient(factory, 'api/v1');
 
 test.before(async () => {
-    await server.start();
+    try {
+        await server.start();
+    } catch (err) {
+        console.log('AppTestProvider start error', err);
+    }
 });
 
 for (const item of tests) {

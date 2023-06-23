@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 import test from 'ava';
 import sinon from 'sinon';

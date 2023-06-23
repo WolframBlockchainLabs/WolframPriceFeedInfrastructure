@@ -1,11 +1,9 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 import test from 'ava';
 import sinon from 'sinon';
 import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
-import { CandleStickCollector } from '../../lib/collectors/ccxt/CandleStick.js';
+import { CandleStickCollector } from '../../../lib/collectors/ccxt/CandleStick.js';
 
 let sandbox;
 

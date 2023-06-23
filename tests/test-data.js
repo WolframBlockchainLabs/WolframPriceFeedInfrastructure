@@ -65,5 +65,4 @@ export const tickerData = {
     average: faker.number.float(),
     baseVolume: faker.number.float(),
     quoteVolume: faker.number.float(),
-    createdAt: faker.number.float(),
 };

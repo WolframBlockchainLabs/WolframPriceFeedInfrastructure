@@ -11,7 +11,32 @@ export default [
                 '/exchanges/Binance,KuCoin,Kraken,Gemini/markets/BTC_USDT/orderBooks',
             );
 
-            t.is(res.length, 4);
+            t.is(res.data.length, 4);
+        },
+        after: async ({ factory }) => {
+            await factory.cleanup();
+        },
+    },
+    {
+        label: 'Positive: orderBooks list with date ranges',
+        before: async ({ factory }) => {
+            const orderBooks = await factory.createOrderBook();
+
+            return orderBooks;
+        },
+        test: async ({ t, coreAPI }) => {
+            const oneYearAgo = new Date(
+                new Date().setFullYear(new Date().getFullYear() - 1),
+            ).toISOString();
+            const oneYearFromNow = new Date(
+                new Date().setFullYear(new Date().getFullYear() + 1),
+            ).toISOString();
+
+            const res = await coreAPI.get(
+                `/exchanges/Binance,KuCoin,Kraken,Gemini/markets/BTC_USDT/orderBooks?rangeDateStart=${oneYearAgo}&rangeDateEnd=${oneYearFromNow}`,
+            );
+
+            t.is(res.data.length, 4);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
@@ -27,7 +52,7 @@ export default [
                 '/exchanges/test/markets/BTC_USDT/orderBooks',
             );
 
-            t.is(res.length, 0);
+            t.is(res.data.length, 0);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
@@ -43,7 +68,7 @@ export default [
                 '/exchanges/Binance/markets/BTC_U/orderBooks',
             );
 
-            t.is(res.length, 0);
+            t.is(res.data.length, 0);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
