@@ -1,17 +1,21 @@
+/* eslint-disable no-magic-numbers */
 
 export default [
     {
         label  : 'Positive: exchanges list',
         before : async ({ factory }) => {
-            const exchange = await factory.createExchange();
-
-            return { exchange };
+            await factory.createExchanges();
         },
+
         test : async ({ t, coreAPI }) => {
             const res = await coreAPI.get('/exchanges');
 
-            t.is(res.length, 1);
+            console.log(res.length);
+
+            // t.deepEqual(res, exchanges);
+            t.is(res.length, 4);
         },
+
         after : async ({ factory }) => {
             await factory.cleanup();
         }

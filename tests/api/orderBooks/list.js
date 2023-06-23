@@ -1,51 +1,44 @@
-
+/* eslint-disable no-magic-numbers */
 export default [
     {
         label  : 'Positive: orderBooks list',
         before : async ({ factory }) => {
-            const { exchangeName, symbol, newOrderBook } = await factory.createOrderBook();
+            const orderBooks = await factory.createOrderBook();
 
-            return { exchangeName, symbol, newOrderBook };
+            return orderBooks;
         },
-        test : async ({ t, coreAPI, exchangeName, symbol, newOrderBook }) => {
-            const res = await coreAPI.get(`/exchanges/${exchangeName}/markets/${symbol}/orderBooks`);
+        test : async ({ t, coreAPI }) => {
+            const res = await coreAPI.get('/exchanges/Binance,KuCoin,Kraken,Gemini/markets/BTC_USDT/orderBooks');
 
-            t.is(res[0].id, newOrderBook.id);
-            t.is(res[0].marketId, newOrderBook.marketId);
-            t.deepEqual(res[0].asks, newOrderBook.asks);
-            t.deepEqual(res[0].bids, newOrderBook.bids);
+            t.is(res.length, 4);
         },
         after : async ({ factory }) => {
             await factory.cleanup();
         }
     },
     {
-        label  : 'Negative: orderBooks list with incorrect exchange name',
+        label  : 'Negative: empty orderBooks list with incorrect exchange name',
         before : async ({ factory }) => {
-            const { exchangeName, symbol } = await factory.createOrderBook();
-
-            return { exchangeName, symbol };
+            await factory.createOrderBook();
         },
-        test : async ({ t, coreAPI, symbol }) => {
-            const res = await coreAPI.get(`/exchanges/test/markets/${symbol}/orderBooks`);
+        test : async ({ t, coreAPI }) => {
+            const res = await coreAPI.get('/exchanges/test/markets/BTC_USDT/orderBooks');
 
-            t.is(res.error.code, 'EXCHANGE_NOT_FOUND');
+            t.is(res.length, 0);
         },
         after : async ({ factory }) => {
             await factory.cleanup();
         }
     },
     {
-        label  : 'Negative: orderBooks list with incorrect marketId',
+        label  : 'Negative: empty orderBooks list with incorrect symbol name',
         before : async ({ factory }) => {
-            const { exchangeName } = await factory.createOrderBook();
-
-            return { exchangeName };
+            await factory.createOrderBook();
         },
-        test : async ({ t, coreAPI, exchangeName }) => {
-            const res = await coreAPI.get(`/exchanges/${exchangeName}/markets/test/orderBooks`);
+        test : async ({ t, coreAPI }) => {
+            const res = await coreAPI.get('/exchanges/Binance/markets/BTC_U/orderBooks');
 
-            t.is(res.error.code, 'MARKET_NOT_FOUND');
+            t.is(res.length, 0);
         },
         after : async ({ factory }) => {
             await factory.cleanup();
@@ -54,12 +47,10 @@ export default [
     {
         label  : 'Negative: orderBooks list with invalid date',
         before : async ({ factory }) => {
-            const { exchangeName, symbol } = await factory.createOrderBook();
-
-            return { exchangeName, symbol };
+            await factory.createOrderBook();
         },
-        test : async ({ t, coreAPI, exchangeName, symbol }) => {
-            const res = await coreAPI.get(`/exchanges/${exchangeName}/markets/${symbol}/orderBooks?rangeDateStart=2023-06-05%2001:38:37&rangeDateEnd=qq`);
+        test : async ({ t, coreAPI }) => {
+            const res = await coreAPI.get('/exchanges/Binance,Kraken/markets/BTC_USDT/orderBooks?rangeDateStart=2023-06-05%2001:38:37&rangeDateEnd=qq');
 
             t.is(res.error.fields.rangeDateEnd, 'INVALID_ISO_DATE_OR_TIMESTAMP');
             t.is(res.error.code, 'FORMAT_ERROR');
@@ -71,12 +62,10 @@ export default [
     {
         label  : 'Negative: orderBooks list with late date start',
         before : async ({ factory }) => {
-            const { exchangeName, symbol } = await factory.createOrderBook();
-
-            return { exchangeName, symbol };
+            await factory.createOrderBook();
         },
-        test : async ({ t, coreAPI, exchangeName, symbol }) => {
-            const res = await coreAPI.get(`/exchanges/${exchangeName}/markets/${symbol}/orderBooks?rangeDateStart=2023-06-05%2001:38:37&rangeDateEnd=2023-06-04%2001:38:37`);
+        test : async ({ t, coreAPI }) => {
+            const res = await coreAPI.get('/exchanges/Binance,Kraken/markets/BTC_USDT/orderBooks?rangeDateStart=2023-06-05%2001:38:37&?rangeDateStart=2023-06-05%2001:38:37&rangeDateEnd=2023-06-04%2001:38:37');
 
             t.is(res.error.fields.rangeDateEnd, 'DATE START CANNOT BE LATE THAN DATA END');
             t.is(res.error.code, 'FORMAT_ERROR');

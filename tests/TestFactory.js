@@ -1,33 +1,54 @@
-import { exchangeData, marketData, orderBookData, tickerData, generateCandleStickData, generateTradeData } from './test-data.js';
-import Exchange                                                                                            from './../lib/domain-model/Exchange.js';
-import Market                                                                                              from './../lib/domain-model/Market.js';
-import OrderBook                                                                                           from './../lib/domain-model/OrderBook.js';
-import Trade                                                                                               from './../lib/domain-model/Trade.js';
-import Ticker                                                                                              from './../lib/domain-model/Ticker.js';
-import CandleStick                                                                                         from './../lib/domain-model/CandleStick.js';
+import { dumpExchange, dumpMarket }                                                                             from '../lib/use-cases/utils/dumps.js';
+import { exchangeData, fakeMarketsData, orderBookData, tickerData, generateCandleStickData, generateTradeData } from './test-data.js';
+import Exchange                                                                                                 from './../lib/domain-model/Exchange.js';
+import Market                                                                                                   from './../lib/domain-model/Market.js';
+import OrderBook                                                                                                from './../lib/domain-model/OrderBook.js';
+import Trade                                                                                                    from './../lib/domain-model/Trade.js';
+import Ticker                                                                                                   from './../lib/domain-model/Ticker.js';
+import CandleStick                                                                                              from './../lib/domain-model/CandleStick.js';
 
 export default class TestFactory {
-    async createExchange() {
-        const exchange = await Exchange.create(exchangeData);
+    async createExchanges() {
+        try {
+            for (const exchange of exchangeData) {
+                await Exchange.create({ externalExchangeId: exchange.externalExchangeId, name: exchange.name });
+            }
 
-        return exchange;
+            const exchanges = await Exchange.findAll();
+
+            return exchanges.map((exchange) => {
+                return dumpExchange(exchange);
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    async createMarket() {
-        const { id:exchangeId, name: exchangeName } = await this.createExchange();
+    async createMarkets() {
+        const exchanges = await this.createExchanges();
 
-        const { id:marketId, symbol } = await Market.create({ ...marketData, exchangeId });
+        const marketsData = fakeMarketsData();
 
-        return { marketId, symbol, exchangeName };
+
+        for (const [ index, exchange ] of exchanges.entries()) {
+            await Market.create({ ...marketsData[index], exchangeId: exchange.id });
+        }
+
+        const createMarket = await Market.findAll();
+
+        return createMarket.map((market) => {
+            return dumpMarket(market);
+        });
     }
 
     async createOrderBook() {
-        const { marketId, symbol, exchangeName } = await this.createMarket();
+        const markets = await this.createMarkets();
+
         const { bids, asks } = orderBookData;
 
-        const newOrderBook = await OrderBook.create({ marketId, bids, asks });
-
-        return { exchangeName, marketId, symbol, newOrderBook };
+        for (const market of markets) {
+            await OrderBook.create({ marketId: market.id, bids, asks });
+        }
     }
 
     async createCandleStick() {
