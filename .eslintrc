@@ -1,16 +1,15 @@
 {
-  "extends": "webbylab",
-  "parser": "babel-eslint",
-  "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 2021
-  },
-  "rules": {
-    "align-import/align-import": 1,
-    "linebreak-style": 0
-  },
-  "plugins": [
-      "ava",
-      "align-import"
-  ]
+    "root": true,
+    "parser": "@babel/eslint-parser",
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "requireConfigFile": false
+    },
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "plugins": ["ava"]
 }
