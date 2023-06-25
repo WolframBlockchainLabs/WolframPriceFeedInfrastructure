@@ -1,15 +1,10 @@
-/* eslint-disable no-unused-vars */
 import test from 'ava';
 import sinon from 'sinon';
-import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
 import Collector from '../../lib/collectors/BaseCollector.js';
+import testLogger from '../testLogger.js';
 
 let sandbox;
-
-let sequelize;
-
-let ccxtStub;
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
@@ -24,15 +19,13 @@ const fetchOrderBookStubResult = {
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
-    sequelize = {};
-
-    ccxtStub = sandbox.stub(ccxt, 'binance').returns({});
-
-    t.context.collector = new Collector(
-        { exchange, symbol },
-        sequelize,
+    t.context.collector = new Collector({
+        logger: testLogger,
+        exchange,
+        symbol,
         marketId,
-    );
+        exchangeAPI: {},
+    });
 });
 
 test.afterEach(() => {
@@ -41,8 +34,6 @@ test.afterEach(() => {
 
 test('start method should call fetch and save data', async (t) => {
     const { collector } = t.context;
-
-    const exchangeApiStub = new ccxt[exchange]();
 
     sandbox.stub(collector, 'fetchData').resolves(fetchOrderBookStubResult);
 

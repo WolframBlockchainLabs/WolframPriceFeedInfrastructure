@@ -1,15 +1,12 @@
-/* eslint-disable no-unused-vars */
 import test from 'ava';
 import sinon from 'sinon';
-import ccxt from 'ccxt';
 import { faker } from '@faker-js/faker';
 import MarketService from '../../lib/collectors/MarketService.js';
+import Exchange from '../../lib/domain-model/entities/Exchange.js';
+import Market from '../../lib/domain-model/entities/Market.js';
+import testLogger from '../testLogger.js';
 
 let sandbox;
-
-let sequelize;
-
-let ccxtStub;
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
@@ -20,17 +17,7 @@ const createResult = faker.number.int();
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
-    sequelize = {
-        Exchange: {
-            findOne: sinon.stub(),
-        },
-        Market: {
-            findOne: sinon.stub(),
-            create: sinon.stub(),
-        },
-    };
-
-    ccxtStub = sandbox.stub(ccxt, 'binance').returns({
+    t.context.exchangeAPIStub = {
         loadMarkets: sandbox.stub().resolves({
             [symbol]: {
                 id: 'externalMarketId',
@@ -41,9 +28,16 @@ test.beforeEach((t) => {
                 active: true,
             },
         }),
-    });
+    };
 
-    t.context.marketService = new MarketService(sequelize);
+    t.context.ExchangeStub = {
+        findOne: sandbox.stub(Exchange, 'findOne'),
+    };
+
+    t.context.MarketStub = {
+        findOne: sandbox.stub(Market, 'findOne'),
+        create: sandbox.stub(Market, 'create'),
+    };
 });
 
 test.afterEach(() => {
@@ -51,71 +45,76 @@ test.afterEach(() => {
 });
 
 test('getMarketInfo should return existing market info', async (t) => {
-    const { marketService } = t.context;
+    const marketService = new MarketService({
+        logger: testLogger,
+        exchangeAPI: t.context.exchangeAPIStub,
+    });
+
     const createMarketStub = sandbox.stub(
         MarketService.prototype,
         'createMarket',
     );
 
-    marketService.sequelize.Exchange.findOne.resolves(
-        exchangeFindOneStubResult,
-    );
-    marketService.sequelize.Market.findOne.resolves(marketFindOneStubResult);
+    t.context.ExchangeStub.findOne.resolves(exchangeFindOneStubResult);
+    t.context.MarketStub.findOne.resolves(marketFindOneStubResult);
 
     const result = await marketService.getMarketInfo(exchange, symbol);
 
     t.is(result.marketId, marketFindOneStubResult.id);
-    t.is(undefined, sinon.assert.calledOnce(sequelize.Exchange.findOne));
-    t.is(undefined, sinon.assert.calledOnce(sequelize.Market.findOne));
+    t.is(undefined, sinon.assert.calledOnce(t.context.ExchangeStub.findOne));
+    t.is(undefined, sinon.assert.calledOnce(t.context.MarketStub.findOne));
     t.is(undefined, sinon.assert.notCalled(createMarketStub));
 });
 
 test('getMarketInfo should create a new market', async (t) => {
+    const marketService = new MarketService({
+        logger: testLogger,
+        exchangeAPI: t.context.exchangeAPIStub,
+    });
+
     const createMarketStub = sandbox.stub(
         MarketService.prototype,
         'createMarket',
     );
 
-    const { marketService } = t.context;
-
-    marketService.sequelize.Exchange.findOne.resolves(
-        exchangeFindOneStubResult,
-    );
-
-    marketService.sequelize.Market.findOne.resolves(null);
+    t.context.ExchangeStub.findOne.resolves(exchangeFindOneStubResult);
+    t.context.MarketStub.findOne.resolves(null);
 
     createMarketStub.resolves(createResult);
 
     const actualResult = await marketService.getMarketInfo(exchange, symbol);
 
     t.is(createResult, actualResult.marketId);
-    t.is(undefined, sinon.assert.calledOnce(sequelize.Exchange.findOne));
-    t.is(undefined, sinon.assert.calledOnce(sequelize.Market.findOne));
+    t.is(undefined, sinon.assert.calledOnce(t.context.ExchangeStub.findOne));
+    t.is(undefined, sinon.assert.calledOnce(t.context.MarketStub.findOne));
     t.is(
         undefined,
-        sinon.assert.calledOnceWithExactly(
-            createMarketStub,
+        sinon.assert.calledOnceWithExactly(createMarketStub, {
             exchange,
-            exchangeFindOneStubResult.id,
+            exchangeId: exchangeFindOneStubResult.id,
             symbol,
-        ),
+        }),
     );
 });
 
 test('createMarket should create a new market', async (t) => {
-    const { marketService } = t.context;
+    const marketService = new MarketService({
+        logger: testLogger,
+        exchangeAPI: t.context.exchangeAPIStub,
+    });
 
-    const exchangeApiStub = new ccxt[exchange]();
+    t.context.MarketStub.create.resolves(marketFindOneStubResult);
 
-    marketService.sequelize.Market.create.resolves(marketFindOneStubResult);
-
-    const result = await marketService.createMarket(
+    const result = await marketService.createMarket({
         exchange,
-        exchangeFindOneStubResult,
+        exchangeId: exchangeFindOneStubResult.id,
         symbol,
-    );
+    });
 
     t.is(result, marketFindOneStubResult.id);
-    t.is(undefined, sinon.assert.calledOnce(exchangeApiStub.loadMarkets));
-    t.is(undefined, sinon.assert.calledOnce(sequelize.Market.create));
+    t.is(
+        undefined,
+        sinon.assert.calledOnce(t.context.exchangeAPIStub.loadMarkets),
+    );
+    t.is(undefined, sinon.assert.calledOnce(t.context.MarketStub.create));
 });
