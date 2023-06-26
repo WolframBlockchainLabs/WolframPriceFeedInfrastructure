@@ -6,7 +6,7 @@ const { appTestPort } = config;
 
 const STATUS_OK = 200;
 
-export default class APIclient {
+class APIclient {
     constructor(factory, apiPrefix = 'api/v1') {
         this.apiPrefix = apiPrefix;
         this.factory = factory;
@@ -72,3 +72,5 @@ export default class APIclient {
         });
     }
 }
+
+export default APIclient;

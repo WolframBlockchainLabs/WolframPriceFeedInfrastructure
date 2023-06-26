@@ -1,6 +1,6 @@
 import exchanges from './exchanges/index.js';
-import orderBooks from './orderBooks/index.js';
-import candleSticks from './candleSticks/index.js';
+import orderBooks from './order-books/index.js';
+import candleSticks from './candle-sticks/index.js';
 import tickers from './tickers/index.js';
 import trades from './trades/index.js';
 

@@ -4,7 +4,7 @@
 
 Launching collectors to receive and store data on specific symbols (_markets_) from exchanges.
 
-Data is received in four directions:
+Four data types are currently supported:
 
 -   order book
 -   trade
@@ -23,21 +23,21 @@ Retrieval of saved data by users within a specified range.
 
 1. Make sure the docker daemon is running
 
-2. Run `npm run docker:up` command, which will create all necessary images and containers for the stable working of the application.
-   This command will create the containers of the application, database, test-database, and the collector launcher service (You can find the list of services and their corresponding containers within the _docker-compose.yml_ file, located in the 'docker' directory).
-   Also, this command starts the **application server** on port _8000_ and **collectors service** for fetching and saving the data.
+2. Run `./scripts/build` to build container images
 
-3. Run `npm run docker:migration:db` which will create the necessary entities in the database;
+3. Run `./scripts/start` to start containers
 
-4. After running migrations, use `npm run docker:seed:database` which will create five default exchanges in the database (_Binance, Kraken, Gemini, Kucoin and Bitfinex_);
+4. Run `npm run docker:migration:db` which will create the necessary entities in the database;
 
-5. To rollback migrations use `npm run docker:migration:rollback:db`;
+5. After running migrations, use `npm run docker:seed:database` which will create five default exchanges in the database (_Binance, Kraken, Gemini, Kucoin and Bitfinex_);
 
-6. To stop the service use `npm run docker:down` command.
+6. To rollback migrations use `npm run docker:migration:rollback:db`;
+
+7. To stop the service use `./scripts/stop` command.
 
 ## Testing
 
-1. Run `npm run docker:up`;
+1. Run `./scripts/start`;
 2. Run `npm run docker:migration:test`;
 3. Run `npm run docker:test:ava`.
 
@@ -55,6 +55,7 @@ Set the names of the exchanges and markets where data will be collected by colle
 | ------------- | ----------- | ----------------------- |
 | appPort       | Number      | 3000                    |
 | appTestPort   | Number      | 3002                    |
+| appMode       | String      | prod                    |
 | mainUrl       | String      | "http://localhost:8000" |
 | projectName   | String      | ccdb                    |
 |               | **db**      |                         |
@@ -103,9 +104,9 @@ The **_docker_** directory contains configuration files that are essential for s
 
 The **_migrations_** directory contains definitions of database migrations.
 
-**5. Seeders**
+**5. Workers**
 
-The **_seeders_** directory contains the logic for creating initial exchange entries in the application's database.
+The **_workers_** directory contains the logic for creating initial exchange entries in the application's database.
 
 **6. Tests**
 
