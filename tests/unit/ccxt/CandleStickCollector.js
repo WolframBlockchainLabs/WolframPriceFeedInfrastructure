@@ -1,7 +1,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import CandleStickCollector from '../../../lib/collectors/ccxt/CandleStick.js';
+import CandleStickCollector from '../../../lib/collectors/models/CandleStick.js';
 import CandleStick from '../../../lib/domain-model/entities/CandleStick.js';
 import testLogger from '../../testLogger.js';
 

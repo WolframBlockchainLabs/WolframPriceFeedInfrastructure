@@ -2,7 +2,7 @@ import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
 import { tickerData } from '../../test-data.js';
-import TickerCollector from '../../../lib/collectors/ccxt/Ticker.js';
+import TickerCollector from '../../../lib/collectors/models/Ticker.js';
 import testLogger from '../../testLogger.js';
 import Ticker from '../../../lib/domain-model/entities/Ticker.js';
 

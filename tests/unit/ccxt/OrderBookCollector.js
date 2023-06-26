@@ -1,7 +1,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import OrderBookCollector from '../../../lib/collectors/ccxt/OrderBook.js';
+import OrderBookCollector from '../../../lib/collectors/models/OrderBook.js';
 import testLogger from '../../testLogger.js';
 import OrderBook from '../../../lib/domain-model/entities/OrderBook.js';
 
