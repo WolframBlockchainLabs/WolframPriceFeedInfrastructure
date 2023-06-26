@@ -22,16 +22,6 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.exchangeAPIStub = {
-        loadMarkets: sandbox.stub().resolves({
-            [symbol]: {
-                id: 'externalMarketId',
-                base: 'base',
-                quote: 'quote',
-                baseId: 'baseId',
-                quoteId: 'quoteId',
-                active: true,
-            },
-        }),
         fetchOrderBook: sandbox.stub().resolves(fetchOrderBookStubResult),
     };
 
@@ -58,7 +48,6 @@ test('fetch data should return existing orderBook info', async (t) => {
     const result = await orderBookCollector.fetchData();
 
     t.deepEqual(result, fetchOrderBookStubResult);
-    t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.loadMarkets));
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchOrderBook));
 });
 

@@ -19,16 +19,6 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.exchangeAPIStub = {
-        loadMarkets: sandbox.stub().resolves({
-            [symbol]: {
-                id: 'externalMarketId',
-                base: 'base',
-                quote: 'quote',
-                baseId: 'baseId',
-                quoteId: 'quoteId',
-                active: true,
-            },
-        }),
         fetchTicker: sandbox.stub().resolves(fetchTickerStubResult),
     };
 
@@ -55,7 +45,6 @@ test('fetch data should return existing ticker info', async (t) => {
     const result = await tickerCollector.fetchData();
 
     t.deepEqual(result, fetchTickerStubResult);
-    t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.loadMarkets));
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchTicker));
 });
 

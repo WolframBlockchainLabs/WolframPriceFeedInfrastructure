@@ -22,16 +22,6 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.exchangeAPIStub = {
-        loadMarkets: sandbox.stub().resolves({
-            [symbol]: {
-                id: 'externalMarketId',
-                base: 'base',
-                quote: 'quote',
-                baseId: 'baseId',
-                quoteId: 'quoteId',
-                active: true,
-            },
-        }),
         fetchTrades: sandbox.stub().resolves(fetchTradeStubResult),
         milliseconds: sandbox.stub().resolves(6000),
     };
@@ -59,7 +49,6 @@ test('fetch data should return existing trade info', async (t) => {
     const result = await tradeCollector.fetchData();
 
     t.deepEqual(result, fetchedDataMap);
-    t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.loadMarkets));
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchTrades));
 });
 

@@ -20,16 +20,6 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.exchangeAPIStub = {
-        loadMarkets: sandbox.stub().resolves({
-            [symbol]: {
-                id: 'externalMarketId',
-                base: 'base',
-                quote: 'quote',
-                baseId: 'baseId',
-                quoteId: 'quoteId',
-                active: true,
-            },
-        }),
         fetchOHLCV: sandbox.stub().resolves(fetchOHLCVStubResult),
         milliseconds: sandbox.stub().resolves(6000),
     };
@@ -57,7 +47,6 @@ test('fetch data should return existing candleStick info', async (t) => {
     const result = await candleStickCollector.fetchData();
 
     t.deepEqual(result, fetchOHLCVStubResult);
-    t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.loadMarkets));
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchOHLCV));
 });
 
