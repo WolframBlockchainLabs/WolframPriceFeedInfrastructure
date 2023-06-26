@@ -3,7 +3,6 @@ import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
 import OrderBookCollector from '../../../lib/collectors/models/OrderBook.js';
-import testLogger from '../../testLogger.js';
 import OrderBook from '../../../lib/domain-model/entities/OrderBook.js';
 
 let sandbox;
@@ -22,6 +21,11 @@ const fetchOrderBookStubResult = {
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
+    t.context.loggerStub = {
+        info: sandbox.stub(),
+        error: sandbox.stub(),
+    };
+
     t.context.exchangeAPIStub = {
         fetchOrderBook: sandbox.stub().resolves(fetchOrderBookStubResult),
     };
@@ -31,7 +35,7 @@ test.beforeEach((t) => {
     };
 
     t.context.orderBookCollector = new OrderBookCollector({
-        logger: testLogger,
+        logger: t.context.loggerStub,
         exchange,
         symbol,
         marketId,
@@ -53,12 +57,32 @@ test('fetch data should return existing orderBook info', async (t) => {
 });
 
 test('save data should call model.create', async (t) => {
-    const { orderBookCollector } = t.context;
+    const { orderBookCollector, OrderBookStub } = t.context;
     const { bids, asks } = fetchOrderBookStubResult;
 
-    t.context.OrderBookStub.create.resolves(orderBookId);
+    OrderBookStub.create.resolves(orderBookId);
 
     await orderBookCollector.saveData({ bids, asks }, marketId);
 
-    t.is(undefined, sinon.assert.calledOnce(t.context.OrderBookStub.create));
+    t.is(undefined, sinon.assert.calledOnce(OrderBookStub.create));
+});
+
+test('calls logger if fetch fails', async (t) => {
+    const { orderBookCollector, exchangeAPIStub, loggerStub } = t.context;
+
+    exchangeAPIStub.fetchOrderBook.throws();
+
+    await orderBookCollector.start();
+
+    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+});
+
+test('calls logger if save fails', async (t) => {
+    const { orderBookCollector, OrderBookStub, loggerStub } = t.context;
+
+    OrderBookStub.create.throws();
+
+    await orderBookCollector.start();
+
+    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
 });

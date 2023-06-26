@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
 import { tickerData } from '../../test-data.js';
 import TickerCollector from '../../../lib/collectors/models/Ticker.js';
-import testLogger from '../../testLogger.js';
 import Ticker from '../../../lib/domain-model/entities/Ticker.js';
 
 let sandbox;
@@ -19,6 +18,11 @@ const fetchTickerStubResult = tickerData;
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
+    t.context.loggerStub = {
+        info: sandbox.stub(),
+        error: sandbox.stub(),
+    };
+
     t.context.exchangeAPIStub = {
         fetchTicker: sandbox.stub().resolves(fetchTickerStubResult),
     };
@@ -28,7 +32,7 @@ test.beforeEach((t) => {
     };
 
     t.context.tickerCollector = new TickerCollector({
-        logger: testLogger,
+        logger: t.context.loggerStub,
         exchange,
         symbol,
         marketId,
@@ -57,4 +61,24 @@ test('save data should call model.create', async (t) => {
     await tickerCollector.saveData(marketId, fetchTickerStubResult);
 
     t.is(undefined, sinon.assert.calledOnce(t.context.TickerStub.create));
+});
+
+test('calls logger if fetch fails', async (t) => {
+    const { tickerCollector, exchangeAPIStub, loggerStub } = t.context;
+
+    exchangeAPIStub.fetchTicker.throws();
+
+    await tickerCollector.start();
+
+    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+});
+
+test('calls logger if save fails', async (t) => {
+    const { tickerCollector, TickerStub, loggerStub } = t.context;
+
+    TickerStub.create.throws();
+
+    await tickerCollector.start();
+
+    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
 });

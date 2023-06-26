@@ -21,17 +21,17 @@ services:
             - ../:/app
             - /app/node_modules
 
-    # collectors:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-collectors
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
-    #     command: sh -c "npm run collector:run"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    collectors:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-collectors
+        depends_on:
+            timescale:
+                condition: service_healthy
+        env_file: ./env/.env.backend
+        command: sh -c "npm run collector:run"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
     timescale:
         image: timescale/timescaledb:latest-pg15

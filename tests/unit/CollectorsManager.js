@@ -2,7 +2,6 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import testLogger from '../testLogger.js';
 import Exchange from '../../lib/domain-model/entities/Exchange.js';
 import Market from '../../lib/domain-model/entities/Market.js';
 import CollectorsManager from '../../lib/collectors/CollectorsManager.js';
@@ -21,24 +20,25 @@ const marketId = faker.number.int();
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
+    t.context.loggerStub = {
+        info: sandbox.stub(),
+        error: sandbox.stub(),
+    };
+
     t.context.candleStickSaveStub = sandbox.stub(
         CandleStickCollector.prototype,
         'start',
     );
-
     t.context.orderBookSaveStub = sandbox.stub(
         OrderBookCollector.prototype,
         'start',
     );
-
     t.context.tickerSaveStub = sandbox.stub(TickerCollector.prototype, 'start');
-
     t.context.tradeSaveStub = sandbox.stub(TradeCollector.prototype, 'start');
 
     t.context.ExchangeStub = {
         findOne: sandbox.stub(Exchange, 'findOne').returns({ id: exchangeId }),
     };
-
     t.context.MarketStub = {
         findOne: sandbox.stub(Market, 'findOne').returns({ id: marketId }),
     };
@@ -50,7 +50,7 @@ test.beforeEach((t) => {
             TickerCollector,
             TradeCollector,
         ],
-        logger: testLogger,
+        logger: t.context.loggerStub,
         exchange,
         symbol,
         exchangeAPI: {},
@@ -61,11 +61,29 @@ test.afterEach(() => {
     sandbox.restore();
 });
 
-test('The "start" method should call the "init" method and a "start" method on each model.', async (t) => {
-    await t.context.collectorsManager.start();
+test('the "start" method should call the "init" method and a "start" method on each model.', async (t) => {
+    const {
+        collectorsManager,
+        candleStickSaveStub,
+        orderBookSaveStub,
+        tickerSaveStub,
+        tradeSaveStub,
+    } = t.context;
 
-    t.is(undefined, sinon.assert.calledOnce(t.context.candleStickSaveStub));
-    t.is(undefined, sinon.assert.calledOnce(t.context.orderBookSaveStub));
-    t.is(undefined, sinon.assert.calledOnce(t.context.tickerSaveStub));
-    t.is(undefined, sinon.assert.calledOnce(t.context.tradeSaveStub));
+    await collectorsManager.start();
+
+    t.is(undefined, sinon.assert.calledOnce(candleStickSaveStub));
+    t.is(undefined, sinon.assert.calledOnce(orderBookSaveStub));
+    t.is(undefined, sinon.assert.calledOnce(tickerSaveStub));
+    t.is(undefined, sinon.assert.calledOnce(tradeSaveStub));
+});
+
+test('calls logger on error', async (t) => {
+    const { collectorsManager, loggerStub, candleStickSaveStub } = t.context;
+
+    candleStickSaveStub.throws();
+
+    await collectorsManager.start();
+
+    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
 });
