@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import AppTestProvider from './AppTestProvider.js';
 import TestFactory from './TestFactory.js';

@@ -71,6 +71,7 @@
         "eslint": "^8.43.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-ava": "^14.0.0",
+        "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-prettier": "^4.2.1",
         "node-fetch": "^3.3.1",
         "nodemon": "^2.0.22",
