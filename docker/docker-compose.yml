@@ -13,8 +13,6 @@ services:
         depends_on:
             timescale:
                 condition: service_healthy
-        environment:
-            MODE: application
         env_file: ./env/.env.backend
         command: sh -c "npm run nodemon"
         volumes:
@@ -32,6 +30,20 @@ services:
     #     volumes:
     #         - ../:/app
     #         - /app/node_modules
+
+    database-writer:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-database-writer
+        depends_on:
+            timescale:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_started
+        env_file: ./env/.env.backend
+        command: sh -c "npm run workers:database-writer:nodemon"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
     timescale:
         image: timescale/timescaledb:latest-pg15
@@ -63,12 +75,13 @@ services:
             - ~/docker-volumes/ccdb/timescale-test:/var/lib/postgresql/data
 
     rabbitmq:
-        image: rabbitmq:3.12.0
+        image: rabbitmq:3.12.0-management
         container_name: ccdb-rabbitmq
+        hostname: 'dev-rabbitmq'
         ports:
             - 5672:5672
             - 15672:15672
         restart: unless-stopped
-        env_file: ../env/${BUILD_VERSION}/.env.rabbitmq
+        env_file: ./env/.env.rabbitmq
         volumes:
             - '~/docker-volumes/ccdb/rabbitmq:/var/lib/rabbitmq'

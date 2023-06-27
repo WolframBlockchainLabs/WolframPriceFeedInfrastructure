@@ -12,8 +12,6 @@ services:
         depends_on:
             timescale:
                 condition: service_healthy
-        environment:
-            MODE: application
         env_file: ./.env.backend
         entrypoint: 'tail -f /dev/null'
 
