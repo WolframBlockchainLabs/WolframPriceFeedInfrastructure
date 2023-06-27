@@ -61,3 +61,14 @@ services:
         env_file: ./env/.env.database
         volumes:
             - ~/docker-volumes/ccdb/timescale-test:/var/lib/postgresql/data
+
+    rabbitmq:
+        image: rabbitmq:3.12.0
+        container_name: ccdb-rabbitmq
+        ports:
+            - 5672:5672
+            - 15672:15672
+        restart: unless-stopped
+        env_file: ../env/${BUILD_VERSION}/.env.rabbitmq
+        volumes:
+            - '~/docker-volumes/ccdb/rabbitmq:/var/lib/rabbitmq'
