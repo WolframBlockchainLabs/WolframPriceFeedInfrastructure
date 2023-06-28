@@ -3,14 +3,12 @@ import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
 import OrderBookCollector from '../../../lib/collectors/models/OrderBook.js';
-import OrderBook from '../../../lib/domain-model/entities/OrderBook.js';
 
 let sandbox;
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
-const orderBookId = faker.number.int();
 
 const fetchOrderBookStubResult = {
     symbol,
@@ -30,10 +28,6 @@ test.beforeEach((t) => {
         fetchOrderBook: sandbox.stub().resolves(fetchOrderBookStubResult),
     };
 
-    t.context.OrderBookStub = {
-        create: sandbox.stub(OrderBook, 'create'),
-    };
-
     t.context.orderBookCollector = new OrderBookCollector({
         logger: t.context.loggerStub,
         exchange,
@@ -41,6 +35,11 @@ test.beforeEach((t) => {
         marketId,
         exchangeAPI: t.context.exchangeAPIStub,
     });
+
+    t.context.publishStub = sandbox.stub(
+        t.context.orderBookCollector,
+        'publish',
+    );
 });
 
 test.afterEach(() => {
@@ -57,14 +56,12 @@ test('fetch data should return existing orderBook info', async (t) => {
 });
 
 test('save data should call model.create', async (t) => {
-    const { orderBookCollector, OrderBookStub } = t.context;
+    const { orderBookCollector, publishStub } = t.context;
     const { bids, asks } = fetchOrderBookStubResult;
-
-    OrderBookStub.create.resolves(orderBookId);
 
     await orderBookCollector.saveData({ bids, asks }, marketId);
 
-    t.is(undefined, sinon.assert.calledOnce(OrderBookStub.create));
+    t.is(undefined, sinon.assert.calledOnce(publishStub));
 });
 
 test('calls logger if fetch fails', async (t) => {
@@ -78,9 +75,9 @@ test('calls logger if fetch fails', async (t) => {
 });
 
 test('calls logger if save fails', async (t) => {
-    const { orderBookCollector, OrderBookStub, loggerStub } = t.context;
+    const { orderBookCollector, publishStub, loggerStub } = t.context;
 
-    OrderBookStub.create.throws();
+    publishStub.throws();
 
     await orderBookCollector.start();
 

@@ -54,6 +54,9 @@ test.beforeEach((t) => {
         exchange,
         symbol,
         exchangeAPI: {},
+        rabbitMqConfig: {
+            urls: [],
+        },
     });
 });
 
