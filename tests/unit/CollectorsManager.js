@@ -24,6 +24,11 @@ test.beforeEach((t) => {
         info: sandbox.stub(),
         error: sandbox.stub(),
     };
+    t.context.amqpClientStub = {
+        getChannel: sandbox.stub().returns({
+            addSetup: sandbox.stub(),
+        }),
+    };
 
     t.context.candleStickSaveStub = sandbox.stub(
         CandleStickCollector.prototype,
@@ -51,6 +56,7 @@ test.beforeEach((t) => {
             TradeCollector,
         ],
         logger: t.context.loggerStub,
+        amqpClient: t.context.amqpClientStub,
         exchange,
         symbol,
         exchangeAPI: {},
@@ -64,7 +70,7 @@ test.afterEach(() => {
     sandbox.restore();
 });
 
-test('the "start" method should call the "init" method and a "start" method on each model.', async (t) => {
+test('the "start" method should call the "start" method on each model.', async (t) => {
     const {
         collectorsManager,
         candleStickSaveStub,
@@ -73,6 +79,7 @@ test('the "start" method should call the "init" method and a "start" method on e
         tradeSaveStub,
     } = t.context;
 
+    await collectorsManager.init();
     await collectorsManager.start();
 
     t.is(undefined, sinon.assert.calledOnce(candleStickSaveStub));
@@ -86,6 +93,7 @@ test('calls logger on error', async (t) => {
 
     candleStickSaveStub.throws();
 
+    await collectorsManager.init();
     await collectorsManager.start();
 
     t.is(undefined, sinon.assert.calledOnce(loggerStub.error));

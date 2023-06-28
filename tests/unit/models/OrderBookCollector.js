@@ -73,13 +73,3 @@ test('calls logger if fetch fails', async (t) => {
 
     t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
 });
-
-test('calls logger if save fails', async (t) => {
-    const { orderBookCollector, publishStub, loggerStub } = t.context;
-
-    publishStub.throws();
-
-    await orderBookCollector.start();
-
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
-});

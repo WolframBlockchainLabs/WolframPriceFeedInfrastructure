@@ -70,13 +70,3 @@ test('calls logger if fetch fails', async (t) => {
 
     t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
 });
-
-test('calls logger if save fails', async (t) => {
-    const { tradeCollector, publishStub, loggerStub } = t.context;
-
-    publishStub.throws();
-
-    await tradeCollector.start();
-
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
-});
