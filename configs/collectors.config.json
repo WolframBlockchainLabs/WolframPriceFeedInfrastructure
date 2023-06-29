@@ -6,35 +6,7 @@
             "name": "Binance",
             "apiKey": "",
             "apiSecret": "",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        "kucoin": {
-            "id": "kucoin",
-            "name": "KuCoin",
-            "apiKey": "",
-            "apiSecret": "",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        "gemini": {
-            "id": "gemini",
-            "name": "Gemini",
-            "apiKey": "",
-            "apiSecret": "",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        "kraken": {
-            "id": "kraken",
-            "name": "Kraken",
-            "apiKey": "",
-            "apiSecret": "",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        "bitfinex": {
-            "id": "bitfinex",
-            "name": "Bitfinex",
-            "apiKey": "",
-            "apiSecret": "",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
+            "symbols": ["BTC/EUR"]
         }
     }
 }
