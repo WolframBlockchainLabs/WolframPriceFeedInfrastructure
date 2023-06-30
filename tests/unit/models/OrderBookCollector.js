@@ -59,7 +59,7 @@ test('save data should call model.create', async (t) => {
     const { orderBookCollector, publishStub } = t.context;
     const { bids, asks } = fetchOrderBookStubResult;
 
-    await orderBookCollector.saveData({ bids, asks }, marketId);
+    await orderBookCollector.saveData({ bids, asks });
 
     t.is(undefined, sinon.assert.calledOnce(publishStub));
 });

@@ -52,7 +52,7 @@ test('fetch data should return existing ticker info', async (t) => {
 test('save data should call model.create', async (t) => {
     const { tickerCollector, publishStub } = t.context;
 
-    await tickerCollector.saveData(marketId, fetchTickerStubResult);
+    await tickerCollector.saveData(fetchTickerStubResult);
 
     t.is(undefined, sinon.assert.calledOnce(publishStub));
 });

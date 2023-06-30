@@ -56,7 +56,7 @@ test('fetch data should return existing trade info', async (t) => {
 test('save data should call model.create', async (t) => {
     const { tradeCollector, publishStub } = t.context;
 
-    await tradeCollector.saveData(marketId, fetchedDataMap);
+    await tradeCollector.saveData(fetchedDataMap);
 
     t.is(undefined, sinon.assert.calledOnce(publishStub));
 });

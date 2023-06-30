@@ -19,19 +19,19 @@ services:
             - ../:/app
             - /app/node_modules
 
-    collectors:
-        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-        container_name: ccdb-collectors
-        depends_on:
-            timescale:
-                condition: service_healthy
-            rabbitmq:
-                condition: service_started
-        env_file: ./env/.env.backend
-        command: sh -c "npm run collector:run"
-        volumes:
-            - ../:/app
-            - /app/node_modules
+    # collectors:
+    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     container_name: ccdb-collectors
+    #     depends_on:
+    #         timescale:
+    #             condition: service_healthy
+    #         rabbitmq:
+    #             condition: service_started
+    #     env_file: ./env/.env.backend
+    #     command: sh -c "npm run collector:run"
+    #     volumes:
+    #         - ../:/app
+    #         - /app/node_modules
 
     database-writer:
         image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}

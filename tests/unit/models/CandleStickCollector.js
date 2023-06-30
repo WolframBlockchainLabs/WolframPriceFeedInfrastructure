@@ -57,7 +57,7 @@ test('fetch data should return existing candleStick info', async (t) => {
 test('save data should call model.create', async (t) => {
     const { candleStickCollector, publishStub } = t.context;
 
-    await candleStickCollector.saveData(fetchOHLCVStubResult, marketId);
+    await candleStickCollector.saveData(fetchOHLCVStubResult);
 
     t.is(undefined, sinon.assert.calledOnce(publishStub));
 });
