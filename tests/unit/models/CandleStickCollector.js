@@ -3,14 +3,12 @@ import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
 import CandleStickCollector from '../../../lib/collectors/models/CandleStick.js';
-import CandleStick from '../../../lib/domain-model/entities/CandleStick.js';
 
 let sandbox;
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
-const candleStickId = faker.number.int();
 
 const fetchOHLCVStubResult = [
     [faker.number.float(), faker.number.float(), faker.number.float()],
@@ -29,10 +27,6 @@ test.beforeEach((t) => {
         milliseconds: sandbox.stub().resolves(6000),
     };
 
-    t.context.CandleStickStub = {
-        create: sandbox.stub(CandleStick, 'create'),
-    };
-
     t.context.candleStickCollector = new CandleStickCollector({
         logger: t.context.loggerStub,
         exchange,
@@ -40,6 +34,11 @@ test.beforeEach((t) => {
         marketId,
         exchangeAPI: t.context.exchangeAPIStub,
     });
+
+    t.context.publishStub = sandbox.stub(
+        t.context.candleStickCollector,
+        'publish',
+    );
 });
 
 test.afterEach(() => {
@@ -56,29 +55,17 @@ test('fetch data should return existing candleStick info', async (t) => {
 });
 
 test('save data should call model.create', async (t) => {
-    const { candleStickCollector, CandleStickStub } = t.context;
+    const { candleStickCollector, publishStub } = t.context;
 
-    CandleStickStub.create.resolves(candleStickId);
+    await candleStickCollector.saveData(fetchOHLCVStubResult);
 
-    await candleStickCollector.saveData(fetchOHLCVStubResult, marketId);
-
-    t.is(undefined, sinon.assert.calledOnce(CandleStickStub.create));
+    t.is(undefined, sinon.assert.calledOnce(publishStub));
 });
 
 test('calls logger if fetch fails', async (t) => {
     const { candleStickCollector, exchangeAPIStub, loggerStub } = t.context;
 
     exchangeAPIStub.fetchOHLCV.throws();
-
-    await candleStickCollector.start();
-
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
-});
-
-test('calls logger if save fails', async (t) => {
-    const { candleStickCollector, CandleStickStub, loggerStub } = t.context;
-
-    CandleStickStub.create.throws();
 
     await candleStickCollector.start();
 

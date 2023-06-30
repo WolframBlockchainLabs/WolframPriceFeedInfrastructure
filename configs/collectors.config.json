@@ -1,5 +1,6 @@
 {
-    "interval": 60000,
+    "interval": "* * * * *",
+    "internalDesync": 50000,
     "exchanges": {
         "binance": {
             "id": "binance",

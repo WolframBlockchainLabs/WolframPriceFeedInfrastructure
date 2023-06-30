@@ -20,6 +20,11 @@
         "host": "{{TEST_DB_HOST}}",
         "port": "{{TEST_DB_PORT}}"
     },
+    "rabbitmq" : {
+        "urls" : [
+            "amqp://{{RABBITMQ_USER}}:{{RABBITMQ_PASS}}@{{RABBITMQ_HOST}}:5672/"
+        ]
+    },
     "logger": {
         "isPlainText": "{{LOGGER_PLAIN_TEXT}}",
         "level": "{{LOGGER_LEVEL}}",

@@ -19,6 +19,17 @@ const fetchOrderBookStubResult = {
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
+    t.context.amqpChannelStub = {
+        assertQueue: sandbox.stub(),
+    };
+
+    t.context.amqpClientStub = {
+        publish: sandbox.stub(),
+        getChannel: sandbox.stub().returns({
+            addSetup: (func) => func(t.context.amqpChannelStub),
+        }),
+    };
+
     t.context.loggerStub = {
         info: sandbox.stub(),
         error: sandbox.stub(),
@@ -26,6 +37,7 @@ test.beforeEach((t) => {
 
     t.context.collector = new Collector({
         logger: t.context.loggerStub,
+        amqpClient: t.context.amqpClientStub,
         exchange,
         symbol,
         marketId,
@@ -41,7 +53,6 @@ test('start method should call fetch and save data', async (t) => {
     const { collector } = t.context;
 
     sandbox.stub(collector, 'fetchData').resolves(fetchOrderBookStubResult);
-
     sandbox.stub(collector, 'saveData').resolves();
 
     await collector.start();
@@ -53,13 +64,26 @@ test('start method should call fetch and save data', async (t) => {
 test('calls logger on error', async (t) => {
     const { collector, loggerStub } = t.context;
 
-    sandbox.stub(collector, 'fetchData').resolves(fetchOrderBookStubResult);
-
-    sandbox.stub(collector, 'saveData').throws();
+    sandbox.stub(collector, 'fetchData').throws();
 
     await collector.start();
 
     t.is(undefined, sinon.assert.calledOnce(collector.fetchData));
-    t.is(undefined, sinon.assert.calledOnce(collector.saveData));
     t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+});
+
+test('publish method encapsulates amqpClient', async (t) => {
+    const { collector, amqpClientStub } = t.context;
+
+    await collector.publish();
+
+    t.is(undefined, sinon.assert.calledOnce(amqpClientStub.publish));
+});
+
+test('initAMQPConnection passes setup hook to the amqpClient', async (t) => {
+    const { collector, amqpChannelStub } = t.context;
+
+    await collector.initAMQPConnection();
+
+    t.is(undefined, sinon.assert.calledOnce(amqpChannelStub.assertQueue));
 });

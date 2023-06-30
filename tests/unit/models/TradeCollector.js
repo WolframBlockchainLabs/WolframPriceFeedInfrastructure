@@ -3,14 +3,12 @@ import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
 import TradeCollector from '../../../lib/collectors/models/Trade.js';
-import Trade from '../../../lib/domain-model/entities/Trade.js';
 
 let sandbox;
 
 const exchange = 'binance';
 const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
-const tradeId = faker.number.int();
 
 const fetchTradeStubResult = [
     { side: 'sell', price: 0.066754, amount: 0.055, timestamp: 1684141361369 },
@@ -31,10 +29,6 @@ test.beforeEach((t) => {
         milliseconds: sandbox.stub().resolves(6000),
     };
 
-    t.context.TradeStub = {
-        create: sandbox.stub(Trade, 'create'),
-    };
-
     t.context.tradeCollector = new TradeCollector({
         logger: t.context.loggerStub,
         exchange,
@@ -42,6 +36,8 @@ test.beforeEach((t) => {
         marketId,
         exchangeAPI: t.context.exchangeAPIStub,
     });
+
+    t.context.publishStub = sandbox.stub(t.context.tradeCollector, 'publish');
 });
 
 test.afterEach(() => {
@@ -58,29 +54,17 @@ test('fetch data should return existing trade info', async (t) => {
 });
 
 test('save data should call model.create', async (t) => {
-    const { tradeCollector } = t.context;
+    const { tradeCollector, publishStub } = t.context;
 
-    t.context.TradeStub.create.resolves(tradeId);
+    await tradeCollector.saveData(fetchedDataMap);
 
-    await tradeCollector.saveData(marketId, fetchedDataMap);
-
-    t.is(undefined, sinon.assert.calledOnce(t.context.TradeStub.create));
+    t.is(undefined, sinon.assert.calledOnce(publishStub));
 });
 
 test('calls logger if fetch fails', async (t) => {
     const { tradeCollector, exchangeAPIStub, loggerStub } = t.context;
 
     exchangeAPIStub.fetchTrades.throws();
-
-    await tradeCollector.start();
-
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
-});
-
-test('calls logger if save fails', async (t) => {
-    const { tradeCollector, TradeStub, loggerStub } = t.context;
-
-    TradeStub.create.throws();
 
     await tradeCollector.start();
 
