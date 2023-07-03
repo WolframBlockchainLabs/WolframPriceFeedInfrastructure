@@ -13,7 +13,8 @@
     "scripts": {
         "start": "node --max-old-space-size=8192  ./lib/app.js",
         "nodemon": "nodemon --max-old-space-size=8192 --legacy-watch  ./lib/app.js",
-        "collector:run": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
+        "cli:collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
+        "cli:check-gaps": "node --max-old-space-size=8192  ./lib/cli/check-gaps/entrypoint.js",
         "workers:ccxt-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/worker.js",
         "workers:database-writer:start": "node --max-old-space-size=8192 ./lib/workers/database-writer/worker.js",
         "workers:database-writer:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/database-writer/worker.js",
@@ -28,6 +29,7 @@
         "migration:rollback:db": "sequelize db:migrate:undo --migrations-path ./lib/domain-model/migrations --config lib/config.cjs --env db",
         "migration:rollback:test": "sequelize db:migrate:undo --migrations-path ./lib/domain-model/migrations --config lib/config.cjs --env test-db",
         "migration:all": "npm run migration:db && npm run migration:test",
+        "docker:cli:check-gaps": "docker exec -i ccdb-backend npm run cli:check-gaps --",
         "docker:workers:ccxt-seeder:start": "docker exec -i ccdb-backend npm run workers:ccxt-seeder:start",
         "docker:test:ava": "docker exec -i ccdb-backend npm run test:ava",
         "docker:test:coverage": "docker exec -i ccdb-backend npm run test:coverage",

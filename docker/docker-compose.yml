@@ -31,7 +31,7 @@ services:
             rabbitmq:
                 condition: service_started
         env_file: ./env/.env.backend
-        command: sh -c "npm run collector:run"
+        command: sh -c "npm run cli:collectors"
         volumes:
             - ../:/app
             - /app/node_modules
