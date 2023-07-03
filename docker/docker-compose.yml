@@ -51,7 +51,7 @@ services:
             - /app/node_modules
 
     timescale:
-        image: timescale/timescaledb:latest-pg15
+        image: timescale/timescaledb:2.11.1-pg15
         container_name: ccdb-timescale
         restart: always
         ports: ['5432:5432']
@@ -66,7 +66,7 @@ services:
             - ~/docker-volumes/ccdb/timescale:/var/lib/postgresql/data
 
     timescale-test:
-        image: timescale/timescaledb:latest-pg15
+        image: timescale/timescaledb:2.11.1-pg15
         container_name: ccdb-timescale-test
         restart: always
         ports: ['5431:5432']
