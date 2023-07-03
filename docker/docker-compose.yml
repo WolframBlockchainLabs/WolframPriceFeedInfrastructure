@@ -13,6 +13,8 @@ services:
         depends_on:
             timescale:
                 condition: service_healthy
+            rabbitmq:
+                condition: service_started
         env_file: ./env/.env.backend
         command: sh -c "npm run nodemon"
         volumes:
