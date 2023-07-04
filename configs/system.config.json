@@ -1,6 +1,6 @@
 {
     "appPort": "{{PORT}}",
-    "appTestPort": "3002",
+    "appTestPort": 3002,
     "appMode": "{{NODE_ENV}}",
     "mainUrl": "{{MAIN_URL}}",
     "projectName": "{{PROJECT_NAME}}",
@@ -20,8 +20,8 @@
         "host": "{{TEST_DB_HOST}}",
         "port": "{{TEST_DB_PORT}}"
     },
-    "rabbitmq" : {
-        "urls" : [
+    "rabbitmq": {
+        "urls": [
             "amqp://{{RABBITMQ_USER}}:{{RABBITMQ_PASS}}@{{RABBITMQ_HOST}}:5672/"
         ]
     },
