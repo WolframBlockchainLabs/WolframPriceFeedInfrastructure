@@ -50,6 +50,18 @@ services:
             - ../:/app
             - /app/node_modules
 
+    markets-refresher:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-markets-refresher
+        depends_on:
+            timescale:
+                condition: service_healthy
+        env_file: ./env/.env.backend
+        command: sh -c "npm run workers:markets-refresher:nodemon"
+        volumes:
+            - ../:/app
+            - /app/node_modules
+
     timescale:
         image: timescale/timescaledb:2.11.1-pg15
         container_name: ccdb-timescale

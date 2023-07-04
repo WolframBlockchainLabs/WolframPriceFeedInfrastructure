@@ -34,5 +34,8 @@
                 "pretty": true
             }
         ]
+    },
+    "intervals": {
+        "marketsRefresher": "{{MARKETS_REFRESHER_INTERVAL}}"
     }
 }

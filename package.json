@@ -16,6 +16,8 @@
         "cli:collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
         "cli:check-gaps": "node --max-old-space-size=8192  ./lib/cli/check-gaps/entrypoint.js",
         "workers:ccxt-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/worker.js",
+        "workers:markets-refresher:start": "node --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
+        "workers:markets-refresher:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
         "workers:database-writer:start": "node --max-old-space-size=8192 ./lib/workers/database-writer/worker.js",
         "workers:database-writer:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/database-writer/worker.js",
         "format": "prettier --write .",
