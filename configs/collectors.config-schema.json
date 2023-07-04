@@ -1,0 +1,20 @@
+{
+    "interval": ["required", "string"],
+    "internalDesync": ["required", "positive_integer"],
+    "exchanges": [
+        "required",
+        {
+            "list_of": {
+                "nested_object": {
+                    "id": ["required", "string"],
+                    "name": ["required", "string"],
+                    "apiKey": "string",
+                    "apiSecret": "string",
+                    "interval": "string",
+                    "internalDesync": "positive_integer",
+                    "symbols": ["required", { "list_of": "string" }]
+                }
+            }
+        }
+    ]
+}
