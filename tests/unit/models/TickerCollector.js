@@ -49,7 +49,7 @@ test('fetch data should return existing ticker info', async (t) => {
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchTicker));
 });
 
-test('save data should call model.create', async (t) => {
+test('save data should call publish method', async (t) => {
     const { tickerCollector, publishStub } = t.context;
 
     await tickerCollector.saveData(fetchTickerStubResult);

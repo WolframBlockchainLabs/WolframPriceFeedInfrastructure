@@ -49,16 +49,18 @@ test('fetch data should return existing trade info', async (t) => {
 
     const result = await tradeCollector.fetchData();
 
-    t.deepEqual(result, fetchedDataMap);
+    t.deepEqual(result, fetchTradeStubResult);
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchTrades));
 });
 
-test('save data should call model.create', async (t) => {
+test('save data should call publish method', async (t) => {
     const { tradeCollector, publishStub } = t.context;
 
-    await tradeCollector.saveData(fetchedDataMap);
+    await tradeCollector.saveData(fetchTradeStubResult);
 
-    t.is(undefined, sinon.assert.calledOnce(publishStub));
+    t.deepEqual(publishStub.args[0][0], {
+        tradesInfo: fetchedDataMap,
+    });
 });
 
 test('calls logger if fetch fails', async (t) => {

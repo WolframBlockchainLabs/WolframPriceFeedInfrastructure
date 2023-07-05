@@ -55,7 +55,7 @@ test('fetch data should return existing orderBook info', async (t) => {
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchOrderBook));
 });
 
-test('save data should call model.create', async (t) => {
+test('save data should call publish method', async (t) => {
     const { orderBookCollector, publishStub } = t.context;
     const { bids, asks } = fetchOrderBookStubResult;
 
