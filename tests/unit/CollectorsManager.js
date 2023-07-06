@@ -69,8 +69,12 @@ test.beforeEach((t) => {
         rabbitMqConfig: {
             urls: [],
         },
-        interval: '* * * * *',
-        desync: 30000,
+        rateLimit: 50,
+        rateLimitMargin: 10,
+        queuePosition: 3,
+        queueSize: 5,
+        replicaSize: 2,
+        instancePosition: 1,
     });
 });
 
@@ -86,14 +90,8 @@ test('the "start" method should call cron scheduler.', async (t) => {
     t.is(undefined, sinon.assert.calledOnce(cronStub));
 });
 
-test('the "start" method should call the "start" method on each model.', async (t) => {
-    const {
-        collectorsManager,
-        candleStickSaveStub,
-        orderBookSaveStub,
-        tickerSaveStub,
-        tradeSaveStub,
-    } = t.context;
+test('the "runCollectors" method should call the "setTimeout" method for each model.', async (t) => {
+    const { collectorsManager, setTimeoutStub } = t.context;
 
     collectorsManager.schedule = {
         prev: sandbox.stub().returns({
@@ -107,16 +105,26 @@ test('the "start" method should call the "start" method on each model.', async (
     await collectorsManager.initCollectors();
     await collectorsManager.runCollectors();
 
-    t.is(undefined, sinon.assert.calledOnce(candleStickSaveStub));
-    t.is(undefined, sinon.assert.calledOnce(orderBookSaveStub));
-    t.is(undefined, sinon.assert.calledOnce(tickerSaveStub));
-    t.is(undefined, sinon.assert.calledOnce(tradeSaveStub));
+    t.is(setTimeoutStub.callCount, collectorsManager.collectors.length);
 });
 
 test('calls logger on error', async (t) => {
-    const { collectorsManager, loggerStub, candleStickSaveStub } = t.context;
+    const {
+        collectorsManager,
+        loggerStub,
+        candleStickSaveStub,
+        setTimeoutStub,
+    } = t.context;
 
     candleStickSaveStub.throws();
+    const setTimeoutCallbackPromise = new Promise((resolve) => {
+        setTimeoutStub.callsFake(async (cb) => {
+            await cb();
+
+            resolve();
+        });
+    });
+
     collectorsManager.schedule = {
         prev: sandbox.stub().returns({
             toDate: sandbox.stub().returns(new Date()),
@@ -128,6 +136,7 @@ test('calls logger on error', async (t) => {
 
     await collectorsManager.initCollectors();
     await collectorsManager.runCollectors();
+    await setTimeoutCallbackPromise;
 
     t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
 });

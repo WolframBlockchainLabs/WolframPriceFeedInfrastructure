@@ -1,6 +1,8 @@
 {
-    "interval": "* * * * *",
-    "internalDesync": 50000,
+    "rateLimit": 1000,
+    "rateLimitMargin": "{{RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{REPLICA_SIZE}}",
+    "instancePosition": "{{INSTANCE_POSITION}}",
     "exchanges": [
         {
             "id": "binance",

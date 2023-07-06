@@ -1,6 +1,8 @@
 {
-    "interval": ["required", "string"],
-    "internalDesync": ["required", "positive_integer"],
+    "rateLimit": ["required", "positive_integer"],
+    "rateLimitMargin": ["required", "positive_integer"],
+    "replicaSize": ["required", "positive_integer"],
+    "instancePosition": ["required", "integer"],
     "exchanges": [
         "required",
         {
@@ -10,8 +12,7 @@
                     "name": ["required", "string"],
                     "apiKey": "string",
                     "apiSecret": "string",
-                    "interval": "string",
-                    "internalDesync": "positive_integer",
+                    "rateLimit": "positive_integer",
                     "symbols": ["required", { "list_of": "string" }]
                 }
             }

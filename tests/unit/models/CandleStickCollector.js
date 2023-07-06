@@ -54,7 +54,7 @@ test('fetch data should return existing candleStick info', async (t) => {
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchOHLCV));
 });
 
-test('save data should call model.create', async (t) => {
+test('save data should call publish method', async (t) => {
     const { candleStickCollector, publishStub } = t.context;
 
     await candleStickCollector.saveData(fetchOHLCVStubResult);
