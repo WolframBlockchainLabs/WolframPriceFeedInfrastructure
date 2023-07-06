@@ -70,6 +70,7 @@ test.beforeEach((t) => {
             urls: [],
         },
         rateLimit: 50,
+        rateLimitMargin: 10,
         queuePosition: 3,
         queueSize: 5,
         replicaSize: 2,
