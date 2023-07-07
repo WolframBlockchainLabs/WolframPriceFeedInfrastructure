@@ -3,13 +3,13 @@ import test from 'ava';
 import sinon from 'sinon';
 import cron from 'node-cron';
 import { faker } from '@faker-js/faker';
-import Exchange from '../../lib/domain-model/entities/Exchange.js';
-import Market from '../../lib/domain-model/entities/Market.js';
-import CollectorsManager from '../../lib/collectors/CollectorsManager.js';
-import CandleStickCollector from '../../lib/collectors/models/CandleStick.js';
-import OrderBookCollector from '../../lib/collectors/models/OrderBook.js';
-import TickerCollector from '../../lib/collectors/models/Ticker.js';
-import TradeCollector from '../../lib/collectors/models/Trade.js';
+import Exchange from '../../../lib/domain-model/entities/Exchange.js';
+import Market from '../../../lib/domain-model/entities/Market.js';
+import CollectorsManager from '../../../lib/collectors/CollectorsManager.js';
+import CandleStickCollector from '../../../lib/collectors/models/CandleStick.js';
+import OrderBookCollector from '../../../lib/collectors/models/OrderBook.js';
+import TickerCollector from '../../../lib/collectors/models/Ticker.js';
+import TradeCollector from '../../../lib/collectors/models/Trade.js';
 
 let sandbox;
 

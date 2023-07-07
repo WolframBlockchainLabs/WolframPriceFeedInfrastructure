@@ -2,8 +2,8 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import { tickerData } from '../../test-data.js';
-import TickerCollector from '../../../lib/collectors/models/Ticker.js';
+import { tickerData } from '../../../test-data.js';
+import TickerCollector from '../../../../lib/collectors/models/Ticker.js';
 
 let sandbox;
 

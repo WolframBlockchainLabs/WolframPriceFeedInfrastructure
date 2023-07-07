@@ -1,7 +1,11 @@
 {
     "all": true,
-    "include": ["**/use-cases/**", "**/collectors/**"],
-    "exclude": ["**/use-cases/BaseUseCase.js", "**/use-cases/utils/**"],
+    "include": ["**/use-cases/**", "**/collectors/**", "**/ws-api/**"],
+    "exclude": [
+        "**/use-cases/BaseUseCase.js",
+        "**/use-cases/utils/**",
+        "**/ws-api/*.*"
+    ],
     "reporter": ["text", "html"],
     "check-coverage": true,
     "branches": 80,
