@@ -1,10 +1,18 @@
 {
     "all": true,
-    "include": ["**/use-cases/**", "**/collectors/**", "**/ws-api/**"],
+    "include": [
+        "**/use-cases/**",
+        "**/collectors/**",
+        "**/ws-api/**",
+        "**/workers/**"
+    ],
     "exclude": [
+        "**/tests/**",
         "**/use-cases/BaseUseCase.js",
         "**/use-cases/utils/**",
-        "**/ws-api/*.*"
+        "**/ws-api/*.*",
+        "**/workers/*.*",
+        "**/workers/**/worker.*"
     ],
     "reporter": ["text", "html"],
     "check-coverage": true,
