@@ -56,7 +56,11 @@ test('fetch data should return existing trade info', async (t) => {
 test('save data should call publish method', async (t) => {
     const { tradeCollector, publishStub } = t.context;
 
+    tradeCollector.setInterval(1684141361269, 1684141361469);
+
     await tradeCollector.saveData(fetchTradeStubResult);
+
+    tradeCollector.setInterval(null, null);
 
     t.deepEqual(publishStub.args[0][0], {
         tradesInfo: fetchedDataMap,
