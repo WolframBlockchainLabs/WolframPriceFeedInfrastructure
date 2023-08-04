@@ -1,40 +1,36 @@
 {
-    "interval": 60000,
-    "exchanges": {
-        "binance": {
+    "rateLimit": 1000,
+    "rateLimitMargin": "{{RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{REPLICA_SIZE}}",
+    "instancePosition": "{{INSTANCE_POSITION}}",
+    "exchanges": [
+        {
             "id": "binance",
             "name": "Binance",
-            "apiKey": "",
-            "apiSecret": "",
             "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
         },
-        "kucoin": {
+        {
             "id": "kucoin",
             "name": "KuCoin",
-            "apiKey": "",
-            "apiSecret": "",
+            "rateLimit": 100,
             "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
         },
-        "gemini": {
+        {
             "id": "gemini",
             "name": "Gemini",
-            "apiKey": "",
-            "apiSecret": "",
+            "rateLimit": 200,
             "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
         },
-        "kraken": {
+        {
             "id": "kraken",
             "name": "Kraken",
-            "apiKey": "",
-            "apiSecret": "",
             "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
         },
-        "bitfinex": {
+        {
             "id": "bitfinex",
             "name": "Bitfinex",
-            "apiKey": "",
-            "apiSecret": "",
+            "rateLimit": 2000,
             "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
         }
-    }
+    ]
 }

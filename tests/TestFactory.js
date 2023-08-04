@@ -1,4 +1,3 @@
-import { dumpExchange, dumpMarket } from '../lib/use-cases/utils/dumps.js';
 import {
     exchangeData,
     fakeMarketsData,
@@ -7,14 +6,16 @@ import {
     generateCandleStickData,
     generateTradeData,
 } from './test-data.js';
-import Exchange from './../lib/domain-model/Exchange.js';
-import Market from './../lib/domain-model/Market.js';
-import OrderBook from './../lib/domain-model/OrderBook.js';
-import Trade from './../lib/domain-model/Trade.js';
-import Ticker from './../lib/domain-model/Ticker.js';
-import CandleStick from './../lib/domain-model/CandleStick.js';
+import Exchange from './../lib/domain-model/entities/Exchange.js';
+import Market from './../lib/domain-model/entities/Market.js';
+import OrderBook from './../lib/domain-model/entities/OrderBook.js';
+import Trade from './../lib/domain-model/entities/Trade.js';
+import Ticker from './../lib/domain-model/entities/Ticker.js';
+import CandleStick from './../lib/domain-model/entities/CandleStick.js';
+import dumpExchange from '../lib/use-cases/utils/dumps/dumpExchange.js';
+import dumpMarket from '../lib/use-cases/utils/dumps/dumpMarket.js';
 
-export default class TestFactory {
+class TestFactory {
     async createExchanges() {
         try {
             for (const exchange of exchangeData) {
@@ -53,6 +54,54 @@ export default class TestFactory {
         });
     }
 
+    async findOneExchangeOrCreate() {
+        try {
+            const { externalExchangeId, name } = exchangeData[0];
+            let exchange = await Exchange.findOne({
+                where: {
+                    externalExchangeId,
+                    name,
+                },
+            });
+
+            if (!exchange) {
+                exchange = await Exchange.create({
+                    externalExchangeId,
+                    name,
+                });
+            }
+
+            return dumpExchange(exchange);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async findOneMarketOrCreate() {
+        const exchange = await this.findOneExchangeOrCreate();
+        const marketData = fakeMarketsData()[0];
+
+        let market = await Market.findOne({
+            where: {
+                ...marketData,
+                exchangeId: exchange.id,
+            },
+        });
+
+        if (!market) {
+            market = await Market.create({
+                ...marketData,
+                exchangeId: exchange.id,
+            });
+        }
+
+        return {
+            marketId: market.id,
+            symbol: market.symbol,
+            exchangeName: exchange.name,
+        };
+    }
+
     async createOrderBook() {
         const markets = await this.createMarkets();
 
@@ -64,7 +113,8 @@ export default class TestFactory {
     }
 
     async createCandleStick() {
-        const { marketId, symbol, exchangeName } = await this.createMarket();
+        const { marketId, symbol, exchangeName } =
+            await this.findOneMarketOrCreate();
         const charts = generateCandleStickData();
 
         const newCandleStick = await CandleStick.create({ marketId, charts });
@@ -73,7 +123,8 @@ export default class TestFactory {
     }
 
     async createTicker() {
-        const { marketId, symbol, exchangeName } = await this.createMarket();
+        const { marketId, symbol, exchangeName } =
+            await this.findOneMarketOrCreate();
 
         const newTicker = await Ticker.create({ marketId, ...tickerData });
 
@@ -81,7 +132,8 @@ export default class TestFactory {
     }
 
     async createTrade() {
-        const { marketId, symbol, exchangeName } = await this.createMarket();
+        const { marketId, symbol, exchangeName } =
+            await this.findOneMarketOrCreate();
 
         const tradesInfo = generateTradeData();
 
@@ -99,3 +151,5 @@ export default class TestFactory {
         await Exchange.destroy({ truncate: { cascade: true } });
     }
 }
+
+export default TestFactory;

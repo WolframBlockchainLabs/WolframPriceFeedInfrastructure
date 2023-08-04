@@ -1,0 +1,21 @@
+{
+    "rateLimit": ["required", "positive_integer"],
+    "rateLimitMargin": ["required", "positive_integer"],
+    "replicaSize": ["required", "positive_integer"],
+    "instancePosition": ["required", "integer"],
+    "exchanges": [
+        "required",
+        {
+            "list_of": {
+                "nested_object": {
+                    "id": ["required", "string"],
+                    "name": ["required", "string"],
+                    "apiKey": "string",
+                    "apiSecret": "string",
+                    "rateLimit": "positive_integer",
+                    "symbols": ["required", { "list_of": "string" }]
+                }
+            }
+        }
+    ]
+}
