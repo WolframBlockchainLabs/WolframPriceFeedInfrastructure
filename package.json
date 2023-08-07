@@ -13,8 +13,9 @@
     "scripts": {
         "start": "node --max-old-space-size=8192  ./lib/app.js",
         "nodemon": "nodemon --max-old-space-size=8192 --legacy-watch  ./lib/app.js",
-        "cli:collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
-        "cli:historical-collectors": "node ./lib/cli/historical_collectors/ecosystem.config.cjs",
+        "cli:ccxt-collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
+        "cli:ccxt-historical-collectors": "node ./lib/cli/ccxt_historical_collectors/ecosystem.config.cjs",
+        "cli:xrpl-collectors": "npx pm2-runtime start ./lib/cli/xrpl_collectors/ecosystem.config.cjs",
         "cli:check-gaps": "node --max-old-space-size=8192  ./lib/cli/check-gaps/entrypoint.js",
         "workers:ccxt-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/worker.js",
         "workers:markets-refresher:start": "node --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
@@ -33,7 +34,7 @@
         "migration:rollback:test": "sequelize db:migrate:undo --migrations-path ./lib/domain-model/migrations --config lib/config.cjs --env test-db",
         "migration:all": "npm run migration:db && npm run migration:test",
         "docker:cli:check-gaps": "docker exec -i ccdb-backend npm run cli:check-gaps --",
-        "docker:cli:historical-collectors": "docker exec -i ccdb-backend npm run cli:historical-collectors --",
+        "docker:cli:ccxt-historical-collectors": "docker exec -i ccdb-backend npm run cli:ccxt-historical-collectors --",
         "docker:workers:ccxt-seeder:start": "docker exec -i ccdb-backend npm run workers:ccxt-seeder:start",
         "docker:test:ava": "docker exec -i ccdb-backend npm run test:ava",
         "docker:test:coverage": "docker exec -i ccdb-backend npm run test:coverage",
@@ -73,7 +74,8 @@
         "sequelize-cli": "^6.6.1",
         "socket.io": "^4.7.1",
         "traverse": "^0.6.7",
-        "winston": "^3.9.0"
+        "winston": "^3.9.0",
+        "xrpl": "^2.9.1"
     },
     "devDependencies": {
         "@babel/core": "^7.22.5",

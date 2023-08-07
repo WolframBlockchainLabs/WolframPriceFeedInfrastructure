@@ -1,0 +1,51 @@
+{
+    "rateLimit": 80,
+    "rateLimitMargin": "{{XRPL_RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{XRPL_REPLICA_SIZE}}",
+    "instancePosition": "{{XRPL_INSTANCE_POSITION}}",
+    "serverUrl": "{{XRPL_SERVER_URL}}",
+    "exchange": {
+        "id": "xrpl",
+        "name": "XRPL"
+    },
+    "markets": [
+        {
+            "pair": {
+                "base": {
+                    "currency": "XRP"
+                },
+                "counter": {
+                    "currency": "USD",
+                    "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+                }
+            },
+            "symbol": "XRP/Bitstamp USD"
+        },
+        {
+            "pair": {
+                "base": {
+                    "currency": "BTC",
+                    "issuer": "rchGBxcD1A1C2tdxF6papQYZ8kjRKMYcL"
+                },
+                "counter": {
+                    "currency": "USD",
+                    "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+                }
+            },
+            "symbol": "GateHub BTC/Bitstamp USD"
+        },
+        {
+            "pair": {
+                "base": {
+                    "currency": "BTC",
+                    "issuer": "rchGBxcD1A1C2tdxF6papQYZ8kjRKMYcL"
+                },
+                "counter": {
+                    "currency": "EUR",
+                    "issuer": "rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq"
+                }
+            },
+            "symbol": "GateHub BTC/GateHub EUR"
+        }
+    ]
+}
