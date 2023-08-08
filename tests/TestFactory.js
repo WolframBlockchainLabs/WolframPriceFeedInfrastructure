@@ -108,7 +108,12 @@ class TestFactory {
         const { bids, asks } = orderBookData;
 
         for (const market of markets) {
-            await OrderBook.create({ marketId: market.id, bids, asks });
+            await OrderBook.create({
+                marketId: market.id,
+                intervalStart: new Date(),
+                bids,
+                asks,
+            });
         }
     }
 
@@ -117,7 +122,11 @@ class TestFactory {
             await this.findOneMarketOrCreate();
         const charts = generateCandleStickData();
 
-        const newCandleStick = await CandleStick.create({ marketId, charts });
+        const newCandleStick = await CandleStick.create({
+            marketId,
+            intervalStart: new Date(),
+            charts,
+        });
 
         return { exchangeName, marketId, symbol, newCandleStick };
     }
@@ -126,7 +135,11 @@ class TestFactory {
         const { marketId, symbol, exchangeName } =
             await this.findOneMarketOrCreate();
 
-        const newTicker = await Ticker.create({ marketId, ...tickerData });
+        const newTicker = await Ticker.create({
+            marketId,
+            intervalStart: new Date(),
+            ...tickerData,
+        });
 
         return { exchangeName, marketId, symbol, newTicker };
     }
@@ -137,7 +150,11 @@ class TestFactory {
 
         const tradesInfo = generateTradeData();
 
-        const newTrade = await Trade.create({ marketId, tradesInfo });
+        const newTrade = await Trade.create({
+            marketId,
+            tradesInfo,
+            intervalStart: new Date(),
+        });
 
         return { exchangeName, marketId, symbol, newTrade };
     }
