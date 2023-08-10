@@ -8,7 +8,10 @@
     "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module",
-        "requireConfigFile": false
+        "requireConfigFile": false,
+        "babelOptions": {
+            "plugins": ["@babel/plugin-syntax-import-assertions"]
+        }
     },
     "extends": ["eslint:recommended", "plugin:prettier/recommended"],
     "plugins": ["import", "ava"],
