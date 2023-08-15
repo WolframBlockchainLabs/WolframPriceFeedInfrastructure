@@ -1,0 +1,76 @@
+{
+    "rateLimit": 80,
+    "rateLimitMargin": "{{ETH_RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{ETH_REPLICA_SIZE}}",
+    "instancePosition": "{{ETH_INSTANCE_POSITION}}",
+    "providerUrl": "{{ETH_PROVIDER_URL}}",
+    "exchanges": [
+        {
+            "id": "uniswap_v3",
+            "name": "Uniswap_v3",
+            "markets": [
+                {
+                    "pair": {
+                        "in": {
+                            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                            "decimals": 18,
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        },
+                        "out": {
+                            "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                            "decimals": 6,
+                            "symbol": "USDC",
+                            "name": "USD//C"
+                        }
+                    },
+                    "symbol": "WETH/USDC"
+                }
+            ]
+        },
+        {
+            "id": "uniswap_v2",
+            "name": "Uniswap_v2",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "0xf07f378bdff2c303f52ee3e83118474e9a15d95e",
+                        "in": {
+                            "address": "0x4f39687328a14dba531fcbd2305724740bb36941",
+                            "symbol": "Whistler",
+                            "name": "Whistler"
+                        },
+                        "out": {
+                            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        }
+                    },
+                    "symbol": "Whistler/WETH"
+                }
+            ]
+        },
+        {
+            "id": "sushiswap",
+            "name": "SushiSwap",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "0x6a091a3406E0073C3CD6340122143009aDac0EDa",
+                        "in": {
+                            "address": "0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E",
+                            "symbol": "ILV",
+                            "name": "Illuvium"
+                        },
+                        "out": {
+                            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        }
+                    },
+                    "symbol": "ILV/WETH"
+                }
+            ]
+        }
+    ]
+}
