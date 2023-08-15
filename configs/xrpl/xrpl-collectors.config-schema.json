@@ -1,0 +1,51 @@
+{
+    "rateLimit": ["required", "positive_integer"],
+    "rateLimitMargin": ["required", "positive_integer"],
+    "replicaSize": ["required", "positive_integer"],
+    "instancePosition": ["required", "integer"],
+    "serverUrl": ["required", "string"],
+    "exchange": [
+        "required",
+        {
+            "nested_object": {
+                "id": ["required", "string"],
+                "name": ["required", "string"]
+            }
+        }
+    ],
+    "markets": [
+        "required",
+        {
+            "list_of": {
+                "nested_object": {
+                    "pair": [
+                        "required",
+                        {
+                            "nested_object": {
+                                "base": [
+                                    "required",
+                                    {
+                                        "nested_object": {
+                                            "currency": ["required", "string"],
+                                            "issuer": ["string"]
+                                        }
+                                    }
+                                ],
+                                "counter": [
+                                    "required",
+                                    {
+                                        "nested_object": {
+                                            "currency": ["required", "string"],
+                                            "issuer": ["string"]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "symbol": ["required", "string"]
+                }
+            }
+        }
+    ]
+}

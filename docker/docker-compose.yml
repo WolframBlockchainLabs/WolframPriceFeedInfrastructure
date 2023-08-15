@@ -21,9 +21,9 @@ services:
             - ../:/app
             - /app/node_modules
 
-    # collectors-1:
+    # ccxt-collectors-1:
     #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-collectors-1
+    #     container_name: ccdb-ccxt-collectors-1
     #     depends_on:
     #         timescale:
     #             condition: service_healthy
@@ -31,16 +31,16 @@ services:
     #             condition: service_started
     #     env_file: ./env/.env.backend
     #     environment:
-    #         INSTANCE_POSITION: 0
-    #         REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:collectors"
+    #         CCXT_INSTANCE_POSITION: 0
+    #         CCXT_REPLICA_SIZE: 2
+    #     command: sh -c "npm run cli:ccxt-collectors"
     #     volumes:
     #         - ../:/app
     #         - /app/node_modules
 
-    # collectors-2:
+    # ccxt-collectors-2:
     #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-collectors-2
+    #     container_name: ccdb-ccxt-collectors-2
     #     depends_on:
     #         timescale:
     #             condition: service_healthy
@@ -48,9 +48,26 @@ services:
     #             condition: service_started
     #     env_file: ./env/.env.backend
     #     environment:
-    #         INSTANCE_POSITION: 1
-    #         REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:collectors"
+    #         CCXT_INSTANCE_POSITION: 1
+    #         CCXT_REPLICA_SIZE: 2
+    #     command: sh -c "npm run cli:ccxt-collectors"
+    #     volumes:
+    #         - ../:/app
+    #         - /app/node_modules
+
+    # xrpl-collectors-1:
+    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     container_name: ccdb-xrpl-collectors-1
+    #     depends_on:
+    #         timescale:
+    #             condition: service_healthy
+    #         rabbitmq:
+    #             condition: service_started
+    #     env_file: ./env/.env.backend
+    #     environment:
+    #         XRPL_INSTANCE_POSITION: 0
+    #         XRPL_REPLICA_SIZE: 2
+    #     command: sh -c "npm run cli:xrpl-collectors"
     #     volumes:
     #         - ../:/app
     #         - /app/node_modules
