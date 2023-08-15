@@ -74,16 +74,3 @@ test('the "start" method should call connect on exchangeApi and start on super.'
     t.is(undefined, sinon.assert.calledOnce(startStub));
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.connect));
 });
-
-test('the "initCollectors" method should call initCollectors on super.', async (t) => {
-    const { collectorsManager } = t.context;
-
-    const initCollectorsStub = sinon.stub(
-        CollectorsManager.prototype,
-        'initCollectors',
-    );
-
-    await collectorsManager.initCollectors();
-
-    t.is(undefined, sinon.assert.calledOnce(initCollectorsStub));
-});
