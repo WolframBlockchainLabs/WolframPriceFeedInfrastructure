@@ -16,6 +16,7 @@
         "cli:ccxt-collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
         "cli:ccxt-historical-collectors": "node ./lib/cli/ccxt_historical_collectors/ecosystem.config.cjs",
         "cli:xrpl-collectors": "npx pm2-runtime start ./lib/cli/xrpl_collectors/ecosystem.config.cjs",
+        "cli:eth-collectors": "npx pm2-runtime start ./lib/cli/eth_collectors/ecosystem.config.cjs",
         "cli:check-gaps": "node --max-old-space-size=8192  ./lib/cli/check-gaps/entrypoint.js",
         "workers:ccxt-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/worker.js",
         "workers:xrpl-seeder:start": "node --max-old-space-size=8192 ./lib/workers/xrpl-seeder/worker.js",

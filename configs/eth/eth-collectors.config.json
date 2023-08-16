@@ -25,6 +25,40 @@
                         }
                     },
                     "symbol": "WETH/USDC"
+                },
+                {
+                    "pair": {
+                        "in": {
+                            "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+                            "decimals": 18,
+                            "symbol": "DAI",
+                            "name": "Dai Stablecoin"
+                        },
+                        "out": {
+                            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                            "decimals": 18,
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        }
+                    },
+                    "symbol": "DAI/WETH"
+                },
+                {
+                    "pair": {
+                        "in": {
+                            "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+                            "decimals": 18,
+                            "symbol": "UNI",
+                            "name": "Uniswap"
+                        },
+                        "out": {
+                            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                            "decimals": 18,
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        }
+                    },
+                    "symbol": "UNI/WETH"
                 }
             ]
         },
@@ -47,6 +81,38 @@
                         }
                     },
                     "symbol": "Whistler/WETH"
+                },
+                {
+                    "pair": {
+                        "pool": "0x21b8065d10f73ee2e260e5b47d3344d3ced7596e",
+                        "in": {
+                            "address": "0x66a0f676479cee1d7373f3dc2e2952778bff5bd6",
+                            "symbol": "WISE",
+                            "name": "Wise Token"
+                        },
+                        "out": {
+                            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        }
+                    },
+                    "symbol": "WISE/WETH"
+                },
+                {
+                    "pair": {
+                        "pool": "0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852",
+                        "in": {
+                            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        },
+                        "out": {
+                            "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+                            "symbol": "USDT",
+                            "name": "Tether USD"
+                        }
+                    },
+                    "symbol": "ETH/USDT"
                 }
             ]
         },
@@ -69,6 +135,38 @@
                         }
                     },
                     "symbol": "ILV/WETH"
+                },
+                {
+                    "pair": {
+                        "pool": "0xCEfF51756c56CeFFCA006cD410B03FFC46dd3a58",
+                        "in": {
+                            "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+                            "symbol": "WBTC",
+                            "name": "Wrapped BTC"
+                        },
+                        "out": {
+                            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        }
+                    },
+                    "symbol": "WBTC/WETH"
+                },
+                {
+                    "pair": {
+                        "pool": "0x06da0fd433C1A5d7a4faa01111c044910A184553",
+                        "in": {
+                            "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                            "symbol": "WETH",
+                            "name": "Wrapped Ether"
+                        },
+                        "out": {
+                            "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+                            "symbol": "USDT",
+                            "name": "Tether USD"
+                        }
+                    },
+                    "symbol": "WETH/USDT"
                 }
             ]
         }
