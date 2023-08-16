@@ -35,7 +35,7 @@ const tokenData = {
     },
 };
 
-const pairQuote = '10';
+const pairQuote = '0.1';
 
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
@@ -72,7 +72,11 @@ test('the "getExchangeRate" method should format pair and get quote.', async (t)
 
     const result = await ethPoolDriver.getExchangeRate(pair);
 
-    t.is(result, pairQuote);
+    t.deepEqual(result, {
+        poolASize: tokenData.preciseReserves.inReserve,
+        poolBSize: tokenData.preciseReserves.outReserve,
+        exchangeRate: pairQuote,
+    });
 });
 
 test('the "getReserves" method should return quantities of tokens in a pool.', async (t) => {

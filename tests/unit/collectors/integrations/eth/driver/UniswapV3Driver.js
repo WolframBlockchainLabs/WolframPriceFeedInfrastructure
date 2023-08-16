@@ -66,5 +66,7 @@ test('the "getExchangeRate" method should format pair and get quote.', async (t)
             quoterContractStub.callStatic.quoteExactInputSingle,
         ),
     );
-    t.is(result, pairQuote);
+    t.deepEqual(result, {
+        exchangeRate: pairQuote,
+    });
 });
