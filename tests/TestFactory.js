@@ -5,6 +5,7 @@ import {
     tickerData,
     generateCandleStickData,
     generateTradeData,
+    exchangeRateData,
 } from './test-data.js';
 import Exchange from './../lib/domain-model/entities/Exchange.js';
 import Market from './../lib/domain-model/entities/Market.js';
@@ -14,6 +15,7 @@ import Ticker from './../lib/domain-model/entities/Ticker.js';
 import CandleStick from './../lib/domain-model/entities/CandleStick.js';
 import dumpExchange from '../lib/use-cases/utils/dumps/dumpExchange.js';
 import dumpMarket from '../lib/use-cases/utils/dumps/dumpMarket.js';
+import ExchangeRate from '../lib/domain-model/entities/ExchangeRate.js';
 
 class TestFactory {
     async createExchanges() {
@@ -117,6 +119,19 @@ class TestFactory {
         }
     }
 
+    async createExchangeRate() {
+        const markets = await this.createMarkets();
+
+        for (const market of markets) {
+            await ExchangeRate.create({
+                marketId: market.id,
+                intervalStart: new Date(),
+                intervalEnd: new Date(),
+                ...exchangeRateData,
+            });
+        }
+    }
+
     async createCandleStick() {
         const { marketId, symbol, exchangeName } =
             await this.findOneMarketOrCreate();
@@ -163,6 +178,7 @@ class TestFactory {
         await Trade.destroy({ truncate: { cascade: true } });
         await Ticker.destroy({ truncate: { cascade: true } });
         await CandleStick.destroy({ truncate: { cascade: true } });
+        await ExchangeRate.destroy({ truncate: { cascade: true } });
         await OrderBook.destroy({ truncate: { cascade: true } });
         await Market.destroy({ truncate: { cascade: true } });
         await Exchange.destroy({ truncate: { cascade: true } });

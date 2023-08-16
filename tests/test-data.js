@@ -36,6 +36,12 @@ export const orderBookData = {
     asks: [[faker.number.float()], [faker.number.float()]],
 };
 
+export const exchangeRateData = {
+    poolASize: faker.number.float(),
+    poolBSize: faker.number.float(),
+    exchangeRate: faker.number.float(),
+};
+
 export function generateCandleStickData(length = 3) {
     return Array.from({ length }, () =>
         Array.from({ length: 5 }, () => faker.number.float()),
