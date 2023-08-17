@@ -57,6 +57,7 @@
         "test:lint"
     ],
     "dependencies": {
+        "@taquito/taquito": "^17.2.0",
         "@uniswap/sdk-core": "^3.1.0",
         "@uniswap/v3-sdk": "^3.9.0",
         "amqp-connection-manager": "^4.1.13",
