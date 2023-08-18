@@ -21,7 +21,7 @@
         "workers:ccxt-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/worker.js",
         "workers:xrpl-seeder:start": "node --max-old-space-size=8192 ./lib/workers/xrpl-seeder/worker.js",
         "workers:eth-seeder:start": "node --max-old-space-size=8192 ./lib/workers/eth-seeder/worker.js",
-        "workers:collectors-seeder:start": "npm run workers:ccxt-seeder:start && npm run workers:xrpl-seeder:start && workers:eth-seeder:start",
+        "workers:collectors-seeder:start": "npm run workers:ccxt-seeder:start && npm run workers:xrpl-seeder:start && npm run workers:eth-seeder:start",
         "workers:markets-refresher:start": "node --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
         "workers:markets-refresher:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
         "workers:database-writer:start": "node --max-old-space-size=8192 ./lib/workers/database-writer/worker.js",
