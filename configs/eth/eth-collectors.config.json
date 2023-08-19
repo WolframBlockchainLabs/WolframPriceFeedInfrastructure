@@ -1,5 +1,5 @@
 {
-    "rateLimit": 80,
+    "rateLimit": 6000,
     "rateLimitMargin": "{{ETH_RATE_LIMIT_MARGIN}}",
     "replicaSize": "{{ETH_REPLICA_SIZE}}",
     "instancePosition": "{{ETH_INSTANCE_POSITION}}",
