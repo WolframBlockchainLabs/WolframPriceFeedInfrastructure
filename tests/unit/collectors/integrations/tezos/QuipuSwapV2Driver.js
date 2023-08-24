@@ -7,6 +7,8 @@ let sandbox;
 
 const pair = {
     id: 2,
+    in: {},
+    out: {},
 };
 
 const lpData = {
