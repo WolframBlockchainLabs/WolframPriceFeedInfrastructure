@@ -3,7 +3,7 @@ import test from 'ava';
 import sinon from 'sinon';
 import Exchange from '../../../../lib/domain-model/entities/Exchange.js';
 import Market from '../../../../lib/domain-model/entities/Market.js';
-import ETHSeeder from '../../../../lib/workers/eth-seeder/ETHSeeder.js';
+import UDEXSeeder from '../../../../lib/workers/udex-seeder/UDEXSeeder.js';
 
 const ethConfig = {
     exchanges: [
@@ -56,7 +56,7 @@ test.beforeEach((t) => {
         error: sandbox.stub(),
     };
 
-    t.context.ethSeeder = new ETHSeeder({
+    t.context.udexSeeder = new UDEXSeeder({
         logger: t.context.loggerStub,
         sequelize: {},
     });
@@ -67,11 +67,11 @@ test.afterEach(() => {
 });
 
 test('the execute method passes symbols to the loadMarkets method if exchange was created', async (t) => {
-    const { ethSeeder, ExchangeStub } = t.context;
+    const { udexSeeder, ExchangeStub } = t.context;
 
-    const loadMarketsStub = sandbox.stub(ethSeeder, 'loadMarkets');
+    const loadMarketsStub = sandbox.stub(udexSeeder, 'loadMarkets');
 
-    await ethSeeder.execute(ethConfig);
+    await udexSeeder.execute(ethConfig);
 
     sinon.assert.calledOnce(ExchangeStub.findOrCreate);
     sinon.assert.calledOnce(loadMarketsStub);
@@ -80,12 +80,12 @@ test('the execute method passes symbols to the loadMarkets method if exchange wa
 });
 
 test('the execute method passes symbols to the loadMarkets method if exchange was found', async (t) => {
-    const { ethSeeder, ExchangeStub } = t.context;
+    const { udexSeeder, ExchangeStub } = t.context;
 
     ExchangeStub.findOrCreate.returns([{ id: 1 }, false]);
-    const loadMarketsStub = sandbox.stub(ethSeeder, 'loadMarkets');
+    const loadMarketsStub = sandbox.stub(udexSeeder, 'loadMarkets');
 
-    await ethSeeder.execute(ethConfig);
+    await udexSeeder.execute(ethConfig);
 
     sinon.assert.calledOnce(ExchangeStub.findOrCreate);
     sinon.assert.calledOnce(loadMarketsStub);
@@ -94,9 +94,9 @@ test('the execute method passes symbols to the loadMarkets method if exchange wa
 });
 
 test('the loadMarkets method tries to create a markets if they are not found', async (t) => {
-    const { ethSeeder, MarketStub } = t.context;
+    const { udexSeeder, MarketStub } = t.context;
 
-    await ethSeeder.loadMarkets(
+    await udexSeeder.loadMarkets(
         {
             externalExchangeId: 'uniswap_v3',
             name: 'Uniswap_v3',
@@ -110,10 +110,10 @@ test('the loadMarkets method tries to create a markets if they are not found', a
 });
 
 test('the loadMarkets method will not create market if it was found', async (t) => {
-    const { ethSeeder, MarketStub } = t.context;
+    const { udexSeeder, MarketStub } = t.context;
 
     MarketStub.findOrCreate.returns([{ id: 1 }, false]);
-    await ethSeeder.loadMarkets(
+    await udexSeeder.loadMarkets(
         {
             externalExchangeId: 'uniswap_v3',
             name: 'Uniswap_v3',
