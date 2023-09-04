@@ -60,6 +60,8 @@
         "test:lint"
     ],
     "dependencies": {
+        "@blockfrost/blockfrost-js": "^5.4.0",
+        "@minswap/sdk": "^0.2.2-beta",
         "@taquito/taquito": "^17.2.0",
         "@uniswap/sdk-core": "^3.1.0",
         "@uniswap/v3-sdk": "^3.9.0",
