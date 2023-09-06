@@ -42,10 +42,6 @@ test.afterEach(() => {
 test('the "getExchangeRate" method should get storage and pair price.', async (t) => {
     const { minswapDriver } = t.context;
 
-    const getPoolByIdStub = sinon.stub(
-        minswapDriver.minswapAdapter,
-        'getPoolById',
-    );
     const getReservesStub = sinon.stub(minswapDriver, 'getReserves').returns({
         poolASize: new BigNumber(lpData.reserveA),
         poolBSize: new BigNumber(lpData.reserveB),
@@ -53,9 +49,7 @@ test('the "getExchangeRate" method should get storage and pair price.', async (t
 
     const result = await minswapDriver.getExchangeRate(pair);
 
-    sinon.assert.calledOnce(getPoolByIdStub);
     sinon.assert.calledOnce(getReservesStub);
-
     t.deepEqual(result, {
         exchangeRate: pairQuote,
         poolASize: lpData.reserveA,
@@ -66,8 +60,13 @@ test('the "getExchangeRate" method should get storage and pair price.', async (t
 test('the "getReserves" method should return pool sizes.', async (t) => {
     const { minswapDriver } = t.context;
 
-    const result = await minswapDriver.getReserves(lpData, pair);
+    const getPoolByIdStub = sinon
+        .stub(minswapDriver.minswapAdapter, 'getPoolById')
+        .returns(lpData);
 
+    const result = await minswapDriver.getReserves(pair);
+
+    sinon.assert.calledOnce(getPoolByIdStub);
     t.deepEqual(
         {
             poolASize: result.poolASize.toString(),
@@ -83,11 +82,13 @@ test('the "getReserves" method should return pool sizes.', async (t) => {
 test('the "getReserves" method should return pool sizes flipped for flipped addresses.', async (t) => {
     const { minswapDriver } = t.context;
 
-    const result = await minswapDriver.getReserves(
-        { ...lpData, assetA: pair.out.address },
-        pair,
-    );
+    const getPoolByIdStub = sinon
+        .stub(minswapDriver.minswapAdapter, 'getPoolById')
+        .returns({ ...lpData, assetA: pair.out.address });
 
+    const result = await minswapDriver.getReserves(pair);
+
+    sinon.assert.calledOnce(getPoolByIdStub);
     t.deepEqual(
         {
             poolASize: result.poolASize.toString(),
