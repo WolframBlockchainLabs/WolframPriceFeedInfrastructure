@@ -3,7 +3,7 @@
     "rateLimitMargin": "{{CARDANO_RATE_LIMIT_MARGIN}}",
     "replicaSize": "{{CARDANO_REPLICA_SIZE}}",
     "instancePosition": "{{CARDANO_INSTANCE_POSITION}}",
-    "providerUrl": "{{CARDANO_BLOCKFROST_PROJECT_ID}}",
+    "projectId": "{{CARDANO_BLOCKFROST_PROJECT_ID}}",
     "exchanges": [
         {
             "id": "minswap",
@@ -30,7 +30,7 @@
             ]
         },
         {
-            "id": "wingriders",
+            "id": "wing_riders",
             "name": "WingRiders",
             "markets": [
                 {

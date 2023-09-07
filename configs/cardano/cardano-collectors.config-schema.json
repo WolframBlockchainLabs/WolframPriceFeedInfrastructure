@@ -3,7 +3,7 @@
     "rateLimitMargin": ["required", "positive_integer"],
     "replicaSize": ["required", "positive_integer"],
     "instancePosition": ["required", "integer"],
-    "providerUrl": ["required", "string"],
+    "projectId": ["required", "string"],
     "exchanges": [
         "required",
         {
