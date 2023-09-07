@@ -1,0 +1,82 @@
+{
+    "rateLimit": 6000,
+    "rateLimitMargin": "{{CARDANO_RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{CARDANO_REPLICA_SIZE}}",
+    "instancePosition": "{{CARDANO_INSTANCE_POSITION}}",
+    "providerUrl": "{{CARDANO_BLOCKFROST_PROJECT_ID}}",
+    "exchanges": [
+        {
+            "id": "minswap",
+            "name": "Minswap",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "6aa2153e1ae896a95539c9d62f76cedcdabdcdf144e564b8955f609d660cf6a2",
+                        "in": {
+                            "address": "lovelace",
+                            "decimals": 6,
+                            "symbol": "ADA",
+                            "name": "Cardano"
+                        },
+                        "out": {
+                            "address": "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e",
+                            "decimals": 6,
+                            "symbol": "MIN",
+                            "name": "Minswap"
+                        }
+                    },
+                    "symbol": "ADA/MIN"
+                }
+            ]
+        },
+        {
+            "id": "wingriders",
+            "name": "WingRiders",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "addr1z8nvjzjeydcn4atcd93aac8allvrpjn7pjr2qsweukpnaytvcg6zm2vds6mz9x3h3yalqmnf24w86m09n40q3tgqxjms9yu6v8",
+                        "in": {
+                            "address": "c0ee29a85b13209423b10447d3c2e6a50641a15c57770e27cb9d507357696e67526964657273",
+                            "decimals": 0,
+                            "symbol": "WRT",
+                            "name": "WingRiders Governance Token"
+                        },
+                        "out": {
+                            "address": "lovelace",
+                            "decimals": 6,
+                            "symbol": "ADA",
+                            "name": "Cardano"
+                        }
+                    },
+                    "symbol": "WRT/ADA"
+                }
+            ]
+        },
+        {
+            "id": "muesliswap",
+            "name": "MuesliSwap",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "addr1z9cy2gmar6cpn8yymll93lnd7lw96f27kn2p3eq5d4tjr7xnh3gfhnqcwez2pzmr4tryugrr0uahuk49xqw7dc645chscql0d7",
+                        "poolUtxo": "909133088303c49f3a30f1cc8ed553a73857a29779f6c6561cd8093fb4bc66f4c84eb38b23b4429032f7bfb825a9504845c373a70684c18ef3706b21",
+                        "in": {
+                            "address": "lovelace",
+                            "decimals": 6,
+                            "symbol": "ADA",
+                            "name": "Cardano"
+                        },
+                        "out": {
+                            "address": "f66d78b4a3cb3d37afa0ec36461e51ecbde00f26c8f0a68f94b6988069555344",
+                            "decimals": 6,
+                            "symbol": "iUSD",
+                            "name": "Indigo Protocol - iUSD"
+                        }
+                    },
+                    "symbol": "ADA/iUSD"
+                }
+            ]
+        }
+    ]
+}
