@@ -55,22 +55,22 @@ services:
     #         - ../:/app
     #         - /app/node_modules
 
-    # xrpl-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-xrpl-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_started
-    #     env_file: ./env/.env.backend
-    #     environment:
-    #         XRPL_INSTANCE_POSITION: 0
-    #         XRPL_REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:xrpl-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    xrpl-collectors-1:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-xrpl-collectors-1
+        depends_on:
+            timescale:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_started
+        env_file: ./env/.env.backend
+        environment:
+            XRPL_INSTANCE_POSITION: 0
+            XRPL_REPLICA_SIZE: 2
+        command: sh -c "npm run cli:xrpl-collectors"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
     # eth-collectors-1:
     #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
