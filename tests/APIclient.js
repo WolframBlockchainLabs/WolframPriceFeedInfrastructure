@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import qs from 'query-string';
-import config from './../lib/config.cjs';
+import config from '../lib/configs/systemConfig.cjs';
 
 const { appTestPort } = config;
 
