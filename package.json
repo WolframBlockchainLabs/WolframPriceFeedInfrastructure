@@ -13,8 +13,8 @@
     "scripts": {
         "start": "node --max-old-space-size=8192  ./lib/app.js",
         "nodemon": "nodemon --max-old-space-size=8192 --legacy-watch  ./lib/app.js",
-        "cli:ccxt-collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/ecosystem.config.cjs",
-        "cli:ccxt-historical-collectors": "node ./lib/cli/ccxt_historical_collectors/ecosystem.config.cjs",
+        "cli:ccxt-collectors": "npx pm2-runtime start ./lib/cli/ccxt_collectors/realtime/ecosystem.config.cjs",
+        "cli:ccxt-historical-collectors": "node ./lib/cli/ccxt_collectors/historical/ecosystem.config.cjs",
         "cli:xrpl-collectors": "npx pm2-runtime start ./lib/cli/xrpl_collectors/ecosystem.config.cjs",
         "cli:eth-collectors": "npx pm2-runtime start ./lib/cli/udex_collectors/eth/ecosystem.config.cjs",
         "cli:tezos-collectors": "npx pm2-runtime start ./lib/cli/udex_collectors/tezos/ecosystem.config.cjs",
