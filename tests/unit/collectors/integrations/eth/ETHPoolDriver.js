@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import ethDrivers from '../../../../../../lib/collectors/integrations/eth/driver/index.js';
+import ethDrivers from '../../../../../lib/collectors/integrations/eth/index.js';
 import { ethers } from 'ethers';
 
 let sandbox;
