@@ -77,6 +77,55 @@
                     "symbol": "ADA/iUSD"
                 }
             ]
+        },
+        {
+            "id": "vy_finance",
+            "name": "Vy Finance",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "addr1zy36dpyufald7764k7st935hjuvmauwa5rdhncyajuen3znwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2sr488jg",
+                        "in": {
+                            "address": "lovelace",
+                            "decimals": 6,
+                            "symbol": "ADA",
+                            "name": "Cardano"
+                        },
+                        "out": {
+                            "address": "8a1cfae21368b8bebbbed9800fec304e95cce39a2a57dc35e2e3ebaa4d494c4b",
+                            "decimals": 0,
+                            "symbol": "MILK",
+                            "name": "MuesliSwap MILK"
+                        }
+                    },
+                    "symbol": "ADA/MILK"
+                }
+            ]
+        },
+        {
+            "id": "sandaeswap",
+            "name": "SandaeSwap",
+            "markets": [
+                {
+                    "pair": {
+                        "pool": "addr1w9qzpelu9hn45pefc0xr4ac4kdxeswq7pndul2vuj59u8tqaxdznu",
+                        "poolUtxo": "0029cb7c88c7567b63d1a512c0ed626aa169688ec980730c0473b913702008",
+                        "in": {
+                            "address": "lovelace",
+                            "decimals": 6,
+                            "symbol": "ADA",
+                            "name": "Cardano"
+                        },
+                        "out": {
+                            "address": "9a9693a9a37912a5097918f97918d15240c92ab729a0b7c4aa144d7753554e444145",
+                            "decimals": 6,
+                            "symbol": "SUNDAE",
+                            "name": "SundaeSwap SUNDAE"
+                        }
+                    },
+                    "symbol": "ADA/SUNDAE"
+                }
+            ]
         }
     ]
 }

@@ -30,7 +30,7 @@
                                                                 "string"
                                                             ],
                                                             "decimals": [
-                                                                "positive_integer"
+                                                                "integer"
                                                             ],
                                                             "symbol": [
                                                                 "required",
@@ -51,7 +51,7 @@
                                                                 "string"
                                                             ],
                                                             "decimals": [
-                                                                "positive_integer"
+                                                                "integer"
                                                             ],
                                                             "symbol": [
                                                                 "required",
