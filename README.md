@@ -58,28 +58,8 @@ Cardano, XRPL, Tezos and ETH DEXs integrations
 
 **1. Configs**
 
-For setting different configs for different pars of application using **_system.config.json_**.
-For setting secure config options using file ".env.default" that is located in the root folder.
-Set the names of the exchanges and markets where data will be collected by collectors making in **_collectors.config.json_**.
-
-1. **_system.config_**
-
-
-
-2. **_collectors.config.json_**
-
-| Variable name        | TYPE     | EXAMPLE                              |
-| -------------------- | -------- | ------------------------------------ |
-| rateLimit            | Number   | 200                                  |
-| rateLimitMargi       | Number   | 20                                   |
-| replicaSize          | Number   | 2                                    |
-| instancePosition     | Number   | 0                                    |
-|                      | **exchanges** |                                 |
-| id (in ccxt library) | String   | binance                              |
-| name (official)      | String   | Binance                              |
-| symbols              | String[] | BTC/USDT, ETH/USDT                   |
-| rateLimit            | Number   | 200                                  |
-
+This directory contains multiple .json configuration files for the overall system and collectors, powered by confme.js.
+A detailed explanation of each file is in **Configuration files** section
 
 **2. Docker**
 
@@ -91,11 +71,11 @@ The **_docker_** directory contains configuration files that are essential for s
 
 2). The **_api/ws-api_** contains definition of a WebSocket Gateway that emits data about pair pricing.
 
-3). The **_collectors_** directory contains the fundamental logic for initiating and operating the application's collectors. There are four primary collectors in the application: OrderBookCollector, CandleStickCollector, TradeCollector and TickerCollector. These collectors extract data from various exchanges, as specified in the _config.json_ file, using the [CCXT](https://docs.ccxt.com/#/) library. They operate at regular intervals, with the default interval set at 60000 milliseconds. Upon successful data retrieval, the collectors store this information into the database. The application utilizes the **TimescaleDB** database for its data storage needs.
+3). The **_collectors_** directory contains the fundamental logic for initiating and operating the application's collectors. There are four primary collectors in the application: OrderBookCollector, CandleStickCollector, TradeCollector and TickerCollector. These collectors extract data from various exchanges using the [CCXT](https://docs.ccxt.com/#/) library. They operate at regular intervals which is calculated based on rate limits and the amount of markets. Upon successful data retrieval, the collectors store this information into the database. The application utilizes the **TimescaleDB** database for its data storage needs.
 
-4). The **_domain-model_** directory contains the sequelize's entities. Those are: Exchange, Markets, OrderBook, CandleStick, Ticker and Trade.
+4). The **_domain-model_** directory contains the sequelize's entities. Those are: Exchange, Markets, OrderBook, CandleStick, Ticker, ExchangeRate and Trade.
 
-5). The **_infrastructure_** directory contains general logger that is used in the application. It helps to make the logging process of the application more convenient and understandable.
+5). The **_infrastructure_** directory contains amqp client setup and a logger that is used in the application. It helps to make the logging process of the application more convenient and understandable.
 
 6). The **_use-cases_** directory houses the core logic necessary for interacting with the fundamental entities of the application. Additionally, it includes the logic responsible for validating data received from the application's endpoints.
 
@@ -105,7 +85,7 @@ The **_migrations_** directory under domain model directory contains definitions
 
 **5. Workers**
 
-The **_workers_** directory contains the logic for creating initial exchange entries in the application's database.
+The **_workers_** directory contains definitions of services entrypoints. Those services could include seeders, or database refreshers.
 
 **6. Tests**
 
