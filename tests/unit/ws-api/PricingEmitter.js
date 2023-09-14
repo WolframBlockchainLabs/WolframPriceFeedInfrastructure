@@ -64,7 +64,7 @@ test('process emits io messages and acknowledges incoming message to rabbitmq', 
         ),
     });
 
-    sinon.assert.calledThrice(io.emit);
+    sinon.assert.calledOnce(io.emit);
     sinon.assert.calledOnce(amqpChannelStub.ack);
 
     t.pass();
