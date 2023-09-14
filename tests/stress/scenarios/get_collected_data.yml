@@ -1,0 +1,78 @@
+config:
+    target: 'http://localhost:{{ $processEnvironment.PORT }}'
+    phases:
+        - duration: 60
+          arrivalRate: 1
+          rampTo: 5
+          name: Warm up phase
+        - duration: 60
+          arrivalRate: 5
+          rampTo: 10
+          name: Ramp up load
+        - duration: 5
+          arrivalRate: 30
+          name: Spike phase
+    plugins:
+        ensure:
+            thresholds:
+                - http.response_time.p99: 100
+                - http.response_time.p95: 75
+        apdex:
+            threshold: 100
+        metrics-by-endpoint: {}
+
+scenarios:
+    - flow:
+          - get:
+                url: '/api/v1/exchanges'
+                expect:
+                    - statusCode: 200
+          - get:
+                url: '/api/v1/markets'
+                expect:
+                    - statusCode: 200
+          - get:
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/candleSticks'
+                qs:
+                    offset: 0
+                    limit: 5
+                    rangeDateStart: '2023-09-14 12:00:00+0000'
+                    rangeDateEnd: '2024-09-14 12:00:00+0000'
+                expect:
+                    - statusCode: 200
+          - get:
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/exchangeRates'
+                qs:
+                    offset: 0
+                    limit: 5
+                    rangeDateStart: '2023-09-14 12:00:00+0000'
+                    rangeDateEnd: '2024-09-14 12:00:00+0000'
+                expect:
+                    - statusCode: 200
+          - get:
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/orderBooks'
+                qs:
+                    offset: 0
+                    limit: 5
+                    rangeDateStart: '2023-09-14 12:00:00+0000'
+                    rangeDateEnd: '2024-09-14 12:00:00+0000'
+                expect:
+                    - statusCode: 200
+          - get:
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/tickers'
+                qs:
+                    offset: 0
+                    limit: 5
+                    rangeDateStart: '2023-09-14 12:00:00+0000'
+                    rangeDateEnd: '2024-09-14 12:00:00+0000'
+                expect:
+                    - statusCode: 200
+          - get:
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/trades'
+                qs:
+                    offset: 0
+                    limit: 5
+                    rangeDateStart: '2023-09-14 12:00:00+0000'
+                    rangeDateEnd: '2024-09-14 12:00:00+0000'
+                expect:
+                    - statusCode: 200
