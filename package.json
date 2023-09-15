@@ -36,6 +36,8 @@
         "test:coverage": "c8 npm run test:ava",
         "test:audit": "npm audit --audit-level=moderate",
         "test:stress:api": "node --max-old-space-size=8192 ./tests/stress/index.test.js",
+        "test:stress:rabbitmq:start": "docker compose --file './docker/stress-compose.yml' up",
+        "test:stress:rabbitmq:stop": "docker compose --file './docker/stress-compose.yml' down",
         "test": "npm run test:lint && npm run test:audit && npm run test:coverage",
         "migration:db": "sequelize db:migrate --migrations-path ./lib/domain-model/migrations --config lib/configs/systemConfig.cjs --env db",
         "migration:test": "sequelize db:migrate --migrations-path ./lib/domain-model/migrations --config lib/configs/systemConfig.cjs --env test-db",
