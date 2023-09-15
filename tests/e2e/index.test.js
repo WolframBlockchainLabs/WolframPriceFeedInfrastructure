@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
-import AppTestProvider from './AppTestProvider.js';
+import AppTestProvider from '../AppTestProvider.js';
 import TestFactory from './TestFactory.js';
 import APIclient from './APIclient.js';
-import apiTests from './api/index.js';
+import apiTests from './routes/index.js';
 
 const factory = new TestFactory();
 

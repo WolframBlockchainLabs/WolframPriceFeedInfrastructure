@@ -7,15 +7,15 @@ import {
     generateTradeData,
     exchangeRateData,
 } from './test-data.js';
-import Exchange from './../lib/domain-model/entities/Exchange.js';
-import Market from './../lib/domain-model/entities/Market.js';
-import OrderBook from './../lib/domain-model/entities/OrderBook.js';
-import Trade from './../lib/domain-model/entities/Trade.js';
-import Ticker from './../lib/domain-model/entities/Ticker.js';
-import CandleStick from './../lib/domain-model/entities/CandleStick.js';
-import dumpExchange from '../lib/use-cases/utils/dumps/dumpExchange.js';
-import dumpMarket from '../lib/use-cases/utils/dumps/dumpMarket.js';
-import ExchangeRate from '../lib/domain-model/entities/ExchangeRate.js';
+import Exchange from '../../lib/domain-model/entities/Exchange.js';
+import Market from '../../lib/domain-model/entities/Market.js';
+import OrderBook from '../../lib/domain-model/entities/OrderBook.js';
+import Trade from '../../lib/domain-model/entities/Trade.js';
+import Ticker from '../../lib/domain-model/entities/Ticker.js';
+import CandleStick from '../../lib/domain-model/entities/CandleStick.js';
+import dumpExchange from '../../lib/use-cases/utils/dumps/dumpExchange.js';
+import dumpMarket from '../../lib/use-cases/utils/dumps/dumpMarket.js';
+import ExchangeRate from '../../lib/domain-model/entities/ExchangeRate.js';
 
 class TestFactory {
     async createExchanges() {

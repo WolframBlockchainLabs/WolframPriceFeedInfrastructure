@@ -2,7 +2,6 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import { tickerData } from '../../../test-data.js';
 import TickerCollector from '../../../../lib/collectors/models/Ticker.js';
 
 let sandbox;
@@ -11,7 +10,24 @@ const exchange = 'binance';
 const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
 
-const fetchTickerStubResult = tickerData;
+const fetchTickerStubResult = {
+    high: faker.number.float(),
+    low: faker.number.float(),
+    bid: faker.number.float(),
+    bidVolume: faker.number.float(),
+    ask: faker.number.float(),
+    askVolume: faker.number.float(),
+    vwap: faker.number.float(),
+    open: faker.number.float(),
+    close: faker.number.float(),
+    last: faker.number.float(),
+    previousClose: faker.number.float(),
+    change: faker.number.float(),
+    percentage: faker.number.float(),
+    average: faker.number.float(),
+    baseVolume: faker.number.float(),
+    quoteVolume: faker.number.float(),
+};
 
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
