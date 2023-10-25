@@ -32,7 +32,7 @@ services:
     #     env_file: ./env/.env.backend
     #     environment:
     #         CCXT_INSTANCE_POSITION: 0
-    #         CCXT_REPLICA_SIZE: 2
+    #         CCXT_REPLICA_SIZE: 1
     #     command: sh -c "npm run cli:ccxt-collectors"
     #     volumes:
     #         - ../:/app
