@@ -7,30 +7,1366 @@
         {
             "id": "binance",
             "name": "Binance",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        {
-            "id": "kucoin",
-            "name": "KuCoin",
-            "rateLimit": 100,
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        {
-            "id": "gemini",
-            "name": "Gemini",
-            "rateLimit": 200,
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-        },
-        {
-            "id": "kraken",
-            "name": "Kraken",
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
+            "rateLimit": 600,
+            "symbols": [
+                "BTC/USDT",
+                "BTC/TUSD",
+                "BTC/PAX",
+                "BTC/USDC",
+                "BTC/BUSD",
+                "BTC/EUR",
+                "BTC/GBP",
+                "BTC/DAI",
+                "BTC/FDUSD",
+                "BTC/USDP",
+
+                "ETH/BTC",
+                "ETH/USDT",
+                "ETH/TUSD",
+                "ETH/PAX",
+                "ETH/USDC",
+                "ETH/BUSD",
+                "ETH/EUR",
+                "ETH/GBP",
+                "ETH/DAI",
+                "ETH/FDUSD",
+                "ETH/USDP",
+
+                "LTC/BTC",
+                "LTC/ETH",
+                "LTC/USDT",
+                "LTC/TUSD",
+                "LTC/PAX",
+                "LTC/USDC",
+                "LTC/BUSD",
+                "LTC/EUR",
+                "LTC/GBP",
+                "LTC/FDUSD",
+
+                "LINK/BTC",
+                "LINK/ETH",
+                "LINK/USDT",
+                "LINK/TUSD",
+                "LINK/PAX",
+                "LINK/USDC",
+                "LINK/BUSD",
+                "LINK/EUR",
+                "LINK/GBP",
+                "LINK/BNB",
+
+                "SOL/BNB",
+                "SOL/BTC",
+                "SOL/USDT",
+                "SOL/BUSD",
+                "SOL/EUR",
+                "SOL/GBP",
+                "SOL/BIDR",
+                "SOL/USDC",
+                "SOL/ETH",
+                "SOL/TUSD",
+                "SOL/FDUSD",
+
+                "XRP/BTC",
+                "XRP/ETH",
+                "XRP/USDT",
+                "XRP/BNB",
+                "XRP/PAX",
+                "XRP/TUSD",
+                "XRP/USDC",
+                "XRP/BUSD",
+                "XRP/EUR",
+                "XRP/GBP",
+                "XRP/BIDR",
+                "XRP/FDUSD",
+
+                "MATIC/BNB",
+                "MATIC/BTC",
+                "MATIC/USDT",
+                "MATIC/BUSD",
+                "MATIC/EUR",
+                "MATIC/GBP",
+                "MATIC/BIDR",
+                "MATIC/ETH",
+                "MATIC/TUSD",
+                "MATIC/FDUSD",
+
+                "DOGE/BNB",
+                "DOGE/BTC",
+                "DOGE/USDT",
+                "DOGE/PAX",
+                "DOGE/USDC",
+                "DOGE/BUSD",
+                "DOGE/EUR",
+                "DOGE/GBP",
+                "DOGE/BIDR",
+                "DOGE/TUSD",
+                "DOGE/FDUSD",
+
+                "APT/BTC",
+                "APT/USDT",
+                "APT/BUSD",
+                "APT/EUR",
+                "APT/ETH",
+
+                "BNB/BTC",
+                "BNB/ETH",
+                "BNB/USDT",
+                "BNB/PAX",
+                "BNB/USDC",
+                "BNB/EUR",
+                "BNB/GBP",
+                "BNB/BIDR",
+                "BNB/DAI",
+                "BNB/FDUSD"
+            ]
         },
         {
             "id": "bitfinex",
             "name": "Bitfinex",
-            "rateLimit": 2000,
-            "symbols": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
+            "rateLimit": 1000,
+            "symbols": [
+                "BTC/USD",
+                "BTC/EUR",
+                "BTC/JPY",
+                "BTC/GBP",
+                "BTC/USDT",
+                "BTC/CNHT",
+                "BTC/EURT",
+                "BTC/XAUT",
+                "BTC/MIM",
+                "BTC/MXNT",
+
+                "USDT/USD",
+                "USDT/CNHT",
+                "USDT/MXNT",
+
+                "ETH/USD",
+                "ETH/BTC",
+                "ETH/EUR",
+                "ETH/JPY",
+                "ETH/GBP",
+                "ETH/USDT",
+                "ETH/EURT",
+                "ETH/XAUT",
+                "ETH/MXNT",
+
+                "XRP/USD",
+                "XRP/BTC",
+                "XRP/USDT",
+
+                "SOL/USD",
+                "SOL/USDT",
+                "SOL/BTC",
+
+                "LINK/USD",
+                "LINK/USDT",
+
+                "LTC/USD",
+                "LTC/BTC",
+                "LTC/USDT",
+
+                "DOGE/USD",
+                "DOGE/USDT",
+                "DOGE/BTC",
+
+                "ADA/USD",
+                "ADA/BTC",
+                "ADA/USDT",
+
+                "UNI/USD",
+                "UNI/USDT",
+
+                "TRX/USD",
+                "TRX/BTC",
+                "TRX/ETH",
+                "TRX/EUR",
+                "TRX/USDT",
+
+                "USDC/USD",
+                "USDC/USDT",
+
+                "IOTA/USD",
+                "IOTA/BTC",
+
+                "APT/USD",
+                "APT/USDT",
+
+                "EOS/USD",
+                "EOS/BTC",
+                "EOS/ETH",
+                "EOS/USDT",
+
+                "FIL/USD",
+                "FIL/USDT",
+
+                "VET/USD",
+                "VET/BTC",
+                "VET/USDT",
+
+                "XRD/USD",
+                "XRD/BTC",
+
+                "DOT/USD",
+                "DOT/USDT",
+                "DOT/BTC",
+
+                "MATIC/USD",
+                "MATIC/BTC",
+                "MATIC/USDT",
+
+                "GALA/USD",
+                "GALA/USDT",
+
+                "XLM/USD",
+                "XLM/BTC",
+                "XLM/USDT",
+
+                "MKR/USD",
+                "MKR/USDT",
+
+                "AAVE/USD",
+                "AAVE/USDT",
+
+                "XTZ/USD",
+                "XTZ/BTC",
+                "XTZ/USDT",
+
+                "AVAX/USD",
+                "AVAX/USDT",
+                "AVAX/BTC",
+
+                "YFI/USD",
+                "YFI/USDT",
+
+                "XMR/USD",
+                "XMR/BTC",
+                "XMR/USDT",
+
+                "ATOM/USD",
+                "ATOM/BTC",
+                "ATOM/USDT",
+
+                "NEO/USD",
+                "NEO/BTC",
+                "NEO/USDT",
+
+                "ALGO/USD",
+                "ALGO/BTC",
+                "ALGO/USDT",
+
+                "DAI/USD",
+                "DAI/BTC"
+            ]
+        },
+        {
+            "id": "bitget",
+            "name": "Bitget",
+            "rateLimit": 60,
+            "symbols": [
+                "USDT/EUR",
+                "USDT/GBP",
+
+                "BTC/EUR",
+                "BTC/GBP",
+                "BTC/USDC",
+                "BTC/USDT",
+
+                "ETH/EUR",
+                "ETH/GBP",
+                "ETH/USDT",
+                "ETH/BTC",
+                "ETH/USDC",
+
+                "TRB/USDT",
+
+                "LTC/ETH",
+                "LTC/EUR",
+                "LTC/GBP",
+                "LTC/USDT",
+                "LTC/USDC",
+
+                "PEPE/EUR",
+                "PEPE/GBP",
+                "PEPE/USDT",
+
+                "SOL/GBP",
+                "SOL/EUR",
+                "SOL/USDC",
+                "SOL/USDT",
+
+                "XRP/EUR",
+                "XRP/GBP",
+                "XRP/USDT",
+                "XRP/USDC",
+                "XRP/BTC",
+                "XRP/ETH",
+
+                "AGLD/USDT",
+
+                "LINK/USDT",
+                "LINK/USDC",
+                "LINK/BTC",
+
+                "CYBER/USDT",
+
+                "MINA/USDT",
+
+                "DOGE/USDT",
+                "DOGE/USDC",
+                "DOGE/BTC",
+
+                "BCH/USDT",
+                "BCH/USDC",
+
+                "GALA/USDT",
+
+                "FLOKI/USDT",
+
+                "APT/USDT",
+
+                "ARB/USDT",
+
+                "MATIC/USDC",
+                "MATIC/EUR",
+                "MATIC/GBP",
+                "MATIC/USDT",
+
+                "CFX/USDT",
+
+                "LQTY/USDT",
+
+                "BLUR/USDT",
+
+                "AVAX/USDC",
+                "AVAX/USDT",
+
+                "STORJ/USDT",
+
+                "AAVE/USDT",
+                "AAVE/USDC",
+                "AAVE/BTC",
+
+                "BNT/USDT",
+
+                "SUI/USDT",
+
+                "ETC/USDT",
+                "ETC/BTC",
+
+                "ADA/USDT",
+                "ADA/USDC",
+
+                "SHIB/USDT",
+
+                "EOS/USDT",
+                "EOS/USDC",
+                "EOS/BTC",
+                "EOS/ETH",
+
+                "ORBS/USDT",
+
+                "DYDX/USDT",
+
+                "POLYX/USDT",
+
+                "STX/USDT",
+
+                "WLD/USDT",
+
+                "ORDI/USDT",
+
+                "MKR/USDT",
+
+                "APE/USDT",
+                "APE/USDC",
+
+                "BSV/USDT",
+
+                "OP/USDT",
+
+                "BIGTIME/USDT",
+
+                "ATOM/USDC",
+                "ATOM/USDT",
+                "ATOM/ETH",
+                "ATOM/BTC",
+
+                "GRT/USDT",
+
+                "DOT/USDC",
+                "DOT/USDT",
+
+                "STG/USDT",
+
+                "MASK/USDT",
+
+                "BNB/USDC",
+                "BNB/USDT",
+
+                "LDO/USDT",
+
+                "BAND/USDT",
+
+                "LOOM/USDT",
+
+                "AXS/USDT",
+
+                "YGG/USDT",
+
+                "INJ/USDT",
+
+                "RUNE/USDT",
+
+                "FET/USDT"
+            ]
+        },
+        {
+            "id": "bitstamp",
+            "name": "Bitstamp",
+            "rateLimit": 75,
+            "symbols": [
+                "BTC/USD",
+                "BTC/EUR",
+                "BTC/GBP",
+                "BTC/PAX",
+                "BTC/USDC",
+                "BTC/USDT",
+
+                "ETH/BTC",
+                "ETH/USD",
+                "ETH/EUR",
+                "ETH/GBP",
+                "ETH/PAX",
+                "ETH/USDC",
+                "ETH/USDT",
+
+                "USDT/USD",
+                "USDT/EUR",
+
+                "XRP/USD",
+                "XRP/EUR",
+                "XRP/BTC",
+                "XRP/GBP",
+                "XRP/USDT",
+
+                "USDC/USD",
+                "USDC/EUR",
+                "USDC/USDT",
+
+                "SOL/USD",
+                "SOL/EUR",
+
+                "ADA/USD",
+                "ADA/EUR",
+                "ADA/BTC",
+
+                "DOGE/USD",
+                "DOGE/EUR",
+
+                "LINK/USD",
+                "LINK/EUR",
+                "LINK/GBP",
+                "LINK/BTC",
+
+                "MATIC/USD",
+                "MATIC/EUR",
+
+                "WBTC/BTC",
+
+                "DAI/USD",
+
+                "DOT/USD",
+                "DOT/EUR",
+
+                "LTC/BTC",
+                "LTC/USD",
+                "LTC/EUR",
+                "LTC/GBP",
+
+                "BCH/USD",
+                "BCH/EUR",
+                "BCH/BTC",
+
+                "SHIB/USD",
+                "SHIB/EUR",
+
+                "AVAX/USD",
+                "AVAX/EUR",
+
+                "XLM/BTC",
+                "XLM/USD",
+                "XLM/EUR",
+                "XLM/GBP",
+
+                "UNI/USD",
+                "UNI/EUR",
+                "UNI/BTC",
+
+                "HBAR/USD",
+                "HBAR/EUR",
+
+                "LDO/USD",
+                "LDO/EUR",
+
+                "MKR/USD",
+                "MKR/EUR",
+
+                "NEAR/USD",
+                "NEAR/EUR",
+
+                "AAVE/USD",
+                "AAVE/EUR",
+                "AAVE/BTC",
+
+                "INJ/USD",
+                "INJ/EUR",
+
+                "PAX/USD",
+
+                "GRT/USD",
+                "GRT/EUR",
+
+                "RNDR/USD",
+                "RNDR/EUR",
+
+                "ALGO/USD",
+                "ALGO/EUR",
+                "ALGO/BTC",
+
+                "AXS/USD",
+                "AXS/EUR",
+
+                "SAND/USD",
+                "SAND/EUR",
+
+                "MANA/USD",
+                "MANA/EUR",
+
+                "SNX/USD",
+                "SNX/EUR",
+
+                "CHZ/USD",
+                "CHZ/EUR",
+
+                "APE/USD",
+                "APE/EUR",
+
+                "GALA/USD",
+                "GALA/EUR",
+
+                "DYDX/USD",
+                "DYDX/EUR",
+
+                "CRV/USD",
+                "CRV/EUR",
+
+                "SUI/USD",
+                "SUI/EUR",
+
+                "COMP/USD"
+            ]
+        },
+        {
+            "id": "bybit",
+            "name": "Bybit",
+            "rateLimit": 100,
+            "symbols": [
+                "USDT/EUR",
+                "USDT/BRZ",
+
+                "BTC/USDT",
+                "BTC/USDC",
+                "BTC/DAI",
+                "BTC/BRZ",
+                "BTC/EUR",
+
+                "ETH/USDT",
+                "ETH/BTC",
+                "ETH/USDC",
+                "ETH/DAI",
+                "ETH/EUR",
+
+                "MNT/USDT",
+                "MNT/USDC",
+                "MNT/BTC",
+
+                "USDC/USDT",
+                "USDC/EUR",
+
+                "XRP/USDT",
+                "XRP/BTC",
+                "XRP/USDC",
+                "XRP/EUR",
+
+                "LINK/USDT",
+                "LINK/USDC",
+
+                "SOL/USDT",
+                "SOL/USDC",
+                "SOL/BTC",
+                "SOL/EUR",
+
+                "DOGE/USDT",
+                "DOGE/USDC",
+                "DOGE/EUR",
+
+                "PLANET/USDT",
+
+                "PEPE/USDT",
+
+                "CTC/USDT",
+
+                "AVAX/USDT",
+                "AVAX/USDC",
+
+                "ARB/USDC",
+                "ARB/USDT",
+
+                "MATIC/USDT",
+                "MATIC/BTC",
+                "MATIC/USDC",
+
+                "DOT/USDT",
+                "DOT/BTC",
+                "DOT/USDC",
+
+                "GALA/USDT",
+
+                "APT/USDT",
+                "APT/USDC",
+
+                "LTC/USDT",
+                "LTC/USDC",
+                "LTC/BTC",
+                "LTC/EUR",
+
+                "FB/USDT",
+
+                "FLOKI/USDT",
+
+                "SUI/USDT",
+                "SUI/USDC",
+
+                "BUSD/USDT",
+
+                "HFT/USDC",
+                "HFT/USDT",
+
+                "ADA/USDT",
+                "ADA/USDC",
+                "ADA/EUR",
+
+                "INJ/USDT",
+
+                "EOS/USDT",
+                "EOS/USDC",
+
+                "ATOM/USDT",
+
+                "SHIB/USDT",
+                "SHIB/USDC",
+
+                "BEAM/USDT",
+
+                "TOMI/USDT",
+
+                "BONK/USDT",
+
+                "DYDX/USDT",
+
+                "TRX/USDT",
+                "TRX/USDC",
+
+                "CYBER/USDT",
+
+                "UNI/USDT",
+
+                "AAVE/USDT",
+
+                "FTM/USDT",
+
+                "BNB/USDT",
+
+                "POL/USDT",
+
+                "OP/USDT",
+                "OP/USDC",
+
+                "MANA/USDT",
+                "MANA/BTC",
+                "MANA/USDC",
+
+                "AGIX/USDT",
+
+                "FIL/USDT",
+                "FIL/USDC",
+
+                "ICP/USDT",
+                "ICP/USDC",
+
+                "TON/USDT",
+
+                "FTT/USDT",
+
+                "MAGIC/USDT",
+
+                "WLD/USDC",
+                "WLD/USDT",
+
+                "BLUR/USDT",
+
+                "NEAR/USDT",
+
+                "SAND/USDT",
+                "SAND/BTC",
+                "SAND/USDC",
+
+                "ALGO/USDT",
+                "ALGO/BTC"
+            ]
+        },
+        {
+            "id": "gate",
+            "name": "Gate.io",
+            "rateLimit": 50,
+            "symbols": [
+                "BTC/SGD",
+                "BTC/TRY",
+                "BTC/USDC",
+                "BTC/USDT",
+
+                "ETH/BTC",
+                "ETH/SGD",
+                "ETH/TRY",
+                "ETH/USDC",
+                "ETH/USDT",
+
+                "XRP/BTC",
+                "XRP/SGD",
+                "XRP/TRY",
+                "XRP/USDC",
+                "XRP/USDT",
+
+                "USDT/CNYX",
+                "USDT/TRY",
+                "USDT/USD",
+
+                "BNB/BTC",
+                "BNB/TRY",
+                "BNB/USDC",
+                "BNB/USDT",
+
+                "USDC/USDT",
+
+                "STETH/ETH",
+                "STETH/USDT",
+
+                "SOL/TRY",
+                "SOL/USDC",
+                "SOL/USDT",
+
+                "GMMT/USDT",
+
+                "DOGE/BTC",
+                "DOGE/TRY",
+                "DOGE/USDC",
+                "DOGE/USDT",
+
+                "ADA/BTC",
+                "ADA/TRY",
+                "ADA/USDT",
+
+                "CHEEL/USDT",
+
+                "TRX/ETH",
+                "TRX/TRY",
+                "TRX/USDC",
+                "TRX/USDT",
+
+                "LINK/ETH",
+                "LINK/TRY",
+                "LINK/USDT",
+
+                "CRO/USDT",
+
+                "MATIC/ETH",
+                "MATIC/TRY",
+                "MATIC/USDC",
+                "MATIC/USDT",
+
+                "WBTC/BTC",
+                "WBTC/TRY",
+                "WBTC/USDT",
+
+                "DOT/BTC",
+                "DOT/TRY",
+                "DOT/USDT",
+
+                "LTC/BTC",
+                "LTC/SGD",
+                "LTC/TRY",
+                "LTC/USDC",
+                "LTC/USDT",
+
+                "BCH/BTC",
+                "BCH/SGD",
+                "BCH/TRY",
+                "BCH/USDT",
+
+                "SHIB/TRY",
+                "SHIB/USDC",
+                "SHIB/USDT",
+
+                "SUI/TRY",
+                "SUI/USDC",
+                "SUI/USDT",
+
+                "DAI/TRY",
+                "DAI/USDT",
+
+                "AVAX/ETH",
+                "AVAX/TRY",
+                "AVAX/USDC",
+                "AVAX/USDT",
+
+                "LEO/BTC",
+                "LEO/USDT",
+
+                "TUSD/USDT",
+
+                "OCEAN/USDT",
+
+                "XLM/BTC",
+                "XLM/ETH",
+                "XLM/TRY",
+                "XLM/USDT",
+
+                "UNI/ETH",
+                "UNI/TRY",
+                "UNI/USDT",
+
+                "XMR/BTC",
+                "XMR/USDT",
+
+                "LAND/USDT",
+
+                "OKB/USDT",
+
+                "ATOM/BTC",
+                "ATOM/TRY",
+                "ATOM/USDT",
+
+                "ETC/BTC",
+                "ETC/ETH",
+                "ETC/SGD",
+                "ETC/TRY",
+                "ETC/USDT",
+
+                "BUSD/ETH",
+                "BUSD/USDT"
+            ]
+        },
+        {
+            "id": "gemini",
+            "name": "Gemini",
+            "rateLimit": 1000,
+            "symbols": [
+                "AAVE/USD",
+                "ALI/USD",
+                "AMP/USD",
+                "ANKR/USD",
+                "APE/USD",
+                "API3/USD",
+                "ATOM/USD",
+                "AVAX/USD",
+                "AXS/USD",
+                "BAT/BTC",
+                "BAT/ETH",
+                "BAT/USD",
+                "BCH/BTC",
+                "BCH/ETH",
+                "BCH/USD",
+                "BTC/DAI",
+                "BTC/EUR",
+                "BTC/GBP",
+                "BTC/GUSD",
+                "BTC/SGD",
+                "BTC/USD",
+                "BTC/USDT",
+                "CHZ/USD",
+                "COMP/USD",
+                "CRV/USD",
+                "CTX/USD",
+                "CUBE/USD",
+                "DAI/USD",
+                "DOGE/BTC",
+                "DOGE/ETH",
+                "DOGE/USD",
+                "DOT/USD",
+                "ENS/USD",
+                "ERN/USD",
+                "ETH/BTC",
+                "ETH/DAI",
+                "ETH/EUR",
+                "ETH/GBP",
+                "ETH/GUSD",
+                "ETH/SGD",
+                "ETH/USD",
+                "ETH/USDT",
+                "FET/USD",
+                "FIL/USD",
+                "FTM/USD",
+                "GAL/USD",
+                "GMT/USD",
+                "GRT/USD",
+                "GUSD/GBP",
+                "GUSD/SGD",
+                "HNT/USD",
+                "IMX/USD",
+                "INJ/USD",
+                "IOTX/USD",
+                "JAM/USD",
+                "LDO/USD",
+                "LINK/BTC",
+                "LINK/ETH",
+                "LINK/USD",
+                "LPT/USD",
+                "LRC/USD",
+                "LTC/BCH",
+                "LTC/BTC",
+                "LTC/ETH",
+                "LTC/USD",
+                "MANA/USD",
+                "MASK/USD",
+                "MATIC/USD",
+                "MKR/USD",
+                "OXT/BTC",
+                "OXT/ETH",
+                "OXT/USD",
+                "PAXG/USD",
+                "PEPE/USD",
+                "QNT/USD",
+                "RARE/USD",
+                "REN/USD",
+                "RNDR/USD",
+                "SAMO/USD",
+                "SAND/USD",
+                "SHIB/USD",
+                "SNX/USD",
+                "SOL/USD",
+                "STORJ/USD",
+                "SUSHI/USD",
+                "TOKE/USD",
+                "UMA/USD",
+                "UNI/USD",
+                "USDC/USD",
+                "USDT/USD",
+                "XRP/USD",
+                "XTZ/USD",
+                "YFI/USD",
+                "ZBC/USD",
+                "ZEC/BCH",
+                "ZEC/BTC",
+                "ZEC/ETH",
+                "ZEC/LTC",
+                "ZEC/USD",
+                "ZRX/USD"
+            ]
+        },
+        {
+            "id": "kraken",
+            "name": "Kraken",
+            "rateLimit": 1000,
+            "symbols": [
+                "BTC/AED",
+                "BTC/AUD",
+                "BTC/CHF",
+                "BTC/DAI",
+                "BTC/USDC",
+                "BTC/USDT",
+                "BTC/CAD",
+                "BTC/EUR",
+                "BTC/GBP",
+                "BTC/JPY",
+                "BTC/USD",
+
+                "ETH/AED",
+                "ETH/AUD",
+                "ETH/CHF",
+                "ETH/DAI",
+                "ETH/USDC",
+                "ETH/USDT",
+                "ETH/BTC",
+                "ETH/CAD",
+                "ETH/EUR",
+                "ETH/GBP",
+                "ETH/JPY",
+                "ETH/USD",
+
+                "USDT/AUD",
+                "USDT/CAD",
+                "USDT/CHF",
+                "USDT/EUR",
+                "USDT/GBP",
+                "USDT/JPY",
+                "USDT/USD",
+
+                "XRP/AUD",
+                "XRP/ETH",
+                "XRP/GBP",
+                "XRP/USDT",
+                "XRP/BTC",
+                "XRP/CAD",
+                "XRP/EUR",
+                "XRP/JPY",
+                "XRP/USD",
+
+                "USDC/AUD",
+                "USDC/CAD",
+                "USDC/CHF",
+                "USDC/EUR",
+                "USDC/GBP",
+                "USDC/USD",
+                "USDC/USDT",
+
+                "SOL/EUR",
+                "SOL/GBP",
+                "SOL/USD",
+                "SOL/USDT",
+                "SOL/BTC",
+
+                "ADA/AUD",
+                "ADA/ETH",
+                "ADA/EUR",
+                "ADA/GBP",
+                "ADA/USD",
+                "ADA/USDT",
+                "ADA/BTC",
+
+                "DOGE/EUR",
+                "DOGE/USD",
+                "DOGE/USDT",
+                "DOGE/BTC",
+
+                "TRX/ETH",
+                "TRX/EUR",
+                "TRX/USD",
+                "TRX/BTC",
+
+                "MATIC/EUR",
+                "MATIC/GBP",
+                "MATIC/USD",
+                "MATIC/USDT",
+                "MATIC/BTC",
+
+                "LINK/AUD",
+                "LINK/ETH",
+                "LINK/EUR",
+                "LINK/GBP",
+                "LINK/JPY",
+                "LINK/USD",
+                "LINK/USDT",
+                "LINK/BTC",
+
+                "WBTC/EUR",
+                "WBTC/USD",
+                "WBTC/BTC",
+
+                "DOT/ETH",
+                "DOT/EUR",
+                "DOT/GBP",
+                "DOT/JPY",
+                "DOT/USD",
+                "DOT/USDT",
+                "DOT/BTC",
+
+                "LTC/AUD",
+                "LTC/ETH",
+                "LTC/GBP",
+                "LTC/USDT",
+                "LTC/BTC",
+                "LTC/EUR",
+                "LTC/JPY",
+                "LTC/USD",
+
+                "BCH/ETH",
+                "BCH/EUR",
+                "BCH/BTC"
+            ]
+        },
+        {
+            "id": "kucoin",
+            "name": "KuCoin",
+            "rateLimit": 200,
+            "symbols": [
+                "BTC/TUSD",
+                "BTC/USDT",
+                "BTC/DAI",
+                "BTC/USDC",
+                "BTC/EUR",
+                "BTC/GBP",
+
+                "ETH/DAI",
+                "ETH/USDT",
+                "ETH/USDC",
+                "ETH/BTC",
+                "ETH/TUSD",
+                "ETH/EUR",
+
+                "USDT/TUSD",
+                "USDT/USDC",
+                "USDT/DAI",
+                "USDT/EUR",
+                "USDT/GBP",
+
+                "BNB/BTC",
+                "BNB/USDT",
+                "BNB/KCS",
+                "BNB/USDC",
+
+                "XRP/TUSD",
+                "XRP/USDC",
+                "XRP/BTC",
+                "XRP/KCS",
+                "XRP/USDT",
+                "XRP/ETH",
+
+                "USDC/USDT",
+
+                "SOL/USDT",
+                "SOL/USDC",
+
+                "CRO/BTC",
+                "CRO/USDT",
+
+                "ADA/BTC",
+                "ADA/USDT",
+                "ADA/USDC",
+                "ADA/KCS",
+
+                "DOGE/USDT",
+                "DOGE/USDC",
+                "DOGE/BTC",
+                "DOGE/KCS",
+
+                "TRX/KCS",
+                "TRX/BTC",
+                "TRX/ETH",
+                "TRX/USDT",
+                "TRX/USDC",
+
+                "TON/USDT",
+
+                "MATIC/USDT",
+                "MATIC/BTC",
+                "MATIC/USDC",
+
+                "LINK/BTC",
+                "LINK/USDT",
+                "LINK/USDC",
+                "LINK/KCS",
+
+                "DOT/USDT",
+                "DOT/BTC",
+                "DOT/KCS",
+                "DOT/USDC",
+
+                "WBTC/BTC",
+                "WBTC/ETH",
+
+                "HBAR/USDT",
+                "HBAR/BTC",
+
+                "LTC/USDT",
+                "LTC/ETH",
+                "LTC/KCS",
+                "LTC/BTC",
+                "LTC/USDC",
+
+                "THETA/USDT",
+
+                "BCH/BTC",
+                "BCH/USDT",
+                "BCH/USDC",
+                "BCH/KCS",
+
+                "SHIB/USDT",
+                "SHIB/DOGE",
+                "SHIB/USDC",
+
+                "IOTA/USDT",
+                "IOTA/BTC",
+
+                "AVAX/USDT",
+                "AVAX/BTC",
+                "AVAX/USDC",
+
+                "XLM/USDT",
+                "XLM/ETH",
+                "XLM/BTC",
+                "XLM/KCS",
+
+                "XMR/BTC",
+                "XMR/ETH",
+                "XMR/USDT",
+
+                "ATOM/BTC",
+                "ATOM/ETH",
+                "ATOM/USDT",
+                "ATOM/KCS",
+                "ATOM/USDC",
+
+                "UNI/USDT",
+                "UNI/KCS",
+
+                "ACA/USDT",
+                "ACA/BTC",
+
+                "ETC/USDT",
+                "ETC/ETH",
+                "ETC/BTC",
+                "ETC/USDC",
+
+                "FIL/USDT"
+            ]
+        },
+        {
+            "id": "okx",
+            "name": "OKX",
+            "rateLimit": 60,
+            "symbols": [
+                "BTC/USDT",
+                "BTC/USDC",
+                "BTC/DAI",
+                "BTC/EURT",
+
+                "ETH/USDT",
+                "ETH/USDC",
+                "ETH/DAI",
+                "ETH/BTC",
+                "ETH/EURT",
+
+                "USDT/USDC",
+
+                "USDC/USDT",
+
+                "BNB/USDT",
+                "BNB/USDC",
+
+                "XRP/USDT",
+                "XRP/USDC",
+                "XRP/BTC",
+                "XRP/ETH",
+                "XRP/OKB",
+
+                "STETH/USDT",
+                "STETH/ETH",
+
+                "SOL/USDT",
+                "SOL/USDC",
+                "SOL/BTC",
+                "SOL/ETH",
+
+                "OKB/USDT",
+                "OKB/USDC",
+                "OKB/BTC",
+                "OKB/ETH",
+
+                "ADA/USDT",
+                "ADA/USDC",
+                "ADA/BTC",
+                "ADA/ETH",
+
+                "DOGE/USDT",
+                "DOGE/USDC",
+                "DOGE/BTC",
+                "DOGE/ETH",
+
+                "TRX/USDT",
+                "TRX/USDC",
+                "TRX/BTC",
+                "TRX/ETH",
+
+                "TON/USDT",
+                "TON/USDC",
+
+                "LINK/USDT",
+                "LINK/USDC",
+                "LINK/BTC",
+                "LINK/ETH",
+
+                "MATIC/USDT",
+                "MATIC/USDC",
+                "MATIC/BTC",
+
+                "WBTC/USDT",
+                "WBTC/BTC",
+
+                "DOT/USDT",
+                "DOT/USDC",
+                "DOT/BTC",
+                "DOT/ETH",
+
+                "LTC/USDT",
+                "LTC/USDC",
+                "LTC/BTC",
+                "LTC/ETH",
+                "LTC/OKB",
+
+                "BCH/USDT",
+                "BCH/USDC",
+                "BCH/BTC",
+
+                "SHIB/USDT",
+                "SHIB/USDC",
+                "SHIB/BTC",
+
+                "AVAX/USDT",
+                "AVAX/USDC",
+                "AVAX/BTC",
+
+                "DAI/USDT",
+
+                "LEO/USDT",
+
+                "UNI/USDT",
+                "UNI/USDC",
+                "UNI/BTC",
+                "UNI/ETH",
+
+                "XLM/USDT",
+                "XLM/USDC",
+                "XLM/BTC",
+                "XLM/ETH",
+
+                "XMR/USDT",
+                "XMR/USDC",
+                "XMR/BTC",
+                "XMR/ETH",
+
+                "ETC/USDT",
+                "ETC/USDC",
+                "ETC/BTC",
+
+                "ATOM/USDT",
+                "ATOM/USDC",
+                "ATOM/BTC",
+                "ATOM/ETH",
+
+                "HBAR/USDT",
+                "HBAR/USDC",
+                "HBAR/BTC",
+
+                "FIL/USDT",
+                "FIL/USDC",
+                "FIL/BTC",
+                "FIL/ETH",
+
+                "LDO/USDT",
+
+                "APT/USDT",
+                "APT/USDC"
+            ]
         }
     ]
 }
