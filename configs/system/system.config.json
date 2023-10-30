@@ -37,5 +37,9 @@
     },
     "intervals": {
         "marketsRefresher": "{{MARKETS_REFRESHER_INTERVAL}}"
+    },
+    "amqpWorker": {
+        "retryLimit": 12,
+        "retryPeriodMs": 3600000
     }
 }

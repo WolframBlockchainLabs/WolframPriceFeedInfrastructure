@@ -67,5 +67,14 @@
                 "marketsRefresher": ["required", "positive_integer"]
             }
         }
+    ],
+    "amqpWorker": [
+        "required",
+        {
+            "nested_object": {
+                "retryLimit": ["required", "positive_integer"],
+                "retryPeriodMs": ["required", "positive_integer"]
+            }
+        }
     ]
 }
