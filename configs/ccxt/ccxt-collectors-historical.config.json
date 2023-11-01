@@ -1,0 +1,93 @@
+{
+    "rateLimit": 1000,
+    "rateLimitMargin": "{{CCXT_RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{CCXT_REPLICA_SIZE}}",
+    "instancePosition": "{{CCXT_INSTANCE_POSITION}}",
+    "exchanges": [
+        {
+            "id": "binance",
+            "name": "Binance",
+            "rateLimit": 600,
+            "symbols": [
+                "BTC/USDT",
+                "BTC/TUSD",
+                "BTC/PAX",
+                "BTC/USDC",
+                "BTC/BUSD"
+            ]
+        },
+        {
+            "id": "bitfinex",
+            "name": "Bitfinex",
+            "rateLimit": 1000,
+            "symbols": ["BTC/USD", "BTC/EUR", "BTC/USDT", "BTC/EURT", "BTC/MIM"]
+        },
+        {
+            "id": "bitget",
+            "name": "Bitget",
+            "rateLimit": 60,
+            "symbols": [
+                "USDT/EUR",
+                "USDT/GBP",
+
+                "BTC/EUR",
+                "BTC/USDC",
+                "BTC/USDT"
+            ]
+        },
+        {
+            "id": "bitstamp",
+            "name": "Bitstamp",
+            "rateLimit": 75,
+            "symbols": ["BTC/USD", "BTC/EUR", "BTC/PAX", "BTC/USDC", "BTC/USDT"]
+        },
+        {
+            "id": "bybit",
+            "name": "Bybit",
+            "rateLimit": 100,
+            "symbols": ["BTC/USDT", "BTC/USDC", "BTC/DAI", "BTC/BRZ", "BTC/EUR"]
+        },
+        {
+            "id": "gate",
+            "name": "Gate.io",
+            "rateLimit": 50,
+            "symbols": ["ETH/BTC", "ETH/SGD", "ETH/TRY", "ETH/USDC", "ETH/USDT"]
+        },
+        {
+            "id": "gemini",
+            "name": "Gemini",
+            "rateLimit": 1000,
+            "symbols": ["ETH/BTC", "ETH/DAI", "ETH/EUR", "ETH/USD", "ETH/USDT"]
+        },
+        {
+            "id": "kraken",
+            "name": "Kraken",
+            "rateLimit": 1000,
+            "symbols": ["BTC/DAI", "BTC/USDC", "BTC/USDT", "BTC/EUR", "BTC/USD"]
+        },
+        {
+            "id": "kucoin",
+            "name": "KuCoin",
+            "rateLimit": 200,
+            "symbols": [
+                "BTC/TUSD",
+                "BTC/USDT",
+                "BTC/DAI",
+                "BTC/USDC",
+                "BTC/EUR"
+            ]
+        },
+        {
+            "id": "okx",
+            "name": "OKX",
+            "rateLimit": 60,
+            "symbols": [
+                "ETH/USDT",
+                "ETH/USDC",
+                "ETH/DAI",
+                "ETH/BTC",
+                "ETH/EURT"
+            ]
+        }
+    ]
+}
