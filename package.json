@@ -20,6 +20,7 @@
         "cli:tezos-collectors": "npx pm2-runtime start ./lib/cli/udex_collectors/tezos/ecosystem.config.cjs",
         "cli:cardano-collectors": "npx pm2-runtime start ./lib/cli/udex_collectors/cardano/ecosystem.config.cjs",
         "cli:check-gaps": "node --max-old-space-size=8192  ./lib/cli/check-gaps/entrypoint.js",
+        "cli:check-replica-crash": "node --max-old-space-size=8192  ./lib/cli/check-replica-crash/entrypoint.js",
         "workers:ccxt-realtime-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/realtime_worker.js",
         "workers:ccxt-historical-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/historical_worker.js",
         "workers:xrpl-seeder:start": "node --max-old-space-size=8192 ./lib/workers/xrpl-seeder/worker.js",
