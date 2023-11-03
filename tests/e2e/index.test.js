@@ -4,6 +4,7 @@ import AppTestProvider from '../AppTestProvider.js';
 import TestFactory from './TestFactory.js';
 import APIclient from './APIclient.js';
 import apiTests from './routes/index.js';
+import Sinon from 'sinon';
 
 const factory = new TestFactory();
 
@@ -86,5 +87,9 @@ async function runTest(item, baseTestParams) {
 }
 
 test.after(async () => {
+    const exitStub = Sinon.stub(process, 'exit');
+
     await server.shutdown();
+
+    exitStub.restore();
 });
