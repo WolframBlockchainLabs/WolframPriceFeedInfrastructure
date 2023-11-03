@@ -31,6 +31,10 @@ jobs:
         run: |
           docker compose --project-name "${{ env.PROJECT_NAME }}" --file "${{ env.PATH_TO_COMPOSE }}" up --build -d
 
+      - name: Run database migrations
+        run: |
+          docker exec -it "${{ env.BACKEND_CONTAINER_NAME }}" npm run migration:test
+
       - name: Run tests
         run: |
           docker exec -i "${{ env.BACKEND_CONTAINER_NAME }}" npm run test
