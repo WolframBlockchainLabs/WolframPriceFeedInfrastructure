@@ -21,6 +21,8 @@ jobs:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       REGISTRY_PATH: ${{ secrets.REGISTRY_PATH }}
+      BACKEND_IMAGE: ${{ secrets.REGISTRY_PATH }}:${{ github.ref_name }}
+      BACKEND_CONTAINER_NAME: ccdb-be
 
     steps:
       - name: Check Out Repo
