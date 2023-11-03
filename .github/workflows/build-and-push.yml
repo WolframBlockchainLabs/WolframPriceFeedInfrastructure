@@ -15,11 +15,13 @@ env:
   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
   REGISTRY_PATH: ${{ secrets.REGISTRY_PATH }}
+  BACKEND_IMAGE: ${{ secrets.REGISTRY_PATH }}:${{ github.ref_name }}
   BACKEND_CONTAINER_NAME: ccdb-be
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v3
@@ -46,10 +48,13 @@ jobs:
 
   build-and-push:
     needs: test
+
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
+
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
