@@ -20,13 +20,13 @@ export const exchangeData = [
 ];
 
 export function fakeMarketsData(amount = 4) {
-    return Array.from(new Array(amount)).map(() => ({
+    return Array.from(new Array(amount)).map((_, i) => ({
         externalMarketId: faker.word.noun(Math.floor(Math.random() * 10)),
         symbol: 'BTC/USDT',
-        base: faker.word.noun(Math.floor(Math.random() * 5)),
-        quote: faker.word.noun(Math.floor(Math.random() * 5)),
-        baseId: faker.word.noun(Math.floor(Math.random() * 5)),
-        quoteId: faker.word.noun(Math.floor(Math.random() * 5)),
+        base: 'BTC',
+        quote: 'USDT',
+        baseId: `BTC${i}`,
+        quoteId: `USDT${i}`,
         active: faker.datatype.boolean(),
     }));
 }
