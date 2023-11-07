@@ -40,6 +40,27 @@ test.afterEach(() => {
     sandbox.restore();
 });
 
+test('run calls super.run() method and initAMQPConnection', async (t) => {
+    const { pricingEmitter } = t.context;
+
+    const prototypeRunStub = sandbox.stub(
+        Object.getPrototypeOf(PricingEmitter.prototype),
+        'run',
+    );
+
+    const initAMQPConnectionStub = sandbox.stub(
+        pricingEmitter,
+        'initAMQPConnection',
+    );
+
+    pricingEmitter.run();
+
+    sinon.assert.calledOnce(prototypeRunStub);
+    sinon.assert.calledOnce(initAMQPConnectionStub);
+
+    t.pass();
+});
+
 test('initAMQPConnection passes setup hook to the amqpClient', async (t) => {
     const { pricingEmitter, amqpChannelStub } = t.context;
 
