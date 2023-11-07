@@ -1,0 +1,83 @@
+name: CI - Build, Test, and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/*'
+    tags:
+      - '*'
+
+env:
+  PROJECT_NAME: ccdb
+  PATH_TO_COMPOSE: ./docker/ci/docker-compose.yml
+  REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+  REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+  REGISTRY_PATH: ${{ secrets.REGISTRY_PATH }}
+  BACKEND_IMAGE: ${{ secrets.REGISTRY_PATH }}:${{ github.ref_name }}
+  BACKEND_CONTAINER_NAME: ccdb-be
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Start the Docker Compose services
+        run: |
+          docker compose --project-name "${{ env.PROJECT_NAME }}" --file "${{ env.PATH_TO_COMPOSE }}" up --build -d
+
+      - name: Run database migrations
+        run: |
+          docker exec -i "${{ env.BACKEND_CONTAINER_NAME }}" npm run migration:test
+
+      - name: Run tests
+        run: |
+          docker exec -i "${{ env.BACKEND_CONTAINER_NAME }}" npm run test
+
+      - name: Stop and remove Docker Compose services
+        if: always()
+        run: |
+          docker compose --project-name "${{ env.PROJECT_NAME }}" --file "${{ env.PATH_TO_COMPOSE }}" down
+
+  build-and-push:
+    needs: test
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY_PATH }}
+          username: ${{ env.REGISTRY_USERNAME }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build and push Docker image
+        run: |
+          docker compose --project-name "${{ env.PROJECT_NAME }}" --file "${{ env.PATH_TO_COMPOSE }}" build
+          docker compose --project-name "${{ env.PROJECT_NAME }}" --file "${{ env.PATH_TO_COMPOSE }}" push

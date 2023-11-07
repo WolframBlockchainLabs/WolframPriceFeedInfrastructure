@@ -37,6 +37,10 @@ test.beforeEach((t) => {
         sequelize: {},
         amqpClient: t.context.amqpClientStub,
         consumerConfig: {},
+        config: {
+            retryLimit: 3,
+            retryPeriodMs: 3000,
+        },
     });
 });
 

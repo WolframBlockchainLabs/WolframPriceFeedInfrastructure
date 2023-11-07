@@ -18,8 +18,13 @@ test.beforeEach((t) => {
         .stub(cron, 'schedule')
         .callsFake((interval, cb) => cb());
     t.context.setTimeoutStub = sandbox.stub(global, 'setTimeout');
+    t.context.loggerStub = {
+        info: sandbox.stub(),
+        error: sandbox.stub(),
+    };
 
     t.context.collectorsScheduler = new CollectorsScheduler({
+        logger: t.context.loggerStub,
         rateLimit: 50,
         rateLimitMargin: 10,
         operationsAmount: 4,

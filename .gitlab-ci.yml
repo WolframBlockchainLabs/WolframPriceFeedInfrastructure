@@ -13,10 +13,20 @@ variables:
     DOCKER_HOST: 'tcp://docker:2375'
 
 stages:
+    - test
     - push
 
 before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+docker_build_test:
+    stage: test
+    script:
+        - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" build
+        - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" up -d
+        - docker exec -i $BACKEND_CONTAINER_NAME npm run migration:test
+        - docker exec -i $BACKEND_CONTAINER_NAME npm run test
+        - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" down
 
 docker_build_push:
     stage: push

@@ -113,6 +113,7 @@ class TestFactory {
             await OrderBook.create({
                 marketId: market.id,
                 intervalStart: new Date(),
+                intervalEnd: new Date(),
                 bids,
                 asks,
             });
@@ -140,6 +141,7 @@ class TestFactory {
         const newCandleStick = await CandleStick.create({
             marketId,
             intervalStart: new Date(),
+            intervalEnd: new Date(),
             charts,
         });
 
@@ -153,6 +155,7 @@ class TestFactory {
         const newTicker = await Ticker.create({
             marketId,
             intervalStart: new Date(),
+            intervalEnd: new Date(),
             ...tickerData,
         });
 
@@ -169,6 +172,7 @@ class TestFactory {
             marketId,
             tradesInfo,
             intervalStart: new Date(),
+            intervalEnd: new Date(),
         });
 
         return { exchangeName, marketId, symbol, newTrade };

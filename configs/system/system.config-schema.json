@@ -67,5 +67,24 @@
                 "marketsRefresher": ["required", "positive_integer"]
             }
         }
+    ],
+    "amqpWorker": [
+        "required",
+        {
+            "nested_object": {
+                "retryLimit": ["required", "positive_integer"],
+                "retryPeriodMs": ["required", "positive_integer"]
+            }
+        }
+    ],
+    "aggregateOHLCVEmitter": [
+        "required",
+        {
+            "nested_object": {
+                "interval": ["required", "positive_integer"],
+                "exchanges": ["required", { "list_of": "string" }],
+                "pairs": ["required", { "list_of": "string" }]
+            }
+        }
     ]
 }
