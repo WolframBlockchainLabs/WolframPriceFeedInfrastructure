@@ -37,7 +37,7 @@ For more details, visit the following chapters organized by category:
 - 📐 [Structure Information](docs/structure.md)
 
 ### Configuration Guides
-- ⚙️ [General Config](docs/general.md)
+- ⚙️ [System Config](docs/config/system.md)
 
 ### Blockchain Collectors Configuration
 - 💱 [CCXT Collectors Config](docs/config/ccxt-collectors.md)
