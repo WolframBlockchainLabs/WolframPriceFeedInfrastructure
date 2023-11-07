@@ -30,6 +30,6 @@
 2. Run `npm run docker:migration:test`;
 3. Run `npm run docker:test:ava` or `npm run docker:test:coverage` to get report on covered lines and branches.
 
-
+---
 
  🟣 [Back to main doc file](../README.md)

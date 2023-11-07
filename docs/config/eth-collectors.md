@@ -57,6 +57,6 @@ Here is a basic structure of a market object:
 
 *Note*: The placeholder values (e.g., `{{ETH_RATE_LIMIT_MARGIN}}`) should be replaced with actual values during runtime.
 
-
+---
 
  🟣 [Back to main doc file](../../README.md)
