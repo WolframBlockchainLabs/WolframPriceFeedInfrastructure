@@ -35,4 +35,6 @@ The **_workers_** directory contains definitions of services entrypoints. Those 
 
 The **_tests_** directory houses both end-to-end and unit tests. The end-to-end tests are used to evaluate the application's endpoints that users interact with. On the other hand, unit tests are utilized to verify the fundamental logic of the application's data collectors.
 
+
+
  🟣 [Back to main doc file](../README.md)
