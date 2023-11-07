@@ -1,38 +1,48 @@
-# CCDB application
+# CCDB Application
 
-## Feature
+---
 
-Launching collectors to receive and store data on specific symbols (_markets_) from exchanges.
+## ✨ Features
 
-Four data types are currently supported:
+**CCDB**, the robust data collector, seamlessly launches collectors to acquire and archive data on chosen symbols (_markets_) from various exchanges. Experience comprehensive support for multiple data types and enhanced user-driven data retrieval within bespoke ranges. CCDB boasts a fault-tolerant distributed architecture, ensures deterministic scheduling for rate limit adherence, and integrates seamlessly with leading blockchain technologies.
 
--   order book
--   trade
--   ticker
--   candlestick
--   exchange rate
+### Supported Data Types
+CCDB actively supports a diverse range of data types, including:
 
-Retrieval of saved data by users within a specified range.
+- 📚 **Order Book**: A real-time list of buy and sell orders on the exchange.
+- 🔄 **Trade**: Detailed information on executed transactions.
+- 🏷️ **Ticker**: Snapshot of the current market statistics.
+- 🕯️ **Candlestick**: Price movement data depicted over a specific time period.
+- 💹 **Exchange Rate**: Current currency conversion rates.
 
-Historical data retrieval in specified ranges.
+### Data Retrieval
+- 🔍 **User-Driven Data Access**: Retrieve stored data within a user-defined range.
+- 📅 **Historical Data**: Access historical data over specific time intervals.
 
-Fault tolerant distributed architecture.
+### Architecture & Integrations
+- 🏛️ **Fault-Tolerant Distributed Architecture**: Designed for resilience and continuous operation.
+- ⏱️ **Deterministic Scheduling**: Smart scheduling to stay within API rate limits.
+- 🔗 **Blockchain Integrations**:
+  - 🟣 Cardano (ADA)
+  - 🔵 XRP Ledger (XRPL)
+  - 🌟 Tezos (XTZ)
+  - ⚫ Ethereum (ETH) and DEXs
 
-Deterministic scheduling to comply with rate limits.
+## Documentation Links
 
-Cardano, XRPL, Tezos and ETH DEXs integrations
+For more details, visit the following chapters organized by category:
 
-## Links
+### Getting Started
+- 🚀 [Quick Start Guide](docs/quick-start.md)
+- 📐 [Structure Information](docs/structure.md)
 
-For more details visit the following chapters:
+### Configuration Guides
+- ⚙️ [General Config](docs/general.md)
 
-- [Quick Start Guide](docs/quick-start.md)
-- [Structure Information](docs/structure.md)
+### Blockchain Collectors Configuration
+- 💱 [CCXT Collectors Config](docs/config/ccxt-collectors.md)
+- 🟣 [Cardano Collectors Config](docs/config/cardano-collectors.md)
+- 🌐 [Ethereum Collectors Config](docs/config/eth-collectors.md)
+- ⭐ [Tezos Collectors Config](docs/config/tezos-collectors.md)
+- 💠 [XRP Ledger Collectors Config](docs/config/xrpl-collectors.md)
 
-- [General Config](docs/general.md)
-
-- [Cardano Collectors Config](docs/cardano-collectors.md)
-- [CCXT Collectors Config](docs/ccxt-collectors.md)
-- [Ethereum Collectors Config](docs/eth-collectors.md)
-- [Tezos Collectors Config](docs/tezos-collectors.md)
-- [XRP Ledger Collectors Config](docs/xrpl-collectors.md)
