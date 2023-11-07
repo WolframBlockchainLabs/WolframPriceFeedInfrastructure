@@ -41,5 +41,21 @@
     "amqpWorker": {
         "retryLimit": 12,
         "retryPeriodMs": 3600000
+    },
+    "aggregateOHLCVEmitter": {
+        "interval": "{{AGGREGATE_OHLCV_EMITTER_INTERVAL}}",
+        "exchanges": [
+            "Binance",
+            "Bitfinex",
+            "Bitget",
+            "Bitstamp",
+            "Bybit",
+            "Gate.io",
+            "Gemini",
+            "Kraken",
+            "KuCoin",
+            "OKX"
+        ],
+        "pairs": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
     }
 }

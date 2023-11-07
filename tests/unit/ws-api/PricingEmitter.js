@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import PricingEmitter from '../../../lib/api/ws-api/pricing/PricingEmitter.js';
+import PricingEmitter from '../../../lib/api/ws-api/emitters/PricingEmitter.js';
 
 let sandbox;
 

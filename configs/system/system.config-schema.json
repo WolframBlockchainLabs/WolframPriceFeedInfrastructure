@@ -76,5 +76,15 @@
                 "retryPeriodMs": ["required", "positive_integer"]
             }
         }
+    ],
+    "aggregateOHLCVEmitter": [
+        "required",
+        {
+            "nested_object": {
+                "interval": ["required", "positive_integer"],
+                "exchanges": ["required", { "list_of": "string" }],
+                "pairs": ["required", { "list_of": "string" }]
+            }
+        }
     ]
 }
