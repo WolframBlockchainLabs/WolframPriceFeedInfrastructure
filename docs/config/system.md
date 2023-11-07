@@ -77,6 +77,41 @@
 - **intervals.marketsRefresher**: The interval at which the markets refresher function should run. 
   - Example: `"{{MARKETS_REFRESHER_INTERVAL}}"`
 
+### AMQP Worker Settings
+
+- **amqpWorker.retryLimit**: limit on message processing failure retries 
+  - Example: `12`
+- **amqpWorker.retryPeriodMs**: time to wait before next try 
+  - Example: `3600000`
+
+### AggregateOHLCVEmitter Settings
+
+- **aggregateOHLCVEmitter.interval**: time to wait before emitting next message
+  - Example: `"{{AGGREGATE_OHLCV_EMITTER_INTERVAL}}"`
+- **aggregateOHLCVEmitter.exchanges**: An array exchanges to aggregate pairs from. 
+  - Example: 
+    ```
+    [
+      "Binance",
+      "Bitfinex",
+      "Bitget",
+      "Bitstamp",
+      "Bybit",
+      "Gate.io",
+      "Gemini",
+      "Kraken",
+      "KuCoin",
+      "OKX"
+    ]
+    ```
+- **aggregateOHLCVEmitter.pairs**: An array pairs to aggregate OHLCV from. 
+  - Example: 
+    ```
+    ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
+    ```
+
 ---
 
 Please, note that the placeholders (like `{{PORT}}`) should be replaced with actual values during runtime or configuration setup.
+
+ 🟣 [Back to main doc file](../../README.md)
