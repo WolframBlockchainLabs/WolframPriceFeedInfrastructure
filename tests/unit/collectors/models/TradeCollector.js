@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import TradeCollector from '../../../../lib/collectors/models/TradeCollector.js';
+import TradeCollector from '../../../../lib/domain-collectors/collectors/TradeCollector.js';
 
 let sandbox;
 

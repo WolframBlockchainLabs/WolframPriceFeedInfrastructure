@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import cardanoDrivers from '../../../../../lib/collectors/integrations/cardano/index.js';
+import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/cardano/index.js';
 import BigNumber from 'bignumber.js';
 
 let sandbox;

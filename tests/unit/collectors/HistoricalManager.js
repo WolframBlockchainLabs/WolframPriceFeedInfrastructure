@@ -5,11 +5,11 @@ import cron from 'node-cron';
 import { faker } from '@faker-js/faker';
 import Exchange from '../../../lib/domain-model/entities/Exchange.js';
 import Market from '../../../lib/domain-model/entities/Market.js';
-import CandleStickCollector from '../../../lib/collectors/models/CandleStickCollector.js';
-import OrderBookCollector from '../../../lib/collectors/models/OrderBookCollector.js';
-import TickerCollector from '../../../lib/collectors/models/TickerCollector.js';
-import TradeCollector from '../../../lib/collectors/models/TradeCollector.js';
-import HistoricalManager from '../../../lib/collectors/HistoricalManager.js';
+import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
+import OrderBookCollector from '../../../lib/domain-collectors/collectors/OrderBookCollector.js';
+import TickerCollector from '../../../lib/domain-collectors/collectors/TickerCollector.js';
+import TradeCollector from '../../../lib/domain-collectors/collectors/TradeCollector.js';
+import HistoricalManager from '../../../lib/domain-collectors/HistoricalManager.js';
 
 let sandbox;
 

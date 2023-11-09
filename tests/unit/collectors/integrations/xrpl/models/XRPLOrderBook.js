@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import XRPLOrderBookCollector from '../../../../../../lib/collectors/integrations/xrpl/models/XRPLOrderBook.js';
+import XRPLOrderBookCollector from '../../../../../../lib/domain-collectors/integrations/xrpl/models/XRPLOrderBook.js';
 
 let sandbox;
 

@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import CandleStickCollector from '../../../../lib/collectors/models/CandleStickCollector.js';
+import CandleStickCollector from '../../../../lib/domain-collectors/collectors/CandleStickCollector.js';
 
 let sandbox;
 

@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import tezosDrivers from '../../../../../lib/collectors/integrations/tezos/index.js';
+import tezosDrivers from '../../../../../lib/domain-collectors/integrations/tezos/index.js';
 
 let sandbox;
 

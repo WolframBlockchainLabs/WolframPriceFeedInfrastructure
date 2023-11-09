@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import XRPLDriver from '../../../../../../lib/collectors/integrations/xrpl/driver/XRPLDriver.js';
+import XRPLDriver from '../../../../../../lib/domain-collectors/integrations/xrpl/driver/XRPLDriver.js';
 
 let sandbox;
 

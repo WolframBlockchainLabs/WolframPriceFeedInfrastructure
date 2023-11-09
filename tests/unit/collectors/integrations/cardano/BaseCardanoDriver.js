@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import BigNumber from 'bignumber.js';
-import BaseCardanoDriver from '../../../../../lib/collectors/integrations/cardano/BaseCardanoDriver.js';
+import BaseCardanoDriver from '../../../../../lib/domain-collectors/integrations/cardano/BaseCardanoDriver.js';
 
 let sandbox;
 
