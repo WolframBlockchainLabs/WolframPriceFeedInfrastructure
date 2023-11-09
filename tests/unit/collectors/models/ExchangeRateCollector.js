@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import ExchangeRateCollector from '../../../../lib/collectors/models/ExchangeRate.js';
+import ExchangeRateCollector from '../../../../lib/collectors/models/ExchangeRateCollector.js';
 
 let sandbox;
 

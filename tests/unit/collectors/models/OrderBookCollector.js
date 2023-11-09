@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import OrderBookCollector from '../../../../lib/collectors/models/OrderBook.js';
+import OrderBookCollector from '../../../../lib/collectors/models/OrderBookCollector.js';
 
 let sandbox;
 
