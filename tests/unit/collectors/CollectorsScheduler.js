@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import cron from 'node-cron';
-import CollectorsScheduler from '../../../lib/domain-collectors/CollectorsScheduler.js';
+import CollectorsScheduler from '../../../lib/domain-collectors/infrastructure/RealtimeScheduler.js';
 
 let sandbox;
 
