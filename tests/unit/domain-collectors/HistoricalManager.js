@@ -1,90 +1,47 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import cron from 'node-cron';
-import { faker } from '@faker-js/faker';
-import Exchange from '../../../lib/domain-model/entities/Exchange.js';
-import Market from '../../../lib/domain-model/entities/Market.js';
-import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
-import OrderBookCollector from '../../../lib/domain-collectors/collectors/OrderBookCollector.js';
-import TickerCollector from '../../../lib/domain-collectors/collectors/TickerCollector.js';
-import TradeCollector from '../../../lib/domain-collectors/collectors/TradeCollector.js';
 import HistoricalManager from '../../../lib/domain-collectors/HistoricalManager.js';
+import HistoricalScheduler from '../../../lib/domain-collectors/infrastructure/HistoricalScheduler.js';
+import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
 
 let sandbox;
 
-const exchange = 'binance';
-const symbol = 'BTC/USDT';
-const exchangeId = faker.number.int();
-const marketId = faker.number.int();
+const schedulerOptions = {
+    baseRateLimit: 50,
+    rateLimitMargin: 10,
+    operationsAmount: 4,
+    queuePosition: 3,
+    queueSize: 5,
+    replicaSize: 2,
+    instancePosition: 1,
 
-const cycleCeil = 1;
-const cycleCounter = 0;
-const lastLimit = 5;
+    scheduleStartDate: '2023-08-04 07:40:00+0000',
+    scheduleEndDate: '2023-08-04 07:45:00+0000',
+};
 
 test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
-
-    t.context.cronTaskStub = { stop: sandbox.stub() };
-    t.context.cronStub = sandbox
-        .stub(cron, 'schedule')
-        .callsFake((interval, cb) => {
-            cb();
-            return t.context.cronTaskStub;
-        });
-    t.context.setTimeoutStub = sandbox
-        .stub(global, 'setTimeout')
-        .callsFake((cb) => cb());
 
     t.context.loggerStub = {
         info: sandbox.stub(),
         error: sandbox.stub(),
     };
+
     t.context.amqpClientStub = {
         getChannel: sandbox.stub().returns({
             addSetup: sandbox.stub(),
         }),
     };
 
-    t.context.candleStickSaveStub = sandbox.stub(
-        CandleStickCollector.prototype,
-        'start',
-    );
-    t.context.orderBookSaveStub = sandbox.stub(
-        OrderBookCollector.prototype,
-        'start',
-    );
-    t.context.tickerSaveStub = sandbox.stub(TickerCollector.prototype, 'start');
-    t.context.tradeSaveStub = sandbox.stub(TradeCollector.prototype, 'start');
-
-    t.context.ExchangeStub = {
-        findOne: sandbox.stub(Exchange, 'findOne').returns({ id: exchangeId }),
-    };
-    t.context.MarketStub = {
-        findOne: sandbox.stub(Market, 'findOne').returns({ id: marketId }),
-    };
-
     t.context.historicalManager = new HistoricalManager({
-        models: [
-            CandleStickCollector,
-            OrderBookCollector,
-            TickerCollector,
-            TradeCollector,
-        ],
+        models: [CandleStickCollector],
         logger: t.context.loggerStub,
         amqpClient: t.context.amqpClientStub,
-        exchange,
-        symbol,
+        exchange: 'binance',
+        symbol: 'BTC/USDT',
         exchangeAPI: {},
-        rabbitMqConfig: {
-            urls: [],
-        },
-        rateLimit: 50,
-        rateLimitMargin: 10,
-        queuePosition: 3,
-        queueSize: 5,
-        scheduleStartDate: '2023-08-04 07:40:00+0000',
-        scheduleEndDate: '2023-08-04 07:45:00+0000',
+        schedulerOptions,
     });
 });
 
@@ -92,62 +49,36 @@ test.afterEach(() => {
     sandbox.restore();
 });
 
-test('the "start" method should call initCycleCounter.', async (t) => {
-    const { historicalManager, cronTaskStub } = t.context;
+test('the "start" method should call loadMarketContext, connectCollectors, and startScheduler.', async (t) => {
+    const { historicalManager } = t.context;
 
-    const initCycleCounterStub = sandbox.stub(
-        historicalManager,
-        'initCycleCounter',
-    );
+    const loadMarketContextStub = sandbox
+        .stub(historicalManager, 'loadMarketContext')
+        .resolves();
+    const connectCollectorsStub = sandbox
+        .stub(historicalManager, 'connectCollectors')
+        .resolves();
+    const startSchedulerStub = sandbox
+        .stub(historicalManager, 'startScheduler')
+        .resolves();
 
     await historicalManager.start();
 
-    t.is(undefined, sinon.assert.calledOnce(initCycleCounterStub));
-    t.is(undefined, sinon.assert.calledOnce(cronTaskStub.stop));
+    sinon.assert.calledOnce(loadMarketContextStub);
+    sinon.assert.calledOnce(connectCollectorsStub);
+    sinon.assert.calledOnce(startSchedulerStub);
+
+    t.pass();
 });
 
-test('the "initCycleCounter" method should set cycleCeil, cycleCounter, lastLimit.', async (t) => {
+test('the "initScheduler" method should initialize a HistoricalScheduler with correct options.', async (t) => {
     const { historicalManager } = t.context;
 
-    t.is(historicalManager.cycleCeil, null);
-    t.is(historicalManager.cycleCounter, null);
-    t.is(historicalManager.lastLimit, null);
+    historicalManager.initScheduler(schedulerOptions);
 
-    historicalManager.initCycleCounter();
+    t.truthy(
+        historicalManager.collectorsScheduler instanceof HistoricalScheduler,
+    );
 
-    t.is(historicalManager.cycleCeil, cycleCeil);
-    t.is(historicalManager.cycleCounter, cycleCounter);
-    t.is(historicalManager.lastLimit, lastLimit);
-
-    historicalManager.cycleCeil = null;
-    historicalManager.cycleCounter = null;
-    historicalManager.lastLimit = null;
-});
-
-test('the "setNextInterval" method should set next interval start and end.', async (t) => {
-    const { historicalManager } = t.context;
-
-    historicalManager.cycleCeil = 3;
-    historicalManager.lastLimit = 5;
-
-    historicalManager.cycleCounter = 0;
-
-    historicalManager.setNextInterval();
-
-    t.is(historicalManager.intervalStart, 1691134800000);
-    t.is(historicalManager.intervalEnd, 1691164800000);
-
-    historicalManager.setNextInterval();
-
-    t.is(historicalManager.intervalStart, 1691164800000);
-    t.is(historicalManager.intervalEnd, 1691194800000);
-
-    historicalManager.setNextInterval();
-
-    t.is(historicalManager.intervalStart, 1691194800000);
-    t.is(historicalManager.intervalEnd, 1691195100000);
-
-    historicalManager.cycleCeil = null;
-    historicalManager.lastLimit = null;
-    historicalManager.cycleCounter = null;
+    t.pass();
 });
