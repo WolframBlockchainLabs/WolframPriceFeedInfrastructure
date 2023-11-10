@@ -10,6 +10,7 @@
         "**/tests/**",
         "**/use-cases/BaseUseCase.js",
         "**/use-cases/utils/**",
+        "**/use-cases/testing/**",
         "**/ws-api/*.*",
         "**/workers/*.*",
         "**/workers/**/*worker.*"
