@@ -2,22 +2,13 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import XRPLOrderBookCollector from '../../../../../../lib/domain-collectors/integrations/xrpl/models/XRPLOrderBook.js';
+import OrderBookCollector from '../../../../lib/domain-collectors/collectors/OrderBookCollector.js';
 
 let sandbox;
 
-const exchange = 'xrpl';
-const symbol = 'XRP/USD';
+const exchange = 'binance';
+const symbol = 'BTC/USDT';
 const marketId = faker.number.int();
-const pair = {
-    base: {
-        currency: 'XRP',
-    },
-    counter: {
-        currency: 'USD',
-        issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B',
-    },
-};
 
 const fetchOrderBookStubResult = {
     symbol,
@@ -29,7 +20,7 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.loggerStub = {
-        info: sandbox.stub(),
+        debug: sandbox.stub(),
         error: sandbox.stub(),
     };
 
@@ -37,13 +28,12 @@ test.beforeEach((t) => {
         fetchOrderBook: sandbox.stub().resolves(fetchOrderBookStubResult),
     };
 
-    t.context.orderBookCollector = new XRPLOrderBookCollector({
+    t.context.orderBookCollector = new OrderBookCollector({
         logger: t.context.loggerStub,
         exchange,
         symbol,
         marketId,
         exchangeAPI: t.context.exchangeAPIStub,
-        pair,
     });
 
     t.context.publishStub = sandbox.stub(
@@ -65,12 +55,25 @@ test('fetch data should return existing orderBook info', async (t) => {
     t.is(undefined, sinon.assert.calledOnce(exchangeAPIStub.fetchOrderBook));
 });
 
+test('save data should call publish method', async (t) => {
+    const { orderBookCollector, publishStub } = t.context;
+    const { bids, asks } = fetchOrderBookStubResult;
+
+    await orderBookCollector.saveData({ bids, asks });
+
+    t.is(undefined, sinon.assert.calledOnce(publishStub));
+});
+
 test('calls logger if fetch fails', async (t) => {
     const { orderBookCollector, exchangeAPIStub, loggerStub } = t.context;
 
     exchangeAPIStub.fetchOrderBook.throws();
 
-    await orderBookCollector.start();
+    try {
+        await orderBookCollector.start();
 
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+        t.fail();
+    } catch {
+        t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+    }
 });

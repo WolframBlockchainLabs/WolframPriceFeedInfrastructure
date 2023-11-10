@@ -20,7 +20,7 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.loggerStub = {
-        info: sandbox.stub(),
+        debug: sandbox.stub(),
         error: sandbox.stub(),
     };
 
@@ -56,11 +56,17 @@ test('fetch data should return existing trade info', async (t) => {
 test('save data should call publish method', async (t) => {
     const { tradeCollector, publishStub } = t.context;
 
-    tradeCollector.setInterval(1684141361269, 1684141361469);
+    tradeCollector.setInterval({
+        intervalStart: 1684141361269,
+        intervalEnd: 1684141361469,
+    });
 
     await tradeCollector.saveData(fetchTradeStubResult);
 
-    tradeCollector.setInterval(null, null);
+    tradeCollector.setInterval({
+        intervalStart: null,
+        intervalEnd: null,
+    });
 
     t.deepEqual(publishStub.args[0][0], {
         tradesInfo: fetchedDataMap,
@@ -72,7 +78,11 @@ test('calls logger if fetch fails', async (t) => {
 
     exchangeAPIStub.fetchTrades.throws();
 
-    await tradeCollector.start();
+    try {
+        await tradeCollector.start();
 
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+        t.fail();
+    } catch {
+        t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+    }
 });

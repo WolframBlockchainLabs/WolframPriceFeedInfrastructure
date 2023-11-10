@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import { faker } from '@faker-js/faker';
-import Collector from '../../../lib/domain-collectors/collectors/BaseCollector.js';
+import Collector from '../../../../lib/domain-collectors/collectors/BaseCollector.js';
 
 let sandbox;
 
@@ -31,7 +31,7 @@ test.beforeEach((t) => {
     };
 
     t.context.loggerStub = {
-        info: sandbox.stub(),
+        debug: sandbox.stub(),
         error: sandbox.stub(),
     };
 
@@ -66,10 +66,14 @@ test('calls logger on error', async (t) => {
 
     sandbox.stub(collector, 'fetchData').throws();
 
-    await collector.start();
+    try {
+        await collector.start();
 
-    t.is(undefined, sinon.assert.calledOnce(collector.fetchData));
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+        t.fail();
+    } catch {
+        t.is(undefined, sinon.assert.calledOnce(collector.fetchData));
+        t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+    }
 });
 
 test('publish method encapsulates amqpClient', async (t) => {

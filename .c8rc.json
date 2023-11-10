@@ -2,7 +2,7 @@
     "all": true,
     "include": [
         "**/use-cases/**",
-        "**/collectors/**",
+        "**/domain-collectors/**",
         "**/ws-api/**",
         "**/workers/**"
     ],

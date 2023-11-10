@@ -18,7 +18,7 @@ test.beforeEach((t) => {
     sandbox = sinon.createSandbox();
 
     t.context.loggerStub = {
-        info: sandbox.stub(),
+        debug: sandbox.stub(),
         error: sandbox.stub(),
     };
 
@@ -67,7 +67,11 @@ test('calls logger if fetch fails', async (t) => {
 
     exchangeAPIStub.fetchOHLCV.throws();
 
-    await candleStickCollector.start();
+    try {
+        await candleStickCollector.start();
 
-    t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+        t.fail();
+    } catch {
+        t.is(undefined, sinon.assert.calledOnce(loggerStub.error));
+    }
 });
