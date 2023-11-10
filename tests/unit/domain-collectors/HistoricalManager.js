@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import HistoricalManager from '../../../lib/domain-collectors/HistoricalManager.js';
-import HistoricalScheduler from '../../../lib/domain-collectors/infrastructure/HistoricalScheduler.js';
+import HistoricalScheduler from '../../../lib/domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
 import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
 
 let sandbox;

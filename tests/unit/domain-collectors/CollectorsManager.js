@@ -55,7 +55,7 @@ test('constructor should initialize scheduler, backoff manager, and properties.'
     const { collectorsManager } = t.context;
 
     t.truthy(collectorsManager.collectorsScheduler);
-    t.truthy(collectorsManager.backoffManager);
+    t.truthy(collectorsManager.backoffPolicy);
 
     t.pass();
 });
@@ -69,8 +69,8 @@ test('the "start" method should call necessary methods for setup.', async (t) =>
     const connectCollectorsStub = sandbox
         .stub(collectorsManager, 'connectCollectors')
         .resolves();
-    const startBackoffManagerStub = sandbox
-        .stub(collectorsManager, 'startBackoffManager')
+    const startBackoffPolicyStub = sandbox
+        .stub(collectorsManager, 'startBackoffPolicy')
         .resolves();
     const startSchedulerStub = sandbox
         .stub(collectorsManager, 'startScheduler')
@@ -80,7 +80,7 @@ test('the "start" method should call necessary methods for setup.', async (t) =>
 
     sinon.assert.calledOnce(loadMarketContextStub);
     sinon.assert.calledOnce(connectCollectorsStub);
-    sinon.assert.calledOnce(startBackoffManagerStub);
+    sinon.assert.calledOnce(startBackoffPolicyStub);
     sinon.assert.calledOnce(startSchedulerStub);
 
     t.pass();
@@ -126,7 +126,7 @@ test('the "startCollectorWithDelay" method should delay collector start, then st
         .returns(1000);
 
     const broadcastRateLimitChangeStub = sandbox
-        .stub(collectorsManager.backoffManager, 'broadcastRateLimitChange')
+        .stub(collectorsManager.backoffPolicy, 'broadcastRateLimitChange')
         .resolves();
 
     await collectorsManager.startCollectorWithDelay(mockCollector, 0);
@@ -228,16 +228,16 @@ test('the "startScheduler" method should start the scheduler with the correct ha
     t.pass();
 });
 
-test('the "startBackoffManager" method should start the backoff manager with the correct handler.', async (t) => {
+test('the "startBackoffPolicy" method should start the backoff manager with the correct handler.', async (t) => {
     const { collectorsManager } = t.context;
 
-    const backoffManagerStartStub = sandbox
-        .stub(collectorsManager.backoffManager, 'start')
+    const backoffPolicyStartStub = sandbox
+        .stub(collectorsManager.backoffPolicy, 'start')
         .resolves();
 
-    await collectorsManager.startBackoffManager();
+    await collectorsManager.startBackoffPolicy();
 
-    sinon.assert.calledWith(backoffManagerStartStub);
+    sinon.assert.calledWith(backoffPolicyStartStub);
 
     t.pass();
 });

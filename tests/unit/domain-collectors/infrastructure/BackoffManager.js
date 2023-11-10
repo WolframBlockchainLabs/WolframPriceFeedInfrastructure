@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import BackoffManager from '../../../../lib/domain-collectors/infrastructure/BackoffManager.js';
+import BackoffPolicy from '../../../../lib/domain-collectors/infrastructure/amqp-policies/BackoffPolicy.js';
 
 let sandbox;
 
@@ -21,7 +21,7 @@ test.beforeEach((t) => {
         getChannel: sandbox.stub().returns(t.context.channelStub),
     };
 
-    t.context.backoffManager = new BackoffManager({
+    t.context.backoffPolicy = new BackoffPolicy({
         amqpClient: t.context.amqpClientStub,
         rabbitGroupName: 'testGroup',
     });
@@ -32,14 +32,14 @@ test.afterEach(() => {
 });
 
 test('the "start" method should set reloadHandler and call setupReplicaChannel.', async (t) => {
-    const { backoffManager } = t.context;
+    const { backoffPolicy } = t.context;
 
     const setupReplicaChannelStub = sandbox.stub(
-        backoffManager,
+        backoffPolicy,
         'setupReplicaChannel',
     );
 
-    await backoffManager.start(() => {});
+    await backoffPolicy.start(() => {});
 
     sinon.assert.calledOnce(setupReplicaChannelStub);
 
@@ -47,14 +47,14 @@ test('the "start" method should set reloadHandler and call setupReplicaChannel.'
 });
 
 test('the "setupReplicaChannel" method pass configureRabbitMQChannel into amqp addSetup.', async (t) => {
-    const { backoffManager, amqpClientStub, channelStub } = t.context;
+    const { backoffPolicy, amqpClientStub, channelStub } = t.context;
 
     const configureRabbitMQChannelStub = sandbox.stub(
-        backoffManager,
+        backoffPolicy,
         'configureRabbitMQChannel',
     );
 
-    await backoffManager.setupReplicaChannel();
+    await backoffPolicy.setupReplicaChannel();
 
     sinon.assert.calledOnce(amqpClientStub.getChannel);
     sinon.assert.calledOnce(channelStub.addSetup);
@@ -64,9 +64,9 @@ test('the "setupReplicaChannel" method pass configureRabbitMQChannel into amqp a
 });
 
 test('the "configureRabbitMQChannel" should call assertExchange, assertAndBindQueue, and setupConsumer.', async (t) => {
-    const { backoffManager, channelStub } = t.context;
+    const { backoffPolicy, channelStub } = t.context;
 
-    await backoffManager.configureRabbitMQChannel(channelStub);
+    await backoffPolicy.configureRabbitMQChannel(channelStub);
 
     sinon.assert.calledWith(channelStub.assertExchange, 'testGroup', 'fanout', {
         durable: false,
@@ -79,16 +79,16 @@ test('the "configureRabbitMQChannel" should call assertExchange, assertAndBindQu
 });
 
 test('the "broadcastRateLimitChange" should publish a message to the channel.', async (t) => {
-    const { backoffManager } = t.context;
+    const { backoffPolicy } = t.context;
     const rateLimitMultiplier = 2;
 
-    await backoffManager.broadcastRateLimitChange(rateLimitMultiplier);
+    await backoffPolicy.broadcastRateLimitChange(rateLimitMultiplier);
 
     const expectedMessage = Buffer.from(
         JSON.stringify({ rateLimitMultiplier }),
     );
     sinon.assert.calledWith(
-        backoffManager.amqpClient.getChannel().publish,
+        backoffPolicy.amqpClient.getChannel().publish,
         'testGroup',
         '',
         expectedMessage,

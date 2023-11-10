@@ -3,7 +3,7 @@ import test from 'ava';
 import sinon from 'sinon';
 import cron from 'node-cron';
 import cronParser from 'cron-parser';
-import RealtimeScheduler from '../../../../lib/domain-collectors/infrastructure/RealtimeScheduler.js';
+import RealtimeScheduler from '../../../../lib/domain-collectors/infrastructure/schedulers/RealtimeScheduler.js';
 
 let sandbox;
 
