@@ -30,7 +30,7 @@ CCDB actively supports a diverse range of data types, including:
 | [<img src="public/images/cardano.png" alt="Cardano" height="60"/>](https://cardano.org/) | [Cardano (ADA)](https://cardano.org/) |
 | [<img src="public/images/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger (XRPL)](https://xrpl.org/index.html) |
 | [<img src="public/images/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/) | [Tezos (XTZ)](https://tezos.com/) |
-| [<img src="public/images/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/) | [Ethereum (ETH)](https://ethereum.org/) and DEXs |
+| [<img src="public/images/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/) | [Ethereum (ETH)](https://ethereum.org/) |
 
 ## Documentation Links
 
