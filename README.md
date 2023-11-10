@@ -23,10 +23,13 @@ CCDB actively supports a diverse range of data types, including:
 - 🏛️ **Fault-Tolerant Distributed Architecture**: Designed for resilience and continuous operation.
 - ⏱️ **Deterministic Scheduling**: Smart scheduling to stay within API rate limits.
 - 🔗 **Blockchain Integrations**:
-  - [<img src="public/images/cardano.png" alt="Cardano" width="100"/>](https://cardano.org/) Cardano (ADA)
-  - [<img src="public/images/xrpl.png" alt="XRP Ledger" width="100"/>](https://xrpl.org/index.html) XRP Ledger (XRPL)
-  - [<img src="public/images/tezos.jpg" alt="Tezos" width="100"/>](https://tezos.com/) Tezos (XTZ)
-  - [<img src="public/images/ethereum.png" alt="Ethereum" width="100"/>](https://ethereum.org/) Ethereum (ETH)
+
+| Blockchain | Description |
+|:---:|:---|
+| [![Cardano](public/images/cardano.png)](https://cardano.org/) | [Cardano (ADA)](https://cardano.org/) |
+| [![XRP Ledger](public/images/xrpl.png)](https://xrpl.org/index.html) | [XRP Ledger (XRPL)](https://xrpl.org/index.html) |
+| [![Tezos](public/images/tezos.jpg)](https://tezos.com/) | [Tezos (XTZ)](https://tezos.com/) |
+| [![Ethereum](public/images/ethereum.png)](https://ethereum.org/) | [Ethereum (ETH)](https://ethereum.org/) and DEXs |
 
 ## Documentation Links
 
