@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import BackoffPolicy from '../../../../lib/domain-collectors/infrastructure/amqp-policies/BackoffPolicy.js';
+import BaseAMQPPolicy from '../../../../../lib/domain-collectors/infrastructure/amqp-policies/BaseAMQPPolicy.js';
 
 let sandbox;
 
@@ -21,7 +21,7 @@ test.beforeEach((t) => {
         getChannel: sandbox.stub().returns(t.context.channelStub),
     };
 
-    t.context.backoffPolicy = new BackoffPolicy({
+    t.context.baseAMQPPolicy = new BaseAMQPPolicy({
         amqpClient: t.context.amqpClientStub,
         rabbitGroupName: 'testGroup',
     });
@@ -32,14 +32,14 @@ test.afterEach(() => {
 });
 
 test('the "start" method should set reloadHandler and call setupReplicaChannel.', async (t) => {
-    const { backoffPolicy } = t.context;
+    const { baseAMQPPolicy } = t.context;
 
     const setupReplicaChannelStub = sandbox.stub(
-        backoffPolicy,
+        baseAMQPPolicy,
         'setupReplicaChannel',
     );
 
-    await backoffPolicy.start(() => {});
+    await baseAMQPPolicy.start(() => {});
 
     sinon.assert.calledOnce(setupReplicaChannelStub);
 
@@ -47,14 +47,14 @@ test('the "start" method should set reloadHandler and call setupReplicaChannel.'
 });
 
 test('the "setupReplicaChannel" method pass configureRabbitMQChannel into amqp addSetup.', async (t) => {
-    const { backoffPolicy, amqpClientStub, channelStub } = t.context;
+    const { baseAMQPPolicy, amqpClientStub, channelStub } = t.context;
 
     const configureRabbitMQChannelStub = sandbox.stub(
-        backoffPolicy,
+        baseAMQPPolicy,
         'configureRabbitMQChannel',
     );
 
-    await backoffPolicy.setupReplicaChannel();
+    await baseAMQPPolicy.setupReplicaChannel();
 
     sinon.assert.calledOnce(amqpClientStub.getChannel);
     sinon.assert.calledOnce(channelStub.addSetup);
@@ -64,9 +64,9 @@ test('the "setupReplicaChannel" method pass configureRabbitMQChannel into amqp a
 });
 
 test('the "configureRabbitMQChannel" should call assertExchange, assertAndBindQueue, and setupConsumer.', async (t) => {
-    const { backoffPolicy, channelStub } = t.context;
+    const { baseAMQPPolicy, channelStub } = t.context;
 
-    await backoffPolicy.configureRabbitMQChannel(channelStub);
+    await baseAMQPPolicy.configureRabbitMQChannel(channelStub);
 
     sinon.assert.calledWith(channelStub.assertExchange, 'testGroup', 'fanout', {
         durable: false,
@@ -78,21 +78,49 @@ test('the "configureRabbitMQChannel" should call assertExchange, assertAndBindQu
     t.pass();
 });
 
-test('the "broadcastRateLimitChange" should publish a message to the channel.', async (t) => {
-    const { backoffPolicy } = t.context;
+test('the "broadcast" should publish a message to the channel.', async (t) => {
+    const { baseAMQPPolicy } = t.context;
     const rateLimitMultiplier = 2;
 
-    await backoffPolicy.broadcastRateLimitChange(rateLimitMultiplier);
+    await baseAMQPPolicy.broadcast({ rateLimitMultiplier });
 
     const expectedMessage = Buffer.from(
         JSON.stringify({ rateLimitMultiplier }),
     );
     sinon.assert.calledWith(
-        backoffPolicy.amqpClient.getChannel().publish,
+        baseAMQPPolicy.amqpClient.getChannel().publish,
         'testGroup',
         '',
         expectedMessage,
     );
+
+    t.pass();
+});
+
+test('consumer should call the handler with the provided message', async (t) => {
+    const { baseAMQPPolicy } = t.context;
+
+    const mockHandler = sinon.stub().resolves();
+    baseAMQPPolicy.handler = mockHandler;
+
+    const mockMessage = { content: 'test message' };
+
+    await baseAMQPPolicy.consumer(mockMessage);
+
+    sinon.assert.calledOnce(mockHandler);
+    sinon.assert.calledWith(mockHandler, mockMessage);
+
+    t.pass();
+});
+
+test('getPrivateQueueAddress should return the rabbitQueueId', (t) => {
+    const { baseAMQPPolicy } = t.context;
+
+    baseAMQPPolicy.rabbitQueueId = 'testQueueId';
+
+    const result = baseAMQPPolicy.getPrivateQueueAddress();
+
+    t.is(result, 'testQueueId');
 
     t.pass();
 });

@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import HistoricalScheduler from '../../../../lib/domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
+import HistoricalScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
 
 let sandbox;
 

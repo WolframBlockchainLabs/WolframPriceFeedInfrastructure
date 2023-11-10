@@ -3,7 +3,7 @@ import test from 'ava';
 import sinon from 'sinon';
 import cron from 'node-cron';
 import cronParser from 'cron-parser';
-import RealtimeScheduler from '../../../../lib/domain-collectors/infrastructure/schedulers/RealtimeScheduler.js';
+import RealtimeScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/RealtimeScheduler.js';
 
 let sandbox;
 
@@ -116,10 +116,6 @@ test('the "reload" method calls stop and then start method, sets up a critical s
 test('the "updateRateLimitMultiplier" method reloads cron if the new backoff multiplier is valid, and sets up a critical section', async (t) => {
     const { realtimeScheduler, mutexStub } = t.context;
 
-    const getMultiplierBackoffStub = sandbox.stub(
-        realtimeScheduler,
-        'getMultiplierBackoff',
-    );
     const validateMultiplierStub = sandbox
         .stub(realtimeScheduler, 'validateMultiplier')
         .returns(true);
@@ -129,7 +125,6 @@ test('the "updateRateLimitMultiplier" method reloads cron if the new backoff mul
 
     sinon.assert.calledOnce(mutexStub.acquire);
     sinon.assert.calledOnce(mutexStub.release);
-    sinon.assert.calledOnce(getMultiplierBackoffStub);
     sinon.assert.calledOnce(validateMultiplierStub);
     sinon.assert.calledOnce(reloadStub);
 
@@ -139,10 +134,6 @@ test('the "updateRateLimitMultiplier" method reloads cron if the new backoff mul
 test('the "updateRateLimitMultiplier" method skips reload if the new backoff multiplier is not valid, and sets up a critical section', async (t) => {
     const { realtimeScheduler, mutexStub } = t.context;
 
-    const getMultiplierBackoffStub = sandbox.stub(
-        realtimeScheduler,
-        'getMultiplierBackoff',
-    );
     const validateMultiplierStub = sandbox.stub(
         realtimeScheduler,
         'validateMultiplier',
@@ -153,9 +144,28 @@ test('the "updateRateLimitMultiplier" method skips reload if the new backoff mul
 
     sinon.assert.calledOnce(mutexStub.acquire);
     sinon.assert.calledOnce(mutexStub.release);
-    sinon.assert.calledOnce(getMultiplierBackoffStub);
     sinon.assert.calledOnce(validateMultiplierStub);
     sinon.assert.notCalled(reloadStub);
+
+    t.pass();
+});
+
+test('the "autoUpdateRateLimitMultiplier" method generates next multiplier and calls updateRateLimitMultiplier', async (t) => {
+    const { realtimeScheduler } = t.context;
+
+    const getMultiplierBackoffStub = sandbox.stub(
+        realtimeScheduler,
+        'getMultiplierBackoff',
+    );
+    const updateRateLimitMultiplierStub = sandbox.stub(
+        realtimeScheduler,
+        'updateRateLimitMultiplier',
+    );
+
+    await realtimeScheduler.autoUpdateRateLimitMultiplier();
+
+    sinon.assert.calledOnce(getMultiplierBackoffStub);
+    sinon.assert.calledOnce(updateRateLimitMultiplierStub);
 
     t.pass();
 });
@@ -371,4 +381,12 @@ test('the "getIntervalBounds" returns intervalStart and intervalEnd', async (t) 
     const bounds = realtimeScheduler.getIntervalBounds();
 
     t.deepEqual(bounds, defaultBounds);
+});
+
+test('the "getMultiplier" returns current multiplier', async (t) => {
+    const { realtimeScheduler } = t.context;
+
+    const multiplier = realtimeScheduler.getMultiplier();
+
+    t.deepEqual(realtimeScheduler.rateLimitMultiplier, multiplier);
 });

@@ -72,6 +72,9 @@ test('the "start" method should call necessary methods for setup.', async (t) =>
     const startBackoffPolicyStub = sandbox
         .stub(collectorsManager, 'startBackoffPolicy')
         .resolves();
+    const startStatusUpdatePolicyStub = sandbox
+        .stub(collectorsManager, 'startStatusUpdatePolicy')
+        .resolves();
     const startSchedulerStub = sandbox
         .stub(collectorsManager, 'startScheduler')
         .resolves();
@@ -81,6 +84,7 @@ test('the "start" method should call necessary methods for setup.', async (t) =>
     sinon.assert.calledOnce(loadMarketContextStub);
     sinon.assert.calledOnce(connectCollectorsStub);
     sinon.assert.calledOnce(startBackoffPolicyStub);
+    sinon.assert.calledOnce(startStatusUpdatePolicyStub);
     sinon.assert.calledOnce(startSchedulerStub);
 
     t.pass();
@@ -238,6 +242,20 @@ test('the "startBackoffPolicy" method should start the backoff manager with the 
     await collectorsManager.startBackoffPolicy();
 
     sinon.assert.calledWith(backoffPolicyStartStub);
+
+    t.pass();
+});
+
+test('the "startStatusUpdatePolicy" method should start the status update policy with the correct handlers.', async (t) => {
+    const { collectorsManager } = t.context;
+
+    const statusUpdatePolicyStartStub = sandbox
+        .stub(collectorsManager.statusUpdatePolicy, 'start')
+        .resolves();
+
+    await collectorsManager.startStatusUpdatePolicy();
+
+    sinon.assert.calledWith(statusUpdatePolicyStartStub);
 
     t.pass();
 });
