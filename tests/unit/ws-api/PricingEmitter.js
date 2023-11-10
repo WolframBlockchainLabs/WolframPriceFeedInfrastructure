@@ -21,7 +21,7 @@ test.beforeEach((t) => {
     };
 
     t.context.loggerStub = {
-        info: sandbox.stub(),
+        debug: sandbox.stub(),
         error: sandbox.stub(),
     };
 

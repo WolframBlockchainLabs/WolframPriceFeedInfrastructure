@@ -37,7 +37,7 @@ test.beforeEach((t) => {
 
     t.context.loggerStub = {
         info: sandbox.stub(),
-        warn: sandbox.stub(),
+        warning: sandbox.stub(),
     };
 
     t.context.marketsRefresher = new MarketsRefresher({
@@ -84,7 +84,7 @@ test('the execute method logs a warning if exchange was not found', async (t) =>
     ]);
 
     sinon.assert.calledOnce(ExchangeStub.findOne);
-    sinon.assert.calledOnce(loggerStub.warn);
+    sinon.assert.calledOnce(loggerStub.warning);
     sinon.assert.notCalled(refreshMarketsStub);
 
     t.pass();
@@ -129,7 +129,7 @@ test('the refreshMarkets method logs a warning if market was not found', async (
 
     sinon.assert.calledOnce(ccxtStub.binance);
     sinon.assert.calledOnce(MarketStub.findOne);
-    sinon.assert.calledOnce(loggerStub.warn);
+    sinon.assert.calledOnce(loggerStub.warning);
     sinon.assert.notCalled(marketInstanceStub.update);
 
     t.pass();
