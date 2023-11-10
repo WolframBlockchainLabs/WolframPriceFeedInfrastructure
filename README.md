@@ -20,16 +20,18 @@ CCDB actively supports a diverse range of data types, including:
 - 📅 **Historical Data**: Access historical data over specific time intervals.
 
 ### Architecture & Integrations
+
 - 🏛️ **Fault-Tolerant Distributed Architecture**: Designed for resilience and continuous operation.
 - ⏱️ **Deterministic Scheduling**: Smart scheduling to stay within API rate limits.
 - 🔗 **Blockchain Integrations**:
 
-| Blockchain | Description |
+| Logo | Name |
 |:---:|:---|
-| [![Cardano](public/images/cardano.png)](https://cardano.org/) | [Cardano (ADA)](https://cardano.org/) |
-| [![XRP Ledger](public/images/xrpl.png)](https://xrpl.org/index.html) | [XRP Ledger (XRPL)](https://xrpl.org/index.html) |
-| [![Tezos](public/images/tezos.jpg)](https://tezos.com/) | [Tezos (XTZ)](https://tezos.com/) |
-| [![Ethereum](public/images/ethereum.png)](https://ethereum.org/) | [Ethereum (ETH)](https://ethereum.org/) and DEXs |
+| [<img src="public/images/cardano.png" alt="Cardano" width="150"/>](https://cardano.org/) | [Cardano (ADA)](https://cardano.org/) |
+| [<img src="public/images/xrpl.png" alt="XRP Ledger" width="150"/>](https://xrpl.org/index.html) | [XRP Ledger (XRPL)](https://xrpl.org/index.html) |
+| [<img src="public/images/tezos.jpg" alt="Tezos" width="150"/>](https://tezos.com/) | [Tezos (XTZ)](https://tezos.com/) |
+| [<img src="public/images/ethereum.png" alt="Ethereum" width="150"/>](https://ethereum.org/) | [Ethereum (ETH)](https://ethereum.org/) and DEXs |
+
 
 ## Documentation Links
 
@@ -43,9 +45,12 @@ For more details, visit the following chapters organized by category:
 - ⚙️ [System Config](docs/config/system.md)
 
 ### CEX & DEX Collectors Configuration
-- [![CCXT](public/images/ccxt.jpeg)](https://docs.ccxt.com/) [CCXT Collectors Config](docs/config/ccxt-collectors.md)
-- [![Cardano](public/images/cardano.png)](https://cardano.org/) [Cardano Collectors Config](docs/config/cardano-collectors.md)
-- [![Ethereum](public/images/ethereum.png)](https://ethereum.org/) [Ethereum Collectors Config](docs/config/eth-collectors.md)
-- [![Tezos](public/images/tezos.jpg)](https://tezos.com/) [Tezos Collectors Config](docs/config/tezos-collectors.md)
-- [![XRP Ledger](public/images/xrpl.png)](https://xrpl.org/index.html) [XRP Ledger Collectors Config](docs/config/xrpl-collectors.md)
+
+| Logo | Name | Exchanges Type |
+|:---:|:---|:---:|
+| [<img src="public/images/ccxt.jpeg" alt="CCXT" width="150"/>](https://docs.ccxt.com/) | [CCXT Collectors Config](docs/config/ccxt-collectors.md) | CEXs |
+| [<img src="public/images/cardano.png" alt="Cardano" width="150"/>](https://cardano.org/) | [Cardano Collectors Config](docs/config/cardano-collectors.md) | DEXs |
+| [<img src="public/images/ethereum.png" alt="Ethereum" width="150"/>](https://ethereum.org/) | [Ethereum Collectors Config](docs/config/eth-collectors.md) | DEXs |
+| [<img src="public/images/tezos.jpg" alt="Tezos" width="150"/>](https://tezos.com/) | [Tezos Collectors Config](docs/config/tezos-collectors.md) | DEXs |
+| [<img src="public/images/xrpl.png" alt="XRP Ledger" width="150"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl-collectors.md) | DEXs |
 
