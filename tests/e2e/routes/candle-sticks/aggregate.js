@@ -16,7 +16,9 @@ export default [
                 `/candleSticks/aggregate?rangeDateStart=${oneYearAgo}&rangeDateEnd=${oneYearFromNow}&symbols[]=${symbol}&exchangeNames[]=${exchangeName}`,
             );
 
-            t.truthy(res.data[symbol]);
+            t.is(res.data.rangeDateStart, oneYearAgo);
+            t.is(res.data.rangeDateEnd, oneYearFromNow);
+            t.truthy(res.data.aggregatedPairs[symbol]);
         },
         after: async ({ factory }) => {
             await factory.cleanup();
