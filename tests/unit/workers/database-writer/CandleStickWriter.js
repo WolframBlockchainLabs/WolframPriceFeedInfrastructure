@@ -2,7 +2,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import CandleStickWriter from '../../../../lib/workers/database-writer/CandleStickWriter.js';
-import CandleStick from '../../../../lib/domain-model/entities/CandleStick.js';
+import CandleStick from '../../../../lib/domain-model/entities/market-records/CandleStick.js';
 
 let sandbox;
 

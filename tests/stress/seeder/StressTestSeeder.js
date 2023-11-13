@@ -1,10 +1,10 @@
 import Exchange from '../../../lib/domain-model/entities/Exchange.js';
 import Market from '../../../lib/domain-model/entities/Market.js';
-import OrderBook from '../../../lib/domain-model/entities/OrderBook.js';
-import Trade from '../../../lib/domain-model/entities/Trade.js';
-import Ticker from '../../../lib/domain-model/entities/Ticker.js';
-import CandleStick from '../../../lib/domain-model/entities/CandleStick.js';
-import ExchangeRate from '../../../lib/domain-model/entities/ExchangeRate.js';
+import OrderBook from '../../../lib/domain-model/entities/market-records/OrderBook.js';
+import Trade from '../../../lib/domain-model/entities/market-records/Trade.js';
+import Ticker from '../../../lib/domain-model/entities/market-records/Ticker.js';
+import CandleStick from '../../../lib/domain-model/entities/market-records/CandleStick.js';
+import ExchangeRate from '../../../lib/domain-model/entities/market-records/ExchangeRate.js';
 import {
     exchangeData,
     getCollectorsMetaInfos,

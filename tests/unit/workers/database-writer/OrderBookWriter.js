@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import OrderBook from '../../../../lib/domain-model/entities/OrderBook.js';
+import OrderBook from '../../../../lib/domain-model/entities/market-records/OrderBook.js';
 import OrderBookWriter from '../../../../lib/workers/database-writer/OrderBookWriter.js';
 
 let sandbox;

@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import Ticker from '../../../../lib/domain-model/entities/Ticker.js';
+import Ticker from '../../../../lib/domain-model/entities/market-records/Ticker.js';
 import TickerWriter from '../../../../lib/workers/database-writer/TickerWriter.js';
 
 let sandbox;
