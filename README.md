@@ -62,10 +62,10 @@ CCDB supports a diverse range of data types:
   | [<img src="public/images/exchanges/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/) | [Ethereum (ETH)](https://ethereum.org/) |
 
 - 📗 [Architecture Documentation](docs/architecture/overview.md)
+- 📒 [Codebase Structure Docs](docs/codebase/overview.md)
 
 ## Getting Started
 - 🚀 [Quick Start Guide](docs/quick-start.md)
-- 📐 [Structure Information](docs/structure.md)
 
 ## Configuration Guides
 
