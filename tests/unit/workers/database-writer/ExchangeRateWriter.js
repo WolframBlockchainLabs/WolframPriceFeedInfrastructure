@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import ExchangeRate from '../../../../lib/domain-model/entities/ExchangeRate.js';
+import ExchangeRate from '../../../../lib/domain-model/entities/market-records/ExchangeRate.js';
 import ExchangeRateWriter from '../../../../lib/workers/database-writer/ExchangeRateWriter.js';
 
 let sandbox;

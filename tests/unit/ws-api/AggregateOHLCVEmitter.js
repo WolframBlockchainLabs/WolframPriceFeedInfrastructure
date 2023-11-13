@@ -41,7 +41,7 @@ test.beforeEach((t) => {
     };
 
     t.context.aggregateCandleSticks = {
-        execute: sandbox.stub(),
+        run: sandbox.stub(),
     };
 
     t.context.aggregateOHLCVEmitter = new AggregateOHLCVEmitter({
@@ -96,7 +96,7 @@ test('fetchAggregation executes aggregateCandleSticks use-case', async (t) => {
 
     await aggregateOHLCVEmitter.fetchAggregation();
 
-    sinon.assert.calledOnce(aggregateCandleSticks.execute);
+    sinon.assert.calledOnce(aggregateCandleSticks.run);
 
     t.pass();
 });

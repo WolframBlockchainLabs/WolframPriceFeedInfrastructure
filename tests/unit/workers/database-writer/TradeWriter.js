@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import test from 'ava';
 import sinon from 'sinon';
-import Trade from '../../../../lib/domain-model/entities/Trade.js';
+import Trade from '../../../../lib/domain-model/entities/market-records/Trade.js';
 import TradeWriter from '../../../../lib/workers/database-writer/TradeWriter.js';
 
 let sandbox;
