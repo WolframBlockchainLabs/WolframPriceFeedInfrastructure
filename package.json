@@ -42,7 +42,10 @@
         "test:stress:rabbitmq:stop": "docker compose --file './docker/stress-compose.yml' down",
         "test": "npm run test:lint && npm run test:coverage",
         "migration:db": "sequelize db:migrate --migrations-path ./migrations --config lib/configs/systemConfig.cjs --env db",
+        "migration:test": "sequelize db:migrate --migrations-path ./migrations --config lib/configs/systemConfig.cjs --env test-db",
         "migration:rollback:db": "sequelize db:migrate:undo --migrations-path ./migrations --config lib/configs/systemConfig.cjs --env db",
+        "migration:rollback:test": "sequelize db:migrate:undo --migrations-path ./migrations --config lib/configs/systemConfig.cjs --env test-db",
+        "migration:all": "npm run migration:db && npm run migration:test",
         "docker:cli:check-gaps": "docker exec -it ccdb-backend npm run cli:check-gaps --",
         "docker:cli:ccxt-historical-collectors": "docker exec -it ccdb-backend npm run cli:ccxt-historical-collectors --",
         "docker:workers:ccxt-realtime-seeder:start": "docker exec -it ccdb-backend npm run workers:ccxt-realtime-seeder:start",
@@ -58,7 +61,10 @@
         "docker:test:audit": "docker exec -it ccdb-backend npm run test:audit",
         "docker:test:stress:api": "docker exec -it ccdb-backend npm run test:stress:api",
         "docker:migration:db": "docker exec -it ccdb-backend npm run migration:db",
-        "docker:migration:rollback:db": "docker exec -it ccdb-backend npm run migration:rollback:db"
+        "docker:migration:test": "docker exec -it ccdb-backend npm run migration:test",
+        "docker:migration:rollback:db": "docker exec -it ccdb-backend npm run migration:rollback:db",
+        "docker:migration:rollback:test": "docker exec -it ccdb-backend npm run migration:rollback:test",
+        "docker:migration:all": "docker exec -it ccdb-backend npm run migration:all"
     },
     "pre-commit": [
         "test:lint"
