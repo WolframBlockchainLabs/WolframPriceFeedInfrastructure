@@ -1,0 +1,27 @@
+{
+    "testEnvironment": "node",
+    "roots": ["tests-new"],
+    "testMatch": ["**/?(*.)+(spec).js"],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+        "**/use-cases/**",
+        "**/domain-collectors/**",
+        "**/ws-api/**",
+        "**/workers/**",
+        "!**/tests/**",
+        "!**/use-cases/BaseUseCase.js",
+        "!**/use-cases/utils/**",
+        "!**/use-cases/testing/**",
+        "!**/ws-api/*.*",
+        "!**/workers/*.*",
+        "!**/workers/**/*worker.*"
+    ],
+    "coverageThreshold": {
+        "global": {
+            "branches": 80,
+            "functions": 80,
+            "lines": 80,
+            "statements": -10
+        }
+    }
+}
