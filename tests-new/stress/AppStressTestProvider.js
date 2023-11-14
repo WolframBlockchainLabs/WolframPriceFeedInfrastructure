@@ -3,8 +3,8 @@ import ArtilleryRunner from './ArtilleryRunner.cjs';
 import StressTestSeeder from './seeder/StressTestSeeder.js';
 
 class AppStressTestProvider extends AppTestProvider {
-    build() {
-        super.build();
+    constructor(...args) {
+        super(...args);
 
         this.seeder = this.initSeeder(this.logger);
         this.artillery = this.initArtillery(this.logger);

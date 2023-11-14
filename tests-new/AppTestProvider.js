@@ -1,12 +1,14 @@
-import AppProvider from '../lib/AppProvider.js';
-
-class AppTestProvider extends AppProvider {
-    async start() {
-        await super.start(this.config.appTestPort);
+class AppTestProvider {
+    constructor(appProvider) {
+        this.appProvider = appProvider;
     }
 
-    getSequelizeOptions(config) {
-        return config['test-db'];
+    async start() {
+        await this.appProvider.start();
+    }
+
+    async shutdown() {
+        await this.appProvider.shutdown();
     }
 }
 

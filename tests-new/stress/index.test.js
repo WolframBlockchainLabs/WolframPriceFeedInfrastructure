@@ -1,5 +1,7 @@
+import AppProvider from '../../lib/AppProvider.js';
 import AppStressTestProvider from './AppStressTestProvider.js';
 
-const provider = new AppStressTestProvider();
+const appProvider = new AppProvider();
+const stressTestProvider = new AppStressTestProvider(appProvider);
 
-provider.start();
+stressTestProvider.start();
