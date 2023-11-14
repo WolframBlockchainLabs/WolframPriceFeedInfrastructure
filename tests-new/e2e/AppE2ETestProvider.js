@@ -1,61 +1,39 @@
-import initModels from '../../lib/infrastructure/sequelize/initModels.js';
 import AppTestProvider from '../AppTestProvider.js';
 import request from 'supertest';
-import { exec } from 'child_process';
-import util from 'util';
-import { SequelizeStorage, Umzug } from 'umzug';
+import TestDBManager from './TestDBManager.js';
 
 class AppE2ETestProvider extends AppTestProvider {
     constructor(...args) {
         super(...args);
 
         this.request = request(this.getExpressApp());
-        this.execAsync = util.promisify(exec);
+    }
+
+    async start() {
+        await this.testDBManager.start();
+    }
+
+    async shutdown() {
+        await this.testDBManager.close();
+
+        await this.sequelize.close();
     }
 
     build() {
         super.build();
 
-        this.umzug = this.initUmzug(this.sequelize);
+        this.testDBManager = this.initTestDBManager({
+            logger: this.logger,
+            sequelize: this.sequelize,
+        });
     }
 
-    async start() {
-        await this.createWorkerTestDatabase();
-
-        await this.runMigrations();
-    }
-
-    async createWorkerTestDatabase() {
-        if (!process.env.JEST_WORKER_ID) return;
-
-        const { sequelize } = initModels(this.config['test-db']);
-        const databaseName = this.getDatabaseName();
-
-        const dbExists = await sequelize.query(
-            'SELECT 1 FROM pg_database WHERE datname = $databaseName',
-            {
-                bind: { databaseName },
-                type: sequelize.QueryTypes.SELECT,
-            },
-        );
-
-        if (dbExists.length === 0) {
-            await sequelize.query(`CREATE DATABASE "${databaseName}"`);
-        }
-
-        await sequelize.close();
-    }
-
-    async runMigrations() {
-        return this.umzug.up();
-    }
-
-    initUmzug(sequelize) {
-        return new Umzug({
-            migrations: { glob: 'migrations/*.js' },
-            context: sequelize.getQueryInterface(),
-            storage: new SequelizeStorage({ sequelize }),
-            logger: console,
+    initTestDBManager({ logger, sequelize }) {
+        return new TestDBManager({
+            sequelize,
+            logger,
+            testDBConfig: this.config['test-db'],
+            databaseName: this.getDatabaseName(),
         });
     }
 

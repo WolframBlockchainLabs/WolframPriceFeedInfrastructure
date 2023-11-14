@@ -1,4 +1,7 @@
 {
+    "transform": {
+        "^.+\\.[t|j]sx?$": "babel-jest"
+    },
     "testEnvironment": "node",
     "roots": ["tests-new"],
     "testMatch": ["**/?(*.)+(spec).js"],
