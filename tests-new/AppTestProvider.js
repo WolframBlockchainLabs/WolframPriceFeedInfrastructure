@@ -4,11 +4,23 @@ class AppTestProvider {
     }
 
     async start() {
-        await this.appProvider.start();
+        await this.appProvider.start(this.getAppPort());
     }
 
     async shutdown() {
         await this.appProvider.shutdown();
+    }
+
+    getLogger() {
+        return this.appProvider.logger;
+    }
+
+    getConfig() {
+        return this.appProvider.config;
+    }
+
+    getAppPort() {
+        return this.getConfig().appTestPort;
     }
 }
 

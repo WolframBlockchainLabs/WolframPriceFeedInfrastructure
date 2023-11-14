@@ -1,5 +1,6 @@
 {
     "appPort": "{{PORT}}",
+    "appTestPort": 3002,
     "appMode": "{{NODE_ENV}}",
     "mainUrl": "{{MAIN_URL}}",
     "projectName": "{{PROJECT_NAME}}",
@@ -48,16 +49,5 @@
             "OKX"
         ],
         "pairs": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
-    },
-    "test": {
-        "appPort": 3002,
-        "db": {
-            "username": "{{TEST_DB_USERNAME}}",
-            "password": "{{TEST_DB_PASSWORD}}",
-            "database": "{{TEST_DB_DATABASE}}",
-            "dialect": "{{TEST_DB_DIALECT}}",
-            "host": "{{TEST_DB_HOST}}",
-            "port": "{{TEST_DB_PORT}}"
-        }
     }
 }

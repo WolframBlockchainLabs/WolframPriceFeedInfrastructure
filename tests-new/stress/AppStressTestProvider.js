@@ -6,8 +6,8 @@ class AppStressTestProvider extends AppTestProvider {
     constructor(...args) {
         super(...args);
 
-        this.seeder = this.initSeeder(this.logger);
-        this.artillery = this.initArtillery(this.logger);
+        this.seeder = this.initSeeder(this.getLogger());
+        this.artillery = this.initArtillery(this.getLogger());
     }
 
     async start() {
@@ -16,7 +16,7 @@ class AppStressTestProvider extends AppTestProvider {
         await this.seeder.cleanup();
         await this.seeder.execute();
 
-        await this.artillery.execute(this.config.appTestPort);
+        await this.artillery.execute(this.getAppPort());
         await this.shutdown();
     }
 
