@@ -3,7 +3,8 @@
     "parser": "@babel/eslint-parser",
     "env": {
         "node": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "parserOptions": {
         "ecmaVersion": 2020,

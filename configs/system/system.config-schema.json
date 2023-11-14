@@ -17,6 +17,19 @@
             }
         }
     ],
+    "test-db": [
+        "required",
+        {
+            "nested_object": {
+                "username": ["required", "string"],
+                "password": ["required", "string"],
+                "database": ["required", "string"],
+                "dialect": ["required", "string"],
+                "host": ["required", "string"],
+                "port": ["required", "positive_integer"]
+            }
+        }
+    ],
     "rabbitmq": [
         "required",
         {

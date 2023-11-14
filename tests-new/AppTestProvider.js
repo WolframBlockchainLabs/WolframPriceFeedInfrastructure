@@ -1,26 +1,20 @@
-class AppTestProvider {
-    constructor(appProvider) {
-        this.appProvider = appProvider;
-    }
+import AppProvider from '../lib/AppProvider.js';
 
+class AppTestProvider extends AppProvider {
     async start() {
-        await this.appProvider.start(this.getAppPort());
+        await super.start(this.getTestAppPort());
     }
 
-    async shutdown() {
-        await this.appProvider.shutdown();
+    getSequelizeOptions(config) {
+        return config['test-db'];
     }
 
-    getLogger() {
-        return this.appProvider.logger;
+    getExpressApp() {
+        return this.restApp.getExpressServer();
     }
 
-    getConfig() {
-        return this.appProvider.config;
-    }
-
-    getAppPort() {
-        return this.getConfig().appTestPort;
+    getTestAppPort() {
+        return this.config.appTestPort;
     }
 }
 

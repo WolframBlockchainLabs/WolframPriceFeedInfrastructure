@@ -96,6 +96,7 @@
         "sequelize-cli": "^6.6.1",
         "socket.io": "^4.7.1",
         "traverse": "^0.6.7",
+        "umzug": "^3.4.0",
         "winston": "^3.9.0",
         "xrpl": "^2.9.1"
     },
@@ -104,6 +105,7 @@
         "@babel/eslint-parser": "^7.22.5",
         "@babel/plugin-syntax-import-assertions": "^7.22.5",
         "@faker-js/faker": "^8.0.2",
+        "@types/jest": "^29.5.8",
         "artillery": "^2.0.0-37",
         "ava": "^5.3.1",
         "c8": "^8.0.0",

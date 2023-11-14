@@ -3,11 +3,11 @@ import ArtilleryRunner from './ArtilleryRunner.cjs';
 import StressTestSeeder from './seeder/StressTestSeeder.js';
 
 class AppStressTestProvider extends AppTestProvider {
-    constructor(...args) {
-        super(...args);
+    build() {
+        super.build();
 
-        this.seeder = this.initSeeder(this.getLogger());
-        this.artillery = this.initArtillery(this.getLogger());
+        this.seeder = this.initSeeder(this.logger);
+        this.artillery = this.initArtillery(this.logger);
     }
 
     async start() {
@@ -16,7 +16,7 @@ class AppStressTestProvider extends AppTestProvider {
         await this.seeder.cleanup();
         await this.seeder.execute();
 
-        await this.artillery.execute(this.getAppPort());
+        await this.artillery.execute(this.getTestAppPort());
         await this.shutdown();
     }
 
