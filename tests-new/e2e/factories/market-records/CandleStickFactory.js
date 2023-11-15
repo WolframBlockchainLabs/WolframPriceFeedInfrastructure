@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import CandleStick from '../../../lib/domain-model/entities/market-records/CandleStick.js';
-import BaseFactory from './BaseFactory.js';
-import dumpCandleStick from '../../../lib/use-cases/utils/dumps/dumpCandleStick.js';
+import CandleStick from '../../../../lib/domain-model/entities/market-records/CandleStick.js';
+import dumpCandleStick from '../../../../lib/use-cases/utils/dumps/dumpCandleStick.js';
+import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
-class CandleStickFactory extends BaseFactory {
+class CandleStickFactory extends BaseMarketRecordFactory {
     static CANDLE_STICK_ITEMS_COUNT = 5;
 
     static DEFAULT_CHARTS_COUNT = 3;

@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import Trade from '../../../lib/domain-model/entities/market-records/Trade.js';
-import dumpTrade from '../../../lib/use-cases/utils/dumps/dumpTrade.js';
-import BaseFactory from './BaseFactory.js';
+import Trade from '../../../../lib/domain-model/entities/market-records/Trade.js';
+import dumpTrade from '../../../../lib/use-cases/utils/dumps/dumpTrade.js';
+import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
-class TradeFactory extends BaseFactory {
+class TradeFactory extends BaseMarketRecordFactory {
     static TRADE_ITEMS_COUNT = 4;
 
     static DEFAULT_TRADES_COUNT = 3;

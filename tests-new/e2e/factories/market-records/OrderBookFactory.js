@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import BaseFactory from './BaseFactory.js';
-import dumpOrderBook from '../../../lib/use-cases/utils/dumps/dumpOrderBook.js';
-import OrderBook from '../../../lib/domain-model/entities/market-records/OrderBook.js';
+import dumpOrderBook from '../../../../lib/use-cases/utils/dumps/dumpOrderBook.js';
+import OrderBook from '../../../../lib/domain-model/entities/market-records/OrderBook.js';
+import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
-class OrderBookFactory extends BaseFactory {
+class OrderBookFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
     async createExchangeRates({

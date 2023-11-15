@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import ExchangeRate from '../../../lib/domain-model/entities/market-records/ExchangeRate.js';
-import dumpExchangeRate from '../../../lib/use-cases/utils/dumps/dumpExchangeRate.js';
-import BaseFactory from './BaseFactory.js';
+import ExchangeRate from '../../../../lib/domain-model/entities/market-records/ExchangeRate.js';
+import dumpExchangeRate from '../../../../lib/use-cases/utils/dumps/dumpExchangeRate.js';
+import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
-class ExchangeRateFactory extends BaseFactory {
+class ExchangeRateFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
     async createExchangeRates({

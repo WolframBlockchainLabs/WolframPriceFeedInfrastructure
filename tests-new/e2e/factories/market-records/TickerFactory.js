@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import dumpTicker from '../../../lib/use-cases/utils/dumps/dumpTicker.js';
-import BaseFactory from './BaseFactory.js';
-import Ticker from '../../../lib/domain-model/entities/market-records/Ticker.js';
+import dumpTicker from '../../../../lib/use-cases/utils/dumps/dumpTicker.js';
+import Ticker from '../../../../lib/domain-model/entities/market-records/Ticker.js';
+import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
-class TickerFactory extends BaseFactory {
+class TickerFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
     async createExchangeRates({
