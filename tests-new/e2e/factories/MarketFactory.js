@@ -33,10 +33,10 @@ class MarketFactory extends BaseFactory {
         },
         {
             externalMarketId: 'ETHEUR',
-            symbol: 'BTC/EUR',
-            base: 'BTC',
+            symbol: 'ETH/EUR',
+            base: 'ETH',
             quote: 'EUR',
-            baseId: 'BTC',
+            baseId: 'ETH',
             quoteId: 'EUR',
             active: false,
         },

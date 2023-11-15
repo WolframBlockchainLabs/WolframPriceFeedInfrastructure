@@ -6,7 +6,7 @@ import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 class TickerFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createExchangeRates({
+    async createTickers({
         markets = [],
         recordsCount = TickerFactory.DEFAULT_RECORDS_COUNT,
     }) {
@@ -32,6 +32,16 @@ class TickerFactory extends BaseMarketRecordFactory {
         return tickers.map((ticker) => {
             return dumpTicker(ticker);
         });
+    }
+
+    async findTicker(recordId) {
+        const ticker = await Ticker.scope([
+            {
+                method: ['searchById', recordId],
+            },
+        ]).findOne();
+
+        return dumpTicker(ticker);
     }
 
     generateTickerData() {

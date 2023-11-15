@@ -3,6 +3,7 @@
         "^.+\\.[t|j]sx?$": "babel-jest"
     },
     "testEnvironment": "node",
+    "testTimeout": 60000,
     "roots": ["tests-new"],
     "testMatch": ["**/?(*.)+(spec).js"],
     "collectCoverage": true,

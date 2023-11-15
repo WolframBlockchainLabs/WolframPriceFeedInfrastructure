@@ -34,6 +34,16 @@ class ExchangeRateFactory extends BaseMarketRecordFactory {
         });
     }
 
+    async findExchangeRate(recordId) {
+        const exchangeRate = await ExchangeRate.scope([
+            {
+                method: ['searchById', recordId],
+            },
+        ]).findOne();
+
+        return dumpExchangeRate(exchangeRate);
+    }
+
     generateExchangeRateData() {
         return {
             poolASize: faker.number.float(),

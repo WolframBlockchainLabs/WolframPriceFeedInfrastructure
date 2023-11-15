@@ -39,11 +39,21 @@ class CandleStickFactory extends BaseMarketRecordFactory {
         });
     }
 
+    async findCandleStick(recordId) {
+        const candleStick = await CandleStick.scope([
+            {
+                method: ['searchById', recordId],
+            },
+        ]).findOne();
+
+        return dumpCandleStick(candleStick);
+    }
+
     generateCandleStickCharts(
         length = CandleStickFactory.DEFAULT_CHARTS_COUNT,
     ) {
         return Array.from({ length }, () => {
-            Array.from(
+            return Array.from(
                 { length: CandleStickFactory.CANDLE_STICK_ITEMS_COUNT },
                 () => faker.number.float(),
             );

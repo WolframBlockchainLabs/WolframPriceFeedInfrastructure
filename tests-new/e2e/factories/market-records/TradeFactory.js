@@ -10,9 +10,10 @@ class TradeFactory extends BaseMarketRecordFactory {
 
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createExchangeRates({
+    async createTrades({
         markets = [],
         recordsCount = TradeFactory.DEFAULT_RECORDS_COUNT,
+        tradesCount = TradeFactory.DEFAULT_TRADES_COUNT,
     }) {
         const tradePromises = markets.flatMap(({ id: marketId }) => {
             return Array.from({ length: recordsCount }, (_, index) => {
@@ -26,9 +27,7 @@ class TradeFactory extends BaseMarketRecordFactory {
                         TradeFactory.INITIAL_INTERVAL_END,
                         index,
                     ),
-                    tradesInfo: this.generateTradeData(
-                        TradeFactory.DEFAULT_TRADES_COUNT,
-                    ),
+                    tradesInfo: this.generateTradeData(tradesCount),
                 });
             });
         });
@@ -38,6 +37,16 @@ class TradeFactory extends BaseMarketRecordFactory {
         return trades.map((trade) => {
             return dumpTrade(trade);
         });
+    }
+
+    async findTrade(recordId) {
+        const trade = await Trade.scope([
+            {
+                method: ['searchById', recordId],
+            },
+        ]).findOne();
+
+        return dumpTrade(trade);
     }
 
     generateTradeData(length = TradeFactory.DEFAULT_TRADES_COUNT) {

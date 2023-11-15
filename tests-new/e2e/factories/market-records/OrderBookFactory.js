@@ -6,7 +6,7 @@ import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 class OrderBookFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createExchangeRates({
+    async createOrderBooks({
         markets = [],
         recordsCount = OrderBookFactory.DEFAULT_RECORDS_COUNT,
     }) {
@@ -32,6 +32,16 @@ class OrderBookFactory extends BaseMarketRecordFactory {
         return orderBooks.map((orderBook) => {
             return dumpOrderBook(orderBook);
         });
+    }
+
+    async findOrderBook(recordId) {
+        const orderBook = await OrderBook.scope([
+            {
+                method: ['searchById', recordId],
+            },
+        ]).findOne();
+
+        return dumpOrderBook(orderBook);
     }
 
     generateOrderBookData() {
