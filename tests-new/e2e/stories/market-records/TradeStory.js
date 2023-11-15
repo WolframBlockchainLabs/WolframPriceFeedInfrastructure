@@ -1,7 +1,7 @@
 import TradeFactory from '../../factories/market-records/TradeFactory.js';
 import BaseMarketRecordStory from './BaseMarketRecordStory.js';
 
-class TradesStory extends BaseMarketRecordStory {
+class TradeStory extends BaseMarketRecordStory {
     constructor(...args) {
         super(...args);
 
@@ -18,4 +18,4 @@ class TradesStory extends BaseMarketRecordStory {
     }
 }
 
-export default TradesStory;
+export default TradeStory;
