@@ -16,7 +16,7 @@ services:
         entrypoint: 'tail -f /dev/null'
 
     timescale:
-        image: timescale/timescaledb:latest-pg15
+        image: timescale/timescaledb:2.11.1-pg15
         restart: always
         healthcheck:
             test: ['CMD-SHELL', 'pg_isready -d ccdb_test -U postgres']
@@ -24,8 +24,8 @@ services:
             timeout: 5s
             retries: 5
         environment:
-            POSTGRES_MAX_CONNECTIONS: 100
             POSTGRES_DB: ccdb_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
         container_name: ccdb-timescale-test
+        command: ["-c", "max_connections=10000"]
