@@ -28,7 +28,7 @@
 
 1. Run `./scripts/start`;
 2. Run `npm run docker:migration:test`;
-3. Run `npm run docker:test:ava` or `npm run docker:test:coverage` to get report on covered lines and branches.
+3. Run `npm run docker:test:jest` or `npm run docker:test:jest:coverage` to get report on covered lines and branches.
 
 ---
 
