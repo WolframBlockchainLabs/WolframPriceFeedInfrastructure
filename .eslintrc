@@ -15,7 +15,7 @@
         }
     },
     "extends": ["eslint:recommended", "plugin:prettier/recommended"],
-    "plugins": ["import", "ava"],
+    "plugins": ["import"],
     "rules": {
         "import/no-unresolved": 2,
         "import/named": 2,

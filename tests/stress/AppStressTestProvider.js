@@ -16,7 +16,7 @@ class AppStressTestProvider extends AppTestProvider {
         await this.seeder.cleanup();
         await this.seeder.execute();
 
-        await this.artillery.execute(this.config.appTestPort);
+        await this.artillery.execute(this.getTestAppPort());
         await this.shutdown();
     }
 

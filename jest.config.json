@@ -4,9 +4,9 @@
     },
     "testEnvironment": "node",
     "testTimeout": 60000,
-    "roots": ["tests-new"],
+    "roots": ["tests"],
     "moduleNameMapper": {
-        "^@minswap/sdk$": "<rootDir>/tests-new/unit/__mocks__/minswap.js"
+        "^@minswap/sdk$": "<rootDir>/tests/unit/__mocks__/minswap.js"
     },
     "testMatch": ["**/?(*.)+(spec).js"],
     "collectCoverage": true,
