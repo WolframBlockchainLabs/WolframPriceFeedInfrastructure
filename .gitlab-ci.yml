@@ -27,6 +27,11 @@ docker_build_test:
         - docker exec -i $BACKEND_CONTAINER_NAME npm run migration:test
         - docker exec -i $BACKEND_CONTAINER_NAME npm run test
         - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" down
+    only:
+        - main
+        - develop
+        - /^release\/.*$/
+        - tags
 
 docker_build_push:
     stage: push
