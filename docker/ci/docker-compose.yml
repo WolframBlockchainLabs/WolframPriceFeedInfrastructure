@@ -24,6 +24,7 @@ services:
             timeout: 5s
             retries: 5
         environment:
+            POSTGRES_MAX_CONNECTIONS: 100
             POSTGRES_DB: ccdb_test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
