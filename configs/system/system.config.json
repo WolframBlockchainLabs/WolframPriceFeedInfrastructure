@@ -2,6 +2,7 @@
     "appPort": "{{PORT}}",
     "appTestPort": 3002,
     "appMode": "{{NODE_ENV}}",
+    "appTrustProxy": "{{APP_TRUST_PROXY}}",
     "mainUrl": "{{MAIN_URL}}",
     "projectName": "{{PROJECT_NAME}}",
     "db": {

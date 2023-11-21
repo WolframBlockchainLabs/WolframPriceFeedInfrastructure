@@ -1,6 +1,7 @@
 {
     "appPort": ["required", "positive_integer"],
     "appTestPort": ["required", "positive_integer"],
+    "appTrustProxy": ["required", "positive_integer"],
     "projectName": ["required", "string"],
     "appMode": ["required", "string"],
     "mainUrl": ["required", "string"],
