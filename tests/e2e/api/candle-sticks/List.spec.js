@@ -28,12 +28,11 @@ describe('[candle-stick]: List the records', () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
         const { exchangeName, symbol } =
             await candleStickFactory.findCandleStick(candleSticks[0].id);
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${exchangeName}/markets/${encodedSymbol}/candleSticks`,
-            )
+            .get(`/api/v1/crypto/candleSticks`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -46,15 +45,14 @@ describe('[candle-stick]: List the records', () => {
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/candleSticks`,
-            )
+            .get(`/api/v1/crypto/candleSticks`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -69,10 +67,11 @@ describe('[candle-stick]: List the records', () => {
         const { symbol } = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/test/markets/${encodedSymbol}/candleSticks`)
+            .get(`/api/v1/crypto/candleSticks`)
+            .query(`exchangeNames[]=test`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -87,7 +86,9 @@ describe('[candle-stick]: List the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/${exchangeName}/markets/test/candleSticks`)
+            .get(`/api/v1/crypto/candleSticks`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol: 'test' })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -100,15 +101,14 @@ describe('[candle-stick]: List the records', () => {
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/candleSticks`,
-            )
+            .get(`/api/v1/crypto/candleSticks`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -125,15 +125,14 @@ describe('[candle-stick]: List the records', () => {
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/candleSticks`,
-            )
+            .get(`/api/v1/crypto/candleSticks`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);

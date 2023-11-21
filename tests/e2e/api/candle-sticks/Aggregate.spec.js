@@ -31,7 +31,7 @@ describe('[candle-stick]: Aggregate the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/candleSticks/aggregate`)
+            .get(`/api/v1/crypto/candleSticks/aggregate`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalEnd,
@@ -62,7 +62,7 @@ describe('[candle-stick]: Aggregate the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/candleSticks/aggregate`)
+            .get(`/api/v1/crypto/candleSticks/aggregate`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
@@ -86,7 +86,7 @@ describe('[candle-stick]: Aggregate the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/candleSticks/aggregate`)
+            .get(`/api/v1/crypto/candleSticks/aggregate`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,

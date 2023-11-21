@@ -29,12 +29,11 @@ describe('[trades]: List the records', () => {
         const { exchangeName, symbol } = await tradeFactory.findTrade(
             trades[0].id,
         );
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${exchangeName}/markets/${encodedSymbol}/trades`,
-            )
+            .get(`/api/v1/crypto/trades`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -45,15 +44,14 @@ describe('[trades]: List the records', () => {
     it('Should return trades list for specified exchange, pair, and date range', async () => {
         const { trades } = await tradeStory.setupTrades();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/trades`,
-            )
+            .get(`/api/v1/crypto/trades`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -66,10 +64,11 @@ describe('[trades]: List the records', () => {
     it('Should return an empty list if the exchange name is wrong', async () => {
         const { trades } = await tradeStory.setupTrades();
         const { symbol } = await tradeFactory.findTrade(trades[0].id);
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/test/markets/${encodedSymbol}/trades`)
+            .get(`/api/v1/crypto/trades`)
+            .query(`exchangeNames[]=test`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -82,7 +81,9 @@ describe('[trades]: List the records', () => {
         const { exchangeName } = await tradeFactory.findTrade(trades[0].id);
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/${exchangeName}/markets/test/trades`)
+            .get(`/api/v1/crypto/trades`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol: 'test' })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -93,15 +94,14 @@ describe('[trades]: List the records', () => {
     it('Should return an error if the date range is ill-formatted', async () => {
         const { trades } = await tradeStory.setupTrades();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/trades`,
-            )
+            .get(`/api/v1/crypto/trades`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -116,15 +116,14 @@ describe('[trades]: List the records', () => {
     it('Should return an error if the range end date is smaller then range start date', async () => {
         const { trades } = await tradeStory.setupTrades();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/trades`,
-            )
+            .get(`/api/v1/crypto/trades`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);

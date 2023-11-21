@@ -28,12 +28,11 @@ describe('[exchange-rates]: List the records', () => {
         const { exchangeRates } = await exchangeRateStory.setupExchangeRates();
         const { exchangeName, symbol } =
             await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${exchangeName}/markets/${encodedSymbol}/exchangeRates`,
-            )
+            .get(`/api/v1/crypto/exchangeRates`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -46,15 +45,14 @@ describe('[exchange-rates]: List the records', () => {
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
             exchangeRates[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/exchangeRates`,
-            )
+            .get(`/api/v1/crypto/exchangeRates`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -69,12 +67,11 @@ describe('[exchange-rates]: List the records', () => {
         const { symbol } = await exchangeRateFactory.findExchangeRate(
             exchangeRates[0].id,
         );
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/test/markets/${encodedSymbol}/exchangeRates`,
-            )
+            .get(`/api/v1/crypto/exchangeRates`)
+            .query(`exchangeNames[]=test`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -89,7 +86,9 @@ describe('[exchange-rates]: List the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/${exchangeName}/markets/test/exchangeRates`)
+            .get(`/api/v1/crypto/exchangeRates`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol: 'test' })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -102,15 +101,14 @@ describe('[exchange-rates]: List the records', () => {
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
             exchangeRates[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/exchangeRates`,
-            )
+            .get(`/api/v1/crypto/exchangeRates`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -127,15 +125,14 @@ describe('[exchange-rates]: List the records', () => {
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
             exchangeRates[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/exchangeRates`,
-            )
+            .get(`/api/v1/crypto/exchangeRates`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);

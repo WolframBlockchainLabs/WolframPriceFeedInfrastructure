@@ -26,7 +26,7 @@ describe('[exchanges]: List the records', () => {
         const exchanges = await exchangeFactory.createExchanges();
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges`)
+            .get(`/api/v1/crypto/exchanges`)
             .set('Accept', 'application/json')
             .expect(200);
 

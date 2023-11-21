@@ -29,12 +29,11 @@ describe('[order-books]: List the records', () => {
         const { exchangeName, symbol } = await orderBookFactory.findOrderBook(
             orderBooks[0].id,
         );
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${exchangeName}/markets/${encodedSymbol}/orderBooks`,
-            )
+            .get(`/api/v1/crypto/orderBooks`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -47,15 +46,14 @@ describe('[order-books]: List the records', () => {
         const targetCandleStick = await orderBookFactory.findOrderBook(
             orderBooks[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/orderBooks`,
-            )
+            .get(`/api/v1/crypto/orderBooks`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -70,10 +68,11 @@ describe('[order-books]: List the records', () => {
         const { symbol } = await orderBookFactory.findOrderBook(
             orderBooks[0].id,
         );
-        const encodedSymbol = symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/test/markets/${encodedSymbol}/orderBooks`)
+            .get(`/api/v1/crypto/orderBooks`)
+            .query(`exchangeNames[]=test`)
+            .query({ symbol })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -88,7 +87,9 @@ describe('[order-books]: List the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/exchanges/${exchangeName}/markets/test/orderBooks`)
+            .get(`/api/v1/crypto/orderBooks`)
+            .query(`exchangeNames[]=${exchangeName}`)
+            .query({ symbol: 'test' })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -101,15 +102,14 @@ describe('[order-books]: List the records', () => {
         const targetCandleStick = await orderBookFactory.findOrderBook(
             orderBooks[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/orderBooks`,
-            )
+            .get(`/api/v1/crypto/orderBooks`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);
@@ -126,15 +126,14 @@ describe('[order-books]: List the records', () => {
         const targetCandleStick = await orderBookFactory.findOrderBook(
             orderBooks[0].id,
         );
-        const encodedSymbol = targetCandleStick.symbol.replace(/\//g, '_');
 
         const activateResponse = await app.request
-            .get(
-                `/api/v1/exchanges/${targetCandleStick.exchangeName}/markets/${encodedSymbol}/orderBooks`,
-            )
+            .get(`/api/v1/crypto/orderBooks`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
+                symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
             .expect(200);

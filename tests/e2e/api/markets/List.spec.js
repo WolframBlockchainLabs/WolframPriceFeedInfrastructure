@@ -26,7 +26,7 @@ describe('[markets]: List the records', () => {
         const { markets } = await baseMarketRecord.setupMarkets();
 
         const activateResponse = await app.request
-            .get(`/api/v1/markets`)
+            .get(`/api/v1/crypto/markets`)
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -43,7 +43,7 @@ describe('[markets]: List the records', () => {
         );
 
         const activateResponse = await app.request
-            .get(`/api/v1/markets`)
+            .get(`/api/v1/crypto/markets`)
             .query(`exchangeNames[]=${targetExchange.name}`)
             .set('Accept', 'application/json')
             .expect(200);
@@ -61,7 +61,7 @@ describe('[markets]: List the records', () => {
         });
 
         const activateResponse = await app.request
-            .get(`/api/v1/markets`)
+            .get(`/api/v1/crypto/markets`)
             .query(`tokenNames[]=${targetToken}`)
             .set('Accept', 'application/json')
             .expect(200);
