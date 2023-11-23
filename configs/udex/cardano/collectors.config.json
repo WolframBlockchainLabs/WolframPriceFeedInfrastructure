@@ -4,5 +4,5 @@
     "rateLimitMargin": "{{CARDANO_RATE_LIMIT_MARGIN}}",
     "replicaSize": "{{CARDANO_REPLICA_SIZE}}",
     "instancePosition": "{{CARDANO_INSTANCE_POSITION}}",
-    "projectId": "{{CARDANO_BLOCKFROST_PROJECT_ID}}"
+    "apiSecret": "{{CARDANO_BLOCKFROST_PROJECT_ID}}"
 }

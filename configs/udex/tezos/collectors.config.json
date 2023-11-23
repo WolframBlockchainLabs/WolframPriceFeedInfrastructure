@@ -4,5 +4,5 @@
     "rateLimitMargin": "{{TEZOS_RATE_LIMIT_MARGIN}}",
     "replicaSize": "{{TEZOS_REPLICA_SIZE}}",
     "instancePosition": "{{TEZOS_INSTANCE_POSITION}}",
-    "providerUrl": "{{TEZOS_PROVIDER_URL}}"
+    "apiSecret": "{{TEZOS_PROVIDER_URL}}"
 }
