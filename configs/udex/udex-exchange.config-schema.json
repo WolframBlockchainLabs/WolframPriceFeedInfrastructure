@@ -1,0 +1,43 @@
+{
+    "id": ["required", "string"],
+    "name": ["required", "string"],
+    "meta": ["any_object"],
+    "markets": [
+        "required",
+        {
+            "list_of": {
+                "nested_object": {
+                    "pair": [
+                        "required",
+                        {
+                            "nested_object": {
+                                "meta": ["any_object"],
+                                "in": [
+                                    "required",
+                                    {
+                                        "nested_object": {
+                                            "symbol": ["required", "string"],
+                                            "name": ["required", "string"],
+                                            "meta": ["any_object"]
+                                        }
+                                    }
+                                ],
+                                "out": [
+                                    "required",
+                                    {
+                                        "nested_object": {
+                                            "symbol": ["required", "string"],
+                                            "name": ["required", "string"],
+                                            "meta": ["any_object"]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "symbol": ["required", "string"]
+                }
+            }
+        }
+    ]
+}

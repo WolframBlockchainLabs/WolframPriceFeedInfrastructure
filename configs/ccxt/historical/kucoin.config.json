@@ -1,0 +1,6 @@
+{
+    "id": "kucoin",
+    "name": "KuCoin",
+    "rateLimit": 200,
+    "symbols": ["BTC/TUSD", "BTC/USDT", "BTC/DAI", "BTC/USDC", "BTC/EUR"]
+}

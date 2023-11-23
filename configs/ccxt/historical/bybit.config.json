@@ -1,0 +1,6 @@
+{
+    "id": "bybit",
+    "name": "Bybit",
+    "rateLimit": 100,
+    "symbols": ["BTC/USDT", "BTC/USDC", "BTC/DAI", "BTC/BRZ", "BTC/EUR"]
+}

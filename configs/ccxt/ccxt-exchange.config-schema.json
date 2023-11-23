@@ -1,0 +1,8 @@
+{
+    "id": ["required", "string"],
+    "name": ["required", "string"],
+    "apiKey": "string",
+    "apiSecret": "string",
+    "rateLimit": "positive_integer",
+    "symbols": ["required", { "list_of": "string" }]
+}

@@ -1,0 +1,30 @@
+{
+    "id": "vy_finance",
+    "name": "VyFinance",
+    "markets": [
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1zy36dpyufald7764k7st935hjuvmauwa5rdhncyajuen3znwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2sr488jg"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "MILK",
+                    "name": "MuesliSwap MILK",
+                    "meta": {
+                        "address": "8a1cfae21368b8bebbbed9800fec304e95cce39a2a57dc35e2e3ebaa4d494c4b",
+                        "decimals": 0
+                    }
+                }
+            },
+            "symbol": "ADA/MILK"
+        }
+    ]
+}

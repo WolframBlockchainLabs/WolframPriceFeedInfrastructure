@@ -1,0 +1,8 @@
+{
+    "groupName": "Ethereum",
+    "rateLimit": 6000,
+    "rateLimitMargin": "{{ETH_RATE_LIMIT_MARGIN}}",
+    "replicaSize": "{{ETH_REPLICA_SIZE}}",
+    "instancePosition": "{{ETH_INSTANCE_POSITION}}",
+    "providerUrl": "{{ETH_PROVIDER_URL}}"
+}

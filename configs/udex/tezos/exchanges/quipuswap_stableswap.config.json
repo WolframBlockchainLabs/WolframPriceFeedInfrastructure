@@ -1,0 +1,22 @@
+{
+    "id": "quipuswap_stableswap",
+    "name": "QuipuSwap_Stableswap",
+    "markets": [
+        {
+            "pair": {
+                "meta": {
+                    "pool": "KT1AU17piUnQjovVyS8rQwpUxuWLapXnk9x3"
+                },
+                "in": {
+                    "symbol": "kUSD",
+                    "name": "Kolibri USD"
+                },
+                "out": {
+                    "symbol": "USDt",
+                    "name": "Tether USDt"
+                }
+            },
+            "symbol": "kUSD/USDt"
+        }
+    ]
+}

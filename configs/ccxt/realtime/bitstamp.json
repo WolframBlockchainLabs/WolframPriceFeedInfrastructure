@@ -1,0 +1,146 @@
+{
+    "id": "bitstamp",
+    "name": "Bitstamp",
+    "rateLimit": 75,
+    "symbols": [
+        "BTC/USD",
+        "BTC/EUR",
+        "BTC/GBP",
+        "BTC/PAX",
+        "BTC/USDC",
+        "BTC/USDT",
+
+        "ETH/BTC",
+        "ETH/USD",
+        "ETH/EUR",
+        "ETH/GBP",
+        "ETH/PAX",
+        "ETH/USDC",
+        "ETH/USDT",
+
+        "USDT/USD",
+        "USDT/EUR",
+
+        "XRP/USD",
+        "XRP/EUR",
+        "XRP/BTC",
+        "XRP/GBP",
+        "XRP/USDT",
+
+        "USDC/USD",
+        "USDC/EUR",
+        "USDC/USDT",
+
+        "SOL/USD",
+        "SOL/EUR",
+
+        "ADA/USD",
+        "ADA/EUR",
+        "ADA/BTC",
+
+        "DOGE/USD",
+        "DOGE/EUR",
+
+        "LINK/USD",
+        "LINK/EUR",
+        "LINK/GBP",
+        "LINK/BTC",
+
+        "MATIC/USD",
+        "MATIC/EUR",
+
+        "WBTC/BTC",
+
+        "DAI/USD",
+
+        "DOT/USD",
+        "DOT/EUR",
+
+        "LTC/BTC",
+        "LTC/USD",
+        "LTC/EUR",
+        "LTC/GBP",
+
+        "BCH/USD",
+        "BCH/EUR",
+        "BCH/BTC",
+
+        "SHIB/USD",
+        "SHIB/EUR",
+
+        "AVAX/USD",
+        "AVAX/EUR",
+
+        "XLM/BTC",
+        "XLM/USD",
+        "XLM/EUR",
+        "XLM/GBP",
+
+        "UNI/USD",
+        "UNI/EUR",
+        "UNI/BTC",
+
+        "HBAR/USD",
+        "HBAR/EUR",
+
+        "LDO/USD",
+        "LDO/EUR",
+
+        "MKR/USD",
+        "MKR/EUR",
+
+        "NEAR/USD",
+        "NEAR/EUR",
+
+        "AAVE/USD",
+        "AAVE/EUR",
+        "AAVE/BTC",
+
+        "INJ/USD",
+        "INJ/EUR",
+
+        "PAX/USD",
+
+        "GRT/USD",
+        "GRT/EUR",
+
+        "RNDR/USD",
+        "RNDR/EUR",
+
+        "ALGO/USD",
+        "ALGO/EUR",
+        "ALGO/BTC",
+
+        "AXS/USD",
+        "AXS/EUR",
+
+        "SAND/USD",
+        "SAND/EUR",
+
+        "MANA/USD",
+        "MANA/EUR",
+
+        "SNX/USD",
+        "SNX/EUR",
+
+        "CHZ/USD",
+        "CHZ/EUR",
+
+        "APE/USD",
+        "APE/EUR",
+
+        "GALA/USD",
+        "GALA/EUR",
+
+        "DYDX/USD",
+        "DYDX/EUR",
+
+        "CRV/USD",
+        "CRV/EUR",
+
+        "SUI/USD",
+        "SUI/EUR",
+
+        "COMP/USD"
+    ]
+}

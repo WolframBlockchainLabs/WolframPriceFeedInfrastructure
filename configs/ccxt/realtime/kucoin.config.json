@@ -1,0 +1,136 @@
+{
+    "id": "kucoin",
+    "name": "KuCoin",
+    "rateLimit": 200,
+    "symbols": [
+        "BTC/TUSD",
+        "BTC/USDT",
+        "BTC/DAI",
+        "BTC/USDC",
+        "BTC/EUR",
+        "BTC/GBP",
+
+        "ETH/DAI",
+        "ETH/USDT",
+        "ETH/USDC",
+        "ETH/BTC",
+        "ETH/TUSD",
+        "ETH/EUR",
+
+        "USDT/TUSD",
+        "USDT/USDC",
+        "USDT/DAI",
+        "USDT/EUR",
+        "USDT/GBP",
+
+        "BNB/BTC",
+        "BNB/USDT",
+        "BNB/KCS",
+        "BNB/USDC",
+
+        "XRP/TUSD",
+        "XRP/USDC",
+        "XRP/BTC",
+        "XRP/KCS",
+        "XRP/USDT",
+        "XRP/ETH",
+
+        "USDC/USDT",
+
+        "SOL/USDT",
+        "SOL/USDC",
+
+        "CRO/BTC",
+        "CRO/USDT",
+
+        "ADA/BTC",
+        "ADA/USDT",
+        "ADA/USDC",
+        "ADA/KCS",
+
+        "DOGE/USDT",
+        "DOGE/USDC",
+        "DOGE/BTC",
+        "DOGE/KCS",
+
+        "TRX/KCS",
+        "TRX/BTC",
+        "TRX/ETH",
+        "TRX/USDT",
+        "TRX/USDC",
+
+        "TON/USDT",
+
+        "MATIC/USDT",
+        "MATIC/BTC",
+        "MATIC/USDC",
+
+        "LINK/BTC",
+        "LINK/USDT",
+        "LINK/USDC",
+        "LINK/KCS",
+
+        "DOT/USDT",
+        "DOT/BTC",
+        "DOT/KCS",
+        "DOT/USDC",
+
+        "WBTC/BTC",
+        "WBTC/ETH",
+
+        "HBAR/USDT",
+        "HBAR/BTC",
+
+        "LTC/USDT",
+        "LTC/ETH",
+        "LTC/KCS",
+        "LTC/BTC",
+        "LTC/USDC",
+
+        "THETA/USDT",
+
+        "BCH/BTC",
+        "BCH/USDT",
+        "BCH/USDC",
+        "BCH/KCS",
+
+        "SHIB/USDT",
+        "SHIB/DOGE",
+        "SHIB/USDC",
+
+        "IOTA/USDT",
+        "IOTA/BTC",
+
+        "AVAX/USDT",
+        "AVAX/BTC",
+        "AVAX/USDC",
+
+        "XLM/USDT",
+        "XLM/ETH",
+        "XLM/BTC",
+        "XLM/KCS",
+
+        "XMR/BTC",
+        "XMR/ETH",
+        "XMR/USDT",
+
+        "ATOM/BTC",
+        "ATOM/ETH",
+        "ATOM/USDT",
+        "ATOM/KCS",
+        "ATOM/USDC",
+
+        "UNI/USDT",
+        "UNI/KCS",
+
+        "ACA/USDT",
+        "ACA/BTC",
+
+        "ETC/USDT",
+        "ETC/ETH",
+        "ETC/BTC",
+        "ETC/USDC",
+
+        "FIL/USDT"
+    ]
+}

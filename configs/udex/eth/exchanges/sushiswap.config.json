@@ -1,0 +1,72 @@
+{
+    "id": "sushiswap",
+    "name": "SushiSwap",
+    "markets": [
+        {
+            "pair": {
+                "meta": {
+                    "pool": "0x6a091a3406E0073C3CD6340122143009aDac0EDa"
+                },
+                "in": {
+                    "symbol": "ILV",
+                    "name": "Illuvium",
+                    "meta": {
+                        "address": "0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E"
+                    }
+                },
+                "out": {
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether",
+                    "meta": {
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                    }
+                }
+            },
+            "symbol": "ILV/WETH"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "0xCEfF51756c56CeFFCA006cD410B03FFC46dd3a58"
+                },
+                "in": {
+                    "symbol": "WBTC",
+                    "name": "Wrapped BTC",
+                    "meta": {
+                        "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+                    }
+                },
+                "out": {
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether",
+                    "meta": {
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                    }
+                }
+            },
+            "symbol": "WBTC/WETH"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "0x06da0fd433C1A5d7a4faa01111c044910A184553"
+                },
+                "in": {
+                    "symbol": "WETH",
+                    "name": "Wrapped Ether",
+                    "meta": {
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                    }
+                },
+                "out": {
+                    "symbol": "USDT",
+                    "name": "Tether USD",
+                    "meta": {
+                        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+                    }
+                }
+            },
+            "symbol": "WETH/USDT"
+        }
+    ]
+}

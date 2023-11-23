@@ -1,0 +1,6 @@
+{
+    "id": "bitget",
+    "name": "Bitget",
+    "rateLimit": 60,
+    "symbols": ["USDT/EUR", "USDT/GBP", "BTC/EUR", "BTC/USDC", "BTC/USDT"]
+}

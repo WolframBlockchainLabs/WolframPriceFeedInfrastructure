@@ -1,0 +1,30 @@
+{
+    "id": "plenty",
+    "name": "Plenty_DeFi",
+    "markets": [
+        {
+            "pair": {
+                "meta": {
+                    "pool": "KT1X1nkqJDR1UHwbfpcnME5Z7agJLjUQNguB"
+                },
+                "in": {
+                    "symbol": "ctez",
+                    "name": "Ctez",
+                    "meta": {
+                        "address": "KT1SjXiUX63QvdNMcM2m492f7kuf8JxXRLp4",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "kUSD",
+                    "name": "Kolibri USD",
+                    "meta": {
+                        "address": "KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV",
+                        "decimals": 18
+                    }
+                }
+            },
+            "symbol": "ctez/kUSD"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "id": "minswap",
+    "name": "Minswap",
+    "markets": [
+        {
+            "pair": {
+                "meta": {
+                    "pool": "6aa2153e1ae896a95539c9d62f76cedcdabdcdf144e564b8955f609d660cf6a2"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "MIN",
+                    "name": "Minswap",
+                    "meta": {
+                        "address": "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/MIN"
+        }
+    ]
+}

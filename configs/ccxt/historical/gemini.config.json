@@ -1,0 +1,6 @@
+{
+    "id": "gemini",
+    "name": "Gemini",
+    "rateLimit": 1000,
+    "symbols": ["ETH/BTC", "ETH/DAI", "ETH/EUR", "ETH/USD", "ETH/USDT"]
+}

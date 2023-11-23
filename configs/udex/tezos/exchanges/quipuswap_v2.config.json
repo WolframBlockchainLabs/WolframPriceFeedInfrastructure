@@ -1,0 +1,22 @@
+{
+    "id": "quipuswap_v2",
+    "name": "QuipuSwap_v2",
+    "markets": [
+        {
+            "pair": {
+                "meta": {
+                    "pool": 2
+                },
+                "in": {
+                    "symbol": "TEZ",
+                    "name": "Tezos"
+                },
+                "out": {
+                    "symbol": "QUIPU",
+                    "name": "QuipuSwap Governance Token"
+                }
+            },
+            "symbol": "TEZ/QUIPU"
+        }
+    ]
+}

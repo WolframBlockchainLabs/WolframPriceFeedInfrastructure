@@ -1,0 +1,138 @@
+{
+    "id": "bitfinex",
+    "name": "Bitfinex",
+    "rateLimit": 1000,
+    "symbols": [
+        "BTC/USD",
+        "BTC/EUR",
+        "BTC/JPY",
+        "BTC/GBP",
+        "BTC/USDT",
+        "BTC/CNHT",
+        "BTC/EURT",
+        "BTC/XAUT",
+        "BTC/MIM",
+        "BTC/MXNT",
+
+        "USDT/USD",
+        "USDT/CNHT",
+        "USDT/MXNT",
+
+        "ETH/USD",
+        "ETH/BTC",
+        "ETH/EUR",
+        "ETH/JPY",
+        "ETH/GBP",
+        "ETH/USDT",
+        "ETH/EURT",
+        "ETH/XAUT",
+        "ETH/MXNT",
+
+        "XRP/USD",
+        "XRP/BTC",
+        "XRP/USDT",
+
+        "SOL/USD",
+        "SOL/USDT",
+        "SOL/BTC",
+
+        "LINK/USD",
+        "LINK/USDT",
+
+        "LTC/USD",
+        "LTC/BTC",
+        "LTC/USDT",
+
+        "DOGE/USD",
+        "DOGE/USDT",
+        "DOGE/BTC",
+
+        "ADA/USD",
+        "ADA/BTC",
+        "ADA/USDT",
+
+        "UNI/USD",
+        "UNI/USDT",
+
+        "TRX/USD",
+        "TRX/BTC",
+        "TRX/ETH",
+        "TRX/EUR",
+        "TRX/USDT",
+
+        "USDC/USD",
+        "USDC/USDT",
+
+        "IOTA/USD",
+        "IOTA/BTC",
+
+        "APT/USD",
+        "APT/USDT",
+
+        "EOS/USD",
+        "EOS/BTC",
+        "EOS/ETH",
+        "EOS/USDT",
+
+        "FIL/USD",
+        "FIL/USDT",
+
+        "VET/USD",
+        "VET/BTC",
+        "VET/USDT",
+
+        "XRD/USD",
+        "XRD/BTC",
+
+        "DOT/USD",
+        "DOT/USDT",
+        "DOT/BTC",
+
+        "MATIC/USD",
+        "MATIC/BTC",
+        "MATIC/USDT",
+
+        "GALA/USD",
+        "GALA/USDT",
+
+        "XLM/USD",
+        "XLM/BTC",
+        "XLM/USDT",
+
+        "MKR/USD",
+        "MKR/USDT",
+
+        "AAVE/USD",
+        "AAVE/USDT",
+
+        "XTZ/USD",
+        "XTZ/BTC",
+        "XTZ/USDT",
+
+        "AVAX/USD",
+        "AVAX/USDT",
+        "AVAX/BTC",
+
+        "YFI/USD",
+        "YFI/USDT",
+
+        "XMR/USD",
+        "XMR/BTC",
+        "XMR/USDT",
+
+        "ATOM/USD",
+        "ATOM/BTC",
+        "ATOM/USDT",
+
+        "NEO/USD",
+        "NEO/BTC",
+        "NEO/USDT",
+
+        "ALGO/USD",
+        "ALGO/BTC",
+        "ALGO/USDT",
+
+        "DAI/USD",
+        "DAI/BTC"
+    ]
+}

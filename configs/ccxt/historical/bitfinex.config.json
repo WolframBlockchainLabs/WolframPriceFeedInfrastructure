@@ -1,0 +1,6 @@
+{
+    "id": "bitfinex",
+    "name": "Bitfinex",
+    "rateLimit": 1000,
+    "symbols": ["BTC/USD", "BTC/EUR", "BTC/USDT", "BTC/EURT", "BTC/MIM"]
+}

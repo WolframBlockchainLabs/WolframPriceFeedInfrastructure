@@ -1,0 +1,6 @@
+{
+    "id": "bitstamp",
+    "name": "Bitstamp",
+    "rateLimit": 75,
+    "symbols": ["BTC/USD", "BTC/EUR", "BTC/PAX", "BTC/USDC", "BTC/USDT"]
+}
