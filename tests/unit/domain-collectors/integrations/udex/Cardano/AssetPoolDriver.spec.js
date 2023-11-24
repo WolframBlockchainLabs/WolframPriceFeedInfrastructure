@@ -1,4 +1,4 @@
-import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
+import cardanoDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
 import BigNumber from 'bignumber.js';
 
 describe('[domain-collectors/integrations/cardano]: AssetPoolDriver Tests Suite', () => {
@@ -35,8 +35,8 @@ describe('[domain-collectors/integrations/cardano]: AssetPoolDriver Tests Suite'
     const pairQuote = '10';
 
     beforeEach(() => {
-        context.wingRidersDriver = new cardanoDrivers['wing_riders']({
-            projectId: 'test',
+        context.wingRidersDriver = new cardanoDrivers.drivers['wing_riders']({
+            apiSecret: 'test',
         });
     });
 

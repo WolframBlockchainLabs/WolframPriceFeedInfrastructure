@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
-import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
+import cardanoDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
 import BigNumber from 'bignumber.js';
 
 describe('[domain-collectors/integrations/cardano]: MinswapDriver Tests Suite', () => {
@@ -27,8 +26,8 @@ describe('[domain-collectors/integrations/cardano]: MinswapDriver Tests Suite', 
     const pairQuote = '10';
 
     beforeEach(() => {
-        context.minswapDriver = new cardanoDrivers['minswap']({
-            projectId: 'test',
+        context.minswapDriver = new cardanoDrivers.drivers['minswap']({
+            apiSecret: 'test',
         });
     });
 

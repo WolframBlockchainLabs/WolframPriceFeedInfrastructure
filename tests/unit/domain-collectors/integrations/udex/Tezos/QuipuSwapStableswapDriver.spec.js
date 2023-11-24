@@ -1,4 +1,4 @@
-import tezosDrivers from '../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
+import tezosDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
 
 describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Tests Suite', () => {
     const context = {};
@@ -15,9 +15,11 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
     const pairQuote = '10';
 
     beforeEach(() => {
-        context.quipuswapStableswapDriver = new tezosDrivers[
+        context.quipuswapStableswapDriver = new tezosDrivers.drivers[
             'quipuswap_stableswap'
-        ]('test');
+        ]({
+            apiSecret: 'test',
+        });
     });
 
     afterEach(() => {

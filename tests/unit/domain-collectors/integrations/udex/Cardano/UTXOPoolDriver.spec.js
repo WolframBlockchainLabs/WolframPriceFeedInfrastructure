@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
-import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
+import cardanoDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
 
 describe('Muesliswap Driver Tests', () => {
     const context = {};
@@ -41,8 +40,8 @@ describe('Muesliswap Driver Tests', () => {
     const pairQuote = '10';
 
     beforeEach(() => {
-        context.muesliswapDriver = new cardanoDrivers['muesliswap']({
-            projectId: 'test',
+        context.muesliswapDriver = new cardanoDrivers.drivers['muesliswap']({
+            apiSecret: 'test',
         });
     });
 

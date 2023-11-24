@@ -1,6 +1,5 @@
-// eslint-disable-next-line import/no-unresolved
 import BigNumber from 'bignumber.js';
-import BaseCardanoDriver from '../../../../../lib/domain-collectors/integrations/udex/Cardano/BaseCardanoDriver.js';
+import BaseCardanoDriver from '../../../../../../lib/domain-collectors/integrations/udex/Cardano/BaseCardanoDriver.js';
 
 describe('[domain-collectors/integrations/cardano]: BaseCardanoDriver Tests Suite', () => {
     const context = {};
@@ -28,7 +27,7 @@ describe('[domain-collectors/integrations/cardano]: BaseCardanoDriver Tests Suit
 
     beforeEach(() => {
         context.minswapDriver = new BaseCardanoDriver({
-            projectId: 'test',
+            apiSecret: 'test',
         });
     });
 

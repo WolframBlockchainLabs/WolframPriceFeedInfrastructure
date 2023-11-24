@@ -1,4 +1,4 @@
-import tezosDrivers from '../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
+import tezosDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
 
 describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite', () => {
     const context = {};
@@ -20,7 +20,9 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite'
         context.execViewStub = jest
             .fn()
             .mockResolvedValue([{ reserves: lpData }]);
-        context.quipuswapV2Driver = new tezosDrivers['quipuswap_v2']('test');
+        context.quipuswapV2Driver = new tezosDrivers.drivers['quipuswap_v2']({
+            apiSecret: 'test',
+        });
 
         context.quipuswapV2Driver.tezosClient = {
             contract: {

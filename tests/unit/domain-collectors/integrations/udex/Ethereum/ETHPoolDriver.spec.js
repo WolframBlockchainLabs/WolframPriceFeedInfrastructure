@@ -1,4 +1,4 @@
-import ethDrivers from '../../../../../lib/domain-collectors/integrations/udex/Ethereum/index.js';
+import ethDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Ethereum/index.js';
 import { ethers } from 'ethers';
 
 jest.mock('ethers', () => {
@@ -53,7 +53,9 @@ describe('[domain-collectors/integrations/eth]: ETHPoolDriver Tests Suite', () =
 
         ethers.Contract.mockImplementation(() => context.contractStub);
 
-        context.ethPoolDriver = new ethDrivers['uniswap_v2']('test');
+        context.ethPoolDriver = new ethDrivers.drivers['uniswap_v2']({
+            apiSecret: 'test',
+        });
     });
 
     afterEach(() => {

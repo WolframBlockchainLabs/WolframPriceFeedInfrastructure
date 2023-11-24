@@ -1,4 +1,4 @@
-import tezosDrivers from '../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
+import tezosDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
 
 describe('[domain-collectors/integrations/tezos]: PlentyDriver Tests Suite', () => {
     const context = {};
@@ -28,7 +28,9 @@ describe('[domain-collectors/integrations/tezos]: PlentyDriver Tests Suite', () 
     const pairQuote = '10';
 
     beforeEach(() => {
-        context.plentyDriver = new tezosDrivers['plenty']('test');
+        context.plentyDriver = new tezosDrivers.drivers['plenty']({
+            apiSecret: 'test',
+        });
     });
 
     afterEach(() => {
