@@ -16,14 +16,20 @@ describe('[domain-collectors/integrations/eth]: ETHPoolDriver Tests Suite', () =
     const context = {};
 
     const pair = {
-        pool: '0xf07f378bdff2c303f52ee3e83118474e9a15d95e',
+        meta: {
+            pool: '0xf07f378bdff2c303f52ee3e83118474e9a15d95e',
+        },
         in: {
-            address: '0x4f39687328a14dba531fcbd2305724740bb36941',
+            meta: {
+                address: '0x4f39687328a14dba531fcbd2305724740bb36941',
+            },
             symbol: 'WETH',
             name: 'Wrapped Ether',
         },
         out: {
-            address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+            meta: {
+                address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+            },
             symbol: 'USDC',
             name: 'USD//C',
         },
@@ -79,7 +85,7 @@ describe('[domain-collectors/integrations/eth]: ETHPoolDriver Tests Suite', () =
     test('the "getReserves" method should return quantities of tokens in a pool', async () => {
         const pairContract = {
             getReserves: jest.fn(() => tokenData.reserves),
-            token0: jest.fn(() => pair.in.address),
+            token0: jest.fn(() => pair.in.meta.address),
         };
 
         const result = await context.ethPoolDriver.getReserves({
@@ -94,7 +100,7 @@ describe('[domain-collectors/integrations/eth]: ETHPoolDriver Tests Suite', () =
     test('the "getReserves" method should return quantities of tokens in a pool with a correct match of tokens and pools', async () => {
         const pairContract = {
             getReserves: jest.fn(() => tokenData.reserves),
-            token0: jest.fn(() => pair.out.address),
+            token0: jest.fn(() => pair.out.meta.address),
         };
 
         const result = await context.ethPoolDriver.getReserves({

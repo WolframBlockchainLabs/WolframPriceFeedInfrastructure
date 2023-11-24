@@ -4,16 +4,22 @@ describe('[domain-collectors/integrations/tezos]: PlentyDriver Tests Suite', () 
     const context = {};
 
     const pair = {
-        pool: 'KT1X1nkqJDR1UHwbfpcnME5Z7agJLjUQNguB',
+        meta: {
+            pool: 'KT1X1nkqJDR1UHwbfpcnME5Z7agJLjUQNguB',
+        },
         in: {
-            address: 'KT1SjXiUX63QvdNMcM2m492f7kuf8JxXRLp4',
-            decimals: 0,
+            meta: {
+                address: 'KT1SjXiUX63QvdNMcM2m492f7kuf8JxXRLp4',
+                decimals: 0,
+            },
             symbol: 'ctez',
             name: 'Ctez',
         },
         out: {
-            address: 'KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV',
-            decimals: 0,
+            meta: {
+                address: 'KT1K9gCRgaLRFKTErYt1wVxA3Frb9FjasjTV',
+                decimals: 0,
+            },
             symbol: 'kUSD',
             name: 'Kolibri USD',
         },
@@ -74,7 +80,7 @@ describe('[domain-collectors/integrations/tezos]: PlentyDriver Tests Suite', () 
     });
 
     test('the "getTokenPools" method should return pool sizes flipped for flipped addresses', async () => {
-        const flippedData = { ...lpData, token1Address: pair.out.address };
+        const flippedData = { ...lpData, token1Address: pair.out.meta.address };
         const result = await context.plentyDriver.getTokenPools(
             flippedData,
             pair,

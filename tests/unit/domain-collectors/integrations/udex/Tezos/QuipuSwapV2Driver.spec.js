@@ -4,7 +4,9 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite'
     const context = {};
 
     const pair = {
-        id: 2,
+        meta: {
+            id: 2,
+        },
         in: {},
         out: {},
     };
@@ -55,8 +57,8 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite'
     test('the "getReserves" method should take into account decimals if provided', async () => {
         const modifiedPair = {
             ...pair,
-            in: { decimals: 1 },
-            out: { decimals: 1 },
+            in: { meta: { decimals: 1 } },
+            out: { meta: { decimals: 1 } },
         };
 
         const result = await context.quipuswapV2Driver.getExchangeRate(

@@ -4,7 +4,9 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
     const context = {};
 
     const pair = {
-        id: 2,
+        meta: {
+            id: 2,
+        },
     };
 
     const lpData = {

@@ -5,15 +5,21 @@ describe('[domain-collectors/integrations/cardano]: MinswapDriver Tests Suite', 
     const context = {};
 
     const pair = {
-        pool: '6aa2153e1ae896a95539c9d62f76cedcdabdcdf144e564b8955f609d660cf6a2',
+        meta: {
+            pool: '6aa2153e1ae896a95539c9d62f76cedcdabdcdf144e564b8955f609d660cf6a2',
+        },
         in: {
-            address: 'lovelace',
-            decimals: 0,
+            meta: {
+                address: 'lovelace',
+                decimals: 0,
+            },
         },
         out: {
-            address:
-                '29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e',
-            decimals: 0,
+            meta: {
+                address:
+                    '29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e',
+                decimals: 0,
+            },
         },
     };
 
