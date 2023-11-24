@@ -1,4 +1,4 @@
-import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/cardano/index.js';
+import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
 import BigNumber from 'bignumber.js';
 
 describe('[domain-collectors/integrations/cardano]: AssetPoolDriver Tests Suite', () => {

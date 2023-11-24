@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/cardano/index.js';
+import cardanoDrivers from '../../../../../lib/domain-collectors/integrations/udex/Cardano/index.js';
 
 describe('Muesliswap Driver Tests', () => {
     const context = {};

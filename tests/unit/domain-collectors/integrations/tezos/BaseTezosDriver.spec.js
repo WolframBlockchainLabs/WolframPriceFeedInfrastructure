@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import BaseTezosDriver from '../../../../../lib/domain-collectors/integrations/tezos/BaseTezosDriver.js';
+import BaseTezosDriver from '../../../../../lib/domain-collectors/integrations/udex/Tezos/BaseTezosDriver.js';
 
 describe('[domain-collectors/integrations/tezos]: BaseTezosDriver Tests Suite', () => {
     const context = {};
