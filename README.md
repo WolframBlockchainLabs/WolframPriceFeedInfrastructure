@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-[**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**Glossary**](#glossary)
+[**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**Community Contribution Guides**](#community-contribution-guides) · [**Glossary**](#glossary)
 
 ## Introduction
 Welcome to the CCDB Application, a robust and comprehensive data collector designed for seamless integration with various exchanges and blockchain technologies. This document is a gateway to understanding our application, from its core principles and objectives to its technical configurations.
@@ -82,6 +82,18 @@ CCDB supports a diverse range of data types:
 | DEXs | [<img src="public/images/exchanges/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/) | [Tezos Collectors Config](docs/config/udex.md) |
 | DEXs | [<img src="public/images/exchanges/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl.md) |
 
+## Community Contribution Guides
+
+We value contributions from the community and provide the following guides to help you get started with contributing to our project:
+
+- **How to Contribute to CCXT collectors**: If you're looking to get up and running with CCXT collectors contributions, our [CCXT Contribution Guide](docs/guides/ccxt.md) provides the essential information you need.
+
+- **How to Add Markets to XRPL Configurations**: To contribute to the integration of a new market for XRPL, refer to the [XRPL Contribution Guide](docs/guides/xrpl.md) for detailed instructions on the process.
+
+- **UDEX Contribution Guide**: For contributions related to UDEX integrations, adding new DEXs or even blockchains, check out the [UDEX Contribution Guide](docs/guides/udex.md) which outlines the steps and requirements for Blockchain integration contributions.
+
+Each guide is designed to provide you with a clear path to making your contributions meaningful and aligned with our project's structure and standards. Please ensure you follow the guidelines provided for a smooth collaboration process.
+
 ## Glossary
 
 Below is a glossary of terms and abbreviations commonly used in this documentation:
@@ -90,6 +102,7 @@ Below is a glossary of terms and abbreviations commonly used in this documentati
 |--------------|-------------|
 | **API**      | Application Programming Interface, a set of routines, protocols, and tools for building software applications. |
 | **CCXT**     | CryptoCurrency eXchange Trading Library, a JavaScript / Python / PHP library for cryptocurrency trading and e-commerce with support for many bitcoin/ether/altcoin exchange markets and merchant APIs. |
+| **UDEX**     | This platform, designed specifically for this project, enables smooth integration of Decentralized Exchanges (DEXs) operating on a Liquidity Pool (LP) basis across various blockchains. |
 | **CEX**      | Centralized Exchange, a traditional crypto exchange where the company holds the users' funds. |
 | **DEX**      | Decentralized Exchange, a blockchain-based exchange where transactions are peer-to-peer without a central authority. |
 | **CCDB**     | Cryptocurrency Database, our application for collecting and managing crypto data. |
