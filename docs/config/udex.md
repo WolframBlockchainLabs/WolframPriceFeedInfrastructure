@@ -1,6 +1,7 @@
-## cardano-collectors.config
+## udex-collectors.config
 
-### General Settings
+- **groupName**: A name of a group for drivers that are united by a common external dependency e.g. blockchain RPC node.
+  - Example: `Cardano`
 
 - **rateLimit**: The maximum number of requests allowed within a specified time frame.
   - Default: `6000`
@@ -14,22 +15,24 @@
 - **instancePosition**: The position of the current instance within the replica set.
   - Example: `"{{CARDANO_INSTANCE_POSITION}}"`
 
-- **projectId**: The project ID related to the Blockfrost API integration.
+- **apiSecret**: The secret used in any driver to connect to the remote RPC endpoint or API server.
   - Example: `"{{CARDANO_BLOCKFROST_PROJECT_ID}}"`
 
-### Exchange Settings
+- **meta**: An object that contains any additional required data for driver's initialization.
+  - Example: `{ requestTTL: 3000 }`
 
-The configuration contains an array of exchange objects describing the exchanges and the markets available on them. Each exchange object has the following fields:
+## udex-exchange.config
 
 - **id**: Unique identifier for the exchange.
 - **name**: The name of the exchange.
 - **markets**: An array containing market objects available on the exchange. Each market object contains trading pairs and symbols information.
+- **meta**: An object that contains any additional required data.
 
 #### Market Object Structure
 
 Each market object provides information about the available trading pairs on the exchange. Here's a brief description of the properties:
 
-- **pair**: This contains details of the trading pair, including liquidity pool identifier (`pool`) and information about the input (`in`) and output (`out`) tokens. Optionally, it may contain a `poolUtxo` field representing the Unspent Transaction Output (UTXO) identifier for the pool.
+- **pair**: This contains details of the trading pair, including information about the input (`in`) and output (`out`) tokens. Optionally, it may contain a `meta` object that describes exchange-specific field like liquidity pool identifier (`pool`) and `poolUtxo` field representing the Unspent Transaction Output (UTXO) identifier for the pool.
   
 - **symbol**: A representation of the trading pair, generally indicating the trading route, e.g., "ADA/MIN".
 
@@ -37,17 +40,14 @@ Each market object provides information about the available trading pairs on the
 
 The pair object within each market object provides the following fields:
 
-- **pool**: The liquidity pool identifier or address for the trading pair.
-- **poolUtxo** (optional): A specific identifier for UTXO in the liquidity pool.
+- **meta**: An object that contains any additional required data.
 - **in**: Information about the input token, including:
-  - **address**: The contract address or designation for the input token.
-  - **decimals**: The number of decimal places used by the input token.
+  - **meta**: An object that contains any additional required data.
   - **symbol**: The symbol representing the input token.
   - **name**: The name of the input token.
   
 - **out**: Information about the output token, including:
-  - **address**: The contract address or designation for the output token.
-  - **decimals**: The number of decimal places used by the output token.
+  - **meta**: An object that contains any additional required data.
   - **symbol**: The symbol representing the output token.
   - **name**: The name of the output token.
 
@@ -59,4 +59,4 @@ The pair object within each market object provides the following fields:
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+ 🟣 [Back to main doc file](../../../README.md)

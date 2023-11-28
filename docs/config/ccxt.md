@@ -1,7 +1,5 @@
 ## ccxt-collectors.config
 
-### General Settings
-
 - **rateLimit**: The global rate limit for the collectors.
   - Default: `1000`
 
@@ -14,11 +12,7 @@
 - **instancePosition**: The position of this instance in the replica set.
   - Example: `"{{CCXT_INSTANCE_POSITION}}"`
 
-### Exchanges
-
-The configuration contains an array of exchange objects with the following properties:
-
-#### Exchange Object Properties
+## ccxt-exchange.config
 
 - **id**: A unique identifier for the exchange.
 - **name**: The display name of the exchange.
@@ -61,4 +55,4 @@ Please replace the placeholders (e.g., `{{CCXT_RATE_LIMIT_MARGIN}}`) with actual
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+ 🟣 [Back to main doc file](../../../README.md)
