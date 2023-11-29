@@ -39,6 +39,9 @@ describe('RealtimeScheduler Tests', () => {
         context.realtimeScheduler.stopMutex = context.mutexStub;
         context.realtimeScheduler.reloadMutex = context.mutexStub;
         context.realtimeScheduler.updateRTMMutex = context.mutexStub;
+        context.realtimeScheduler.startAssertionMutex = context.mutexStub;
+        context.realtimeScheduler.stopAssertionMutex = context.mutexStub;
+        context.realtimeScheduler.startStopMutex = context.mutexStub;
     });
 
     afterEach(() => {
@@ -76,8 +79,8 @@ describe('RealtimeScheduler Tests', () => {
 
         await context.realtimeScheduler.stop();
 
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
+        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(4);
+        expect(context.mutexStub.release).toHaveBeenCalledTimes(3);
         expect(waitOneCycleSpy).toHaveBeenCalledTimes(1);
         expect(context.realtimeScheduler.cronTask.stop).toHaveBeenCalledTimes(
             1,

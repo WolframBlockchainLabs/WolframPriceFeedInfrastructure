@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-unresolved
+import { RateLimitExceeded } from 'ccxt';
 import CollectorsManager from '../../../lib/domain-collectors/CollectorsManager.js';
 import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
 import Exchange from '../../../lib/domain-model/entities/Exchange.js';
@@ -139,7 +141,9 @@ describe('CollectorsManager Tests', () => {
             context.collectorsManager.backoffPolicy.broadcastRateLimitChange,
         ).not.toHaveBeenCalled();
 
-        mockCollector.start.mockRejectedValue(new Error('Test Error'));
+        mockCollector.start.mockRejectedValue(
+            new RateLimitExceeded('Test Error'),
+        );
         await context.collectorsManager.startCollectorWithDelay(
             mockCollector,
             0,
@@ -151,6 +155,51 @@ describe('CollectorsManager Tests', () => {
         expect(
             context.collectorsManager.backoffPolicy.broadcastRateLimitChange,
         ).toHaveBeenCalledTimes(1);
+    });
+
+    test('the "startCollectorWithDelay" method should not start backoff policy for unknown errors.', async () => {
+        const mockCollector = {
+            start: jest.fn().mockResolvedValue(),
+            getName: jest.fn().mockReturnValue('MockCollector'),
+            setInterval: jest.fn(),
+        };
+
+        jest.spyOn(
+            context.collectorsManager.collectorsScheduler,
+            'getOperationDesync',
+        ).mockReturnValue(1000);
+        jest.spyOn(
+            context.collectorsManager.backoffPolicy,
+            'broadcastRateLimitChange',
+        ).mockResolvedValue();
+
+        await context.collectorsManager.startCollectorWithDelay(
+            mockCollector,
+            0,
+        );
+
+        expect(context.setTimeoutStub).toHaveBeenCalledWith(
+            expect.any(Function),
+            1000,
+        );
+        expect(mockCollector.start).toHaveBeenCalledTimes(1);
+        expect(context.loggerStub.error).not.toHaveBeenCalled();
+        expect(
+            context.collectorsManager.backoffPolicy.broadcastRateLimitChange,
+        ).not.toHaveBeenCalled();
+
+        mockCollector.start.mockRejectedValue(new Error('Test Error'));
+        await context.collectorsManager.startCollectorWithDelay(
+            mockCollector,
+            0,
+        );
+
+        expect(context.setTimeoutStub).toHaveBeenCalledTimes(2);
+        expect(mockCollector.start).toHaveBeenCalledTimes(2);
+        expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
+        expect(
+            context.collectorsManager.backoffPolicy.broadcastRateLimitChange,
+        ).toHaveBeenCalledTimes(0);
     });
 
     test('the "loadMarketContext" method should set the marketId correctly.', async () => {
