@@ -13,6 +13,7 @@
         "BTC/XAUT",
         "BTC/MIM",
         "BTC/MXNT",
+        "BTC/TRY",
 
         "USDT/USD",
         "USDT/CNHT",
@@ -132,7 +133,6 @@
         "ALGO/BTC",
         "ALGO/USDT",
 
-        "DAI/USD",
-        "DAI/BTC"
+        "DAI/USD"
     ]
 }

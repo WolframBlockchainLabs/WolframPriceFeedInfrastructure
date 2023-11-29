@@ -6,6 +6,7 @@
         "USDT/EUR",
         "USDT/GBP",
 
+        "BTC/BRL",
         "BTC/EUR",
         "BTC/GBP",
         "BTC/USDC",
@@ -26,7 +27,6 @@
         "LTC/USDC",
 
         "PEPE/EUR",
-        "PEPE/GBP",
         "PEPE/USDT",
 
         "SOL/GBP",

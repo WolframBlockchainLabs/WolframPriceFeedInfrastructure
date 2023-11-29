@@ -3,6 +3,7 @@
     "name": "OKX",
     "rateLimit": 60,
     "symbols": [
+        "BTC/EUR",
         "BTC/USDT",
         "BTC/USDC",
         "BTC/DAI",
@@ -101,7 +102,6 @@
         "XLM/USDT",
         "XLM/USDC",
         "XLM/BTC",
-        "XLM/ETH",
 
         "XMR/USDT",
         "XMR/USDC",
