@@ -167,6 +167,12 @@ describe('RealtimeScheduler Tests', () => {
         expect(context.setTimeoutStub).toHaveBeenCalledTimes(1);
     });
 
+    test('the "waitBetweenBackoffReload" method timeouts execution for multiplier', async () => {
+        await context.realtimeScheduler.waitBetweenBackoffReload(2);
+
+        expect(context.setTimeoutStub).toHaveBeenCalledTimes(1);
+    });
+
     test('the "initializeScheduler" method calls interval initialization and cron task setup', async () => {
         const calculateIntervalPropertiesSpy = jest
             .spyOn(context.realtimeScheduler, 'calculateIntervalProperties')
