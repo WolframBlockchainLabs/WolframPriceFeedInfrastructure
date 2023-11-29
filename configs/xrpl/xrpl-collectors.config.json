@@ -1,5 +1,5 @@
 {
-    "rateLimit": 200,
+    "rateLimit": 400,
     "rateLimitMargin": "{{XRPL_RATE_LIMIT_MARGIN}}",
     "replicaSize": "{{XRPL_REPLICA_SIZE}}",
     "instancePosition": "{{XRPL_INSTANCE_POSITION}}",
