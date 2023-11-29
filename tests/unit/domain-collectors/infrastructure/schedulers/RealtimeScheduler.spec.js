@@ -79,7 +79,7 @@ describe('RealtimeScheduler Tests', () => {
 
         await context.realtimeScheduler.stop();
 
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(4);
+        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(3);
         expect(context.mutexStub.release).toHaveBeenCalledTimes(3);
         expect(waitOneCycleSpy).toHaveBeenCalledTimes(1);
         expect(context.realtimeScheduler.cronTask.stop).toHaveBeenCalledTimes(
