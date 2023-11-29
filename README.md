@@ -81,7 +81,6 @@ CCDB supports a diverse range of data types:
 | DEXs | [<img src="public/images/exchanges/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/) | [Ethereum Collectors Config](docs/config/udex.md) |
 | DEXs | [<img src="public/images/exchanges/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/) | [Tezos Collectors Config](docs/config/udex.md) |
 | DEXs | [<img src="public/images/exchanges/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl.md) |
-<<<<<<< HEAD
 
 ## Community Contribution Guides
 
@@ -94,8 +93,6 @@ We value contributions from the community and provide the following guides to he
 - **UDEX Contribution Guide**: For contributions related to UDEX integrations, adding new DEXs or even blockchains, check out the [UDEX Contribution Guide](docs/guides/udex.md) which outlines the steps and requirements for Blockchain integration contributions.
 
 Each guide is designed to provide you with a clear path to making your contributions meaningful and aligned with our project's structure and standards. Please ensure you follow the guidelines provided for a smooth collaboration process.
-=======
->>>>>>> 5902131 (feat(docs): update config docs)
 
 ## Glossary
 
