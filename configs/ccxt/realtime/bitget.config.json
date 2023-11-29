@@ -1,7 +1,7 @@
 {
     "id": "bitget",
     "name": "Bitget",
-    "rateLimit": 60,
+    "rateLimit": 100,
     "symbols": [
         "USDT/EUR",
         "USDT/GBP",

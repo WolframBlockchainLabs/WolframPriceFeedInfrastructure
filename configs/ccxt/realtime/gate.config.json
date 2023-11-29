@@ -1,7 +1,7 @@
 {
     "id": "gate",
     "name": "Gate.io",
-    "rateLimit": 50,
+    "rateLimit": 100,
     "symbols": [
         "BTC/SGD",
         "BTC/TRY",

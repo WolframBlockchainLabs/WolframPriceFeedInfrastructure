@@ -1,7 +1,7 @@
 {
     "id": "okx",
     "name": "OKX",
-    "rateLimit": 60,
+    "rateLimit": 120,
     "symbols": [
         "BTC/EUR",
         "BTC/USDT",
