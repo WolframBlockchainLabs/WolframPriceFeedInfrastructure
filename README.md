@@ -74,7 +74,7 @@ CCDB supports a diverse range of data types:
 
 ### CEX & DEX Collectors Configuration
 
-| Type | Logo | Configuration |
+| Type | Service | Configuration |
 |:----:|:----:|:--------------|
 | CEXs | [<img src="public/images/exchanges/ccxt.jpeg" alt="CCXT" height="60"/>](https://docs.ccxt.com/) | [CCXT Collectors Config](docs/config/ccxt-collectors.md) |
 | DEXs | [<img src="public/images/exchanges/cardano.png" alt="Cardano" height="60"/>](https://cardano.org/) | [Cardano Collectors Config](docs/config/cardano-collectors.md) |
