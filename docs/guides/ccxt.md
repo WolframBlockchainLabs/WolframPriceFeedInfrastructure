@@ -4,10 +4,10 @@ Thank you for your interest in contributing to CCXT collectors. This document wi
 
 ## Adding a New Exchange Configuration
 
-If you want to add a new exchange to the CCXT library, follow these steps:
+If you want to add a new exchange to the CCXT collectors, follow these steps:
 
 1. **Fork the Repository**  
-   Start by forking the CCXT repository to your own GitHub account.
+   Start by forking the repository to your own GitHub account.
 
 2. **Create a New Config File**  
    In the `configs/ccxt/realtime` directory of your fork, create a new `.json` file for the exchange.
@@ -34,7 +34,7 @@ If you want to add a new exchange to the CCXT library, follow these steps:
    Commit the new config file to your fork with a descriptive commit message.
 
 5. **Create a Pull Request**  
-   Submit a pull request to the original CCXT repository with your new exchange configuration.
+   Submit a pull request to the original repository with your new exchange configuration.
 
 ## Updating an Existing Exchange Configuration
 
