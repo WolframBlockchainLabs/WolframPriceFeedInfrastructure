@@ -5,7 +5,7 @@
 [**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**Community Contribution Guides**](#community-contribution-guides) · [**Glossary**](#glossary)
 
 ## Introduction
-Welcome to the CCDB Application, a robust and comprehensive data collector designed for seamless integration with various exchanges and blockchain technologies. This document is a gateway to understanding our application, from its core principles and objectives to its technical configurations.
+Welcome to the CCDB* Application, a robust and comprehensive data collector designed for seamless integration with various exchanges and blockchain technologies. This document is a gateway to understanding our application, from its core principles and objectives to its technical configurations. *Note: We don't really have a catchy name for the project yet, so for now, we just call it "CCDB," short for "Cryptocurrency Database."
 
 ## Foundational Principles
 
