@@ -25,7 +25,7 @@
         "workers:ccxt-historical-seeder:start": "node --max-old-space-size=8192 ./lib/workers/ccxt-seeder/historical_worker.js",
         "workers:xrpl-seeder:start": "node --max-old-space-size=8192 ./lib/workers/xrpl-seeder/worker.js",
         "workers:udex-seeder:start": "node --max-old-space-size=8192 ./lib/workers/udex-seeder/worker.js",
-        "workers:collectors-seeder:start": "npm run workers:ccxt-realtime-seeder:start && npm run workers:ccxt-historical-seeder:start && npm run workers:xrpl-seeder:start && npm run workers:eth-seeder:start && npm run workers:tezos-seeder:start && npm run workers:cardano-seeder:start",
+        "workers:collectors-seeder:start": "npm run workers:ccxt-realtime-seeder:start && npm run workers:ccxt-historical-seeder:start && npm run workers:xrpl-seeder:start && workers:udex-seeder:start",
         "workers:markets-refresher:start": "node --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
         "workers:markets-refresher:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
         "workers:database-writer:start": "node --max-old-space-size=8192 ./lib/workers/database-writer/worker.js",
