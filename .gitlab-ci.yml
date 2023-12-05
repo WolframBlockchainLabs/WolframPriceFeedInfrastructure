@@ -30,7 +30,7 @@ docker_build_test:
     only:
         - main
         - develop
-        - /^release\/.*$/
+        - /^release\-.*$/
         - tags
 
 docker_build_push:
@@ -41,5 +41,5 @@ docker_build_push:
     only:
         - main
         - develop
-        - /^release\/.*$/
+        - /^release\-.*$/
         - tags
