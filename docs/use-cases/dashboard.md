@@ -1,5 +1,7 @@
 # **Use Case: Real-Time Streaming Dashboard via Websocket API**
 
+<img src="../../public/images/use-cases/realtime-dashboard.jpg" alt="Realtime Dashboard" height="500"/>
+
 ## Scenario
 
 The objective is to develop a dashboard that displays **up-to-the-minute market data** for selected cryptocurrency pairs, leveraging the power of our WebSocket API for real-time data streaming.
