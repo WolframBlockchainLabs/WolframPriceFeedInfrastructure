@@ -10,11 +10,11 @@ The objective is to develop a dashboard that displays **up-to-the-minute market 
 
 The dashboard will feature real-time updates for the following pairs:
 
-- `ADA-BTC` (Cardano to Bitcoin)
-- `XRP-BTC` (Ripple to Bitcoin)
-- `XTZ-BTC` (Tezos to Bitcoin)
-- `ETH-BTC` (Ethereum to Bitcoin)
-- `BTC-USD` (Bitcoin to US Dollar)
+- `ADA-BTC` (Ada to Bitcoin)
+- `XRP-BTC` (XRP to Bitcoin)
+- `XTZ-BTC` (Tez to Bitcoin)
+- `ETH-BTC` (Ether to Bitcoin)
+- `BTC-USD` (bitcoin to US Dollar)
 
 ## Features
 
