@@ -1,6 +1,6 @@
 # **Use Case: Real-Time Streaming Dashboard via Websocket API**
 
-<img src="../../public/images/use-cases/realtime-dashboard.jpg" alt="Realtime Dashboard" height="500"/>
+<img src="../../public/images/use-cases/realtime-dashboard.png" alt="Realtime Dashboard" height="500"/>
 
 ## Scenario
 
