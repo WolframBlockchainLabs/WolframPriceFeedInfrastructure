@@ -32,6 +32,9 @@ The dashboard will feature real-time updates for the following pairs:
 
 Utilizing web technologies compatible with WebSocket connections, the dashboard will subscribe to our server's feeds for the specified pairs, updating the display in real-time as new data arrives.
 
+## Live Instance
+- 🚀 [Realtime Dashboard](https://207.154.219.83/realtime-dashboard/)
+
 ---
 
  🟣 [Back to main doc file](../../README.md)
