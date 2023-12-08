@@ -1,10 +1,26 @@
 {
-    "appPort": ["required", "positive_integer"],
-    "appTestPort": ["required", "positive_integer"],
-    "appTrustProxy": ["required", "positive_integer"],
     "projectName": ["required", "string"],
-    "appMode": ["required", "string"],
-    "mainUrl": ["required", "string"],
+    "app": [
+        "required",
+        {
+            "nested_object": {
+                "port": ["required", "positive_integer"],
+                "testPort": ["required", "positive_integer"],
+                "mode": ["required", "string"],
+                "trustProxy": ["required", "positive_integer"]
+            }
+        }
+    ],
+    "urls": [
+        "required",
+        {
+            "nested_object": {
+                "self": ["required", "string"],
+                "main": ["required", "string"],
+                "realtimeDashboard": ["required", "string"]
+            }
+        }
+    ],
     "db": [
         "required",
         {
