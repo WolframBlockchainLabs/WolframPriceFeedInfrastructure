@@ -2,16 +2,26 @@
 
 ### General Settings
 
-- **appPort**: The port on which the application will run. 
-  - Example: `"{{PORT}}"`
-- **appTestPort**: The port used for testing. 
-  - Default: `3002`
-- **appMode**: The mode in which the application will run (e.g., development, production). 
-  - Example: `"{{NODE_ENV}}"`
-- **mainUrl**: The main URL of the application. 
-  - Example: `"{{MAIN_URL}}"`
 - **projectName**: The name of the project. 
   - Example: `"{{PROJECT_NAME}}"`
+
+#### App Settings
+
+- **app.port**: The port on which the application will run. 
+  - Example: `"{{PORT}}"`
+- **app.testPort**: The port used for testing. 
+  - Default: `3002`
+- **app.mode**: The mode in which the application will run (e.g., development, production). 
+  - Example: `"{{NODE_ENV}}"`
+
+#### URLs Settings
+
+- **urls.self**: URL of the server. 
+  - Example: `"{{SELF_URL}}"`
+- **urls.main**: The main URL of the application. 
+  - Example: `"{{MAIN_URL}}"`
+- **urls.realtimeDashboard**: URL of the realtime dashboard. 
+  - Example: `"{{REALTIME_DASHBOARD_URL}}"`
 
 ### Database Settings
 

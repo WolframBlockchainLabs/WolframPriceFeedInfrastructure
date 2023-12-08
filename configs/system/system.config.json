@@ -1,10 +1,17 @@
 {
-    "appPort": "{{PORT}}",
-    "appTestPort": 3002,
-    "appMode": "{{NODE_ENV}}",
-    "appTrustProxy": "{{APP_TRUST_PROXY}}",
-    "mainUrl": "{{MAIN_URL}}",
+    
     "projectName": "{{PROJECT_NAME}}",
+    "app": {
+        "port": "{{PORT}}",
+        "testPort": 3002,
+        "mode": "{{NODE_ENV}}",
+        "trustProxy": "{{APP_TRUST_PROXY}}"
+    },
+    "urls": {
+        "self": "{{SELF_URL}}",
+        "main": "{{MAIN_URL}}",
+        "realtimeDashboard": "{{REALTIME_DASHBOARD_URL}}"
+    },
     "db": {
         "username": "{{DB_USERNAME}}",
         "password": "{{DB_PASSWORD}}",

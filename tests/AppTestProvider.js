@@ -14,7 +14,7 @@ class AppTestProvider extends AppProvider {
     }
 
     getTestAppPort() {
-        return this.config.appTestPort;
+        return this.config.app.testPort;
     }
 }
 
