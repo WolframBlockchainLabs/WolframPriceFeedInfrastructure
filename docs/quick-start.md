@@ -45,7 +45,7 @@ Ensure the following before running containers:
         - You wont need to change this, just uncomment services you want to run.
         - Every combination would work: 1 or 2 or 1 and 2.
         - Do not change replica envs defined directly in `./docker/docker-compose.yml` unless you know what you're doing.
-4. **Service Configuration**: uncomment only those services that you've provided envs for in `./docker/env/.env.backend`. Some collectors require API keys for nodes and will not work unless keys were provided. Other services could be launched without keys like: CCXT XRPL, and Tezos based collectos. Ethereum and Cardano will definitely require keys to be passed in envs, becuase degault ones are just stubs and will not work. Look for configuration under `./configs` dir.
+4. **Service Configuration**: uncomment only those services that you've provided envs for in `./docker/env/.env.backend`. Some collectors require API keys for nodes and will not work unless keys were provided. Other services could be launched without keys like: CCXT, XRPL, and Tezos based collectos. Ethereum and Cardano will definitely require keys to be passed in envs, because default ones are just stubs and will not work. Look for configuration under `./configs` dir.
 5. **Rate Limit Caution**: Ensure your API keys meet the rate limits specified in the `./configs` directory for their respective service config.
 6. **Start Containers**: Execute `./scripts/start`.
 
