@@ -1,8 +1,15 @@
+import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
 import ExchangeRate from '../../../../lib/domain-model/entities/market-records/ExchangeRate.js';
 import ExchangeRateWriter from '../../../../lib/workers/database-writer/ExchangeRateWriter.js';
 
 describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
     const context = {};
+
+    const payload = {
+        intervalEnd: 1702287483000,
+        intervalStart: 1702287483000 - MILLISECONDS_IN_A_MINUTE,
+        marketId: 1,
+    };
 
     beforeEach(() => {
         context.amqpChannelStub = {
@@ -49,7 +56,7 @@ describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
         await context.exchangeRateWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.ExchangeRateStub.findOrCreate).toHaveBeenCalledTimes(1);
@@ -64,7 +71,7 @@ describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
         await context.exchangeRateWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.ExchangeRateStub.findOrCreate).toHaveBeenCalledTimes(1);

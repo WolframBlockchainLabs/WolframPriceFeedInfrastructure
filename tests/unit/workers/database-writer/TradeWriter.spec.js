@@ -1,8 +1,15 @@
+import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
 import Trade from '../../../../lib/domain-model/entities/market-records/Trade.js';
 import TradeWriter from '../../../../lib/workers/database-writer/TradeWriter.js';
 
 describe('[database-writer]: TradeWriter Tests Suite', () => {
     const context = {};
+
+    const payload = {
+        intervalEnd: 1702287483000,
+        intervalStart: 1702287483000 - MILLISECONDS_IN_A_MINUTE,
+        marketId: 1,
+    };
 
     beforeEach(() => {
         context.amqpChannelStub = {
@@ -49,7 +56,7 @@ describe('[database-writer]: TradeWriter Tests Suite', () => {
         await context.tradeWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.TradeStub.findOrCreate).toHaveBeenCalledTimes(1);
@@ -61,7 +68,7 @@ describe('[database-writer]: TradeWriter Tests Suite', () => {
         await context.tradeWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.TradeStub.findOrCreate).toHaveBeenCalledTimes(1);
