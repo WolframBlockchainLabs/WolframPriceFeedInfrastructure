@@ -1,35 +1,74 @@
-## Required
+# Project Setup and Management Guide
 
-1. **Node.js®** version not lower than v. 18;
+## Prerequisites
 
-2. **docker-cli (_demon_)** to run docker environment;
+Before setting up the project, ensure the following requirements are met:
 
-## Setup
+- **Node.js®**: Version 18 or higher.
+- **Docker CLI (Daemon)**: Required to run the Docker environment.
 
-1. Make sure the docker daemon is running
+## Initial Setup Instructions
 
-2. In the root directory copy .env.example into .env and change parameters if needed
+Follow these steps to set up the project:
 
-3. From the ./docker/env/_example directory copy .env.*example* files into ./docker/env/ and change parameters if needed
+1. **Docker Daemon**: Verify that the Docker daemon is active.
+2. **Environment Variables**: 
+    - Copy `.env.example` from the root directory to `.env`.
+    - Modify parameters as necessary. 
+    - This file includes variables for Docker Compose configuration such as:
+        - `PROJECT_NAME` : project name for compose to manage containers,
+        - `BE_REGISTRY_ADDRESS` : address of containers registry that will be used for building and pushing,
+        - `BE_TAG` : tag for the image that will be used for building and pushing.
+3. **Additional Configuration**:
+   - Copy `.env._example_` files from `./docker/env/_example` to `./docker/env/`.
+   - Adjust parameters as needed.
+   - For more details, refer to [Configuration Guides](../README.md#configuration-guides).
+4. **Build Container Images**: Execute `./scripts/build`.
+5. **Start Containers**: Execute `./scripts/start`.
+6. **Database Migration**: Run `npm run docker:migration:db` to set up necessary database entities.
+7. **Seed Database**: 
+   - Use `npm run docker:workers:collectors-seeder:start` to populate the database with preconfigured exchanges (e.g., Binance, Kraken, Gemini).
+   - Refer to collectors config for the full list exchanges and markets.
 
-4. Run `./scripts/build` to build container images
+## Running Containers
 
-5. Run `./scripts/start` to start containers
+Ensure the following before running containers:
 
-6. Run `npm run docker:migration:db` which will create the necessary entities in the database;
+1. **Setup Completion**: Complete the setup guide, otherwise collectors will fail to launch.
+2. **Stopping Containers**: If containers are active, stop them before proceeding.
+3. **Local Launch**:
+    - Uncomment necessary services in `./docker/docker-compose.yml`.
+    - Don't forget to follow YAML indentation rules.
+    - There you can find a bunch of commented services with a common root in names: `collectors`. Services for collectors are named like `ccxt-collectors-1`, `eth-collectors-1`, etc.
+    - The postfix number in container name indicates its order in the replica set. Learn about replica sets in [Fault Tolerance](./architecture/fault_tolerance.md).
+    - `*_INSTANCE_POSITION` and `*_REPLICA_SIZE` are envs that tell to containers information about configured replica.
+        - You wont need to change this, just uncomment services you want to run.
+        - Every combination would work: 1 or 2 or 1 and 2.
+        - Do not change replica envs defined directly in `./docker/docker-compose.yml` unless you know what you're doing.
+4. **Service Configuration**: uncomment only those services that you've provided envs for in `./docker/env/.env.backend`. Some collectors require API keys for nodes and will not work unless keys were provided. Other services could be launched without keys like: CCXT, XRPL, and Tezos based collectos. Ethereum and Cardano will definitely require keys to be passed in envs, because default ones are just stubs and will not work. Look for configuration under `./configs` dir.
+5. **Rate Limit Caution**: Ensure your API keys meet the rate limits specified in the `./configs` directory for their respective service config.
+6. **Start Containers**: Execute `./scripts/start`.
 
-7. After running migrations, use `npm run docker:workers:collectors-seeder:start` which will create preconfigured exchanges in the database (_Binance, Kraken, Gemini, Kucoin and Bitfinex_) and others depending on collectors config;
+## Rollback Database
 
-8. To rollback migrations use `npm run docker:migration:rollback:db`;
+To rollback the database:
 
-9. To stop the service use `./scripts/stop` command.
+1. Use `npm run docker:migration:rollback:db`.
+2. Note: This will destroy all data and tables. Migrations and seeders will need to be rerun.
 
-## Testing
+# Stopping the Project
 
-1. Run `./scripts/start`;
-2. Run `npm run docker:migration:test`;
-3. Run `npm run docker:test:jest` or `npm run docker:test:jest:coverage` to get report on covered lines and branches.
+To stop the project:
+
+1. **Attached Mode**: Containers running in attached mode can be stopped with Ctrl + C.
+2. **Detached Mode**: Use `./scripts/stop` (or from another terminal for Attached mode) to stop services.
+
+## Testing Procedures
+
+1. Start services with `./scripts/start`.
+2. Run database migration tests with `npm run docker:migration:test`.
+3. Execute tests using `npm run docker:test:jest` or `npm run docker:test:jest:coverage` for coverage reports.
 
 ---
 
- 🟣 [Back to main doc file](../README.md)
+🟣 [Back to main documentation](../README.md)

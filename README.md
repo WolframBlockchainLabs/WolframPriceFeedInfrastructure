@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-[**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Use Cases**](#use-cases) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**Community Contribution Guides**](#community-contribution-guides) · [**Glossary**](#glossary)
+[**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Use Cases**](#use-cases) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**API Reference**](#api-reference) · [**Community Contribution Guides**](#community-contribution-guides) · [**Glossary**](#glossary)
 
 ## Introduction
 Welcome to the CCDB* Application, a robust and comprehensive data collector designed for seamless integration with various exchanges and blockchain technologies. This document is a gateway to understanding our application, from its core principles and objectives to its technical configurations. *Note: We don't really have a catchy name for the project yet, so for now, we just call it "CCDB," short for "Cryptocurrency Database."
@@ -88,15 +88,22 @@ CCDB supports a diverse range of data types:
 | DEXs | [<img src="public/images/exchanges/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/) | [Tezos Collectors Config](docs/config/udex.md) |
 | DEXs | [<img src="public/images/exchanges/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl.md) |
 
+## API Reference
+
+This section outlines the available API endpoints our service offers. We support two primary communication methods:
+
+1. [WebSocket API DOCS](docs/api/ws.md): Utilized for real-time data updates. 
+2. [REST API DOCS](docs/api/rest.md): Offers flexibility with adjustable parameters for retrieving and aggregating realtime and historical data.
+
 ## Community Contribution Guides
 
 We value contributions from the community and provide the following guides to help you get started with contributing to our project:
 
-- **How to Contribute to CCXT collectors**: If you're looking to get up and running with CCXT collectors contributions, our [CCXT Contribution Guide](docs/guides/ccxt.md) provides the essential information you need.
+- **How to Contribute to CCXT collectors**: If you're looking to get up and running with CCXT collectors contributions, our [CCXT Contribution Guide](docs/community-contribution-guides/ccxt.md) provides the essential information you need.
 
-- **How to Add Markets to XRPL Configurations**: To contribute to the integration of a new market for XRPL, refer to the [XRPL Contribution Guide](docs/guides/xrpl.md) for detailed instructions on the process.
+- **How to Add Markets to XRPL Configurations**: To contribute to the integration of a new market for XRPL, refer to the [XRPL Contribution Guide](docs/community-contribution-guides/xrpl.md) for detailed instructions on the process.
 
-- **UDEX Contribution Guide**: For contributions related to UDEX integrations, adding new DEXs or even blockchains, check out the [UDEX Contribution Guide](docs/guides/udex.md) which outlines the steps and requirements for Blockchain integration contributions.
+- **UDEX Contribution Guide**: For contributions related to UDEX integrations, adding new DEXs or even blockchains, check out the [UDEX Contribution Guide](docs/community-contribution-guides/udex.md) which outlines the steps and requirements for Blockchain integration contributions.
 
 Each guide is designed to provide you with a clear path to making your contributions meaningful and aligned with our project's structure and standards. Please ensure you follow the guidelines provided for a smooth collaboration process.
 
