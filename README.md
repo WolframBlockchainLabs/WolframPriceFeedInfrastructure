@@ -92,11 +92,11 @@ CCDB supports a diverse range of data types:
 
 We value contributions from the community and provide the following guides to help you get started with contributing to our project:
 
-- **How to Contribute to CCXT collectors**: If you're looking to get up and running with CCXT collectors contributions, our [CCXT Contribution Guide](docs/guides/ccxt.md) provides the essential information you need.
+- **How to Contribute to CCXT collectors**: If you're looking to get up and running with CCXT collectors contributions, our [CCXT Contribution Guide](docs/community-contribution-guides/ccxt.md) provides the essential information you need.
 
-- **How to Add Markets to XRPL Configurations**: To contribute to the integration of a new market for XRPL, refer to the [XRPL Contribution Guide](docs/guides/xrpl.md) for detailed instructions on the process.
+- **How to Add Markets to XRPL Configurations**: To contribute to the integration of a new market for XRPL, refer to the [XRPL Contribution Guide](docs/community-contribution-guides/xrpl.md) for detailed instructions on the process.
 
-- **UDEX Contribution Guide**: For contributions related to UDEX integrations, adding new DEXs or even blockchains, check out the [UDEX Contribution Guide](docs/guides/udex.md) which outlines the steps and requirements for Blockchain integration contributions.
+- **UDEX Contribution Guide**: For contributions related to UDEX integrations, adding new DEXs or even blockchains, check out the [UDEX Contribution Guide](docs/community-contribution-guides/udex.md) which outlines the steps and requirements for Blockchain integration contributions.
 
 Each guide is designed to provide you with a clear path to making your contributions meaningful and aligned with our project's structure and standards. Please ensure you follow the guidelines provided for a smooth collaboration process.
 
