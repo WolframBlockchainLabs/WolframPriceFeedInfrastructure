@@ -1,8 +1,15 @@
+import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
 import OrderBook from '../../../../lib/domain-model/entities/market-records/OrderBook.js';
 import OrderBookWriter from '../../../../lib/workers/database-writer/OrderBookWriter.js';
 
 describe('[database-writer]: OrderBookWriter Tests Suite', () => {
     const context = {};
+
+    const payload = {
+        intervalEnd: 1702287483000,
+        intervalStart: 1702287483000 - MILLISECONDS_IN_A_MINUTE,
+        marketId: 1,
+    };
 
     beforeEach(() => {
         context.amqpChannelStub = {
@@ -49,7 +56,7 @@ describe('[database-writer]: OrderBookWriter Tests Suite', () => {
         await context.orderBookWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.OrderBookStub.findOrCreate).toHaveBeenCalledTimes(1);
@@ -64,7 +71,7 @@ describe('[database-writer]: OrderBookWriter Tests Suite', () => {
         await context.orderBookWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.OrderBookStub.findOrCreate).toHaveBeenCalledTimes(1);

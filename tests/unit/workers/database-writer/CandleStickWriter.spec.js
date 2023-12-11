@@ -1,8 +1,15 @@
 import CandleStickWriter from '../../../../lib/workers/database-writer/CandleStickWriter.js';
 import CandleStick from '../../../../lib/domain-model/entities/market-records/CandleStick.js';
+import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
 
 describe('[database-writer]: CandleStickWriter Tests Suite', () => {
     const context = {};
+
+    const payload = {
+        intervalEnd: 1702287483000,
+        intervalStart: 1702287483000 - MILLISECONDS_IN_A_MINUTE,
+        marketId: 1,
+    };
 
     beforeEach(() => {
         context.amqpChannelStub = {
@@ -49,7 +56,7 @@ describe('[database-writer]: CandleStickWriter Tests Suite', () => {
         await context.candleStickWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.CandleStickStub.findOrCreate).toHaveBeenCalledTimes(1);
@@ -64,7 +71,7 @@ describe('[database-writer]: CandleStickWriter Tests Suite', () => {
         await context.candleStickWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
-            payload: {},
+            payload,
         });
 
         expect(context.CandleStickStub.findOrCreate).toHaveBeenCalledTimes(1);
