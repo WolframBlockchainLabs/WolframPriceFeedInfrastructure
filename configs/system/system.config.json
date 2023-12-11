@@ -47,8 +47,9 @@
         "marketsRefresher": "{{MARKETS_REFRESHER_INTERVAL}}"
     },
     "amqpWorker": {
-        "retryLimit": 12,
-        "retryPeriodMs": 3600000
+        "retryLimit": "{{AMQP_WORKER_RETRY_LIMIT}}",
+        "retryPeriodMs": "{{AMQP_WORKER_RETRY_PERIOD_MS}}",
+        "prefetchCount": "{{AMQP_WORKER_PREFETCH_COUNT}}"
     },
     "aggregateOHLCVEmitter": {
         "interval": "{{AGGREGATE_OHLCV_EMITTER_INTERVAL}}",
