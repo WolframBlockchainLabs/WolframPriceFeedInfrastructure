@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-[**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Use Cases**](#use-cases) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**Community Contribution Guides**](#community-contribution-guides) · [**Glossary**](#glossary)
+[**Introduction**](#introduction) · [**Principles**](#foundational-principles) · [**Objectives**](#objectives) · [**Features**](#features) · [**Use Cases**](#use-cases) · [**Data Types**](#supported-data-types) · [**Data Retrieval**](#data-retrieval) · [**Architecture**](#architecture) · [**Getting Started**](#getting-started) · [**Config Guides**](#configuration-guides) · [**API Reference**](#api-reference) · [**Community Contribution Guides**](#community-contribution-guides) · [**Glossary**](#glossary)
 
 ## Introduction
 Welcome to the CCDB* Application, a robust and comprehensive data collector designed for seamless integration with various exchanges and blockchain technologies. This document is a gateway to understanding our application, from its core principles and objectives to its technical configurations. *Note: We don't really have a catchy name for the project yet, so for now, we just call it "CCDB," short for "Cryptocurrency Database."
@@ -87,6 +87,13 @@ CCDB supports a diverse range of data types:
 | DEXs | [<img src="public/images/exchanges/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/) | [Ethereum Collectors Config](docs/config/udex.md) |
 | DEXs | [<img src="public/images/exchanges/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/) | [Tezos Collectors Config](docs/config/udex.md) |
 | DEXs | [<img src="public/images/exchanges/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl.md) |
+
+## API Reference
+
+This section outlines the available API endpoints our service offers. We support two primary communication methods:
+
+1. [WebSocket API DOCS](docs/api/ws.md): Utilized for real-time data updates. 
+2. [REST API DOCS](docs/api/rest.md): Offers flexibility with adjustable parameters for retrieving and aggregating realtime and historical data.
 
 ## Community Contribution Guides
 
