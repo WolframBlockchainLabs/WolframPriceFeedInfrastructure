@@ -6,16 +6,16 @@
 2. [Markets](#markets)
    - [Get List of Markets](#get-list-of-markets)
 3. [CandleStick](#candlestick)
-   - [Get all Market's candleSticks by MarketId](#get-all-markets-candlesticks-by-marketid)
-   - [Get aggregate Market candleStick by MarketId](#get-aggregate-market-candlestick-by-marketid)
+   - [Get List of Market's candleSticks](#get-list-of-markets-candlesticks)
+   - [Get aggregate Market candleStick](#get-aggregate-market-candlestick)
 4. [Exchange Rate](#exchange-rate)
-   - [Get Market's exchangeRates by marketId](#get-markets-exchangerates-by-marketid)
+   - [Get List of Market's exchangeRates](#get-list-of-markets-exchangerates)
 5. [Order Book](#order-book)
-   - [Get Market's orderBooks by marketId](#get-markets-orderbooks-by-marketid)
+   - [Get List of Market's orderBooks](#get-list-of-markets-orderbooks)
 6. [Ticker](#ticker)
-   - [Get all Market's tickers by MarketId](#get-all-markets-tickers-by-marketid)
+   - [Get List of Market's tickers](#get-list-of-markets-tickers)
 7. [Trades](#trades)
-   - [Get all Market's trades by MarketId](#get-all-markets-trades-by-marketid)
+   - [Get List of Market's trades](#get-list-of-markets-trades)
 
 ## Exchange
 
@@ -174,7 +174,7 @@
 
 ## CandleStick
 
-### Get all Market's candleSticks by MarketId
+### Get List of Market's candleSticks
 - **Method**: GET
 - **Endpoint**: `/api/v1/crypto/candleSticks`
 - **Parameters**:
@@ -292,7 +292,7 @@
 }
 ```
 
-### Get aggregate Market candleStick by MarketId
+### Get aggregate Market candleStick
 - **Method**: GET
 - **Endpoint**: `/api/v1/crypto/candleSticks/aggregate`
 - **Parameters**:
@@ -338,7 +338,7 @@
 
 
 ## Exchange Rate
-### Get Market's exchangeRates by marketId
+### Get List of Market's exchangeRates
 - **Method**: GET
 - **Endpoint**: `/api/v1/crypto/exchangeRates`
 - **Parameters**:
@@ -424,7 +424,7 @@
 
 
 ## Order Book
-### Get Market's orderBooks by marketId
+### Get List of Market's orderBooks
 - **Method**: GET
 - **Endpoint**: `/api/v1/crypto/orderBooks`
 - **Parameters**:
@@ -524,7 +524,7 @@
 
 
 ## Ticker
-### Get all Market's tickers by MarketId
+### Get List of Market's tickers
 - **Method**: GET
 - **Endpoint**: `/api/v1/crypto/tickers`
 - **Parameters**:
@@ -675,7 +675,7 @@
 
 
 ## Trades
-### Get all Market's trades by MarketId
+### Get List of Market's trades
 - **Method**: GET
 - **Endpoint**: `/api/v1/crypto/trades`
 - **Parameters**:
