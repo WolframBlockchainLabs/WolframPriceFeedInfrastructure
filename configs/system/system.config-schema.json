@@ -91,10 +91,7 @@
             "nested_object": {
                 "retryLimit": ["required", "positive_integer"],
                 "retryPeriodMs": ["required", "positive_integer"],
-                "prefetchCount": [
-                    "required",
-                    { "or": ["boolean", "positive_integer"] }
-                ]
+                "prefetchCount": ["required", "integer"]
             }
         }
     ],
