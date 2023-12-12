@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-unresolved
-import { RateLimitExceeded } from 'ccxt';
 import CollectorsManager from '../../../lib/domain-collectors/CollectorsManager.js';
 import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
 import Exchange from '../../../lib/domain-model/entities/Exchange.js';
 import Market from '../../../lib/domain-model/entities/Market.js';
+import RateLimitExceeded from '../../../lib/domain-model/exceptions/RateLimitExceeded.js';
 
 describe('CollectorsManager Tests', () => {
     const schedulerOptions = {
@@ -141,9 +140,7 @@ describe('CollectorsManager Tests', () => {
             context.collectorsManager.backoffPolicy.broadcastRateLimitChange,
         ).not.toHaveBeenCalled();
 
-        mockCollector.start.mockRejectedValue(
-            new RateLimitExceeded('Test Error'),
-        );
+        mockCollector.start.mockRejectedValue(new RateLimitExceeded());
         await context.collectorsManager.startCollectorWithDelay(
             mockCollector,
             0,
