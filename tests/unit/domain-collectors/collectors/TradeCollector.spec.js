@@ -6,6 +6,12 @@ describe('[domain-collectors/collectors]: TradeCollector Tests Suite', () => {
     const symbol = 'BTC/USDT';
     const marketId = faker.number.int();
 
+    const collectorMeta = {
+        intervalStart: 1702384093936,
+        intervalEnd: 1702384693936,
+        collectorTraceId: '6771447a',
+    };
+
     const fetchTradeStubResult = [
         {
             side: 'sell',
@@ -48,28 +54,24 @@ describe('[domain-collectors/collectors]: TradeCollector Tests Suite', () => {
     });
 
     test('fetch data should return existing trade info', async () => {
-        const result = await context.tradeCollector.fetchData();
+        const result = await context.tradeCollector.fetchData(collectorMeta);
 
         expect(result).toEqual(fetchTradeStubResult);
         expect(context.exchangeAPIStub.fetchTrades).toHaveBeenCalledTimes(1);
     });
 
     test('save data should call publish method', async () => {
-        context.tradeCollector.setInterval({
-            intervalStart: 1684141361269,
-            intervalEnd: 1684141361469,
-        });
+        await context.tradeCollector.saveData(
+            fetchTradeStubResult,
+            collectorMeta,
+        );
 
-        await context.tradeCollector.saveData(fetchTradeStubResult);
-
-        context.tradeCollector.setInterval({
-            intervalStart: null,
-            intervalEnd: null,
-        });
-
-        expect(context.tradeCollector.publish).toHaveBeenCalledWith({
-            tradesInfo: fetchedDataMap,
-        });
+        expect(context.tradeCollector.publish).toHaveBeenCalledWith(
+            {
+                tradesInfo: fetchedDataMap,
+            },
+            collectorMeta,
+        );
     });
 
     test('calls logger if fetch fails', async () => {
@@ -77,7 +79,9 @@ describe('[domain-collectors/collectors]: TradeCollector Tests Suite', () => {
             new Error('Test Error'),
         );
 
-        await expect(() => context.tradeCollector.start()).rejects.toThrow();
+        await expect(() =>
+            context.tradeCollector.start(collectorMeta),
+        ).rejects.toThrow();
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 });

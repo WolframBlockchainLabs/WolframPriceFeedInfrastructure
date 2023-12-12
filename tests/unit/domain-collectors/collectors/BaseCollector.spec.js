@@ -7,6 +7,12 @@ describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
     const symbol = 'BTC/USDT';
     const marketId = faker.number.int();
 
+    const collectorMeta = {
+        intervalStart: 1702384093936,
+        intervalEnd: 1702384693936,
+        collectorTraceId: '6771447a',
+    };
+
     const fetchOrderBookStubResult = {
         symbol,
         bids: [[faker.number.float()]],
@@ -50,7 +56,7 @@ describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
         );
         jest.spyOn(context.collector, 'saveData').mockResolvedValue();
 
-        await context.collector.start();
+        await context.collector.start(collectorMeta);
 
         expect(context.collector.fetchData).toHaveBeenCalledTimes(1);
         expect(context.collector.saveData).toHaveBeenCalledTimes(1);
@@ -62,7 +68,7 @@ describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
         );
 
         try {
-            await context.collector.start();
+            await context.collector.start(collectorMeta);
             expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
         } catch (error) {
             expect(context.collector.fetchData).toHaveBeenCalledTimes(1);
@@ -70,7 +76,7 @@ describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
     });
 
     test('publish method encapsulates amqpClient', async () => {
-        await context.collector.publish();
+        await context.collector.publish({}, collectorMeta);
 
         expect(context.amqpClientStub.publish).toHaveBeenCalledTimes(1);
     });
@@ -79,21 +85,5 @@ describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
         await context.collector.initAMQPConnection();
 
         expect(context.amqpChannelStub.assertQueue).toHaveBeenCalledTimes(1);
-    });
-
-    test('setInterval sets interval boundaries to the context', async () => {
-        const intervalBoundaries = {
-            intervalStart: Date.now(),
-            intervalEnd: Date.now(),
-        };
-
-        await context.collector.setInterval(intervalBoundaries);
-
-        expect(context.collector.intervalStart).toEqual(
-            intervalBoundaries.intervalStart,
-        );
-        expect(context.collector.intervalEnd).toEqual(
-            intervalBoundaries.intervalEnd,
-        );
     });
 });

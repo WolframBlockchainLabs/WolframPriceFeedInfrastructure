@@ -6,6 +6,12 @@ describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', ()
     const symbol = 'BTC/USDT';
     const marketId = faker.number.int();
 
+    const collectorMeta = {
+        intervalStart: 1702384093936,
+        intervalEnd: 1702384693936,
+        collectorTraceId: '6771447a',
+    };
+
     const getExchangeRateStubResult = {
         poolASize: faker.number.float(),
         poolBSize: faker.number.float(),
@@ -44,7 +50,10 @@ describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', ()
     });
 
     test('fetch data should return existing orderBook info', async () => {
-        const result = await context.exchangeRateCollector.fetchData();
+        const result = await context.exchangeRateCollector.fetchData(
+            collectorMeta,
+        );
+
         expect(result).toEqual(getExchangeRateStubResult);
         expect(context.exchangeAPIStub.getExchangeRate).toHaveBeenCalledTimes(
             1,
@@ -52,7 +61,10 @@ describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', ()
     });
 
     test('save data should call publish method', async () => {
-        await context.exchangeRateCollector.saveData(getExchangeRateStubResult);
+        await context.exchangeRateCollector.saveData(
+            getExchangeRateStubResult,
+            collectorMeta,
+        );
 
         expect(context.publishStub).toHaveBeenCalledTimes(1);
     });
@@ -63,7 +75,7 @@ describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', ()
         );
 
         await expect(() =>
-            context.exchangeRateCollector.start(),
+            context.exchangeRateCollector.start(collectorMeta),
         ).rejects.toThrow();
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });

@@ -16,6 +16,12 @@ describe('[domain-collectors/integrations/xrpl]: XRPLOrderBookCollector Tests Su
         },
     };
 
+    const collectorMeta = {
+        intervalStart: 1702384093936,
+        intervalEnd: 1702384693936,
+        collectorTraceId: '6771447a',
+    };
+
     const fetchOrderBookStubResult = {
         symbol,
         bids: [[faker.number.float()]],
@@ -51,7 +57,9 @@ describe('[domain-collectors/integrations/xrpl]: XRPLOrderBookCollector Tests Su
     });
 
     test('fetch data should return existing orderBook info', async () => {
-        const result = await context.orderBookCollector.fetchData();
+        const result = await context.orderBookCollector.fetchData(
+            collectorMeta,
+        );
 
         expect(result).toEqual(fetchOrderBookStubResult);
         expect(context.exchangeAPIStub.fetchOrderBook).toHaveBeenCalledTimes(1);
@@ -63,7 +71,7 @@ describe('[domain-collectors/integrations/xrpl]: XRPLOrderBookCollector Tests Su
         );
 
         try {
-            await context.orderBookCollector.start();
+            await context.orderBookCollector.start(collectorMeta);
         } catch (error) {
             expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
         }

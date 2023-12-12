@@ -64,6 +64,10 @@ describe('[emitters]: PricingEmitter Tests Suite', () => {
                 JSON.stringify({
                     exchange: 'binance',
                     symbol: 'BTC/USDT',
+                    payload: {
+                        intervalStart: 1702384093936,
+                        intervalEnd: 1702384693936,
+                    },
                     type: 'Trades',
                 }),
             ),

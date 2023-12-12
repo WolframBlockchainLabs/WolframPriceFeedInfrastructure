@@ -6,6 +6,12 @@ describe('[domain-collectors/collectors]: TickerCollector Tests Suite', () => {
     const symbol = 'BTC/USDT';
     const marketId = faker.number.int();
 
+    const collectorMeta = {
+        intervalStart: 1702384093936,
+        intervalEnd: 1702384693936,
+        collectorTraceId: '6771447a',
+    };
+
     const fetchTickerStubResult = {
         high: faker.number.float(),
         low: faker.number.float(),
@@ -53,14 +59,17 @@ describe('[domain-collectors/collectors]: TickerCollector Tests Suite', () => {
     });
 
     test('fetch data should return existing ticker info', async () => {
-        const result = await context.tickerCollector.fetchData();
+        const result = await context.tickerCollector.fetchData(collectorMeta);
 
         expect(result).toEqual(fetchTickerStubResult);
         expect(context.exchangeAPIStub.fetchTicker).toHaveBeenCalledTimes(1);
     });
 
     test('save data should call publish method', async () => {
-        await context.tickerCollector.saveData(fetchTickerStubResult);
+        await context.tickerCollector.saveData(
+            fetchTickerStubResult,
+            collectorMeta,
+        );
 
         expect(context.tickerCollector.publish).toHaveBeenCalledTimes(1);
     });
@@ -70,7 +79,9 @@ describe('[domain-collectors/collectors]: TickerCollector Tests Suite', () => {
             new Error('Test Error'),
         );
 
-        await expect(() => context.tickerCollector.start()).rejects.toThrow();
+        await expect(() =>
+            context.tickerCollector.start(collectorMeta),
+        ).rejects.toThrow();
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 });
