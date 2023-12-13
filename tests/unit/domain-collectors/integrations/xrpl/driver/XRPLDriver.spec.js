@@ -1,4 +1,6 @@
+import { TimeoutError, ValidationError } from 'xrpl';
 import XRPLDriver from '../../../../../../lib/domain-collectors/integrations/xrpl/driver/XRPLDriver.js';
+import RateLimitExceededException from '../../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
 
 describe('[domain-collectors/integrations/xrpl]: XRPLDriver Tests Suite', () => {
     const context = {};
@@ -63,5 +65,25 @@ describe('[domain-collectors/integrations/xrpl]: XRPLDriver Tests Suite', () => 
                 [2, 2],
             ],
         });
+    });
+
+    test('the "loadOrders" should throw RateLimitExceededException when TimeoutError is thrown', async () => {
+        context.xrplClientStub.request.mockImplementation(() => {
+            throw new TimeoutError();
+        });
+
+        await expect(context.xrplDriver.loadOrders({})).rejects.toThrow(
+            RateLimitExceededException,
+        );
+    });
+
+    test('the "loadOrders" should throw same error when other errors are thrown', async () => {
+        context.xrplClientStub.request.mockImplementation(() => {
+            throw new ValidationError();
+        });
+
+        await expect(context.xrplDriver.loadOrders({})).rejects.toThrow(
+            ValidationError,
+        );
     });
 });
