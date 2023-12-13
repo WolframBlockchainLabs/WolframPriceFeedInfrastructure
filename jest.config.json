@@ -4,7 +4,7 @@
     },
     "testEnvironment": "node",
     "testTimeout": 60000,
-    "roots": ["tests/unit/domain-collectors/integrations/xrpl"],
+    "roots": ["tests"],
     "moduleNameMapper": {
         "^@minswap/sdk$": "<rootDir>/tests/unit/__mocks__/minswap.js"
     },

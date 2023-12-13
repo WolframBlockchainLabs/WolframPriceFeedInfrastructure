@@ -8,15 +8,21 @@
                     "pool": 2
                 },
                 "in": {
-                    "symbol": "TEZ",
-                    "name": "Tezos"
+                    "symbol": "QUIPU",
+                    "name": "QuipuSwap Governance Token",
+                    "meta": {
+                        "decimals": 6
+                    }
                 },
                 "out": {
-                    "symbol": "QUIPU",
-                    "name": "QuipuSwap Governance Token"
+                    "symbol": "TEZ",
+                    "name": "Tezos",
+                    "meta": {
+                        "decimals": 6
+                    }
                 }
             },
-            "symbol": "TEZ/QUIPU"
+            "symbol": "QUIPU/TEZ"
         }
     ]
 }

@@ -14,8 +14,6 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
         token_b_pool: '10',
     };
 
-    const pairQuote = '10';
-
     beforeEach(() => {
         context.quipuswapStableswapDriver = new tezosDrivers.drivers[
             'quipuswap_stableswap'
@@ -26,26 +24,6 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
 
     afterEach(() => {
         jest.restoreAllMocks();
-    });
-
-    test('the "getExchangeRate" method should get storage and pair price', async () => {
-        jest.spyOn(
-            context.quipuswapStableswapDriver,
-            'getContractStorage',
-        ).mockResolvedValue();
-        jest.spyOn(
-            context.quipuswapStableswapDriver,
-            'getPairPrice',
-        ).mockResolvedValue();
-
-        await context.quipuswapStableswapDriver.getExchangeRate(pair);
-
-        expect(
-            context.quipuswapStableswapDriver.getContractStorage,
-        ).toHaveBeenCalledTimes(1);
-        expect(
-            context.quipuswapStableswapDriver.getPairPrice,
-        ).toHaveBeenCalledTimes(1);
     });
 
     test('the "getPairPrice" method should return pool sizes and exchange rate', async () => {
@@ -73,12 +51,19 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
             },
         };
 
-        const result = await context.quipuswapStableswapDriver.getPairPrice(
-            storageStub,
+        jest.spyOn(
+            context.quipuswapStableswapDriver,
+            'getContractStorage',
+        ).mockResolvedValue(storageStub);
+
+        const result = await context.quipuswapStableswapDriver.getReserves(
+            pair,
         );
 
-        expect(result).toEqual({
-            exchangeRate: pairQuote,
+        expect({
+            poolASize: result.poolASize.toString(),
+            poolBSize: result.poolBSize.toString(),
+        }).toEqual({
             poolASize: lpData.token_a_pool.toString(),
             poolBSize: lpData.token_b_pool.toString(),
         });

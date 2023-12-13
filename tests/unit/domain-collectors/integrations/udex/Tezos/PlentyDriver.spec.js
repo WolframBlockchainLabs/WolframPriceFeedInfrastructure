@@ -31,8 +31,6 @@ describe('[domain-collectors/integrations/tezos]: PlentyDriver Tests Suite', () 
         token1Address: 'KT1SjXiUX63QvdNMcM2m492f7kuf8JxXRLp4',
     };
 
-    const pairQuote = '10';
-
     beforeEach(() => {
         context.plentyDriver = new tezosDrivers.drivers['plenty']({
             apiSecret: 'test',
@@ -44,51 +42,43 @@ describe('[domain-collectors/integrations/tezos]: PlentyDriver Tests Suite', () 
     });
 
     test('the "getExchangeRate" method should get storage and pair price', async () => {
-        jest.spyOn(
-            context.plentyDriver,
-            'getContractStorage',
-        ).mockResolvedValue();
-        jest.spyOn(context.plentyDriver, 'getPairPrice').mockResolvedValue();
-        jest.spyOn(context.plentyDriver, 'getTokenPools').mockResolvedValue();
+        jest.spyOn(context.plentyDriver, 'getReserves').mockResolvedValue({
+            poolASize: lpData.token1_pool,
+            poolBSize: lpData.token2_pool,
+        });
 
         await context.plentyDriver.getExchangeRate(pair);
 
-        expect(context.plentyDriver.getContractStorage).toHaveBeenCalledTimes(
-            1,
-        );
-        expect(context.plentyDriver.getPairPrice).toHaveBeenCalledTimes(1);
-        expect(context.plentyDriver.getTokenPools).toHaveBeenCalledTimes(1);
+        expect(context.plentyDriver.getReserves).toHaveBeenCalledTimes(1);
     });
 
-    test('the "getPairPrice" method should return pool sizes and exchange rate', async () => {
-        const result = await context.plentyDriver.getPairPrice(pair, lpData);
+    test('the "getReserves" method should return pool sizes and exchange rate', async () => {
+        jest.spyOn(
+            context.plentyDriver,
+            'getContractStorage',
+        ).mockResolvedValue(lpData);
+
+        const result = await context.plentyDriver.getReserves(pair);
 
         expect(result).toEqual({
-            exchangeRate: pairQuote,
             poolASize: lpData.token1_pool.toString(),
             poolBSize: lpData.token2_pool.toString(),
         });
     });
 
-    test('the "getTokenPools" method should return pool sizes', async () => {
-        const result = await context.plentyDriver.getTokenPools(lpData, pair);
-
-        expect(result).toEqual({
-            token1_pool: lpData.token1_pool.toString(),
-            token2_pool: lpData.token2_pool.toString(),
-        });
-    });
-
     test('the "getTokenPools" method should return pool sizes flipped for flipped addresses', async () => {
         const flippedData = { ...lpData, token1Address: pair.out.meta.address };
-        const result = await context.plentyDriver.getTokenPools(
-            flippedData,
-            pair,
-        );
+
+        jest.spyOn(
+            context.plentyDriver,
+            'getContractStorage',
+        ).mockResolvedValue(flippedData);
+
+        const result = await context.plentyDriver.getReserves(pair);
 
         expect(result).toEqual({
-            token2_pool: lpData.token1_pool.toString(),
-            token1_pool: lpData.token2_pool.toString(),
+            poolBSize: lpData.token1_pool.toString(),
+            poolASize: lpData.token2_pool.toString(),
         });
     });
 });

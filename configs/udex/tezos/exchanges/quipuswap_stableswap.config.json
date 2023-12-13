@@ -9,11 +9,17 @@
                 },
                 "in": {
                     "symbol": "kUSD",
-                    "name": "Kolibri USD"
+                    "name": "Kolibri USD",
+                    "meta": {
+                        "decimals": 18
+                    }
                 },
                 "out": {
                     "symbol": "USDt",
-                    "name": "Tether USDt"
+                    "name": "Tether USDt",
+                    "meta": {
+                        "decimals": 18
+                    }
                 }
             },
             "symbol": "kUSD/USDt"
