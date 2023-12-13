@@ -1,5 +1,5 @@
 import CCXTDriverWrapper from '../../../../../lib/domain-collectors/integrations/ccxt/CCXTDriverWrapper.js';
-import RateLimitExceeded from '../../../../../lib/domain-model/exceptions/RateLimitExceeded.js';
+import RateLimitExceededException from '../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
 import ccxt, {
     RateLimitExceeded as CCXTRateLimitExceeded,
     NetworkError,
@@ -67,13 +67,13 @@ describe('[domain-collectors/integrations/ccxt]: CCXTDriverWrapper Tests Suite',
         );
     });
 
-    test('the "fetchWithErrorTranslation" should throw RateLimitExceeded when CCXTRateLimitExceeded is thrown', async () => {
+    test('the "fetchWithErrorTranslation" should throw RateLimitExceededException when CCXTRateLimitExceeded is thrown', async () => {
         context.ccxtExchangeAPIStub.loadMarkets.mockImplementation(() => {
             throw new CCXTRateLimitExceeded();
         });
 
         await expect(context.ccxtDriverWrapper.loadMarkets()).rejects.toThrow(
-            RateLimitExceeded,
+            RateLimitExceededException,
         );
     });
 

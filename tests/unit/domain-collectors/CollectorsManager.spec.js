@@ -2,7 +2,7 @@ import CollectorsManager from '../../../lib/domain-collectors/CollectorsManager.
 import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
 import Exchange from '../../../lib/domain-model/entities/Exchange.js';
 import Market from '../../../lib/domain-model/entities/Market.js';
-import RateLimitExceeded from '../../../lib/domain-model/exceptions/RateLimitExceeded.js';
+import RateLimitExceededException from '../../../lib/domain-model/exceptions/RateLimitExceededException.js';
 
 describe('CollectorsManager Tests', () => {
     const schedulerOptions = {
@@ -140,7 +140,7 @@ describe('CollectorsManager Tests', () => {
             context.collectorsManager.backoffPolicy.broadcastRateLimitChange,
         ).not.toHaveBeenCalled();
 
-        mockCollector.start.mockRejectedValue(new RateLimitExceeded());
+        mockCollector.start.mockRejectedValue(new RateLimitExceededException());
         await context.collectorsManager.startCollectorWithDelay(
             mockCollector,
             0,
