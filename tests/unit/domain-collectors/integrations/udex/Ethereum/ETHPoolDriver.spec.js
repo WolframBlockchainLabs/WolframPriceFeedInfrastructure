@@ -36,29 +36,17 @@ describe('[domain-collectors/integrations/eth]: ETHPoolDriver Tests Suite', () =
     };
 
     const tokenData = {
-        decimals: {
-            inTokenDecimals: 6,
-            outTokenDecimals: 6,
-        },
         reserves: {
             reserve0: 10,
             reserve1: 1,
         },
         preciseReserves: {
-            inReserve: '0.00001',
-            outReserve: '0.000001',
+            poolASize: '10',
+            poolBSize: '1',
         },
     };
 
-    const pairQuote = '0.1';
-
     beforeEach(() => {
-        context.contractStub = {
-            decimals: jest.fn(() => tokenData.decimals.inTokenDecimals),
-        };
-
-        ethers.Contract.mockImplementation(() => context.contractStub);
-
         context.ethPoolDriver = new ethDrivers.drivers['uniswap_v2']({
             apiSecret: 'test',
         });
@@ -68,50 +56,13 @@ describe('[domain-collectors/integrations/eth]: ETHPoolDriver Tests Suite', () =
         jest.restoreAllMocks();
     });
 
-    test('the "getExchangeRate" method should format pair and get quote', async () => {
-        jest.spyOn(context.ethPoolDriver, 'getReserves').mockResolvedValue(
-            tokenData.preciseReserves,
-        );
-
-        const result = await context.ethPoolDriver.getExchangeRate(pair);
-
-        expect(result).toEqual({
-            poolASize: tokenData.preciseReserves.inReserve,
-            poolBSize: tokenData.preciseReserves.outReserve,
-            exchangeRate: pairQuote,
-        });
-    });
-
     test('the "getReserves" method should return quantities of tokens in a pool', async () => {
-        const pairContract = {
+        ethers.Contract.mockReturnValue({
             getReserves: jest.fn(() => tokenData.reserves),
-            token0: jest.fn(() => pair.in.meta.address),
-        };
-
-        const result = await context.ethPoolDriver.getReserves({
-            pair,
-            pairContract,
-            tokensDecimals: tokenData.decimals,
         });
+
+        const result = await context.ethPoolDriver.getReserves(pair);
 
         expect(result).toEqual(tokenData.preciseReserves);
-    });
-
-    test('the "getReserves" method should return quantities of tokens in a pool with a correct match of tokens and pools', async () => {
-        const pairContract = {
-            getReserves: jest.fn(() => tokenData.reserves),
-            token0: jest.fn(() => pair.out.meta.address),
-        };
-
-        const result = await context.ethPoolDriver.getReserves({
-            pair,
-            pairContract,
-            tokensDecimals: tokenData.decimals,
-        });
-
-        expect(result).toEqual({
-            inReserve: tokenData.preciseReserves.outReserve,
-            outReserve: tokenData.preciseReserves.inReserve,
-        });
     });
 });

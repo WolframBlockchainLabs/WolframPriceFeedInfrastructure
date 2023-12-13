@@ -11,14 +11,16 @@
                     "symbol": "Whistler",
                     "name": "Whistler",
                     "meta": {
-                        "address": "0x4f39687328a14dba531fcbd2305724740bb36941"
+                        "address": "0x4f39687328a14dba531fcbd2305724740bb36941",
+                        "decimals": 18
                     }
                 },
                 "out": {
                     "symbol": "WETH",
                     "name": "Wrapped Ether",
                     "meta": {
-                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "decimals": 18
                     }
                 }
             },
@@ -33,14 +35,16 @@
                     "symbol": "WISE",
                     "name": "Wise Token",
                     "meta": {
-                        "address": "0x66a0f676479cee1d7373f3dc2e2952778bff5bd6"
+                        "address": "0x66a0f676479cee1d7373f3dc2e2952778bff5bd6",
+                        "decimals": 18
                     }
                 },
                 "out": {
                     "symbol": "WETH",
                     "name": "Wrapped Ether",
                     "meta": {
-                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "decimals": 18
                     }
                 }
             },
@@ -55,14 +59,16 @@
                     "symbol": "WETH",
                     "name": "Wrapped Ether",
                     "meta": {
-                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "decimals": 18
                     }
                 },
                 "out": {
                     "symbol": "USDT",
                     "name": "Tether USD",
                     "meta": {
-                        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+                        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+                        "decimals": 6
                     }
                 }
             },

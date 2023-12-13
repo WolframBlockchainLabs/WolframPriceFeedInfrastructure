@@ -11,14 +11,16 @@
                     "symbol": "ILV",
                     "name": "Illuvium",
                     "meta": {
-                        "address": "0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E"
+                        "address": "0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E",
+                        "decimals": 18
                     }
                 },
                 "out": {
                     "symbol": "WETH",
                     "name": "Wrapped Ether",
                     "meta": {
-                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "decimals": 18
                     }
                 }
             },
@@ -33,14 +35,16 @@
                     "symbol": "WBTC",
                     "name": "Wrapped BTC",
                     "meta": {
-                        "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+                        "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+                        "decimals": 8
                     }
                 },
                 "out": {
                     "symbol": "WETH",
                     "name": "Wrapped Ether",
                     "meta": {
-                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "decimals": 18
                     }
                 }
             },
@@ -55,14 +59,16 @@
                     "symbol": "WETH",
                     "name": "Wrapped Ether",
                     "meta": {
-                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "decimals": 18
                     }
                 },
                 "out": {
                     "symbol": "USDT",
                     "name": "Tether USD",
                     "meta": {
-                        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+                        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+                        "decimals": 6
                     }
                 }
             },

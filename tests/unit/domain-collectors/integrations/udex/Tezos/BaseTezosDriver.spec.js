@@ -29,7 +29,7 @@ describe('[domain-collectors/integrations/tezos]: BaseTezosDriver Tests Suite', 
         expect(result).toBe('storage');
     });
 
-    test('the "getExchangeRate" should throw RateLimitExceededException taquito throws an error', async () => {
+    test('the "getExchangeRate" should throw RateLimitExceededException when taquito throws an error', async () => {
         jest.spyOn(
             BaseUDEXDriver.prototype,
             'getExchangeRate',
