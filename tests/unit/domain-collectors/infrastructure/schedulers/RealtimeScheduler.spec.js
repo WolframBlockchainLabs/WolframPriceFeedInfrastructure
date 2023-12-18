@@ -6,10 +6,10 @@ jest.mock('croner', () => {
         cb();
 
         return {
-            currentRun: jest
+            previousRun: jest
                 .fn()
                 .mockReturnValue(new Date('2023-11-7 12:53:44+0000')),
-            nextRun: jest
+            currentRun: jest
                 .fn()
                 .mockReturnValue(new Date('2023-11-7 12:54:44+0000')),
         };

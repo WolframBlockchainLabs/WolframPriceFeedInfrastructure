@@ -1,6 +1,6 @@
 # **Use Case: Real-Time Streaming Dashboard via Websocket API**
 
-<img src="../../public/images/use-cases/realtime-dashboard.png" alt="Realtime Dashboard UI" height="700"/>
+<img src="../../public/images/use-cases/realtime-dashboard.png" alt="Realtime Dashboard UI" width="100%"/>
 
 ## Table of Contents
 
@@ -57,7 +57,7 @@ The dashboard is engineered using a blend of cutting-edge libraries and framewor
 
 ### Architecture Diagram
 
-<img src="../../public/images/use-cases/EA_RT-Dashboard_arch.png" alt="Realtime Dashboard Architecture" height="700"/>
+<img src="../../public/images/use-cases/EA_RT-Dashboard_arch.png" alt="Realtime Dashboard Architecture" width="100%"/>
 
 ### Chart Rendering with ApexCharts
 
