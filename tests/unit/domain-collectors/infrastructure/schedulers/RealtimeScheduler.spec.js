@@ -1,4 +1,20 @@
 import RealtimeScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/RealtimeScheduler.js';
+import 'croner';
+
+jest.mock('croner', () => {
+    return jest.fn().mockImplementation((_, cb) => {
+        cb();
+
+        return {
+            currentRun: jest
+                .fn()
+                .mockReturnValue(new Date('2023-11-7 12:53:44+0000')),
+            nextRun: jest
+                .fn()
+                .mockReturnValue(new Date('2023-11-7 12:54:44+0000')),
+        };
+    });
+});
 
 describe('RealtimeScheduler Tests', () => {
     const context = {};
@@ -147,15 +163,11 @@ describe('RealtimeScheduler Tests', () => {
         expect(updateRateLimitMultiplierSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('the "runCollectors" method updates intervalBounds and calls handler', async () => {
-        const updateIntervalBoundsSpy = jest
-            .spyOn(context.realtimeScheduler, 'updateIntervalBounds')
-            .mockImplementation(() => {});
+    test('the "runCollectors" method calls handler', async () => {
         context.realtimeScheduler.handler = jest.fn();
 
         await context.realtimeScheduler.runCollectors();
 
-        expect(updateIntervalBoundsSpy).toHaveBeenCalledTimes(1);
         expect(context.realtimeScheduler.handler).toHaveBeenCalledTimes(1);
     });
 
@@ -171,31 +183,7 @@ describe('RealtimeScheduler Tests', () => {
         expect(context.setTimeoutStub).toHaveBeenCalledTimes(1);
     });
 
-    test('the "initializeScheduler" method calls interval initialization and cron task setup', async () => {
-        const calculateIntervalPropertiesSpy = jest
-            .spyOn(context.realtimeScheduler, 'calculateIntervalProperties')
-            .mockImplementation(() => {});
-        const setupCronTaskSpy = jest
-            .spyOn(context.realtimeScheduler, 'setupCronTask')
-            .mockImplementation(() => {});
-
-        await context.realtimeScheduler.initializeScheduler();
-
-        expect(calculateIntervalPropertiesSpy).toHaveBeenCalledTimes(1);
-        expect(setupCronTaskSpy).toHaveBeenCalledTimes(1);
-    });
-
-    test('the "calculateIntervalProperties" method sets properties for cron scheduler', () => {
-        context.realtimeScheduler.calculateIntervalProperties();
-
-        expect(context.realtimeScheduler.intraIntervalDistance).toBe(1440);
-        expect(context.realtimeScheduler.normalizedInterval).toBe(1);
-        expect(context.realtimeScheduler.interval).toBe('*/1 * * * *');
-    });
-
-    test('the "setupCronTask" method must setup cron schedule', () => {
-        // jest.spyOn(cronParser, 'parseExpression').mockImplementation(() => {});
-        // jest.spyOn(cron, 'schedule').mockImplementation((_, cb) => cb());
+    test('the "initializeScheduler" method sets up cron scheduler', async () => {
         jest.spyOn(
             context.realtimeScheduler,
             'calculateDesyncTimeoutForCollector',
@@ -204,11 +192,13 @@ describe('RealtimeScheduler Tests', () => {
             context.realtimeScheduler,
             'runCollectors',
         ).mockImplementation(() => {});
+        context.realtimeScheduler.setHandler(jest.fn());
 
-        context.realtimeScheduler.setupCronTask();
+        await context.realtimeScheduler.initializeScheduler();
 
-        // expect(cronParser.parseExpression).toHaveBeenCalledTimes(1);
-        // expect(cron.schedule).toHaveBeenCalledTimes(1);
+        expect(context.realtimeScheduler.intraIntervalDistance).toBe(1440);
+        expect(context.realtimeScheduler.normalizedInterval).toBe(1);
+        expect(context.realtimeScheduler.interval).toBe('*/1 * * * *');
         expect(
             context.realtimeScheduler.calculateDesyncTimeoutForCollector,
         ).toHaveBeenCalledTimes(1);
@@ -218,31 +208,17 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "calculateDesyncTimeoutForCollector" method returns desync value', () => {
-        context.realtimeScheduler.calculateIntervalProperties();
+        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.initializeScheduler();
         const desync =
             context.realtimeScheduler.calculateDesyncTimeoutForCollector();
 
         expect(desync).toBe(36000);
     });
 
-    test('the "updateIntervalBounds" method updates intervalStart and intervalEnd props', () => {
-        context.realtimeScheduler.schedule = {
-            prev: jest.fn().mockReturnValue({ toDate: () => new Date() }),
-            next: jest.fn().mockReturnValue({ toDate: () => new Date() }),
-        };
-
-        context.realtimeScheduler.updateIntervalBounds();
-
-        expect(context.realtimeScheduler.schedule.prev).toHaveBeenCalledTimes(
-            1,
-        );
-        expect(context.realtimeScheduler.schedule.next).toHaveBeenCalledTimes(
-            2,
-        );
-    });
-
     test('the "getOperationDesync" returns desync value for each operation', () => {
-        context.realtimeScheduler.calculateIntervalProperties();
+        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.initializeScheduler();
         const desync = context.realtimeScheduler.getOperationDesync(1);
 
         expect(desync).toBe(7500);
@@ -297,11 +273,14 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "getIntervalBounds" returns intervalStart and intervalEnd', () => {
+        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.initializeScheduler();
+
         const bounds = context.realtimeScheduler.getIntervalBounds();
 
         expect(bounds).toEqual({
-            intervalStart: context.realtimeScheduler.intervalStart,
-            intervalEnd: context.realtimeScheduler.intervalEnd,
+            intervalStart: new Date('2023-11-7 12:53:44+0000').getTime(),
+            intervalEnd: new Date('2023-11-7 12:54:44+0000').getTime(),
         });
     });
 

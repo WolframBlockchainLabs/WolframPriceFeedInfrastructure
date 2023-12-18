@@ -80,6 +80,13 @@ describe('CollectorsManager Tests', () => {
     });
 
     test('the "runCollectors" method should handle collector startups and log errors if any.', async () => {
+        jest.spyOn(
+            context.collectorsManager.collectorsScheduler,
+            'getIntervalBounds',
+        ).mockReturnValue({
+            intervalStart: new Date('2023-11-7 12:53:44+0000').getTime(),
+            intervalEnd: new Date('2023-11-7 12:54:44+0000').getTime(),
+        });
         const mockCollector1 = {
             start: jest.fn().mockResolvedValue(),
             getName: jest.fn().mockReturnValue('Collector1'),
@@ -110,6 +117,13 @@ describe('CollectorsManager Tests', () => {
     });
 
     test('the "startCollectorWithDelay" method should delay collector start, then start it, and handle errors.', async () => {
+        jest.spyOn(
+            context.collectorsManager.collectorsScheduler,
+            'getIntervalBounds',
+        ).mockReturnValue({
+            intervalStart: new Date('2023-11-7 12:53:44+0000').getTime(),
+            intervalEnd: new Date('2023-11-7 12:54:44+0000').getTime(),
+        });
         const mockCollector = {
             start: jest.fn().mockResolvedValue(),
             getName: jest.fn().mockReturnValue('MockCollector'),
@@ -155,6 +169,13 @@ describe('CollectorsManager Tests', () => {
     });
 
     test('the "startCollectorWithDelay" method should not start backoff policy for unknown errors.', async () => {
+        jest.spyOn(
+            context.collectorsManager.collectorsScheduler,
+            'getIntervalBounds',
+        ).mockReturnValue({
+            intervalStart: new Date('2023-11-7 12:53:44+0000').getTime(),
+            intervalEnd: new Date('2023-11-7 12:54:44+0000').getTime(),
+        });
         const mockCollector = {
             start: jest.fn().mockResolvedValue(),
             getName: jest.fn().mockReturnValue('MockCollector'),

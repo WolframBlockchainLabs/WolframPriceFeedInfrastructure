@@ -55,6 +55,18 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         expect(handleStopSpy).toHaveBeenCalledTimes(1);
     });
 
+    test('the "runCollectors" method updates intervalBounds and calls handler', async () => {
+        const updateIntervalBoundsSpy = jest
+            .spyOn(context.historicalScheduler, 'updateIntervalBounds')
+            .mockImplementation(() => {});
+        context.historicalScheduler.handler = jest.fn();
+
+        await context.historicalScheduler.runCollectors();
+
+        expect(updateIntervalBoundsSpy).toHaveBeenCalledTimes(1);
+        expect(context.historicalScheduler.handler).toHaveBeenCalledTimes(1);
+    });
+
     test('the "updateIntervalBounds" should update scheduler state.', () => {
         context.historicalScheduler.updateIntervalBounds();
         expect(context.historicalScheduler.cycleCounter).toBe(1);
@@ -130,5 +142,14 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         context.historicalScheduler.updateIntervalBounds();
 
         expect(context.historicalScheduler.cycleCounter).toBe(2);
+    });
+
+    test('the "getIntervalBounds" returns intervalStart and intervalEnd', () => {
+        const bounds = context.historicalScheduler.getIntervalBounds();
+
+        expect(bounds).toEqual({
+            intervalStart: context.historicalScheduler.intervalStart,
+            intervalEnd: context.historicalScheduler.intervalEnd,
+        });
     });
 });
