@@ -79,44 +79,7 @@ describe('CollectorsManager Tests', () => {
         expect(startSchedulerSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('the "runCollectors" method should handle collector startups and log errors if any.', async () => {
-        jest.spyOn(
-            context.collectorsManager.collectorsScheduler,
-            'getIntervalBounds',
-        ).mockReturnValue({
-            intervalStart: new Date('2023-11-7 12:53:44+0000').getTime(),
-            intervalEnd: new Date('2023-11-7 12:54:44+0000').getTime(),
-        });
-        const mockCollector1 = {
-            start: jest.fn().mockResolvedValue(),
-            getName: jest.fn().mockReturnValue('Collector1'),
-        };
-        const mockCollector2 = {
-            start: jest.fn().mockRejectedValue(new Error('Test Error')),
-            getName: jest.fn().mockReturnValue('Collector2'),
-        };
-
-        context.collectorsManager.collectors = [mockCollector1, mockCollector2];
-        jest.spyOn(
-            context.collectorsManager,
-            'startCollectorWithDelay',
-        ).mockImplementation((collector) => collector.start());
-
-        await context.collectorsManager.runCollectors();
-
-        expect(
-            context.collectorsManager.startCollectorWithDelay,
-        ).toHaveBeenCalledWith(mockCollector1, 0);
-        expect(
-            context.collectorsManager.startCollectorWithDelay,
-        ).toHaveBeenCalledWith(mockCollector2, 1);
-
-        expect(mockCollector1.start).toHaveBeenCalled();
-        expect(mockCollector2.start).toHaveBeenCalled();
-        expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
-    });
-
-    test('the "startCollectorWithDelay" method should delay collector start, then start it, and handle errors.', async () => {
+    test('the "startCollector" method should start and handle errors.', async () => {
         jest.spyOn(
             context.collectorsManager.collectorsScheduler,
             'getIntervalBounds',
@@ -139,15 +102,8 @@ describe('CollectorsManager Tests', () => {
             'broadcastRateLimitChange',
         ).mockResolvedValue();
 
-        await context.collectorsManager.startCollectorWithDelay(
-            mockCollector,
-            0,
-        );
+        await context.collectorsManager.startCollector(mockCollector, 0);
 
-        expect(context.setTimeoutStub).toHaveBeenCalledWith(
-            expect.any(Function),
-            1000,
-        );
         expect(mockCollector.start).toHaveBeenCalledTimes(1);
         expect(context.loggerStub.error).not.toHaveBeenCalled();
         expect(
@@ -155,12 +111,8 @@ describe('CollectorsManager Tests', () => {
         ).not.toHaveBeenCalled();
 
         mockCollector.start.mockRejectedValue(new RateLimitExceededException());
-        await context.collectorsManager.startCollectorWithDelay(
-            mockCollector,
-            0,
-        );
+        await context.collectorsManager.startCollector(mockCollector, 0);
 
-        expect(context.setTimeoutStub).toHaveBeenCalledTimes(2);
         expect(mockCollector.start).toHaveBeenCalledTimes(2);
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
         expect(
@@ -168,7 +120,7 @@ describe('CollectorsManager Tests', () => {
         ).toHaveBeenCalledTimes(1);
     });
 
-    test('the "startCollectorWithDelay" method should not start backoff policy for unknown errors.', async () => {
+    test('the "startCollector" method should not start backoff policy for unknown errors.', async () => {
         jest.spyOn(
             context.collectorsManager.collectorsScheduler,
             'getIntervalBounds',
@@ -191,15 +143,8 @@ describe('CollectorsManager Tests', () => {
             'broadcastRateLimitChange',
         ).mockResolvedValue();
 
-        await context.collectorsManager.startCollectorWithDelay(
-            mockCollector,
-            0,
-        );
+        await context.collectorsManager.startCollector(mockCollector, 0);
 
-        expect(context.setTimeoutStub).toHaveBeenCalledWith(
-            expect.any(Function),
-            1000,
-        );
         expect(mockCollector.start).toHaveBeenCalledTimes(1);
         expect(context.loggerStub.error).not.toHaveBeenCalled();
         expect(
@@ -207,12 +152,8 @@ describe('CollectorsManager Tests', () => {
         ).not.toHaveBeenCalled();
 
         mockCollector.start.mockRejectedValue(new Error('Test Error'));
-        await context.collectorsManager.startCollectorWithDelay(
-            mockCollector,
-            0,
-        );
+        await context.collectorsManager.startCollector(mockCollector, 0);
 
-        expect(context.setTimeoutStub).toHaveBeenCalledTimes(2);
         expect(mockCollector.start).toHaveBeenCalledTimes(2);
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
         expect(

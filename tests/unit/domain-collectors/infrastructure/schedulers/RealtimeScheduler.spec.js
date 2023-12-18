@@ -42,7 +42,6 @@ describe('RealtimeScheduler Tests', () => {
             logger: context.loggerStub,
             baseRateLimit: 50,
             rateLimitMargin: 10,
-            operationsAmount: 4,
             queuePosition: 3,
             queueSize: 5,
             replicaSize: 2,
@@ -64,8 +63,8 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "start" method should start initialization, setup a critical section and wait one cycle.', async () => {
-        const setHandlerSpy = jest
-            .spyOn(context.realtimeScheduler, 'setHandler')
+        const setOperationsSpy = jest
+            .spyOn(context.realtimeScheduler, 'setOperations')
             .mockImplementation(() => {});
         const setMultiplierSpy = jest
             .spyOn(context.realtimeScheduler, 'setMultiplier')
@@ -79,7 +78,7 @@ describe('RealtimeScheduler Tests', () => {
 
         await context.realtimeScheduler.start({});
 
-        expect(setHandlerSpy).toHaveBeenCalledTimes(1);
+        expect(setOperationsSpy).toHaveBeenCalledTimes(1);
         expect(setMultiplierSpy).toHaveBeenCalledTimes(1);
         expect(initializeSchedulerSpy).toHaveBeenCalledTimes(1);
         expect(waitOneCycleSpy).toHaveBeenCalledTimes(1);
@@ -164,11 +163,12 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "runCollectors" method calls handler', async () => {
-        context.realtimeScheduler.handler = jest.fn();
+        const operations = [jest.fn()];
+        context.realtimeScheduler.setOperations(operations);
 
         await context.realtimeScheduler.runCollectors();
 
-        expect(context.realtimeScheduler.handler).toHaveBeenCalledTimes(1);
+        expect(operations[0]).toHaveBeenCalledTimes(1);
     });
 
     test('the "waitOneCycle" method timeouts execution for one cycle', async () => {
@@ -192,7 +192,12 @@ describe('RealtimeScheduler Tests', () => {
             context.realtimeScheduler,
             'runCollectors',
         ).mockImplementation(() => {});
-        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.setOperations([
+            jest.fn(),
+            jest.fn(),
+            jest.fn(),
+            jest.fn(),
+        ]);
 
         await context.realtimeScheduler.initializeScheduler();
 
@@ -208,7 +213,12 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "calculateDesyncTimeoutForCollector" method returns desync value', () => {
-        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.setOperations([
+            jest.fn(),
+            jest.fn(),
+            jest.fn(),
+            jest.fn(),
+        ]);
         context.realtimeScheduler.initializeScheduler();
         const desync =
             context.realtimeScheduler.calculateDesyncTimeoutForCollector();
@@ -217,31 +227,40 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "getOperationDesync" returns desync value for each operation', () => {
-        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.setOperations([
+            jest.fn(),
+            jest.fn(),
+            jest.fn(),
+            jest.fn(),
+        ]);
         context.realtimeScheduler.initializeScheduler();
         const desync = context.realtimeScheduler.getOperationDesync(1);
 
         expect(desync).toBe(7500);
     });
 
-    test('the "setHandler" method validates and sets handler', () => {
-        const handler = jest.fn();
-        context.realtimeScheduler.setHandler(handler);
+    test('the "setOperations" method validates and sets handler', () => {
+        const operations = [jest.fn()];
+        context.realtimeScheduler.setOperations(operations);
 
-        expect(context.realtimeScheduler.handler).toBe(handler);
+        expect(context.realtimeScheduler.operations).toBe(operations);
     });
 
-    test('the "setHandler" throws if handler is not passed', () => {
-        expect(() => context.realtimeScheduler.setHandler()).toThrow();
+    test('the "setOperations" throws if handler is not passed', () => {
+        expect(() => context.realtimeScheduler.setOperations()).toThrow();
     });
 
     test('the "validateMultiplier" returns false if multiplier is invalid', () => {
+        context.realtimeScheduler.setOperations([jest.fn()]);
+
         const isValid = context.realtimeScheduler.validateMultiplier(0);
 
         expect(isValid).toBe(false);
     });
 
     test('the "validateMultiplier" returns true if multiplier is valid', () => {
+        context.realtimeScheduler.setOperations([jest.fn()]);
+
         const isValid = context.realtimeScheduler.validateMultiplier(2);
 
         expect(isValid).toBe(true);
@@ -249,6 +268,7 @@ describe('RealtimeScheduler Tests', () => {
 
     test('the "setMultiplier" sets a new multiplier if it is valid', () => {
         const newMultiplier = 2;
+        context.realtimeScheduler.setOperations([jest.fn()]);
         context.realtimeScheduler.setMultiplier(newMultiplier);
 
         expect(context.realtimeScheduler.rateLimitMultiplier).toBe(
@@ -258,6 +278,7 @@ describe('RealtimeScheduler Tests', () => {
 
     test('the "setMultiplier" skips if a new multiplier is invalid', () => {
         const newMultiplier = 0;
+        context.realtimeScheduler.setOperations([jest.fn()]);
         context.realtimeScheduler.setMultiplier(newMultiplier);
 
         expect(context.realtimeScheduler.rateLimitMultiplier).not.toBe(
@@ -273,7 +294,7 @@ describe('RealtimeScheduler Tests', () => {
     });
 
     test('the "getIntervalBounds" returns intervalStart and intervalEnd', () => {
-        context.realtimeScheduler.setHandler(jest.fn());
+        context.realtimeScheduler.setOperations([jest.fn()]);
         context.realtimeScheduler.initializeScheduler();
 
         const bounds = context.realtimeScheduler.getIntervalBounds();

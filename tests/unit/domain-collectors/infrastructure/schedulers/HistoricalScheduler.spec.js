@@ -56,15 +56,17 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
     });
 
     test('the "runCollectors" method updates intervalBounds and calls handler', async () => {
+        const operation = jest.fn();
+
         const updateIntervalBoundsSpy = jest
             .spyOn(context.historicalScheduler, 'updateIntervalBounds')
             .mockImplementation(() => {});
-        context.historicalScheduler.handler = jest.fn();
+        context.historicalScheduler.setOperations([operation]);
 
         await context.historicalScheduler.runCollectors();
 
         expect(updateIntervalBoundsSpy).toHaveBeenCalledTimes(1);
-        expect(context.historicalScheduler.handler).toHaveBeenCalledTimes(1);
+        expect(operation).toHaveBeenCalledTimes(1);
     });
 
     test('the "updateIntervalBounds" should update scheduler state.', () => {
