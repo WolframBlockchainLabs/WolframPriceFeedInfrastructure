@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import BaseUDEXDriver from '../../../../../lib/domain-collectors/integrations/udex/BaseUDEXDriver.js';
+import RateLimitExceededException from '../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
 
 describe('BaseUDEXDriver Tests Suite', () => {
     let driver;
@@ -55,5 +56,15 @@ describe('BaseUDEXDriver Tests Suite', () => {
             poolBSize: precisePoolBSize.toFixed(),
             exchangeRate: expectedExchangeRate.toFixed(),
         });
+    });
+
+    test('the "getExchangeRate" should throw RateLimitExceededException when getReserves throws an error', async () => {
+        jest.spyOn(driver, 'getReserves').mockImplementation(() => {
+            throw new Error();
+        });
+
+        await expect(driver.getExchangeRate({})).rejects.toThrow(
+            RateLimitExceededException,
+        );
     });
 });

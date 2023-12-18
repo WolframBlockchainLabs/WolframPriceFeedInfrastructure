@@ -13,14 +13,14 @@ describe('Muesliswap Driver Tests', () => {
         in: {
             meta: {
                 address: 'lovelace',
-                decimals: 6,
+                decimals: 0,
             },
         },
         out: {
             meta: {
                 address:
                     'f66d78b4a3cb3d37afa0ec36461e51ecbde00f26c8f0a68f94b6988069555344',
-                decimals: 6,
+                decimals: 0,
             },
         },
     };
