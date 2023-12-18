@@ -1,38 +1,15 @@
-import BigNumber from 'bignumber.js';
+import {
+    BlockfrostClientError,
+    BlockfrostServerError,
+} from '@blockfrost/blockfrost-js';
 import BaseCardanoDriver from '../../../../../../lib/domain-collectors/integrations/udex/Cardano/BaseCardanoDriver.js';
+import RateLimitExceededException from '../../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
 
 describe('[domain-collectors/integrations/cardano]: BaseCardanoDriver Tests Suite', () => {
     const context = {};
 
-    const pair = {
-        meta: {
-            pool: '6aa2153e1ae896a95539c9d62f76cedcdabdcdf144e564b8955f609d660cf6a2',
-        },
-        in: {
-            meta: {
-                address: 'lovelace',
-                decimals: 0,
-            },
-        },
-        out: {
-            meta: {
-                address:
-                    '29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e',
-                decimals: 0,
-            },
-        },
-    };
-
-    const lpData = {
-        reserveA: '1',
-        reserveB: '10',
-        assetA: 'lovelace',
-    };
-
-    const pairQuote = '10';
-
     beforeEach(() => {
-        context.minswapDriver = new BaseCardanoDriver({
+        context.baseCardanoDriver = new BaseCardanoDriver({
             apiSecret: 'test',
         });
     });
@@ -41,19 +18,27 @@ describe('[domain-collectors/integrations/cardano]: BaseCardanoDriver Tests Suit
         jest.restoreAllMocks();
     });
 
-    test('the "getExchangeRate" method should get storage and pair price', async () => {
-        jest.spyOn(context.minswapDriver, 'getReserves').mockReturnValue({
-            poolASize: new BigNumber(lpData.reserveA),
-            poolBSize: new BigNumber(lpData.reserveB),
-        });
+    test('the "getReservesWithErrorTranslation" should throw RateLimitExceededException when BlockfrostServerError is thrown with 429 code', async () => {
+        jest.spyOn(context.baseCardanoDriver, 'getReserves').mockImplementation(
+            () => {
+                throw new BlockfrostServerError({ status_code: 429 });
+            },
+        );
 
-        const result = await context.minswapDriver.getExchangeRate(pair);
+        await expect(
+            context.baseCardanoDriver.getReservesWithErrorTranslation(),
+        ).rejects.toThrow(RateLimitExceededException);
+    });
 
-        expect(context.minswapDriver.getReserves).toHaveBeenCalledTimes(1);
-        expect(result).toEqual({
-            exchangeRate: pairQuote,
-            poolASize: lpData.reserveA,
-            poolBSize: lpData.reserveB,
-        });
+    test('the "getReservesWithErrorTranslation" should throw same error when other errors are thrown', async () => {
+        jest.spyOn(context.baseCardanoDriver, 'getReserves').mockImplementation(
+            () => {
+                throw new BlockfrostClientError({});
+            },
+        );
+
+        await expect(
+            context.baseCardanoDriver.getReservesWithErrorTranslation(),
+        ).rejects.toThrow(BlockfrostClientError);
     });
 });
