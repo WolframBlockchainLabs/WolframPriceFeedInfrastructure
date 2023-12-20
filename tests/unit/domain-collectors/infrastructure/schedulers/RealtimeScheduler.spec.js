@@ -1,4 +1,4 @@
-import RealtimeScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/RealtimeScheduler.js';
+import RealtimeScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/BaseScheduler.js';
 import 'croner';
 
 jest.mock('croner', () => {
