@@ -94,10 +94,6 @@ describe('CollectorsManager Tests', () => {
         };
 
         jest.spyOn(
-            context.collectorsManager.collectorsScheduler,
-            'getOperationDesync',
-        ).mockReturnValue(1000);
-        jest.spyOn(
             context.collectorsManager.backoffPolicy,
             'broadcastRateLimitChange',
         ).mockResolvedValue();
@@ -134,10 +130,6 @@ describe('CollectorsManager Tests', () => {
             setInterval: jest.fn(),
         };
 
-        jest.spyOn(
-            context.collectorsManager.collectorsScheduler,
-            'getOperationDesync',
-        ).mockReturnValue(1000);
         jest.spyOn(
             context.collectorsManager.backoffPolicy,
             'broadcastRateLimitChange',

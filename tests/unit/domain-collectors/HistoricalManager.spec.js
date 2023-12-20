@@ -44,33 +44,6 @@ describe('[domain-collectors]: HistoricalManager Tests Suite', () => {
         jest.restoreAllMocks();
     });
 
-    test('the "start" method should call loadMarketContext, connectCollectors, and startScheduler', async () => {
-        jest.spyOn(
-            context.historicalManager,
-            'loadMarketContext',
-        ).mockResolvedValue();
-        jest.spyOn(
-            context.historicalManager,
-            'connectCollectors',
-        ).mockResolvedValue();
-        jest.spyOn(
-            context.historicalManager,
-            'startScheduler',
-        ).mockResolvedValue();
-
-        await context.historicalManager.start();
-
-        expect(
-            context.historicalManager.loadMarketContext,
-        ).toHaveBeenCalledTimes(1);
-        expect(
-            context.historicalManager.connectCollectors,
-        ).toHaveBeenCalledTimes(1);
-        expect(context.historicalManager.startScheduler).toHaveBeenCalledTimes(
-            1,
-        );
-    });
-
     test('the "initScheduler" method should initialize a HistoricalScheduler with correct options', async () => {
         context.historicalManager.initScheduler(schedulerOptions);
 

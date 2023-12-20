@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import HistoricalScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
 
 describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tests Suite', () => {
@@ -38,24 +37,20 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         jest.clearAllMocks();
     });
 
-    test('the "start" method should call parent start and handleStop', async () => {
+    test('the "start" method should call parent start', async () => {
         const startSpy = jest
             .spyOn(
                 Object.getPrototypeOf(HistoricalScheduler.prototype),
                 'start',
             )
             .mockImplementation(() => {});
-        const handleStopSpy = jest
-            .spyOn(context.historicalScheduler, 'handleStop')
-            .mockImplementation(() => {});
 
         await context.historicalScheduler.start({});
 
         expect(startSpy).toHaveBeenCalledTimes(1);
-        expect(handleStopSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('the "runCollectors" method updates intervalBounds and calls handler', async () => {
+    test('the "runOperations" method updates intervalBounds and calls handler', async () => {
         const operation = jest.fn();
 
         const updateIntervalBoundsSpy = jest
@@ -63,32 +58,29 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
             .mockImplementation(() => {});
         context.historicalScheduler.setOperations([operation]);
 
-        await context.historicalScheduler.runCollectors();
+        await context.historicalScheduler.runOperations();
 
         expect(updateIntervalBoundsSpy).toHaveBeenCalledTimes(1);
         expect(operation).toHaveBeenCalledTimes(1);
     });
 
-    test('the "updateIntervalBounds" should update scheduler state.', () => {
-        context.historicalScheduler.updateIntervalBounds();
-        expect(context.historicalScheduler.cycleCounter).toBe(1);
+    test('the "runOperations" method updates intervalBounds and calls handler', async () => {
+        const operation = jest.fn();
+        context.historicalScheduler.isFinalCycle = true;
 
-        context.historicalScheduler.updateIntervalBounds();
-        expect(context.historicalScheduler.cycleCounter).toBe(2);
-
-        context.historicalScheduler.updateIntervalBounds();
-        expect(context.historicalScheduler.cycleCounter).toBe(3);
-    });
-
-    test('the "handleStop" method should call stop method after all cycle are completed.', async () => {
+        const updateIntervalBoundsSpy = jest
+            .spyOn(context.historicalScheduler, 'updateIntervalBounds')
+            .mockImplementation(() => {});
         const stopSpy = jest
             .spyOn(context.historicalScheduler, 'stop')
             .mockImplementation(() => {});
+        context.historicalScheduler.setOperations([operation]);
 
-        await context.historicalScheduler.handleStop();
+        await context.historicalScheduler.runOperations();
 
+        expect(updateIntervalBoundsSpy).toHaveBeenCalledTimes(1);
         expect(stopSpy).toHaveBeenCalledTimes(1);
-        expect(context.setTimeoutStub).toHaveBeenCalledTimes(1);
+        expect(operation).toHaveBeenCalledTimes(1);
     });
 
     test('calculateLastCycleLimit should return remainingMinutes if it is not falsy', () => {
@@ -120,30 +112,32 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         expect(result).toBe(context.historicalScheduler.operationLimit);
     });
 
-    test('updateIntervalBounds should handle normal cycle correctly', () => {
+    test('updateIntervalBounds should set intervalStart and intervalEnd', () => {
         context.historicalScheduler.cycleCounter = 0;
         context.historicalScheduler.totalCycles = 2;
         context.historicalScheduler.operationLimit = 60;
         context.historicalScheduler.collectionStartDate = new Date(
             '2023-01-01T00:00:00Z',
-        );
+        ).getTime();
 
         context.historicalScheduler.updateIntervalBounds();
 
-        expect(context.historicalScheduler.cycleCounter).toBe(1);
+        expect(context.historicalScheduler.intervalStart).toBe(1672531200000);
+        expect(context.historicalScheduler.intervalEnd).toBe(1672534800000);
     });
 
-    test('updateIntervalBounds should handle final cycle correctly', () => {
+    test('updateIntervalBounds should handle final cycle precisely', () => {
         context.historicalScheduler.cycleCounter = 1;
         context.historicalScheduler.totalCycles = 2;
         context.historicalScheduler.lastCycleLimit = 30;
         context.historicalScheduler.collectionStartDate = new Date(
             '2023-01-01T00:00:00Z',
-        );
+        ).getTime();
 
         context.historicalScheduler.updateIntervalBounds();
 
-        expect(context.historicalScheduler.cycleCounter).toBe(2);
+        expect(context.historicalScheduler.intervalStart).toBe(1672561200000);
+        expect(context.historicalScheduler.intervalEnd).toBe(1672563000000);
     });
 
     test('the "getIntervalBounds" returns intervalStart and intervalEnd', () => {
