@@ -42,6 +42,7 @@ Our server's core functionality revolves around emitting real-time pricing event
 
  - [**Real-Time Streaming Dashboard via Websocket API**](docs/use-cases/realtime-dashboard.md)
  - [**Pricing Feed Infrastructure for Tezos Oracles**](docs/use-cases/tezos-oracle.md)
+ - [**Wolfram ChatBot Insights**](docs/use-cases/wolfram-chatbot.md)
 
 ## Supported Data Types
 CCDB supports a diverse range of data types:
