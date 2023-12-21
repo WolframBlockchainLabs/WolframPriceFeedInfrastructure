@@ -1,8 +1,10 @@
-# **Use Case: ChatGPT Plugin for Database Interaction**
+# **Use Case: Wolfram ChatBot Insights**
 
 ## Overview
 
 This use case describes a ChatGPT plugin designed to interface with a TimescaleDB database using natural language processing. The plugin enables users to query and interact with the data through conversational input. Below, we evaluate two proposed methods for integrating this plugin with our project's infrastructure.
+
+<img src="../../public/images/use-cases/Chatbook_CCDB.png" alt="Wolfram ChatBot Architecture" width="100%"/>
 
 ## Table of Contents
 
@@ -28,7 +30,7 @@ The Wolfram ChatGPT plugin is tasked with providing an intuitive and natural int
 
 ### Option 1: Private Network Exposure
 
-<img src="../../public/images/use-cases/wolfram-chatbot_option-1.png" alt="Wolfram ChatBot Option 1" width="100%"/>
+<img src="../../public/images/use-cases/wolfram-chatbot_option-1.png" alt="Wolfram ChatBot Integration Option 1" width="100%"/>
 
 #### Proposal
 - Expose the TimescaleDB port within a private network.
@@ -47,7 +49,7 @@ The Wolfram ChatGPT plugin is tasked with providing an intuitive and natural int
 
 ### Option 2: Microservice within CCDB
 
-<img src="../../public/images/use-cases/wolfram-chatbot_option-2.png" alt="Wolfram ChatBot Option 2" width="100%"/>
+<img src="../../public/images/use-cases/wolfram-chatbot_option-2.png" alt="Wolfram ChatBot Integration Option 2" width="100%"/>
 
 #### Proposal
 - Develop a Node.js microservice that manages SQL communication.

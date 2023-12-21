@@ -1,4 +1,4 @@
-# **Use Case: Tezos Oracle for Accurate Pricing Feeds**
+# **Use Case: Pricing Feed Infrastructure for Tezos Oracles**
 
 ## Overview
 
