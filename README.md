@@ -40,7 +40,9 @@ Welcome to the CCDB* Application, a robust and comprehensive data collector desi
 
 Our server's core functionality revolves around emitting real-time pricing events for various data types such as **Order Books, Tickers, Trades, Candlesticks, and Exchange Rates** in liquidity pools. This data, captured for each configured currency pair, is fetched and stored in our database by sophisticated collectors. In this section, we delve into a specific use cases leveraging our server's WebSocket and REST API to create a streamlined, real-time solutions.
 
- - [**Real-Time Streaming Dashboard via Websocket API**](docs/use-cases/dashboard.md)
+ - [**Real-Time Streaming Dashboard via Websocket API**](docs/use-cases/realtime-dashboard.md)
+ - [**Pricing Feed Infrastructure for Tezos Oracles**](docs/use-cases/tezos-oracle.md)
+ - [**Wolfram ChatBot Insights**](docs/use-cases/wolfram-chatbot.md)
 
 ## Supported Data Types
 CCDB supports a diverse range of data types:
