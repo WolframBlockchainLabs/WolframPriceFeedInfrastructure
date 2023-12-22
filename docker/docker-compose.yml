@@ -55,73 +55,73 @@ services:
     #         - ../:/app
     #         - /app/node_modules
 
-    # xrpl-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-xrpl-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
-    #     environment:
-    #         XRPL_INSTANCE_POSITION: 0
-    #         XRPL_REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:xrpl-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    xrpl-collectors-1:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-xrpl-collectors-1
+        depends_on:
+            timescale:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_healthy
+        env_file: ./env/.env.backend
+        environment:
+            XRPL_INSTANCE_POSITION: 0
+            XRPL_REPLICA_SIZE: 2
+        command: sh -c "npm run cli:xrpl-collectors"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
-    # eth-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-eth-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
-    #     environment:
-    #         ETH_INSTANCE_POSITION: 0
-    #         ETH_REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:eth-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    eth-collectors-1:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-eth-collectors-1
+        depends_on:
+            timescale:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_healthy
+        env_file: ./env/.env.backend
+        environment:
+            ETH_INSTANCE_POSITION: 0
+            ETH_REPLICA_SIZE: 2
+        command: sh -c "npm run cli:eth-collectors"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
-    # tezos-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-tezos-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
-    #     environment:
-    #         TEZOS_INSTANCE_POSITION: 0
-    #         TEZOS_REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:tezos-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    tezos-collectors-1:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-tezos-collectors-1
+        depends_on:
+            timescale:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_healthy
+        env_file: ./env/.env.backend
+        environment:
+            TEZOS_INSTANCE_POSITION: 0
+            TEZOS_REPLICA_SIZE: 2
+        command: sh -c "npm run cli:tezos-collectors"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
-    # cardano-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-cardano-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
-    #     environment:
-    #         CARDANO_INSTANCE_POSITION: 0
-    #         CARDANO_REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:cardano-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    cardano-collectors-1:
+        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        container_name: ccdb-cardano-collectors-1
+        depends_on:
+            timescale:
+                condition: service_healthy
+            rabbitmq:
+                condition: service_healthy
+        env_file: ./env/.env.backend
+        environment:
+            CARDANO_INSTANCE_POSITION: 0
+            CARDANO_REPLICA_SIZE: 2
+        command: sh -c "npm run cli:cardano-collectors"
+        volumes:
+            - ../:/app
+            - /app/node_modules
 
     database-writer:
         image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}

@@ -1,5 +1,5 @@
-import Market from '../../../lib/domain-model/entities/Market.js';
-import dumpMarket from '../../../lib/use-cases/utils/dumps/dumpMarket.js';
+import Market from '#domain-model/entities/Market.js';
+import dumpMarket from '#use-cases/utils/dumps/dumpMarket.js';
 import BaseFactory from './BaseFactory.js';
 
 class MarketFactory extends BaseFactory {

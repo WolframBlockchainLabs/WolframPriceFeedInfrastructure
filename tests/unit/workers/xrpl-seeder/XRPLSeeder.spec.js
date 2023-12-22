@@ -1,6 +1,6 @@
-import Exchange from '../../../../lib/domain-model/entities/Exchange.js';
-import Market from '../../../../lib/domain-model/entities/Market.js';
-import XRPLSeeder from '../../../../lib/workers/xrpl-seeder/XRPLSeeder.js';
+import Exchange from '#domain-model/entities/Exchange.js';
+import Market from '#domain-model/entities/Market.js';
+import XRPLSeeder from '#workers/xrpl-seeder/XRPLSeeder.js';
 
 const udexConf = {
     exchange: {

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import ExchangeRateCollector from '../../../../lib/domain-collectors/collectors/ExchangeRateCollector.js';
+import ExchangeRateCollector from '#domain-collectors/collectors/ExchangeRateCollector.js';
 
 describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', () => {
     const exchange = 'uniswap_v2';

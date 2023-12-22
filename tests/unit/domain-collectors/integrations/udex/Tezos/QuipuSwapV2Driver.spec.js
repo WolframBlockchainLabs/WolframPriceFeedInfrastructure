@@ -1,4 +1,4 @@
-import tezosDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
+import tezosDrivers from '#domain-collectors/integrations/udex/Tezos/index.js';
 
 describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite', () => {
     const context = {};

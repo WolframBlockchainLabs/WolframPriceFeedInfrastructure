@@ -1,4 +1,4 @@
-import PricingEmitter from '../../../../../lib/api/ws-api/emitters/PricingEmitter.js';
+import PricingEmitter from '#api/ws-api/emitters/PricingEmitter.js';
 
 describe('[emitters]: PricingEmitter Tests Suite', () => {
     const context = {};

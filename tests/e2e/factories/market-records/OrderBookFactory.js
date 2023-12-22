@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import dumpOrderBook from '../../../../lib/use-cases/utils/dumps/dumpOrderBook.js';
-import OrderBook from '../../../../lib/domain-model/entities/market-records/OrderBook.js';
+import dumpOrderBook from '#use-cases/utils/dumps/dumpOrderBook.js';
+import OrderBook from '#domain-model/entities/market-records/OrderBook.js';
 import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
 class OrderBookFactory extends BaseMarketRecordFactory {

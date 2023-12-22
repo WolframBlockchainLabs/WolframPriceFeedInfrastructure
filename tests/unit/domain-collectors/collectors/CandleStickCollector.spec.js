@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import CandleStickCollector from '../../../../lib/domain-collectors/collectors/CandleStickCollector.js';
+import CandleStickCollector from '#domain-collectors/collectors/CandleStickCollector.js';
 
 describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () => {
     const exchange = 'binance';

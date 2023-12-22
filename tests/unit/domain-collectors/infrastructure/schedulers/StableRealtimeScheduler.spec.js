@@ -1,5 +1,5 @@
 import 'croner';
-import StableRealtimeScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/StableRealtimeScheduler.js';
+import StableRealtimeScheduler from '#domain-collectors/infrastructure/schedulers/StableRealtimeScheduler.js';
 
 jest.mock('croner', () => {
     return jest.fn().mockImplementation((_, cb) => {

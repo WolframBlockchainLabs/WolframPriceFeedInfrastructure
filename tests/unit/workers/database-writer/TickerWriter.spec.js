@@ -1,6 +1,6 @@
-import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
-import Ticker from '../../../../lib/domain-model/entities/market-records/Ticker.js';
-import TickerWriter from '../../../../lib/workers/database-writer/TickerWriter.js';
+import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
+import Ticker from '#domain-model/entities/market-records/Ticker.js';
+import TickerWriter from '#workers/database-writer/TickerWriter.js';
 
 describe('[database-writer]: TickerWriter Tests Suite', () => {
     const context = {};

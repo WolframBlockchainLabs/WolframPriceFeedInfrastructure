@@ -1,5 +1,5 @@
-import CCXTDriverWrapper from '../../../../../lib/domain-collectors/integrations/ccxt/CCXTDriverWrapper.js';
-import RateLimitExceededException from '../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
+import CCXTDriverWrapper from '#domain-collectors/integrations/ccxt/CCXTDriverWrapper.js';
+import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
 import ccxt, {
     RateLimitExceeded as CCXTRateLimitExceeded,
     NetworkError,

@@ -1,6 +1,6 @@
-import BaseUDEXDriver from '../../../../../../lib/domain-collectors/integrations/udex/BaseUDEXDriver.js';
-import BaseETHDriver from '../../../../../../lib/domain-collectors/integrations/udex/Ethereum/BaseETHDriver.js';
-import RateLimitExceededException from '../../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
+import BaseUDEXDriver from '#domain-collectors/integrations/udex/BaseUDEXDriver.js';
+import BaseETHDriver from '#domain-collectors/integrations/udex/Ethereum/BaseETHDriver.js';
+import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
 
 describe('[domain-collectors/integrations/tezos]: BaseETHDriver Tests Suite', () => {
     const context = {};

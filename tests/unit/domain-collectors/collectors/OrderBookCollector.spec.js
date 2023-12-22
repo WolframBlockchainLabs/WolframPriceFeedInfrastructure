@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
 import { faker } from '@faker-js/faker';
-import OrderBookCollector from '../../../../lib/domain-collectors/collectors/OrderBookCollector.js';
+import OrderBookCollector from '#domain-collectors/collectors/OrderBookCollector.js';
 
 describe('[domain-collectors/collectors]: OrderBookCollector Tests Suite', () => {
     const exchange = 'binance';

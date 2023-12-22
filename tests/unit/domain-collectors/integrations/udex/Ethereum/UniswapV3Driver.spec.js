@@ -1,4 +1,4 @@
-import ethDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Ethereum/index.js';
+import ethDrivers from '#domain-collectors/integrations/udex/Ethereum/index.js';
 import { ethers } from 'ethers';
 
 jest.mock('ethers', () => {

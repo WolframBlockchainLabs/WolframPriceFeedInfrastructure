@@ -2,8 +2,8 @@ import {
     BlockfrostClientError,
     BlockfrostServerError,
 } from '@blockfrost/blockfrost-js';
-import BaseCardanoDriver from '../../../../../../lib/domain-collectors/integrations/udex/Cardano/BaseCardanoDriver.js';
-import RateLimitExceededException from '../../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
+import BaseCardanoDriver from '#domain-collectors/integrations/udex/Cardano/BaseCardanoDriver.js';
+import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
 
 describe('[domain-collectors/integrations/cardano]: BaseCardanoDriver Tests Suite', () => {
     const context = {};

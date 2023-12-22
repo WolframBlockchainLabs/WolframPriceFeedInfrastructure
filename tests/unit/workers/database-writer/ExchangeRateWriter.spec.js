@@ -1,6 +1,6 @@
-import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
-import ExchangeRate from '../../../../lib/domain-model/entities/market-records/ExchangeRate.js';
-import ExchangeRateWriter from '../../../../lib/workers/database-writer/ExchangeRateWriter.js';
+import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
+import ExchangeRate from '#domain-model/entities/market-records/ExchangeRate.js';
+import ExchangeRateWriter from '#workers/database-writer/ExchangeRateWriter.js';
 
 describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
     const context = {};

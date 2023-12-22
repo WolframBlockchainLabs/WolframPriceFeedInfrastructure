@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import TickerCollector from '../../../../lib/domain-collectors/collectors/TickerCollector.js';
+import TickerCollector from '#domain-collectors/collectors/TickerCollector.js';
 
 describe('[domain-collectors/collectors]: TickerCollector Tests Suite', () => {
     const exchange = 'binance';

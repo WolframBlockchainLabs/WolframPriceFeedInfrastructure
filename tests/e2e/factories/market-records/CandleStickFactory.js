@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import CandleStick from '../../../../lib/domain-model/entities/market-records/CandleStick.js';
-import dumpCandleStick from '../../../../lib/use-cases/utils/dumps/dumpCandleStick.js';
+import CandleStick from '#domain-model/entities/market-records/CandleStick.js';
+import dumpCandleStick from '#use-cases/utils/dumps/dumpCandleStick.js';
 import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
 class CandleStickFactory extends BaseMarketRecordFactory {

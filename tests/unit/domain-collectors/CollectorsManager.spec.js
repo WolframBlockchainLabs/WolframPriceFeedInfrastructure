@@ -1,8 +1,8 @@
-import CollectorsManager from '../../../lib/domain-collectors/CollectorsManager.js';
-import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
-import Exchange from '../../../lib/domain-model/entities/Exchange.js';
-import Market from '../../../lib/domain-model/entities/Market.js';
-import RateLimitExceededException from '../../../lib/domain-model/exceptions/RateLimitExceededException.js';
+import CollectorsManager from '#domain-collectors/CollectorsManager.js';
+import CandleStickCollector from '#domain-collectors/collectors/CandleStickCollector.js';
+import Exchange from '#domain-model/entities/Exchange.js';
+import Market from '#domain-model/entities/Market.js';
+import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
 
 describe('CollectorsManager Tests', () => {
     const schedulerOptions = {

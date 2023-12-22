@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import XRPLOrderBookCollector from '../../../../../../lib/domain-collectors/integrations/xrpl/collectors/XRPLOrderBook.js';
+import XRPLOrderBookCollector from '#domain-collectors/integrations/xrpl/collectors/XRPLOrderBook.js';
 
 describe('[domain-collectors/integrations/xrpl]: XRPLOrderBookCollector Tests Suite', () => {
     const context = {};

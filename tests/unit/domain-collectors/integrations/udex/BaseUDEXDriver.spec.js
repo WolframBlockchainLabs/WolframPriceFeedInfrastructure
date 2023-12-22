@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
-import BaseUDEXDriver from '../../../../../lib/domain-collectors/integrations/udex/BaseUDEXDriver.js';
-import RateLimitExceededException from '../../../../../lib/domain-model/exceptions/RateLimitExceededException.js';
+import BaseUDEXDriver from '#domain-collectors/integrations/udex/BaseUDEXDriver.js';
+import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
 
 describe('BaseUDEXDriver Tests Suite', () => {
     let driver;

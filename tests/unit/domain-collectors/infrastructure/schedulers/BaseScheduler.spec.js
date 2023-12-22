@@ -1,4 +1,4 @@
-import BaseScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/BaseScheduler.js';
+import BaseScheduler from '#domain-collectors/infrastructure/schedulers/BaseScheduler.js';
 import 'croner';
 
 jest.mock('croner', () => {

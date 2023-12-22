@@ -1,4 +1,4 @@
-import StatusUpdatePolicy from '../../../../../lib/domain-collectors/infrastructure/amqp-policies/StatusUpdatePolicy.js';
+import StatusUpdatePolicy from '#domain-collectors/infrastructure/amqp-policies/StatusUpdatePolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy Tests Suite', () => {
     const context = {};

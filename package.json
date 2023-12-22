@@ -10,6 +10,17 @@
         "url": "https://gitlab-ee.webbylab.com/cc-blockchain-labs/exchange-analyzer/backend"
     },
     "author": "WebbyLab",
+    "imports": {
+        "#api/*": "./lib/api/*",
+        "#configs/*": "./lib/configs/*",
+        "#constants/*": "./lib/constants/*",
+        "#domain-collectors/*": "./lib/domain-collectors/*",
+        "#infrastructure/*": "./lib/infrastructure/*",
+        "#domain-model/*": "./lib/domain-model/*",
+        "#use-cases/*": "./lib/use-cases/*",
+        "#utils/*": "./lib/utils/*",
+        "#workers/*": "./lib/workers/*"
+    },
     "scripts": {
         "start": "node --max-old-space-size=8192  ./lib/app.js",
         "nodemon": "nodemon --max-old-space-size=8192 --legacy-watch  ./lib/app.js",
@@ -84,6 +95,7 @@
         "confme": "^1.1.1",
         "cors": "^2.8.5",
         "croner": "^8.0.0",
+        "eslint-import-resolver-alias": "^1.1.2",
         "ethers": "^5.7.2",
         "express": "^4.18.2",
         "express-prom-bundle": "^6.6.0",
