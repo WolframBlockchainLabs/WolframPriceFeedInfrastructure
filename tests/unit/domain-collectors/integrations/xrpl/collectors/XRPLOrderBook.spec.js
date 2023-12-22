@@ -57,9 +57,8 @@ describe('[domain-collectors/integrations/xrpl]: XRPLOrderBookCollector Tests Su
     });
 
     test('fetch data should return existing orderBook info', async () => {
-        const result = await context.orderBookCollector.fetchData(
-            collectorMeta,
-        );
+        const result =
+            await context.orderBookCollector.fetchData(collectorMeta);
 
         expect(result).toEqual(fetchOrderBookStubResult);
         expect(context.exchangeAPIStub.fetchOrderBook).toHaveBeenCalledTimes(1);

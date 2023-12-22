@@ -41,9 +41,8 @@ describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () 
     });
 
     test('fetch data should return existing candleStick info', async () => {
-        const result = await context.candleStickCollector.fetchData(
-            collectorMeta,
-        );
+        const result =
+            await context.candleStickCollector.fetchData(collectorMeta);
 
         expect(result).toEqual(fetchOHLCVStubResult);
         expect(context.exchangeAPIStub.fetchOHLCV).toHaveBeenCalledTimes(1);

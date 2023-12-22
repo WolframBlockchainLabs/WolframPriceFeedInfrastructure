@@ -1,5 +1,4 @@
 {
-    
     "projectName": "{{PROJECT_NAME}}",
     "app": {
         "port": "{{PORT}}",

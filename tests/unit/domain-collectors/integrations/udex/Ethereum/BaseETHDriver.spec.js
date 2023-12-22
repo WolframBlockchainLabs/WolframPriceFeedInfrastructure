@@ -9,18 +9,6 @@ describe('[domain-collectors/integrations/tezos]: BaseETHDriver Tests Suite', ()
         context.baseETHDriver = new BaseETHDriver({
             apiSecret: 'test',
         });
-
-        context.baseETHDriver.tezosClient = {
-            contract: {
-                at() {
-                    return {
-                        storage() {
-                            return 'storage';
-                        },
-                    };
-                },
-            },
-        };
     });
 
     test('the "getExchangeRate" should throw RateLimitExceededException when getReserves fails', async () => {

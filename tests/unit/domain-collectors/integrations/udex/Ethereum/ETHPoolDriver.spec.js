@@ -5,9 +5,7 @@ jest.mock('ethers', () => {
     return {
         ethers: {
             Contract: jest.fn(),
-            providers: {
-                JsonRpcProvider: jest.fn(() => ({})),
-            },
+            JsonRpcProvider: jest.fn(() => ({})),
         },
     };
 });

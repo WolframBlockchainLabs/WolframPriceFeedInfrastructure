@@ -17,14 +17,14 @@ If you want to add a new exchange to the CCXT collectors, follow these steps:
 
     ```json
     {
-      "id": "new_exchange",
-      "name": "New Exchange",
-      "rateLimit": 600,
-      "symbols": [
-        "BTC/USD",
-        "ETH/USD"
-        // Add additional symbols here
-      ]
+        "id": "new_exchange",
+        "name": "New Exchange",
+        "rateLimit": 600,
+        "symbols": [
+            "BTC/USD",
+            "ETH/USD"
+            // Add additional symbols here
+        ]
     }
     ```
 
@@ -56,12 +56,12 @@ To add more symbols to an existing exchange configuration:
 
 Please ensure your contributions adhere to the following guidelines:
 
-- Commit messages should clearly describe the changes.
-- Follow the JSON structure as shown in the provided screenshots.
-- Test your changes to ensure they work as expected.
+-   Commit messages should clearly describe the changes.
+-   Follow the JSON structure as shown in the provided screenshots.
+-   Test your changes to ensure they work as expected.
 
 For any queries or help with your contribution, please open an issue on the GitHub repository.
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+🟣 [Back to main doc file](../../README.md)

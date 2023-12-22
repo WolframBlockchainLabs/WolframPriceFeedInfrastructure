@@ -56,9 +56,8 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
             'getContractStorage',
         ).mockResolvedValue(storageStub);
 
-        const result = await context.quipuswapStableswapDriver.getReserves(
-            pair,
-        );
+        const result =
+            await context.quipuswapStableswapDriver.getReserves(pair);
 
         expect({
             poolASize: result.poolASize.toString(),

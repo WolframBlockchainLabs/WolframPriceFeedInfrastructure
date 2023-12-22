@@ -28,4 +28,4 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
         container_name: ccdb-timescale-test
-        command: ["-c", "max_connections=10000"]
+        command: ['-c', 'max_connections=10000']

@@ -17,16 +17,16 @@ To add a new market pair to the `xrpl-collectors.config.json`, follow the steps 
 
     ```json
     {
-      "pair": {
-        "base": {
-          "currency": "BASE_CURRENCY"
+        "pair": {
+            "base": {
+                "currency": "BASE_CURRENCY"
+            },
+            "counter": {
+                "currency": "COUNTER_CURRENCY",
+                "issuer": "ISSUER_ADDRESS"
+            }
         },
-        "counter": {
-          "currency": "COUNTER_CURRENCY",
-          "issuer": "ISSUER_ADDRESS"
-        }
-      },
-      "symbol": "BASE_CURRENCY/COUNTER_CURRENCY:ISSUER_ADDRESS"
+        "symbol": "BASE_CURRENCY/COUNTER_CURRENCY:ISSUER_ADDRESS"
     }
     ```
 
@@ -37,16 +37,16 @@ To add a new market pair to the `xrpl-collectors.config.json`, follow the steps 
 
     ```json
     {
-      "pair": {
-        "base": {
-          "currency": "XRP"
+        "pair": {
+            "base": {
+                "currency": "XRP"
+            },
+            "counter": {
+                "currency": "USD",
+                "issuer": "rIssuerAddressForUSD"
+            }
         },
-        "counter": {
-          "currency": "USD",
-          "issuer": "rIssuerAddressForUSD"
-        }
-      },
-      "symbol": "XRP/USD:rIssuerAddressForUSD"
+        "symbol": "XRP/USD:rIssuerAddressForUSD"
     }
     ```
 
@@ -60,13 +60,13 @@ To add a new market pair to the `xrpl-collectors.config.json`, follow the steps 
 
 ## Guidelines for Contributions
 
-- Follow the JSON structure provided in the examples.
-- Ensure that the `issuer` field is included for all tokens, with the exception of the native XRP token.
-- Verify the accuracy of the `issuer` address and the currency codes.
-- Provide a clear and descriptive commit message for your changes.
+-   Follow the JSON structure provided in the examples.
+-   Ensure that the `issuer` field is included for all tokens, with the exception of the native XRP token.
+-   Verify the accuracy of the `issuer` address and the currency codes.
+-   Provide a clear and descriptive commit message for your changes.
 
 Contributions are greatly appreciated and help improve the diversity and accuracy of the market data provided by the XRPL configurations. Thank you for your support!
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+🟣 [Back to main doc file](../../README.md)
