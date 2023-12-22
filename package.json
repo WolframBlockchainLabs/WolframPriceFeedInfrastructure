@@ -100,6 +100,7 @@
         "express-prom-bundle": "^6.6.0",
         "helmet": "^7.1.0",
         "is-secret": "^1.2.1",
+        "json-pointer": "^0.6.2",
         "livr": "^2.7.1",
         "livr-extra-rules": "^1.3.2",
         "pg": "^8.11.3",
