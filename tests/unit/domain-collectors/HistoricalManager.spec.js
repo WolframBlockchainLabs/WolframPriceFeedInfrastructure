@@ -1,6 +1,6 @@
-import HistoricalManager from '../../../lib/domain-collectors/HistoricalManager.js';
-import HistoricalScheduler from '../../../lib/domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
-import CandleStickCollector from '../../../lib/domain-collectors/collectors/CandleStickCollector.js';
+import HistoricalManager from '#domain-collectors/HistoricalManager.js';
+import HistoricalScheduler from '#domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
+import CandleStickCollector from '#domain-collectors/collectors/CandleStickCollector.js';
 
 describe('[domain-collectors]: HistoricalManager Tests Suite', () => {
     const context = {};

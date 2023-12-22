@@ -1,4 +1,4 @@
-import HistoricalScheduler from '../../../../../lib/domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
+import HistoricalScheduler from '#domain-collectors/infrastructure/schedulers/HistoricalScheduler.js';
 
 describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tests Suite', () => {
     const scheduleStartDate = new Date('2023-11-7 12:53:44+0000');

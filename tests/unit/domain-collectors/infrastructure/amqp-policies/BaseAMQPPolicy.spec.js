@@ -1,4 +1,4 @@
-import BaseAMQPPolicy from '../../../../../lib/domain-collectors/infrastructure/amqp-policies/BaseAMQPPolicy.js';
+import BaseAMQPPolicy from '#domain-collectors/infrastructure/amqp-policies/BaseAMQPPolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests Suite', () => {
     const context = {};

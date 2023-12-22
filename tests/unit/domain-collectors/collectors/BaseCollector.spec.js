@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import Collector from '../../../../lib/domain-collectors/collectors/BaseCollector.js';
+import Collector from '#domain-collectors/collectors/BaseCollector.js';
 
 describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
     const context = {};

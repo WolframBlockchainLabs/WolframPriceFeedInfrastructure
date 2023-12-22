@@ -1,6 +1,6 @@
-import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
-import Trade from '../../../../lib/domain-model/entities/market-records/Trade.js';
-import TradeWriter from '../../../../lib/workers/database-writer/TradeWriter.js';
+import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
+import Trade from '#domain-model/entities/market-records/Trade.js';
+import TradeWriter from '#workers/database-writer/TradeWriter.js';
 
 describe('[database-writer]: TradeWriter Tests Suite', () => {
     const context = {};

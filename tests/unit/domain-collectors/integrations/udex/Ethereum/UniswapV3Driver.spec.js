@@ -1,13 +1,11 @@
-import ethDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Ethereum/index.js';
+import ethDrivers from '#domain-collectors/integrations/udex/Ethereum/index.js';
 import { ethers } from 'ethers';
 
 jest.mock('ethers', () => {
     return {
         ethers: {
             Contract: jest.fn(),
-            providers: {
-                JsonRpcProvider: jest.fn(() => ({})),
-            },
+            JsonRpcProvider: jest.fn(() => ({})),
         },
     };
 });
@@ -37,8 +35,8 @@ describe('[domain-collectors/integrations/eth]: UniswapV3Driver Tests Suite', ()
 
     beforeEach(() => {
         context.quoterContractStub = {
-            callStatic: {
-                quoteExactInputSingle: jest.fn(),
+            quoteExactInputSingle: {
+                staticCall: jest.fn(),
             },
         };
 
@@ -54,14 +52,14 @@ describe('[domain-collectors/integrations/eth]: UniswapV3Driver Tests Suite', ()
     });
 
     test('the "getExchangeRate" method should format pair and get quote', async () => {
-        context.quoterContractStub.callStatic.quoteExactInputSingle.mockResolvedValue(
+        context.quoterContractStub.quoteExactInputSingle.staticCall.mockResolvedValue(
             `${pairQuote}${'0'.repeat(pair.out.meta.decimals)}`,
         );
 
         const result = await context.uniswapV3Driver.getExchangeRate(pair);
 
         expect(
-            context.quoterContractStub.callStatic.quoteExactInputSingle,
+            context.quoterContractStub.quoteExactInputSingle.staticCall,
         ).toHaveBeenCalledTimes(1);
         expect(result).toEqual({
             exchangeRate: pairQuote,

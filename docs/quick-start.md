@@ -4,31 +4,31 @@
 
 Before setting up the project, ensure the following requirements are met:
 
-- **Node.js®**: Version 18 or higher.
-- **Docker CLI (Daemon)**: Required to run the Docker environment.
+-   **Node.js®**: Version 18 or higher.
+-   **Docker CLI (Daemon)**: Required to run the Docker environment.
 
 ## Initial Setup Instructions
 
 Follow these steps to set up the project:
 
 1. **Docker Daemon**: Verify that the Docker daemon is active.
-2. **Environment Variables**: 
+2. **Environment Variables**:
     - Copy `.env.example` from the root directory to `.env`.
-    - Modify parameters as necessary. 
+    - Modify parameters as necessary.
     - This file includes variables for Docker Compose configuration such as:
         - `PROJECT_NAME` : project name for compose to manage containers,
         - `BE_REGISTRY_ADDRESS` : address of containers registry that will be used for building and pushing,
         - `BE_TAG` : tag for the image that will be used for building and pushing.
 3. **Additional Configuration**:
-   - Copy `.env._example_` files from `./docker/env/_example` to `./docker/env/`.
-   - Adjust parameters as needed.
-   - For more details, refer to [Configuration Guides](../README.md#configuration-guides).
+    - Copy `.env._example_` files from `./docker/env/_example` to `./docker/env/`.
+    - Adjust parameters as needed.
+    - For more details, refer to [Configuration Guides](../README.md#configuration-guides).
 4. **Build Container Images**: Execute `./scripts/build`.
 5. **Start Containers**: Execute `./scripts/start`.
 6. **Database Migration**: Run `npm run docker:migration:db` to set up necessary database entities.
-7. **Seed Database**: 
-   - Use `npm run docker:workers:collectors-seeder:start` to populate the database with preconfigured exchanges (e.g., Binance, Kraken, Gemini).
-   - Refer to collectors config for the full list exchanges and markets.
+7. **Seed Database**:
+    - Use `npm run docker:workers:collectors-seeder:start` to populate the database with preconfigured exchanges (e.g., Binance, Kraken, Gemini).
+    - Refer to collectors config for the full list exchanges and markets.
 
 ## Running Containers
 

@@ -1,17 +1,17 @@
-import Exchange from '../../../lib/domain-model/entities/Exchange.js';
-import Market from '../../../lib/domain-model/entities/Market.js';
-import OrderBook from '../../../lib/domain-model/entities/market-records/OrderBook.js';
-import Trade from '../../../lib/domain-model/entities/market-records/Trade.js';
-import Ticker from '../../../lib/domain-model/entities/market-records/Ticker.js';
-import CandleStick from '../../../lib/domain-model/entities/market-records/CandleStick.js';
-import ExchangeRate from '../../../lib/domain-model/entities/market-records/ExchangeRate.js';
+import Exchange from '#domain-model/entities/Exchange.js';
+import Market from '#domain-model/entities/Market.js';
+import OrderBook from '#domain-model/entities/market-records/OrderBook.js';
+import Trade from '#domain-model/entities/market-records/Trade.js';
+import Ticker from '#domain-model/entities/market-records/Ticker.js';
+import CandleStick from '#domain-model/entities/market-records/CandleStick.js';
+import ExchangeRate from '#domain-model/entities/market-records/ExchangeRate.js';
 import {
     exchangeData,
     getCollectorsMetaInfos,
     marketsData,
 } from './test-data.js';
-import dumpMarket from '../../../lib/use-cases/utils/dumps/dumpMarket.js';
-import dumpExchange from '../../../lib/use-cases/utils/dumps/dumpExchange.js';
+import dumpMarket from '#use-cases/utils/dumps/dumpMarket.js';
+import dumpExchange from '#use-cases/utils/dumps/dumpExchange.js';
 
 class StressTestSeeder {
     constructor(logger) {

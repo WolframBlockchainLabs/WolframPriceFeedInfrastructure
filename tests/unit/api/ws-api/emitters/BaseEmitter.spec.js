@@ -1,5 +1,5 @@
-import BaseEmitter from '../../../../../lib/api/ws-api/emitters/BaseEmitter.js';
-import '../../../../../lib/api/ws-api/emitters/index.js';
+import BaseEmitter from '#api/ws-api/emitters/BaseEmitter.js';
+import '#api/ws-api/emitters/index.js';
 
 describe('[emitters]: BaseEmitter Tests Suite', () => {
     const context = {};

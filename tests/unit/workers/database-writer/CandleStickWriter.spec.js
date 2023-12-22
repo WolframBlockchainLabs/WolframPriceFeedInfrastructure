@@ -1,6 +1,6 @@
-import CandleStickWriter from '../../../../lib/workers/database-writer/CandleStickWriter.js';
-import CandleStick from '../../../../lib/domain-model/entities/market-records/CandleStick.js';
-import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
+import CandleStickWriter from '#workers/database-writer/CandleStickWriter.js';
+import CandleStick from '#domain-model/entities/market-records/CandleStick.js';
+import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
 
 describe('[database-writer]: CandleStickWriter Tests Suite', () => {
     const context = {};

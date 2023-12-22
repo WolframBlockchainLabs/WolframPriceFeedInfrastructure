@@ -2,7 +2,18 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2016",
-        "strictFunctionTypes": true
+        "strictFunctionTypes": true,
+        "paths": {
+            "#api/*": ["./lib/api/*"],
+            "#configs/*": ["./lib/configs/*"],
+            "#constants/*": ["./lib/constants/*"],
+            "#domain-collectors/*": ["./lib/domain-collectors/*"],
+            "#infrastructure/*": ["./lib/infrastructure/*"],
+            "#domain-model/*": ["./lib/domain-model/*"],
+            "#use-cases/*": ["./lib/use-cases/*"],
+            "#utils/*": ["./lib/utils/*"],
+            "#workers/*": ["./lib/workers/*"]
+        }
     },
     "exclude": ["node_modules", "**/node_modules/*"]
 }

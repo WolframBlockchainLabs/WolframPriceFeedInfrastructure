@@ -8,13 +8,13 @@ This use case describes a ChatGPT plugin designed to interface with a TimescaleD
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Plugin Capabilities](#plugin-capabilities)
-- [Integration Options](#integration-options)
-  - [Option 1: Private Network Exposure](#option-1-private-network-exposure)
-  - [Option 2: Microservice within CCDB](#option-2-microservice-within-ccdb)
-- [Comparative Analysis](#comparative-analysis)
-- [Conclusion](#conclusion)
+-   [Introduction](#introduction)
+-   [Plugin Capabilities](#plugin-capabilities)
+-   [Integration Options](#integration-options)
+    -   [Option 1: Private Network Exposure](#option-1-private-network-exposure)
+    -   [Option 2: Microservice within CCDB](#option-2-microservice-within-ccdb)
+-   [Comparative Analysis](#comparative-analysis)
+-   [Conclusion](#conclusion)
 
 ## Introduction
 
@@ -22,9 +22,9 @@ The Wolfram ChatGPT plugin is tasked with providing an intuitive and natural int
 
 ## Plugin Capabilities
 
-- **Natural Language Queries**: Users can ask questions or make requests using natural language.
-- **Data Retrieval**: The plugin scans the database, retrieving information as per the user's request.
-- **Interactive Responses**: Provides conversational feedback based on the data retrieved from the database.
+-   **Natural Language Queries**: Users can ask questions or make requests using natural language.
+-   **Data Retrieval**: The plugin scans the database, retrieving information as per the user's request.
+-   **Interactive Responses**: Provides conversational feedback based on the data retrieved from the database.
 
 ## Integration Options
 
@@ -33,40 +33,46 @@ The Wolfram ChatGPT plugin is tasked with providing an intuitive and natural int
 <img src="../../public/images/use-cases/wolfram-chatbot_option-1.png" alt="Wolfram ChatBot Integration Option 1" width="100%"/>
 
 #### Proposal
-- Expose the TimescaleDB port within a private network.
-- Create a read-only user for specific tables.
-- Enforce query execution time limits.
+
+-   Expose the TimescaleDB port within a private network.
+-   Create a read-only user for specific tables.
+-   Enforce query execution time limits.
 
 #### Benefits
-- Simplified database setup.
-- Enhanced security within a controlled environment.
+
+-   Simplified database setup.
+-   Enhanced security within a controlled environment.
 
 #### Trade-offs
-- Limited management capabilities.
-- Complexity in setting up and maintaining a private network.
-- Manual security management may increase the risk of breaches.
-- TLS setup for database connections may be error-prone.
+
+-   Limited management capabilities.
+-   Complexity in setting up and maintaining a private network.
+-   Manual security management may increase the risk of breaches.
+-   TLS setup for database connections may be error-prone.
 
 ### Option 2: Microservice within CCDB
 
 <img src="../../public/images/use-cases/wolfram-chatbot_option-2.png" alt="Wolfram ChatBot Integration Option 2" width="100%"/>
 
 #### Proposal
-- Develop a Node.js microservice that manages SQL communication.
-- Use special tokens for API access, controlled by administrators or via a paid plan.
-- Create a read-only user for specific tables.
-- Enforce query execution time limits.
+
+-   Develop a Node.js microservice that manages SQL communication.
+-   Use special tokens for API access, controlled by administrators or via a paid plan.
+-   Create a read-only user for specific tables.
+-   Enforce query execution time limits.
 
 #### Benefits
-- Full programmatic control with complex access verification.
-- Improved session management and security features like throttling and rate limits.
-- No need for a private network setup.
-- Security is managed systematically with automated permission tests.
-- TLS management is integrated within the existing NGINX proxy architecture.
+
+-   Full programmatic control with complex access verification.
+-   Improved session management and security features like throttling and rate limits.
+-   No need for a private network setup.
+-   Security is managed systematically with automated permission tests.
+-   TLS management is integrated within the existing NGINX proxy architecture.
 
 #### Trade-offs
-- Increased development time.
-- Dependency on the integration of user and access token management systems.
+
+-   Increased development time.
+-   Dependency on the integration of user and access token management systems.
 
 ## Comparative Analysis
 
@@ -80,4 +86,4 @@ In considering both options for integrating the ChatGPT plugin with our infrastr
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+🟣 [Back to main doc file](../../README.md)

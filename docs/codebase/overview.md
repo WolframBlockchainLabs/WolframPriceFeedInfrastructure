@@ -1,17 +1,18 @@
 # Project Structure Documentation
 
 ## Table of Contents
+
 1. [Configs](#1-configs)
 2. [Docker](#2-docker)
 3. [Documentation](#3-documentation)
 4. [Library (Lib)](#4-library-lib)
-   - [API](#41-api)
-   - [Collectors](#42-collectors)
-   - [Domain Model](#43-domain-model)
-   - [Infrastructure](#44-infrastructure)
-   - [Use Cases](#45-use-cases)
-   - [Utilities](#46-utilities)
-   - [Workers](#47-workers)
+    - [API](#41-api)
+    - [Collectors](#42-collectors)
+    - [Domain Model](#43-domain-model)
+    - [Infrastructure](#44-infrastructure)
+    - [Use Cases](#45-use-cases)
+    - [Utilities](#46-utilities)
+    - [Workers](#47-workers)
 5. [Migrations](#5-migrations)
 6. [Node Modules](#6-node-modules)
 7. [Public](#7-public)
@@ -38,8 +39,9 @@ Documentation-related materials, including architectural overviews and quick-sta
 ### 4.1 API
 
 The `api` directory contains the `rest-api` and `ws-api` subdirectories:
-- `rest-api` includes middleware, routes, and controllers that handle HTTP requests.
-- `ws-api` defines WebSocket gateways for real-time data streaming.
+
+-   `rest-api` includes middleware, routes, and controllers that handle HTTP requests.
+-   `ws-api` defines WebSocket gateways for real-time data streaming.
 
 ### 4.2 Collectors
 
@@ -95,4 +97,4 @@ Each section provides an overview of the respective directory's role within the 
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+🟣 [Back to main doc file](../../README.md)

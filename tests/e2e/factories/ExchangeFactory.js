@@ -1,5 +1,5 @@
-import Exchange from '../../../lib/domain-model/entities/Exchange.js';
-import dumpExchange from '../../../lib/use-cases/utils/dumps/dumpExchange.js';
+import Exchange from '#domain-model/entities/Exchange.js';
+import dumpExchange from '#use-cases/utils/dumps/dumpExchange.js';
 import BaseFactory from './BaseFactory.js';
 
 class ExchangeFactory extends BaseFactory {

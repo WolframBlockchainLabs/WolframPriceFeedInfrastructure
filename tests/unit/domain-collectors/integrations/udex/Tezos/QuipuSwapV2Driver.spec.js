@@ -1,4 +1,4 @@
-import tezosDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
+import tezosDrivers from '#domain-collectors/integrations/udex/Tezos/index.js';
 
 describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite', () => {
     const context = {};
@@ -61,9 +61,8 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapV2Driver Tests Suite'
             out: { meta: { decimals: 1 } },
         };
 
-        const result = await context.quipuswapV2Driver.getExchangeRate(
-            modifiedPair,
-        );
+        const result =
+            await context.quipuswapV2Driver.getExchangeRate(modifiedPair);
 
         expect(context.execViewStub).toHaveBeenCalledTimes(1);
         expect(result).toEqual({

@@ -1,13 +1,11 @@
-import ethDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Ethereum/index.js';
+import ethDrivers from '#domain-collectors/integrations/udex/Ethereum/index.js';
 import { ethers } from 'ethers';
 
 jest.mock('ethers', () => {
     return {
         ethers: {
             Contract: jest.fn(),
-            providers: {
-                JsonRpcProvider: jest.fn(() => ({})),
-            },
+            JsonRpcProvider: jest.fn(() => ({})),
         },
     };
 });

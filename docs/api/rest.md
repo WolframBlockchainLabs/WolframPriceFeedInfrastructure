@@ -1,32 +1,35 @@
 # HTTP API Documentation
 
 ## Table of Contents
+
 1. [Exchange](#exchange)
-   - [Get List of Exchanges](#get-list-of-exchanges)
+    - [Get List of Exchanges](#get-list-of-exchanges)
 2. [Markets](#markets)
-   - [Get List of Markets](#get-list-of-markets)
+    - [Get List of Markets](#get-list-of-markets)
 3. [CandleStick](#candlestick)
-   - [Get List of Market's candleSticks](#get-list-of-markets-candlesticks)
-   - [Get aggregate Market candleStick](#get-aggregate-market-candlestick)
+    - [Get List of Market's candleSticks](#get-list-of-markets-candlesticks)
+    - [Get aggregate Market candleStick](#get-aggregate-market-candlestick)
 4. [Exchange Rate](#exchange-rate)
-   - [Get List of Market's exchangeRates](#get-list-of-markets-exchangerates)
+    - [Get List of Market's exchangeRates](#get-list-of-markets-exchangerates)
 5. [Order Book](#order-book)
-   - [Get List of Market's orderBooks](#get-list-of-markets-orderbooks)
+    - [Get List of Market's orderBooks](#get-list-of-markets-orderbooks)
 6. [Ticker](#ticker)
-   - [Get List of Market's tickers](#get-list-of-markets-tickers)
+    - [Get List of Market's tickers](#get-list-of-markets-tickers)
 7. [Trades](#trades)
-   - [Get List of Market's trades](#get-list-of-markets-trades)
+    - [Get List of Market's trades](#get-list-of-markets-trades)
 
 ## Exchange
 
 ### Get List of Exchanges
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/exchanges`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/exchanges`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -64,20 +67,20 @@
 }
 ```
 
-
-
 ## Markets
 
 ### Get List of Markets
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/markets`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
-  - `tokenNames`: (string) Token symbol (e.g. BTC).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/markets`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+    -   `tokenNames`: (string) Token symbol (e.g. BTC).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -170,22 +173,22 @@
 }
 ```
 
-
-
 ## CandleStick
 
 ### Get List of Market's candleSticks
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/candleSticks`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
-  - `rangeDateStart`: (string) Start date of the range.
-  - `rangeDateEnd`: (string) End date of the range.
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
-  - `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/candleSticks`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
+    -   `rangeDateStart`: (string) Start date of the range.
+    -   `rangeDateEnd`: (string) End date of the range.
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+    -   `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -194,11 +197,7 @@
             "marketId": 69,
             "charts": [
                 [
-                    1701993480000,
-                    43273.99,
-                    43281.02,
-                    43260.68,
-                    43281.01,
+                    1701993480000, 43273.99, 43281.02, 43260.68, 43281.01,
                     27.53241
                 ]
             ],
@@ -212,14 +211,7 @@
             "id": 138410,
             "marketId": 69,
             "charts": [
-                [
-                    1701993420000,
-                    43266.3,
-                    43274,
-                    43252.42,
-                    43274,
-                    24.13456
-                ]
+                [1701993420000, 43266.3, 43274, 43252.42, 43274, 24.13456]
             ],
             "createdAt": "2023-12-08T00:52:06.760Z",
             "exchangeName": "Binance",
@@ -231,14 +223,7 @@
             "id": 138371,
             "marketId": 69,
             "charts": [
-                [
-                    1701993360000,
-                    43279.99,
-                    43280,
-                    43266.3,
-                    43266.3,
-                    17.43755
-                ]
+                [1701993360000, 43279.99, 43280, 43266.3, 43266.3, 17.43755]
             ],
             "createdAt": "2023-12-08T00:51:06.730Z",
             "exchangeName": "Binance",
@@ -250,14 +235,7 @@
             "id": 138333,
             "marketId": 69,
             "charts": [
-                [
-                    1701993300000,
-                    43254.79,
-                    43280,
-                    43253.65,
-                    43279.99,
-                    13.02447
-                ]
+                [1701993300000, 43254.79, 43280, 43253.65, 43279.99, 13.02447]
             ],
             "createdAt": "2023-12-08T00:50:06.688Z",
             "exchangeName": "Binance",
@@ -269,14 +247,7 @@
             "id": 138294,
             "marketId": 69,
             "charts": [
-                [
-                    1701993240000,
-                    43266.3,
-                    43266.31,
-                    43240.83,
-                    43254.79,
-                    15.64374
-                ]
+                [1701993240000, 43266.3, 43266.31, 43240.83, 43254.79, 15.64374]
             ],
             "createdAt": "2023-12-08T00:49:06.271Z",
             "exchangeName": "Binance",
@@ -293,17 +264,19 @@
 ```
 
 ### Get aggregate Market candleStick
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/candleSticks/aggregate`
-- **Parameters**:
-  - `offset`: (integer) Aggregation offset (skips specified amount of records from the beginning of time frame. Not particularly useful in a common use case, but might be in some complex corner cases).
-  - `limit`: (integer) Number of records to be used in an aggregation round (heavily influences execution time and memory usage. The more records will be aggregated in one round the more memory it will take, but the execution time will be faster because it will take less requests to the database).
-  - `rangeDateStart`: (string) Start date of the range.
-  - `rangeDateEnd`: (string) End date of the range.
-  - `symbols[]`: (array) List of trading pair symbols (e.g. BTC/USDT).
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/candleSticks/aggregate`
+-   **Parameters**:
+    -   `offset`: (integer) Aggregation offset (skips specified amount of records from the beginning of time frame. Not particularly useful in a common use case, but might be in some complex corner cases).
+    -   `limit`: (integer) Number of records to be used in an aggregation round (heavily influences execution time and memory usage. The more records will be aggregated in one round the more memory it will take, but the execution time will be faster because it will take less requests to the database).
+    -   `rangeDateStart`: (string) Start date of the range.
+    -   `rangeDateEnd`: (string) End date of the range.
+    -   `symbols[]`: (array) List of trading pair symbols (e.g. BTC/USDT).
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": {
@@ -332,24 +305,24 @@
 }
 ```
 
-*Note: `null` values indicate no data available for the specified period.*
-
-
-
+_Note: `null` values indicate no data available for the specified period._
 
 ## Exchange Rate
+
 ### Get List of Market's exchangeRates
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/exchangeRates`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
-  - `rangeDateStart`: (string) Start date of the range.
-  - `rangeDateEnd`: (string) End date of the range.
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
-  - `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/exchangeRates`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
+    -   `rangeDateStart`: (string) Start date of the range.
+    -   `rangeDateEnd`: (string) End date of the range.
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+    -   `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -421,21 +394,22 @@
 }
 ```
 
-
-
 ## Order Book
+
 ### Get List of Market's orderBooks
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/orderBooks`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
-  - `rangeDateStart`: (string) Start date of the range.
-  - `rangeDateEnd`: (string) End date of the range.
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
-  - `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/orderBooks`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
+    -   `rangeDateStart`: (string) Start date of the range.
+    -   `rangeDateEnd`: (string) End date of the range.
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+    -   `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -443,32 +417,14 @@
             "id": 353997,
             "marketId": 69,
             "bids": [
-                [
-                    41914.86,
-                    0.05232
-                ],
-                [
-                    41914.66,
-                    0.00215
-                ],
-                [
-                    41914.17,
-                    0.00215
-                ]
+                [41914.86, 0.05232],
+                [41914.66, 0.00215],
+                [41914.17, 0.00215]
             ],
             "asks": [
-                [
-                    41914.87,
-                    8.58644
-                ],
-                [
-                    41914.91,
-                    1.2
-                ],
-                [
-                    41914.96,
-                    0.3669
-                ]
+                [41914.87, 8.58644],
+                [41914.91, 1.2],
+                [41914.96, 0.3669]
             ],
             "createdAt": "2023-12-11T15:27:08.427Z",
             "exchangeName": "Binance",
@@ -480,32 +436,14 @@
             "id": 353953,
             "marketId": 69,
             "bids": [
-                [
-                    41901.59,
-                    5.39373
-                ],
-                [
-                    41901.56,
-                    0.07154
-                ],
-                [
-                    41901.27,
-                    0.00012
-                ]
+                [41901.59, 5.39373],
+                [41901.56, 0.07154],
+                [41901.27, 0.00012]
             ],
             "asks": [
-                [
-                    41901.6,
-                    0.41075
-                ],
-                [
-                    41901.92,
-                    0.00215
-                ],
-                [
-                    41902,
-                    0.2222
-                ]
+                [41901.6, 0.41075],
+                [41901.92, 0.00215],
+                [41902, 0.2222]
             ],
             "createdAt": "2023-12-11T15:26:08.360Z",
             "exchangeName": "Binance",
@@ -521,21 +459,22 @@
 }
 ```
 
-
-
 ## Ticker
+
 ### Get List of Market's tickers
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/tickers`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
-  - `rangeDateStart`: (string) Start date of the range.
-  - `rangeDateEnd`: (string) End date of the range.
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
-  - `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/tickers`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
+    -   `rangeDateStart`: (string) Start date of the range.
+    -   `rangeDateEnd`: (string) End date of the range.
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+    -   `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -672,21 +611,22 @@
 }
 ```
 
-
-
 ## Trades
+
 ### Get List of Market's trades
-- **Method**: GET
-- **Endpoint**: `/api/v1/crypto/trades`
-- **Parameters**:
-  - `offset`: (integer) Pagination offset.
-  - `limit`: (integer) Number of records to return.
-  - `rangeDateStart`: (string) Start date of the range.
-  - `rangeDateEnd`: (string) End date of the range.
-  - `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
-  - `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
+
+-   **Method**: GET
+-   **Endpoint**: `/api/v1/crypto/trades`
+-   **Parameters**:
+    -   `offset`: (integer) Pagination offset.
+    -   `limit`: (integer) Number of records to return.
+    -   `rangeDateStart`: (string) Start date of the range.
+    -   `rangeDateEnd`: (string) End date of the range.
+    -   `exchangeNames[]`: (array) List of exchange names (e.g. Binance).
+    -   `symbol`: (string) Trading pair symbol (e.g. BTC/USDT).
 
 **Example Response Payload:**
+
 ```json
 {
     "data": [
@@ -694,24 +634,9 @@
             "id": 344158,
             "marketId": 20,
             "tradesInfo": [
-                [
-                    0,
-                    41891.1,
-                    0.00286926,
-                    1702308567612
-                ],
-                [
-                    0,
-                    41897.1,
-                    0.00208735,
-                    1702308579175
-                ],
-                [
-                    0,
-                    41891.1,
-                    0.02258183,
-                    1702308589174
-                ]
+                [0, 41891.1, 0.00286926, 1702308567612],
+                [0, 41897.1, 0.00208735, 1702308579175],
+                [0, 41891.1, 0.02258183, 1702308589174]
             ],
             "createdAt": "2023-12-11T15:31:11.798Z",
             "exchangeName": "Kraken",
@@ -723,42 +648,12 @@
             "id": 344117,
             "marketId": 20,
             "tradesInfo": [
-                [
-                    1,
-                    41897.9,
-                    0.05,
-                    1702308499073
-                ],
-                [
-                    1,
-                    41897.9,
-                    0.10292988,
-                    1702308499073
-                ],
-                [
-                    1,
-                    41897.4,
-                    0.002487,
-                    1702308499073
-                ],
-                [
-                    1,
-                    41897.3,
-                    0.01962735,
-                    1702308499073
-                ],
-                [
-                    1,
-                    41895.9,
-                    0.09024699,
-                    1702308499073
-                ],
-                [
-                    1,
-                    41895.4,
-                    0.03470878,
-                    1702308499073
-                ]
+                [1, 41897.9, 0.05, 1702308499073],
+                [1, 41897.9, 0.10292988, 1702308499073],
+                [1, 41897.4, 0.002487, 1702308499073],
+                [1, 41897.3, 0.01962735, 1702308499073],
+                [1, 41895.9, 0.09024699, 1702308499073],
+                [1, 41895.4, 0.03470878, 1702308499073]
             ],
             "createdAt": "2023-12-11T15:30:11.762Z",
             "exchangeName": "Kraken",
@@ -780,18 +675,8 @@
             "id": 344037,
             "marketId": 20,
             "tradesInfo": [
-                [
-                    0,
-                    41900.1,
-                    0.03200524,
-                    1702308362414
-                ],
-                [
-                    0,
-                    41909.4,
-                    0.00023861,
-                    1702308400345
-                ]
+                [0, 41900.1, 0.03200524, 1702308362414],
+                [0, 41909.4, 0.00023861, 1702308400345]
             ],
             "createdAt": "2023-12-11T15:28:12.696Z",
             "exchangeName": "Kraken",
@@ -816,8 +701,6 @@
     "status": 1
 }
 ```
-
-
 
 ---
 

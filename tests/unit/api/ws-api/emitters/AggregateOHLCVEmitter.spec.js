@@ -1,4 +1,4 @@
-import AggregateOHLCVEmitter from '../../../../../lib/api/ws-api/emitters/AggregateOHLCVEmitter.js';
+import AggregateOHLCVEmitter from '#api/ws-api/emitters/AggregateOHLCVEmitter.js';
 
 describe('AggregateOHLCVEmitter Tests', () => {
     const context = {

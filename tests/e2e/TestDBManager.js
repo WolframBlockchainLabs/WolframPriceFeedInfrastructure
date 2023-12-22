@@ -1,4 +1,4 @@
-import initModels from '../../lib/infrastructure/sequelize/initModels.js';
+import initModels from '#infrastructure/sequelize/initModels.js';
 import { SequelizeStorage, Umzug } from 'umzug';
 import { Sequelize } from 'sequelize';
 

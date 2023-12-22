@@ -1,6 +1,6 @@
-import CCXTSeeder from '../../../../lib/workers/ccxt-seeder/CCXTSeeder.js';
-import Exchange from '../../../../lib/domain-model/entities/Exchange.js';
-import Market from '../../../../lib/domain-model/entities/Market.js';
+import CCXTSeeder from '#workers/ccxt-seeder/CCXTSeeder.js';
+import Exchange from '#domain-model/entities/Exchange.js';
+import Market from '#domain-model/entities/Market.js';
 // eslint-disable-next-line import/no-unresolved
 import ccxt from 'ccxt';
 

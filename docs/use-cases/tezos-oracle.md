@@ -8,14 +8,14 @@ This documentation presents the use case for a Tezos-based oracle that provides 
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Oracle Design](#oracle-design)
-- [Data Sources and Reliability](#data-sources-and-reliability)
-- [Features](#features)
-- [Implementation Details](#implementation-details)
-- [System Architecture](#system-architecture)
-- [Integrating with Tezos Smart Contracts](#integrating-with-tezos-smart-contracts)
-- [Advantages of Our Tezos Oracle](#advantages-of-our-tezos-oracle)
+-   [Introduction](#introduction)
+-   [Oracle Design](#oracle-design)
+-   [Data Sources and Reliability](#data-sources-and-reliability)
+-   [Features](#features)
+-   [Implementation Details](#implementation-details)
+-   [System Architecture](#system-architecture)
+-   [Integrating with Tezos Smart Contracts](#integrating-with-tezos-smart-contracts)
+-   [Advantages of Our Tezos Oracle](#advantages-of-our-tezos-oracle)
 
 ## Introduction
 
@@ -29,14 +29,14 @@ Our Tezos Oracle is designed with an emphasis on security, accuracy, and latency
 
 ### Key Components:
 
-- **External Exchange APIs**: Data is sourced from established cryptocurrency exchanges like Coinbase, ensuring market-representative prices.
-- **Financial Data Providers**: We incorporate pricing data from renowned financial data services, adding another layer of price verification.
-- **Decentralized Data Aggregators**: Utilization of decentralized platforms ensures that the oracle remains resistant to single points of failure.
+-   **External Exchange APIs**: Data is sourced from established cryptocurrency exchanges like Coinbase, ensuring market-representative prices.
+-   **Financial Data Providers**: We incorporate pricing data from renowned financial data services, adding another layer of price verification.
+-   **Decentralized Data Aggregators**: Utilization of decentralized platforms ensures that the oracle remains resistant to single points of failure.
 
 ### Data Accuracy:
 
-- **Cross-verification**: Prices are cross-verified across different platforms to prevent discrepancies and manipulation.
-- **Timely Updates**: The system is designed for rapid polling and updating to reflect real-time market movements.
+-   **Cross-verification**: Prices are cross-verified across different platforms to prevent discrepancies and manipulation.
+-   **Timely Updates**: The system is designed for rapid polling and updating to reflect real-time market movements.
 
 ## Features
 
@@ -52,11 +52,11 @@ The Tezos Oracle is implemented with a series of interconnected components, each
 
 ## System Architecture
 
-- **Smart Contracts**: Act as the on-chain endpoints for data consumption.
-- **Storage Smart Contract**: Stores the latest verified prices on the blockchain.
-- **Normalizer Smart Contract**: Aggregates and normalizes data from different sources to provide a standardized output.
-- **Poster Server**: An off-chain server that polls data from external sources and pushes it to the smart contracts.
-- **Event Polling**: Monitors data sources and triggers updates to the Poster Server.
+-   **Smart Contracts**: Act as the on-chain endpoints for data consumption.
+-   **Storage Smart Contract**: Stores the latest verified prices on the blockchain.
+-   **Normalizer Smart Contract**: Aggregates and normalizes data from different sources to provide a standardized output.
+-   **Poster Server**: An off-chain server that polls data from external sources and pushes it to the smart contracts.
+-   **Event Polling**: Monitors data sources and triggers updates to the Poster Server.
 
 ## Integrating with Tezos Smart Contracts
 
@@ -66,18 +66,18 @@ Smart contracts on the Tezos blockchain can retrieve the latest asset prices by 
 
 ### Enhanced Security:
 
-- **Decentralized Nodes**: Distribution of data sourcing and validation across multiple nodes to prevent single points of failure and manipulation.
+-   **Decentralized Nodes**: Distribution of data sourcing and validation across multiple nodes to prevent single points of failure and manipulation.
 
 ### Performance:
 
-- **Optimized Data Retrieval**: System design prioritizes low latency to maintain high performance and real-time data provision.
+-   **Optimized Data Retrieval**: System design prioritizes low latency to maintain high performance and real-time data provision.
 
 ### Reliability:
 
-- **Robust Data Sources**: Selection of premium and reliable data sources to ensure continuous and accurate data availability.
+-   **Robust Data Sources**: Selection of premium and reliable data sources to ensure continuous and accurate data availability.
 
 In summary, our Tezos Oracle system is architected to provide a critical service to the DeFi ecosystem, enabling accurate, secure, and decentralized price feeds that smart contracts can rely on for executing financial operations.
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+🟣 [Back to main doc file](../../README.md)

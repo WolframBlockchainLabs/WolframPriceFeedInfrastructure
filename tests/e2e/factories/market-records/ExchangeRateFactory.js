@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import ExchangeRate from '../../../../lib/domain-model/entities/market-records/ExchangeRate.js';
-import dumpExchangeRate from '../../../../lib/use-cases/utils/dumps/dumpExchangeRate.js';
+import ExchangeRate from '#domain-model/entities/market-records/ExchangeRate.js';
+import dumpExchangeRate from '#use-cases/utils/dumps/dumpExchangeRate.js';
 import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
 class ExchangeRateFactory extends BaseMarketRecordFactory {

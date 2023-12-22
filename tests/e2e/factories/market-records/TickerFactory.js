@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import dumpTicker from '../../../../lib/use-cases/utils/dumps/dumpTicker.js';
-import Ticker from '../../../../lib/domain-model/entities/market-records/Ticker.js';
+import dumpTicker from '#use-cases/utils/dumps/dumpTicker.js';
+import Ticker from '#domain-model/entities/market-records/Ticker.js';
 import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 
 class TickerFactory extends BaseMarketRecordFactory {

@@ -1,4 +1,4 @@
-import BackoffPolicy from '../../../../../lib/domain-collectors/infrastructure/amqp-policies/BackoffPolicy.js';
+import BackoffPolicy from '#domain-collectors/infrastructure/amqp-policies/BackoffPolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests Suite', () => {
     const context = {};

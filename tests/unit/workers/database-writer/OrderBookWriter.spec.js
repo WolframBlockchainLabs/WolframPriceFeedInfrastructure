@@ -1,6 +1,6 @@
-import { MILLISECONDS_IN_A_MINUTE } from '../../../../lib/constants/timeframes.js';
-import OrderBook from '../../../../lib/domain-model/entities/market-records/OrderBook.js';
-import OrderBookWriter from '../../../../lib/workers/database-writer/OrderBookWriter.js';
+import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
+import OrderBook from '#domain-model/entities/market-records/OrderBook.js';
+import OrderBookWriter from '#workers/database-writer/OrderBookWriter.js';
 
 describe('[database-writer]: OrderBookWriter Tests Suite', () => {
     const context = {};

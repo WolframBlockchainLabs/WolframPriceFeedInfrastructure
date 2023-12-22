@@ -21,5 +21,23 @@
         "import/named": 2,
         "import/default": 2,
         "import/export": 2
+    },
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["#api", "./lib/api"],
+                    ["#configs", "./lib/configs"],
+                    ["#constants", "./lib/constants"],
+                    ["#domain-collectors", "./lib/domain-collectors"],
+                    ["#infrastructure", "./lib/infrastructure"],
+                    ["#domain-model", "./lib/domain-model"],
+                    ["#use-cases", "./lib/use-cases"],
+                    ["#utils", "./lib/utils"],
+                    ["#workers", "./lib/workers"]
+                ],
+                "extensions": [".js", ".cjs"]
+            }
+        }
     }
 }

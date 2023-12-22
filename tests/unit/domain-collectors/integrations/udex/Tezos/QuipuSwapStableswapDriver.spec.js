@@ -1,4 +1,4 @@
-import tezosDrivers from '../../../../../../lib/domain-collectors/integrations/udex/Tezos/index.js';
+import tezosDrivers from '#domain-collectors/integrations/udex/Tezos/index.js';
 
 describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Tests Suite', () => {
     const context = {};
@@ -56,9 +56,8 @@ describe('[domain-collectors/integrations/tezos]: QuipuswapStableswapDriver Test
             'getContractStorage',
         ).mockResolvedValue(storageStub);
 
-        const result = await context.quipuswapStableswapDriver.getReserves(
-            pair,
-        );
+        const result =
+            await context.quipuswapStableswapDriver.getReserves(pair);
 
         expect({
             poolASize: result.poolASize.toString(),

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import ExchangeRateCollector from '../../../../lib/domain-collectors/collectors/ExchangeRateCollector.js';
+import ExchangeRateCollector from '#domain-collectors/collectors/ExchangeRateCollector.js';
 
 describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', () => {
     const exchange = 'uniswap_v2';
@@ -50,9 +50,8 @@ describe('[domain-collectors/collectors]: ExchangeRateCollector Tests Suite', ()
     });
 
     test('fetch data should return existing orderBook info', async () => {
-        const result = await context.exchangeRateCollector.fetchData(
-            collectorMeta,
-        );
+        const result =
+            await context.exchangeRateCollector.fetchData(collectorMeta);
 
         expect(result).toEqual(getExchangeRateStubResult);
         expect(context.exchangeAPIStub.getExchangeRate).toHaveBeenCalledTimes(

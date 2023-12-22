@@ -1,6 +1,7 @@
 # WebSocket API Documentation
 
 ## Table of Contents
+
 1. [AggregateOHLCV Event](#aggregateohlcv-event)
 2. [\${exchange}-${pair}-Trade Event](#exchange-pair-trade-event)
 3. [\${exchange}-${pair}-Ticker Event](#exchange-pair-ticker-event)
@@ -12,6 +13,7 @@
 The `AggregateOHLCV` event is emitted every 10 minutes, providing aggregated data for preconfigured currency pairs. The interval could be configured in the [System Config](../config/system.md#aggregateohlcvemitter-settings)
 
 **Example Payload:**
+
 ```json
 {
     "data": {
@@ -38,49 +40,26 @@ The `AggregateOHLCV` event is emitted every 10 minutes, providing aggregated dat
     }
 }
 ```
-*Note: `null` values indicate no data available for the specified period.*
+
+_Note: `null` values indicate no data available for the specified period._
 
 ## \${exchange}-${pair}-Trade Event
 
 This event emits Trade data for a specified exchange and currency pair as soon as it is collected.
 
 **Example Payload for binance-BTC/USDT-Trade:**
+
 ```json
 {
     "exchange": "binance",
     "symbol": "BTC/USDT",
     "payload": {
         "tradesInfo": [
-            [
-                1,
-                42000.03,
-                0.00058,
-                1702305540000
-            ],
-            [
-                1,
-                42000.03,
-                0.00054,
-                1702305540001
-            ],
-            [
-                1,
-                42000.03,
-                0.00113,
-                1702305540001
-            ],
-            [
-                1,
-                42000.03,
-                0.00232,
-                1702305540002
-            ],
-            [
-                1,
-                42000.03,
-                0.00227,
-                1702305540002
-            ]
+            [1, 42000.03, 0.00058, 1702305540000],
+            [1, 42000.03, 0.00054, 1702305540001],
+            [1, 42000.03, 0.00113, 1702305540001],
+            [1, 42000.03, 0.00232, 1702305540002],
+            [1, 42000.03, 0.00227, 1702305540002]
         ],
         "intervalStart": 1702305540000,
         "intervalEnd": 1702305600000,
@@ -89,13 +68,15 @@ This event emits Trade data for a specified exchange and currency pair as soon a
     "type": "Trade"
 }
 ```
-*Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names.*
+
+_Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names._
 
 ## \${exchange}-${pair}-Ticker Event
 
 This event provides Ticker data for a specified exchange and currency pair as soon as it is collected.
 
 **Example Payload for binance-BTC/USDT-Ticker:**
+
 ```json
 {
     "exchange": "binance",
@@ -125,57 +106,31 @@ This event provides Ticker data for a specified exchange and currency pair as so
 }
 ```
 
-*Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names.*
+_Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names._
 
 ## \${exchange}-${pair}-OrderBook Event
 
 This event provides OrderBook data for a specified exchange and currency pair as soon as it is collected.
 
 **Example Payload for binance-BTC/USDT-OrderBook:**
+
 ```json
 {
     "exchange": "binance",
     "symbol": "BTC/USDT",
     "payload": {
         "bids": [
-            [
-                41977,
-                0.13294
-            ],
-            [
-                41976.89,
-                0.02795
-            ],
-            [
-                41976.74,
-                0.11951
-            ],
-            [
-                41976.73,
-                0.1
-            ],
-            [
-                41976.49,
-                0.00329
-            ]
+            [41977, 0.13294],
+            [41976.89, 0.02795],
+            [41976.74, 0.11951],
+            [41976.73, 0.1],
+            [41976.49, 0.00329]
         ],
         "asks": [
-            [
-                41977.01,
-                6.61858
-            ],
-            [
-                41977.02,
-                0.00018
-            ],
-            [
-                41977.08,
-                0.23832
-            ],
-            [
-                41977.3,
-                0.5
-            ]
+            [41977.01, 6.61858],
+            [41977.02, 0.00018],
+            [41977.08, 0.23832],
+            [41977.3, 0.5]
         ],
         "intervalStart": 1702305540000,
         "intervalEnd": 1702305600000,
@@ -185,27 +140,21 @@ This event provides OrderBook data for a specified exchange and currency pair as
 }
 ```
 
-*Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names.*
+_Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names._
 
 ## \${exchange}-${pair}-CandleStick Event
 
 This event provides CandleStick data for a specified exchange and currency pair as soon as it is collected.
 
 **Example Payload for binance-BTC/USDT-CandleStick:**
+
 ```json
 {
     "exchange": "binance",
     "symbol": "BTC/USDT",
     "payload": {
         "charts": [
-            [
-                1702305540000,
-                42000.03,
-                42016.11,
-                41972.83,
-                41988.89,
-                107.70167
-            ]
+            [1702305540000, 42000.03, 42016.11, 41972.83, 41988.89, 107.70167]
         ],
         "intervalStart": 1702305540000,
         "intervalEnd": 1702305600000,
@@ -215,8 +164,8 @@ This event provides CandleStick data for a specified exchange and currency pair 
 }
 ```
 
-*Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names.*
+_Note: `\${exchange}` value should be exchange id, not name. Refer to the `./config` folder to find respective ids for names._
 
 ---
 
- 🟣 [Back to main doc file](../../README.md)
+🟣 [Back to main doc file](../../README.md)

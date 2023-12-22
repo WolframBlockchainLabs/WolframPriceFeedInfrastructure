@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import TradeCollector from '../../../../lib/domain-collectors/collectors/TradeCollector.js';
+import TradeCollector from '#domain-collectors/collectors/TradeCollector.js';
 
 describe('[domain-collectors/collectors]: TradeCollector Tests Suite', () => {
     const exchange = 'binance';
