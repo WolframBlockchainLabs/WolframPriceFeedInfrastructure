@@ -2,6 +2,7 @@
     "id": "bitstamp",
     "name": "Bitstamp",
     "rateLimit": 100,
+    "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/USD",
         "BTC/EUR",

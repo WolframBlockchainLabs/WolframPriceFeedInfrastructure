@@ -2,6 +2,7 @@
     "id": "bybit",
     "name": "Bybit",
     "rateLimit": 100,
+    "minimalCycleDuration": 60000,
     "symbols": [
         "USDT/EUR",
         "USDT/BRZ",

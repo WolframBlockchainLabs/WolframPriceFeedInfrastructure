@@ -2,6 +2,7 @@
     "id": "bitfinex",
     "name": "Bitfinex",
     "rateLimit": 1000,
+    "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/USD",
         "BTC/EUR",
