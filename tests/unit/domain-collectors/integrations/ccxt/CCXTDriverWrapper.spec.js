@@ -17,6 +17,9 @@ describe('[domain-collectors/integrations/ccxt]: CCXTDriverWrapper Tests Suite',
             fetchOrderBook: jest.fn(),
             fetchTicker: jest.fn(),
             fetchTrades: jest.fn(),
+            timeframes: {
+                '1m': '1m',
+            },
         };
 
         ccxt[context.exchangeId] = jest.fn(() => context.ccxtExchangeAPIStub);
@@ -27,6 +30,12 @@ describe('[domain-collectors/integrations/ccxt]: CCXTDriverWrapper Tests Suite',
 
     afterEach(() => {
         jest.restoreAllMocks();
+    });
+
+    test('the "timeframes" getter should get timeframes from exchangeAPI', async () => {
+        const timeframes = context.ccxtDriverWrapper.timeframes;
+
+        expect(timeframes).toEqual(context.ccxtExchangeAPIStub.timeframes);
     });
 
     test('the "loadMarkets" method should call loadMarkets on exchangeAPI', async () => {

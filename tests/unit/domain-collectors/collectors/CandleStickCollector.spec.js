@@ -26,6 +26,10 @@ describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () 
         context.exchangeAPIStub = {
             fetchOHLCV: jest.fn().mockResolvedValue(fetchOHLCVStubResult),
             milliseconds: jest.fn().mockResolvedValue(6000),
+            timeframes: {
+                '1s': '1s',
+                '1m': '1m',
+            },
         };
         context.candleStickCollector = new CandleStickCollector({
             logger: context.loggerStub,
@@ -70,5 +74,23 @@ describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () 
             context.candleStickCollector.start(collectorMeta),
         ).rejects.toThrow();
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
+    });
+
+    test('getTimeframeSize should return seconds-precision timeframe if interval is less than a minute', async () => {
+        const result = await context.candleStickCollector.getTimeframeSize({
+            intervalStart: 1702384093936,
+            intervalEnd: 1702384095936,
+        });
+
+        expect(result).toEqual(CandleStickCollector.TIMEFRAMES.SECOND);
+    });
+
+    test('getTimeframeSize should return minute-precision timeframe if interval is more than a minute', async () => {
+        const result = await context.candleStickCollector.getTimeframeSize({
+            intervalStart: 1702384093936,
+            intervalEnd: 1702384693936,
+        });
+
+        expect(result).toEqual(CandleStickCollector.TIMEFRAMES.MINUTE);
     });
 });

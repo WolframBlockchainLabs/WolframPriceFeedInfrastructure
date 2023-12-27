@@ -2,6 +2,7 @@
     "id": "okx",
     "name": "OKX",
     "rateLimit": 400,
+    "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/EUR",
         "BTC/USDT",

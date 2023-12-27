@@ -131,7 +131,7 @@ describe('[tickers]: List the records', () => {
         expect(activateResponse.body.status).toEqual(0);
         expect(activateResponse.body.error.code).toEqual('FORMAT_ERROR');
         expect(activateResponse.body.error.fields.rangeDateEnd).toEqual(
-            'DATE START CANNOT BE LATE THAN DATA END',
+            'START_DATE_GREATER_THAN_END_DATE',
         );
     });
 });

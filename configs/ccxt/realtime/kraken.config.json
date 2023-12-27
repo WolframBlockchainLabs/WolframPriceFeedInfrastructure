@@ -2,6 +2,7 @@
     "id": "kraken",
     "name": "Kraken",
     "rateLimit": 1000,
+    "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/AED",
         "BTC/AUD",
