@@ -1,7 +1,7 @@
 {
     "id": "okx",
     "name": "OKX",
-    "rateLimit": 60,
+    "rateLimit": 400,
     "minimalCycleDuration": 60000,
     "symbols": ["BTC/USDT", "ETH/BTC", "ADA/BTC", "XRP/BTC"]
 }

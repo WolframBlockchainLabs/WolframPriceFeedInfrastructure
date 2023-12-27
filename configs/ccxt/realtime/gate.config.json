@@ -1,7 +1,7 @@
 {
     "id": "gate",
     "name": "Gate.io",
-    "rateLimit": 50,
+    "rateLimit": 100,
     "minimalCycleDuration": 60000,
     "symbols": ["BTC/USDT", "ETH/BTC", "ADA/BTC", "XRP/BTC", "XTZ/BTC"]
 }
