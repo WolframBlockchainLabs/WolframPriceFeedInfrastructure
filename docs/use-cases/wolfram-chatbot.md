@@ -50,6 +50,8 @@ The Wolfram ChatGPT plugin is tasked with providing an intuitive and natural int
 -   Manual security management may increase the risk of breaches.
 -   TLS setup for database connections may be error-prone.
 
+#### 🚀 [Implementation Guide](./wolfram-chatbot-first-option.md)
+
 ### Option 2: Microservice within CCDB
 
 <img src="../../public/images/use-cases/wolfram-chatbot_option-2.png" alt="Wolfram ChatBot Integration Option 2" width="100%"/>
