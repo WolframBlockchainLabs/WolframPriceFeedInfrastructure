@@ -76,8 +76,8 @@ describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () 
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 
-    test('getTimeframeSize should return seconds-precision timeframe if interval is less than a minute', async () => {
-        const result = await context.candleStickCollector.getTimeframeSize({
+    test('getTimeframe should return seconds-precision timeframe if interval is less than a minute', async () => {
+        const result = await context.candleStickCollector.getTimeframe({
             intervalStart: 1702384093936,
             intervalEnd: 1702384095936,
         });
@@ -85,12 +85,32 @@ describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () 
         expect(result).toEqual(CandleStickCollector.TIMEFRAMES.SECOND);
     });
 
-    test('getTimeframeSize should return minute-precision timeframe if interval is more than a minute', async () => {
-        const result = await context.candleStickCollector.getTimeframeSize({
+    test('getTimeframe should return minute-precision timeframe if interval is more than a minute', async () => {
+        const result = await context.candleStickCollector.getTimeframe({
             intervalStart: 1702384093936,
             intervalEnd: 1702384693936,
         });
 
         expect(result).toEqual(CandleStickCollector.TIMEFRAMES.MINUTE);
+    });
+
+    test('getLimit should return seconds-precision limit', async () => {
+        const result = await context.candleStickCollector.getLimit({
+            intervalStart: 1702384093936,
+            intervalEnd: 1702384095936,
+            timeframe: CandleStickCollector.TIMEFRAMES.SECOND,
+        });
+
+        expect(result).toEqual(2);
+    });
+
+    test('getLimit should return minute-precision limit', async () => {
+        const result = await context.candleStickCollector.getLimit({
+            intervalStart: 1702384093936,
+            intervalEnd: 1702384693936,
+            timeframe: CandleStickCollector.TIMEFRAMES.MINUTE,
+        });
+
+        expect(result).toEqual(10);
     });
 });
