@@ -27,6 +27,10 @@
         "host": "{{TEST_DB_HOST}}",
         "port": "{{TEST_DB_PORT}}"
     },
+    "redis": {
+        "host": "{{REDIS_HOST}}",
+        "password": "{{REDIS_PASSWORD}}"
+    },
     "rabbitmq": {
         "urls": [
             "amqp://{{RABBITMQ_USER}}:{{RABBITMQ_PASS}}@{{RABBITMQ_HOST}}:5672/"
@@ -49,6 +53,10 @@
         "retryLimit": "{{AMQP_WORKER_RETRY_LIMIT}}",
         "retryPeriodMs": "{{AMQP_WORKER_RETRY_PERIOD_MS}}",
         "prefetchCount": "{{AMQP_WORKER_PREFETCH_COUNT}}"
+    },
+    "useCaseLRUCache": {
+        "ttl": "{{USE_CASE_LRU_CACHE_TTL}}",
+        "maxCacheSize": "{{USE_CASE_LRU_CACHE_SIZE}}"
     },
     "aggregateOHLCVEmitter": {
         "interval": "{{AGGREGATE_OHLCV_EMITTER_INTERVAL}}",
