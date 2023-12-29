@@ -17,11 +17,7 @@ describe('[tickers]: List the records', () => {
     });
 
     beforeEach(async () => {
-        await app.testDBManager.truncateAllTables();
-    });
-
-    afterEach(async () => {
-        await app.testDBManager.truncateAllTables();
+        await app.resetState();
     });
 
     it('Should return tickers list for specified exchange and pair', async () => {

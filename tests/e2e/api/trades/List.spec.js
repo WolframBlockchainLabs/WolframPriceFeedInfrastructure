@@ -17,11 +17,7 @@ describe('[trades]: List the records', () => {
     });
 
     beforeEach(async () => {
-        await app.testDBManager.truncateAllTables();
-    });
-
-    afterEach(async () => {
-        await app.testDBManager.truncateAllTables();
+        await app.resetState();
     });
 
     it('Should return trades list for specified exchange and pair', async () => {
