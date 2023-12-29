@@ -5,19 +5,18 @@ import Market from '#domain-model/entities/Market.js';
 import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
 
 describe('CollectorsManager Tests', () => {
-    const schedulerOptions = {
-        baseRateLimit: 50,
-        rateLimitMargin: 10,
-        operationsAmount: 4,
-        queuePosition: 3,
-        queueSize: 5,
-        replicaSize: 2,
-        instancePosition: 1,
-    };
-
     const context = {};
 
     beforeEach(() => {
+        context.collectorsSchedulerStub = {
+            getIntervalBounds: jest.fn(),
+            getMultiplierBackoff: jest.fn(),
+            start: jest.fn(),
+            autoUpdateRateLimitMultiplier: jest.fn(),
+            updateRateLimitMultiplier: jest.fn(),
+            getMultiplier: jest.fn(),
+        };
+
         context.loggerStub = {
             info: jest.fn(),
             error: jest.fn(),
@@ -40,7 +39,7 @@ describe('CollectorsManager Tests', () => {
             exchange: 'binance',
             symbol: 'BTC/USDT',
             exchangeAPI: {},
-            schedulerOptions,
+            collectorsScheduler: context.collectorsSchedulerStub,
         });
     });
 

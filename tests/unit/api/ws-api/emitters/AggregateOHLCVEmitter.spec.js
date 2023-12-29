@@ -1,6 +1,9 @@
 import AggregateOHLCVEmitter from '#api/ws-api/emitters/AggregateOHLCVEmitter.js';
+import BaseUseCase from '#use-cases/BaseUseCase.js';
 
 describe('AggregateOHLCVEmitter Tests', () => {
+    BaseUseCase.setConfig({ config: {} });
+
     const context = {
         config: {
             aggregateOHLCVEmitter: {

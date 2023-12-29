@@ -47,6 +47,15 @@
             }
         }
     ],
+    "redis": [
+        "required",
+        {
+            "nested_object": {
+                "host": ["required", "string"],
+                "password": ["required", "string"]
+            }
+        }
+    ],
     "rabbitmq": [
         "required",
         {
@@ -92,6 +101,15 @@
                 "retryLimit": ["required", "positive_integer"],
                 "retryPeriodMs": ["required", "positive_integer"],
                 "prefetchCount": ["required", "integer"]
+            }
+        }
+    ],
+    "useCaseLRUCache": [
+        "required",
+        {
+            "nested_object": {
+                "ttl": ["required", "positive_integer"],
+                "maxCacheSize": ["required", "positive_integer"]
             }
         }
     ],

@@ -15,11 +15,7 @@ describe('[markets]: List the records', () => {
     });
 
     beforeEach(async () => {
-        await app.testDBManager.truncateAllTables();
-    });
-
-    afterEach(async () => {
-        await app.testDBManager.truncateAllTables();
+        await app.resetState();
     });
 
     it('Should return markets list', async () => {

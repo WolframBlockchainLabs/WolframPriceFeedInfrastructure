@@ -16,6 +16,7 @@
         "**/ws-api/**",
         "**/workers/**",
         "!**/tests/**",
+        "!**/use-cases/BaseCacheUseCase.js",
         "!**/use-cases/BaseUseCase.js",
         "!**/use-cases/utils/**",
         "!**/use-cases/testing/**",

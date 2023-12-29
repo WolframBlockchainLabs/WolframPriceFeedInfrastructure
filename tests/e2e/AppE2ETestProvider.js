@@ -19,6 +19,12 @@ class AppE2ETestProvider extends AppTestProvider {
         await this.sequelize.close();
     }
 
+    async resetState() {
+        await this.testDBManager.truncateAllTables();
+
+        await this.ioRedisClient.flushall();
+    }
+
     build() {
         super.build();
 

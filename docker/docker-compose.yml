@@ -1,7 +1,22 @@
 version: '3.9'
 
+x-backend-body: &backend-body
+    image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    depends_on:
+        timescale:
+            condition: service_healthy
+        redis:
+            condition: service_healthy
+        rabbitmq:
+            condition: service_healthy
+    env_file: ./env/.env.backend
+    volumes:
+        - ../:/app
+        - /app/node_modules
+
 services:
     backend:
+        <<: *backend-body
         build:
             context: ../
             dockerfile: ./docker/config/backend/Dockerfile
@@ -9,145 +24,65 @@ services:
                 PORT: 8000
         container_name: ccdb-backend
         ports: ['8000:8000']
-        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-        depends_on:
-            timescale:
-                condition: service_healthy
-            rabbitmq:
-                condition: service_healthy
-        env_file: ./env/.env.backend
         command: sh -c "npm run nodemon"
-        volumes:
-            - ../:/app
-            - /app/node_modules
 
     # ccxt-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     <<: *backend-body
     #     container_name: ccdb-ccxt-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
     #     environment:
     #         CCXT_INSTANCE_POSITION: 0
     #         CCXT_REPLICA_SIZE: 2
     #     command: sh -c "npm run cli:ccxt-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
 
     # ccxt-collectors-2:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     <<: *backend-body
     #     container_name: ccdb-ccxt-collectors-2
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
     #     environment:
     #         CCXT_INSTANCE_POSITION: 1
     #         CCXT_REPLICA_SIZE: 2
     #     command: sh -c "npm run cli:ccxt-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
 
     # xrpl-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     <<: *backend-body
     #     container_name: ccdb-xrpl-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
     #     environment:
     #         XRPL_INSTANCE_POSITION: 0
     #         XRPL_REPLICA_SIZE: 2
     #     command: sh -c "npm run cli:xrpl-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
 
     # eth-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     <<: *backend-body
     #     container_name: ccdb-eth-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
     #     environment:
     #         ETH_INSTANCE_POSITION: 0
     #         ETH_REPLICA_SIZE: 2
     #     command: sh -c "npm run cli:eth-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
 
     # tezos-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     <<: *backend-body
     #     container_name: ccdb-tezos-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
     #     environment:
     #         TEZOS_INSTANCE_POSITION: 0
     #         TEZOS_REPLICA_SIZE: 2
     #     command: sh -c "npm run cli:tezos-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
 
     # cardano-collectors-1:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+    #     <<: *backend-body
     #     container_name: ccdb-cardano-collectors-1
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #         rabbitmq:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
     #     environment:
     #         CARDANO_INSTANCE_POSITION: 0
     #         CARDANO_REPLICA_SIZE: 2
     #     command: sh -c "npm run cli:cardano-collectors"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
 
     database-writer:
-        image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
+        <<: *backend-body
         container_name: ccdb-database-writer
-        depends_on:
-            timescale:
-                condition: service_healthy
-            rabbitmq:
-                condition: service_healthy
-        env_file: ./env/.env.backend
         command: sh -c "npm run workers:database-writer:nodemon"
-        volumes:
-            - ../:/app
-            - /app/node_modules
 
-    # markets-refresher:
-    #     image: ${BE_REGISTRY_ADDRESS}:${BE_TAG}
-    #     container_name: ccdb-markets-refresher
-    #     depends_on:
-    #         timescale:
-    #             condition: service_healthy
-    #     env_file: ./env/.env.backend
-    #     command: sh -c "npm run workers:markets-refresher:nodemon"
-    #     volumes:
-    #         - ../:/app
-    #         - /app/node_modules
+    markets-refresher:
+        <<: *backend-body
+        container_name: ccdb-markets-refresher
+        command: sh -c "npm run workers:markets-refresher:nodemon"
 
     timescale:
         image: timescale/timescaledb:2.11.1-pg15
@@ -188,10 +123,28 @@ services:
             - 15672:15672
         healthcheck:
             test: rabbitmq-diagnostics -q ping
-            interval: 30s
-            timeout: 30s
-            retries: 3
+            interval: 10s
+            timeout: 5s
+            retries: 5
         restart: unless-stopped
         env_file: ./env/.env.rabbitmq
         volumes:
             - '~/docker-volumes/ccdb/rabbitmq:/var/lib/rabbitmq'
+    
+    redis:
+        image: redis:7.2.3
+        container_name: ccdb-redis
+        ports: ['6379:6379']
+        command:
+            - /bin/sh
+            - -c
+            - redis-server --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+        env_file: ./env/.env.redis
+        volumes:
+            - '~/docker-volumes/ccdb/redis:/data'

@@ -12,6 +12,8 @@ services:
         depends_on:
             timescale:
                 condition: service_healthy
+            redis:
+                condition: service_healthy
         env_file: ./.env.backend
         entrypoint: 'tail -f /dev/null'
 
@@ -29,3 +31,19 @@ services:
             POSTGRES_PASSWORD: password
         container_name: ccdb-timescale-test
         command: ['-c', 'max_connections=10000']
+    
+    redis:
+        image: redis:7.2.3
+        container_name: ccdb-redis
+        command:
+            - /bin/sh
+            - -c
+            - redis-server --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+        environment:
+            REDIS_PASSWORD: password
