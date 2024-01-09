@@ -1,6 +1,6 @@
-import StatusUpdatePolicy from '#domain-collectors/infrastructure/amqp-policies/StatusUpdatePolicy.js';
+import ReplicaDiscoveryPolicy from '#domain-collectors/infrastructure/amqp-policies/ReplicaDiscoveryPolicy.js';
 
-describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy Tests Suite', () => {
+describe('[domain-collectors/infrastructure/amqp-policies]: ReplicaDiscoveryPolicy Tests Suite', () => {
     const context = {};
 
     beforeEach(() => {
@@ -18,7 +18,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
             publish: jest.fn(),
         };
 
-        context.statusUpdatePolicy = new StatusUpdatePolicy({
+        context.statusUpdatePolicy = new ReplicaDiscoveryPolicy({
             amqpClient: context.amqpClientStub,
             rabbitGroupName: 'testGroup',
         });
@@ -28,10 +28,10 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
         jest.clearAllMocks();
     });
 
-    test('StatusUpdatePolicy constructor should initialize with modified rabbitGroupName', () => {
+    test('ReplicaDiscoveryPolicy constructor should initialize with modified rabbitGroupName', () => {
         const amqpClient = {};
         const rabbitGroupName = 'testGroup';
-        const instance = new StatusUpdatePolicy({
+        const instance = new ReplicaDiscoveryPolicy({
             amqpClient,
             rabbitGroupName,
         });
@@ -41,7 +41,10 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
 
     test('start should set handlers, call super start, and broadcast REQUEST message', async () => {
         const superStartSpy = jest
-            .spyOn(Object.getPrototypeOf(StatusUpdatePolicy.prototype), 'start')
+            .spyOn(
+                Object.getPrototypeOf(ReplicaDiscoveryPolicy.prototype),
+                'start',
+            )
             .mockImplementation(() => {});
         const broadcastSpy = jest
             .spyOn(context.statusUpdatePolicy, 'broadcast')
@@ -57,7 +60,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
 
         expect(superStartSpy).toHaveBeenCalledTimes(1);
         expect(broadcastSpy).toHaveBeenCalledWith({
-            type: StatusUpdatePolicy.MESSAGE_TYPES.REQUEST,
+            type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.REQUEST,
             data: {
                 statusUpdateQueue:
                     context.statusUpdatePolicy.getPrivateQueueAddress(),
@@ -76,7 +79,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
         const requestMessage = {
             content: Buffer.from(
                 JSON.stringify({
-                    type: StatusUpdatePolicy.MESSAGE_TYPES.REQUEST,
+                    type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.REQUEST,
                     data: {},
                 }),
             ),
@@ -84,7 +87,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
         const updateMessage = {
             content: Buffer.from(
                 JSON.stringify({
-                    type: StatusUpdatePolicy.MESSAGE_TYPES.UPDATE,
+                    type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.UPDATE,
                     data: {},
                 }),
             ),
@@ -110,7 +113,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: StatusUpdatePolicy T
         expect(context.amqpClientStub.publish).toHaveBeenCalledWith(
             statusUpdateQueue,
             {
-                type: StatusUpdatePolicy.MESSAGE_TYPES.UPDATE,
+                type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.UPDATE,
                 data: { currentStatus: 'OK' },
             },
         );

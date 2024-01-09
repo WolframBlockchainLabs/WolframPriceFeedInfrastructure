@@ -122,5 +122,24 @@
                 "pairs": ["required", { "list_of": "string" }]
             }
         }
+    ],
+    "policiesConfigs": [
+        "required",
+        {
+            "nested_object": {
+                "replicaDiscovery": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "initializationDelay": [
+                                "required",
+                                "positive_integer"
+                            ],
+                            "debounceDelay": ["required", "positive_integer"]
+                        }
+                    }
+                ]
+            }
+        }
     ]
 }
