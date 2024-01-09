@@ -14,6 +14,12 @@ x-backend-body: &backend-body
         - ../:/app
         - /app/node_modules
 
+x-collector-body: &collector-body
+    <<: *backend-body
+    deploy:
+        mode: replicated
+        replicas: 2
+
 services:
     backend:
         <<: *backend-body
@@ -26,52 +32,24 @@ services:
         ports: ['8000:8000']
         command: sh -c "npm run nodemon"
 
-    # ccxt-collectors-1:
-    #     <<: *backend-body
-    #     container_name: ccdb-ccxt-collectors-1
-    #     environment:
-    #         CCXT_INSTANCE_POSITION: 0
-    #         CCXT_REPLICA_SIZE: 2
+    # ccxt-collectors:
+    #     <<: *collector-body
     #     command: sh -c "npm run cli:ccxt-collectors"
 
-    # ccxt-collectors-2:
-    #     <<: *backend-body
-    #     container_name: ccdb-ccxt-collectors-2
-    #     environment:
-    #         CCXT_INSTANCE_POSITION: 1
-    #         CCXT_REPLICA_SIZE: 2
-    #     command: sh -c "npm run cli:ccxt-collectors"
-
-    # xrpl-collectors-1:
-    #     <<: *backend-body
-    #     container_name: ccdb-xrpl-collectors-1
-    #     environment:
-    #         XRPL_INSTANCE_POSITION: 0
-    #         XRPL_REPLICA_SIZE: 2
+    # xrpl-collectors:
+    #     <<: *collector-body
     #     command: sh -c "npm run cli:xrpl-collectors"
 
-    # eth-collectors-1:
-    #     <<: *backend-body
-    #     container_name: ccdb-eth-collectors-1
-    #     environment:
-    #         ETH_INSTANCE_POSITION: 0
-    #         ETH_REPLICA_SIZE: 2
+    # eth-collectors:
+    #     <<: *collector-body
     #     command: sh -c "npm run cli:eth-collectors"
 
-    # tezos-collectors-1:
-    #     <<: *backend-body
-    #     container_name: ccdb-tezos-collectors-1
-    #     environment:
-    #         TEZOS_INSTANCE_POSITION: 0
-    #         TEZOS_REPLICA_SIZE: 2
+    # tezos-collectors:
+    #     <<: *collector-body
     #     command: sh -c "npm run cli:tezos-collectors"
 
-    # cardano-collectors-1:
-    #     <<: *backend-body
-    #     container_name: ccdb-cardano-collectors-1
-    #     environment:
-    #         CARDANO_INSTANCE_POSITION: 0
-    #         CARDANO_REPLICA_SIZE: 2
+    # cardano-collectors:
+    #     <<: *collector-body
     #     command: sh -c "npm run cli:cardano-collectors"
 
     database-writer:

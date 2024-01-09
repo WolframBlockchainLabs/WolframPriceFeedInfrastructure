@@ -2,7 +2,5 @@
     "groupName": "Cardano",
     "rateLimit": 6000,
     "rateLimitMargin": "{{CARDANO_RATE_LIMIT_MARGIN}}",
-    "replicaSize": "{{CARDANO_REPLICA_SIZE}}",
-    "instancePosition": "{{CARDANO_INSTANCE_POSITION}}",
     "apiSecret": "{{CARDANO_BLOCKFROST_PROJECT_ID}}"
 }

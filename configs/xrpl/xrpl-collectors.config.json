@@ -1,8 +1,6 @@
 {
     "rateLimit": 600,
     "rateLimitMargin": "{{XRPL_RATE_LIMIT_MARGIN}}",
-    "replicaSize": "{{XRPL_REPLICA_SIZE}}",
-    "instancePosition": "{{XRPL_INSTANCE_POSITION}}",
     "serverUrl": "{{XRPL_SERVER_URL}}",
     "exchange": {
         "id": "xrpl",
