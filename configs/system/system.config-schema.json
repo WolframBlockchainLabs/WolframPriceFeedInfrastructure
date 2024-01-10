@@ -141,5 +141,14 @@
                 ]
             }
         }
+    ],
+    "apiLimits": [
+        "required",
+        {
+            "nested_object": {
+                "maxDateDiff": ["required", "positive_integer"],
+                "maxItemsRetrieved": ["required", "positive_integer"]
+            }
+        }
     ]
 }

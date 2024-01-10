@@ -20,23 +20,6 @@ describe('[trades]: List the records', () => {
         await app.resetState();
     });
 
-    it('Should return trades list for specified exchange and pair', async () => {
-        const { trades } = await tradeStory.setupTrades();
-        const { exchangeName, symbol } = await tradeFactory.findTrade(
-            trades[0].id,
-        );
-
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/trades`)
-            .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol })
-            .set('Accept', 'application/json')
-            .expect(200);
-
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(3);
-    });
-
     it('Should return trades list for specified exchange, pair, and date range', async () => {
         const { trades } = await tradeStory.setupTrades();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
@@ -59,12 +42,18 @@ describe('[trades]: List the records', () => {
 
     it('Should return an empty list if the exchange name is wrong', async () => {
         const { trades } = await tradeStory.setupTrades();
-        const { symbol } = await tradeFactory.findTrade(trades[0].id);
+        const { symbol, intervalStart } = await tradeFactory.findTrade(
+            trades[0].id,
+        );
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/trades`)
             .query(`exchangeNames[]=test`)
-            .query({ symbol })
+            .query({
+                symbol,
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -74,12 +63,18 @@ describe('[trades]: List the records', () => {
 
     it('Should return an empty list if the market name is wrong', async () => {
         const { trades } = await tradeStory.setupTrades();
-        const { exchangeName } = await tradeFactory.findTrade(trades[0].id);
+        const { exchangeName, intervalStart } = await tradeFactory.findTrade(
+            trades[0].id,
+        );
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/trades`)
             .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol: 'test' })
+            .query({
+                symbol: 'test',
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 

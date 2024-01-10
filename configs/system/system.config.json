@@ -79,5 +79,9 @@
             "initializationDelay": "{{REPLICA_DISCOVERY_INITIALIZATION_DELAY}}",
             "debounceDelay": "{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}"
         }
+    },
+    "apiLimits": {
+        "maxDateDiff": "{{API_LIMITS_MAX_DATE_DIFF}}",
+        "maxItemsRetrieved": "{{API_LIMITS_MAX_ITEMS_RETRIEVED}}"
     }
 }

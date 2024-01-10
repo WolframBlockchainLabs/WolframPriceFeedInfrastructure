@@ -20,22 +20,6 @@ describe('[candle-stick]: List the records', () => {
         await app.resetState();
     });
 
-    it('Should return candleSticks list for specified exchange and pair', async () => {
-        const { candleSticks } = await candleStickStory.setupCandleSticks();
-        const { exchangeName, symbol } =
-            await candleStickFactory.findCandleStick(candleSticks[0].id);
-
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
-            .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol })
-            .set('Accept', 'application/json')
-            .expect(200);
-
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(3);
-    });
-
     it('Should return candleSticks list for specified exchange, pair, and date range', async () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
         const targetCandleStick = await candleStickFactory.findCandleStick(
@@ -60,14 +44,17 @@ describe('[candle-stick]: List the records', () => {
 
     it('Should return an empty list if the exchange name is wrong', async () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
-        const { symbol } = await candleStickFactory.findCandleStick(
-            candleSticks[0].id,
-        );
+        const { symbol, intervalStart } =
+            await candleStickFactory.findCandleStick(candleSticks[0].id);
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/candleSticks`)
             .query(`exchangeNames[]=test`)
-            .query({ symbol })
+            .query({
+                symbol,
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -77,14 +64,17 @@ describe('[candle-stick]: List the records', () => {
 
     it('Should return an empty list if the market name is wrong', async () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
-        const { exchangeName } = await candleStickFactory.findCandleStick(
-            candleSticks[0].id,
-        );
+        const { exchangeName, intervalStart } =
+            await candleStickFactory.findCandleStick(candleSticks[0].id);
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/candleSticks`)
             .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol: 'test' })
+            .query({
+                symbol: 'test',
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 

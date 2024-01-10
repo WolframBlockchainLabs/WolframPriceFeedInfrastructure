@@ -20,22 +20,6 @@ describe('[exchange-rates]: List the records', () => {
         await app.resetState();
     });
 
-    it('Should return exchangeRates list for specified exchange and pair', async () => {
-        const { exchangeRates } = await exchangeRateStory.setupExchangeRates();
-        const { exchangeName, symbol } =
-            await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
-
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/exchangeRates`)
-            .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol })
-            .set('Accept', 'application/json')
-            .expect(200);
-
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(3);
-    });
-
     it('Should return exchangeRates list for specified exchange, pair, and date range', async () => {
         const { exchangeRates } = await exchangeRateStory.setupExchangeRates();
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
@@ -60,14 +44,17 @@ describe('[exchange-rates]: List the records', () => {
 
     it('Should return an empty list if the exchange name is wrong', async () => {
         const { exchangeRates } = await exchangeRateStory.setupExchangeRates();
-        const { symbol } = await exchangeRateFactory.findExchangeRate(
-            exchangeRates[0].id,
-        );
+        const { symbol, intervalStart } =
+            await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/exchangeRates`)
             .query(`exchangeNames[]=test`)
-            .query({ symbol })
+            .query({
+                symbol,
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -77,14 +64,17 @@ describe('[exchange-rates]: List the records', () => {
 
     it('Should return an empty list if the market name is wrong', async () => {
         const { exchangeRates } = await exchangeRateStory.setupExchangeRates();
-        const { exchangeName } = await exchangeRateFactory.findExchangeRate(
-            exchangeRates[0].id,
-        );
+        const { exchangeName, intervalStart } =
+            await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/exchangeRates`)
             .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol: 'test' })
+            .query({
+                symbol: 'test',
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 
