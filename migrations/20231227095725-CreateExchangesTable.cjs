@@ -13,9 +13,15 @@ module.exports = {
             },
             name: { type: Sequelize.STRING, allowNull: false },
         });
+
+        await queryInterface.addIndex('Exchanges', ['name'], {
+            name: 'Exchanges_name_idx',
+        });
     },
 
     down: async (queryInterface) => {
+        await queryInterface.removeIndex('Exchanges', 'Exchanges_name_idx');
+
         await queryInterface.dropTable('Exchanges');
     },
 };
