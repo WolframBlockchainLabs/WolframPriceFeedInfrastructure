@@ -1,6 +1,6 @@
 # Fault Tolerance
 
-<img src="../../public/images/architecture/Robust_collector_v3_2.png" alt="Collector Schema" height="500"/>
+<img src="../../public/images/architecture/general_arch_v3_2.png" alt="General Architecture" height="500"/>
 
 ## Table of Contents
 
@@ -11,6 +11,8 @@
 5. [Conclusion](#conclusion)
 
 ## Resilience Through Redundancy
+
+<img src="../../public/images/architecture/Robust_collector_v3_2.png" alt="Collector Schema" height="500"/>
 
 Fault tolerance within the CCDB Application is a paramount feature, ensuring that the system is capable of maintaining continuous operations even in the face of individual component failures. This is achieved through the implementation of operational redundancy, particularly within the data collection layer of the architecture.
 

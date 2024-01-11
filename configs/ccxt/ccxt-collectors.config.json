@@ -1,6 +1,4 @@
 {
     "rateLimit": 1000,
-    "rateLimitMargin": "{{CCXT_RATE_LIMIT_MARGIN}}",
-    "replicaSize": "{{CCXT_REPLICA_SIZE}}",
-    "instancePosition": "{{CCXT_INSTANCE_POSITION}}"
+    "rateLimitMargin": "{{CCXT_RATE_LIMIT_MARGIN}}"
 }

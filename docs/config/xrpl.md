@@ -2,21 +2,13 @@
 
 ### General Settings
 
--   **rateLimit**: The global rate limit applied to the instance, to prevent excessive requests.
+-   **rateLimit**: The global rate limit in milliseconds for the collectors.
 
     -   Default: `80`
 
--   **rateLimitMargin**: The margin applied to the rate limit to allow for flexibility and prevent limit breaches.
+-   **rateLimitMargin**: The margin in milliseconds to consider while setting up rate limits.
 
     -   Example: `"{{XRPL_RATE_LIMIT_MARGIN}}"`
-
--   **replicaSize**: The number of replicas in the replica set for distributed operations.
-
-    -   Example: `"{{XRPL_REPLICA_SIZE}}"`
-
--   **instancePosition**: The specific position of this instance within the replica set.
-
-    -   Example: `"{{XRPL_INSTANCE_POSITION}}"`
 
 -   **serverUrl**: The URL of the XRPL server that the instance interacts with.
     -   Example: `"{{XRPL_SERVER_URL}}"`

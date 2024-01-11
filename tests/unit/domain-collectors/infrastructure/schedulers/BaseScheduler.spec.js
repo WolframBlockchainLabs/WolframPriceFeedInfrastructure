@@ -93,6 +93,29 @@ describe('BaseScheduler Tests', () => {
         expect(initializeSchedulerSpy).toHaveBeenCalledTimes(1);
     });
 
+    test('the "start" method should handle errors and log them', async () => {
+        const mockError = new Error('Test Error');
+
+        jest.spyOn(
+            context.baseScheduler,
+            'setDynamicConfig',
+        ).mockImplementation(() => {
+            throw mockError;
+        });
+
+        await context.baseScheduler.start({});
+
+        expect(context.baseScheduler.logger.error).toHaveBeenCalledWith(
+            expect.objectContaining({
+                message: expect.stringContaining(
+                    `${context.baseScheduler.constructor.name} failed to start for:`,
+                ),
+                context: context.baseScheduler.getLogContext(),
+                error: mockError,
+            }),
+        );
+    });
+
     test('the "stop" method should destroy a schedule, setup a critical section.', async () => {
         const destroyScheduleSpy = jest
             .spyOn(context.baseScheduler, 'destroyScheduler')
@@ -105,6 +128,29 @@ describe('BaseScheduler Tests', () => {
         expect(destroyScheduleSpy).toHaveBeenCalledTimes(1);
     });
 
+    test('the "stop" method should handle errors and log them', async () => {
+        const mockError = new Error('Test Error');
+
+        jest.spyOn(
+            context.baseScheduler,
+            'destroyScheduler',
+        ).mockImplementation(() => {
+            throw mockError;
+        });
+
+        await context.baseScheduler.stop({});
+
+        expect(context.baseScheduler.logger.error).toHaveBeenCalledWith(
+            expect.objectContaining({
+                message: expect.stringContaining(
+                    `${context.baseScheduler.constructor.name} failed to stop for:`,
+                ),
+                context: context.baseScheduler.getLogContext(),
+                error: mockError,
+            }),
+        );
+    });
+
     test('the "reload" method calls stop and then start method, sets up a critical section', async () => {
         const startSpy = jest
             .spyOn(context.baseScheduler, 'start')
@@ -113,7 +159,7 @@ describe('BaseScheduler Tests', () => {
             .spyOn(context.baseScheduler, 'stop')
             .mockImplementation(() => {});
 
-        await context.baseScheduler.reload();
+        await context.baseScheduler.reload({});
 
         expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
         expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
@@ -121,7 +167,7 @@ describe('BaseScheduler Tests', () => {
         expect(stopSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('the "reload" method should delay start if a new multiplier is provided', async () => {
+    test('the "reload" method should delay start if shouldSleep option is provided', async () => {
         const startSpy = jest
             .spyOn(context.baseScheduler, 'start')
             .mockImplementation(() => {});
@@ -129,7 +175,7 @@ describe('BaseScheduler Tests', () => {
             .spyOn(context.baseScheduler, 'stop')
             .mockImplementation(() => {});
 
-        await context.baseScheduler.reload(2);
+        await context.baseScheduler.reload({ shouldSleep: true });
 
         expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
         expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
@@ -146,7 +192,7 @@ describe('BaseScheduler Tests', () => {
             .spyOn(context.baseScheduler, 'reload')
             .mockImplementation(() => {});
 
-        await context.baseScheduler.updateRateLimitMultiplier();
+        await context.baseScheduler.updateRateLimitMultiplier({});
 
         expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
         expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
@@ -162,26 +208,12 @@ describe('BaseScheduler Tests', () => {
             .spyOn(context.baseScheduler, 'reload')
             .mockImplementation(() => {});
 
-        await context.baseScheduler.updateRateLimitMultiplier();
+        await context.baseScheduler.updateRateLimitMultiplier({});
 
         expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
         expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
         expect(validateMultiplierSpy).toHaveBeenCalledTimes(1);
         expect(reloadSpy).not.toHaveBeenCalled();
-    });
-
-    test('the "autoUpdateRateLimitMultiplier" method generates next multiplier and calls updateRateLimitMultiplier', async () => {
-        const getMultiplierBackoffSpy = jest
-            .spyOn(context.baseScheduler, 'getMultiplierBackoff')
-            .mockImplementation(() => {});
-        const updateRateLimitMultiplierSpy = jest
-            .spyOn(context.baseScheduler, 'updateRateLimitMultiplier')
-            .mockImplementation(() => {});
-
-        await context.baseScheduler.autoUpdateRateLimitMultiplier();
-
-        expect(getMultiplierBackoffSpy).toHaveBeenCalledTimes(1);
-        expect(updateRateLimitMultiplierSpy).toHaveBeenCalledTimes(1);
     });
 
     test('the "runOperations" method calls handler', async () => {
@@ -275,5 +307,56 @@ describe('BaseScheduler Tests', () => {
         const multiplier = context.baseScheduler.getMultiplier();
 
         expect(multiplier).toBe(context.baseScheduler.rateLimitMultiplier);
+    });
+
+    test('"setReplicaConfig" should set replica size and instance position when config is provided', () => {
+        const replicaConfig = {
+            replicaSize: 10,
+            instancePosition: 5,
+        };
+
+        context.baseScheduler.setReplicaConfig(replicaConfig);
+
+        expect(context.baseScheduler.replicaSize).toBe(
+            replicaConfig.replicaSize,
+        );
+        expect(context.baseScheduler.instancePosition).toBe(
+            replicaConfig.instancePosition,
+        );
+    });
+
+    test('"setReplicaConfig" should not alter replica size and instance position when config is not provided', () => {
+        context.baseScheduler.replicaSize = 1;
+        context.baseScheduler.instancePosition = 2;
+
+        context.baseScheduler.setReplicaConfig(null);
+
+        expect(context.baseScheduler.replicaSize).toBe(1);
+        expect(context.baseScheduler.instancePosition).toBe(2);
+    });
+
+    test('"setTaskName" should set task name when task name is provided', () => {
+        const taskName = 'New Task';
+
+        context.baseScheduler.setTaskName(taskName);
+
+        expect(context.baseScheduler.taskName).toBe(taskName);
+    });
+
+    test('"setTaskName" should not alter task name when task name is not provided', () => {
+        const originalTaskName = 'Original Task';
+        context.baseScheduler.taskName = originalTaskName;
+
+        context.baseScheduler.setTaskName(null);
+
+        expect(context.baseScheduler.taskName).toBe(originalTaskName);
+
+        context.baseScheduler.setTaskName(undefined);
+
+        expect(context.baseScheduler.taskName).toBe(originalTaskName);
+
+        context.baseScheduler.setTaskName('');
+
+        expect(context.baseScheduler.taskName).toBe(originalTaskName);
     });
 });

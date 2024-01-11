@@ -12,17 +12,26 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests 
             consume: jest.fn().mockResolvedValue(),
             publish: jest.fn().mockResolvedValue(),
         };
+
         context.amqpClientStub = {
             getChannel: jest.fn().mockReturnValue(context.channelStub),
         };
+
+        context.amqpManagementTargetStub = {
+            getStatusHandler: jest.fn(),
+            reloadHandler: jest.fn(),
+        };
+
         context.backoffPolicy = new BackoffPolicy({
             amqpClient: context.amqpClientStub,
             rabbitGroupName: 'testGroup',
+            amqpManagementTarget: context.amqpManagementTargetStub,
         });
     });
 
     afterEach(() => {
         jest.clearAllMocks();
+        jest.restoreAllMocks();
     });
 
     test('BackoffPolicy constructor should initialize with modified rabbitGroupName', () => {
@@ -46,6 +55,39 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests 
         expect(context.backoffPolicy.broadcast).toHaveBeenCalledTimes(1);
         expect(context.backoffPolicy.broadcast).toHaveBeenCalledWith({
             rateLimitMultiplier,
+        });
+    });
+
+    test('"consumer" should not call reloadHandler if rateLimitMultiplier is less than or equal to getStatusHandler rateLimitMultiplier', async () => {
+        context.backoffPolicy.getMessageObject = jest
+            .fn()
+            .mockReturnValue({ rateLimitMultiplier: 5 });
+        context.backoffPolicy.amqpManagementTarget.getStatusHandler.mockReturnValue(
+            { rateLimitMultiplier: 10 },
+        );
+
+        await context.backoffPolicy.consumer({});
+
+        expect(
+            context.backoffPolicy.amqpManagementTarget.reloadHandler,
+        ).not.toHaveBeenCalled();
+    });
+
+    test('"consumer" should call reloadHandler with correct parameters if rateLimitMultiplier is greater', async () => {
+        context.backoffPolicy.getMessageObject = jest
+            .fn()
+            .mockReturnValue({ rateLimitMultiplier: 15 });
+        context.backoffPolicy.amqpManagementTarget.getStatusHandler.mockReturnValue(
+            { rateLimitMultiplier: 10 },
+        );
+
+        await context.backoffPolicy.consumer({});
+
+        expect(
+            context.backoffPolicy.amqpManagementTarget.reloadHandler,
+        ).toHaveBeenCalledWith({
+            rateLimitMultiplier: 15,
+            shouldSleep: true,
         });
     });
 });

@@ -4,21 +4,13 @@
 
     -   Example: `Cardano`
 
--   **rateLimit**: The maximum number of requests allowed within a specified time frame.
+-   **rateLimit**: The global rate limit in milliseconds for the collectors.
 
     -   Default: `6000`
 
--   **rateLimitMargin**: A margin to ensure operations stay within the safe limits of the rate limit.
+-   **rateLimitMargin**: The margin in milliseconds to consider while setting up rate limits.
 
     -   Example: `"{{CARDANO_RATE_LIMIT_MARGIN}}"`
-
--   **replicaSize**: Specifies the size of the replica set for the configuration.
-
-    -   Example: `"{{CARDANO_REPLICA_SIZE}}"`
-
--   **instancePosition**: The position of the current instance within the replica set.
-
-    -   Example: `"{{CARDANO_INSTANCE_POSITION}}"`
 
 -   **apiSecret**: The secret used in any driver to connect to the remote RPC endpoint or API server.
 

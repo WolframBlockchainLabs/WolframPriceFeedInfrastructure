@@ -2,8 +2,6 @@
     "groupName": ["required", "string"],
     "rateLimit": ["required", "positive_integer"],
     "rateLimitMargin": ["required", "positive_integer"],
-    "replicaSize": ["required", "positive_integer"],
-    "instancePosition": ["required", "integer"],
     "apiSecret": ["required", "string"],
     "meta": ["any_object"]
 }

@@ -27,26 +27,13 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         jest.clearAllMocks();
     });
 
-    test('the "start" method should set reloadHandler and call setupReplicaChannel', async () => {
-        jest.spyOn(
-            context.baseAMQPPolicy,
-            'setupReplicaChannel',
-        ).mockResolvedValue();
-
-        await context.baseAMQPPolicy.start(() => {});
-
-        expect(
-            context.baseAMQPPolicy.setupReplicaChannel,
-        ).toHaveBeenCalledTimes(1);
-    });
-
-    test('the "setupReplicaChannel" method passes configureRabbitMQChannel into amqp addSetup', async () => {
+    test('the "start" method passes configureRabbitMQChannel into amqp addSetup', async () => {
         jest.spyOn(
             context.baseAMQPPolicy,
             'configureRabbitMQChannel',
         ).mockImplementation(() => {});
 
-        await context.baseAMQPPolicy.setupReplicaChannel();
+        await context.baseAMQPPolicy.start();
 
         expect(context.amqpClientStub.getChannel).toHaveBeenCalledTimes(1);
         expect(context.channelStub.addSetup).toHaveBeenCalledTimes(1);
@@ -84,20 +71,27 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         );
     });
 
-    test('consumer should call the handler with the provided message', async () => {
-        const mockHandler = jest.fn().mockResolvedValue();
-        context.baseAMQPPolicy.handler = mockHandler;
-
+    test('consumer should be implemented by extending classes and throw an error if not', async () => {
         const mockMessage = { content: 'test message' };
-        await context.baseAMQPPolicy.consumer(mockMessage);
 
-        expect(mockHandler).toHaveBeenCalledTimes(1);
-        expect(mockHandler).toHaveBeenCalledWith(mockMessage);
+        expect(() =>
+            context.baseAMQPPolicy.consumer(mockMessage),
+        ).rejects.toThrow();
     });
 
     test('getPrivateQueueAddress should return the rabbitQueueId', () => {
         context.baseAMQPPolicy.rabbitQueueId = 'testQueueId';
         const result = context.baseAMQPPolicy.getPrivateQueueAddress();
         expect(result).toBe('testQueueId');
+    });
+
+    test('getMessageObject should return object from amqp message data', () => {
+        const data = { test: 1 };
+
+        const result = context.baseAMQPPolicy.getMessageObject({
+            content: JSON.stringify(data),
+        });
+
+        expect(result).toEqual(data);
     });
 });

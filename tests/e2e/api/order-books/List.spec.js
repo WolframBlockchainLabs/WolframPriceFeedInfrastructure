@@ -20,23 +20,6 @@ describe('[order-books]: List the records', () => {
         await app.resetState();
     });
 
-    it('Should return orderBooks list for specified exchange and pair', async () => {
-        const { orderBooks } = await orderBookStory.setupOrderBooks();
-        const { exchangeName, symbol } = await orderBookFactory.findOrderBook(
-            orderBooks[0].id,
-        );
-
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
-            .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol })
-            .set('Accept', 'application/json')
-            .expect(200);
-
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(3);
-    });
-
     it('Should return orderBooks list for specified exchange, pair, and date range', async () => {
         const { orderBooks } = await orderBookStory.setupOrderBooks();
         const targetCandleStick = await orderBookFactory.findOrderBook(
@@ -61,14 +44,18 @@ describe('[order-books]: List the records', () => {
 
     it('Should return an empty list if the exchange name is wrong', async () => {
         const { orderBooks } = await orderBookStory.setupOrderBooks();
-        const { symbol } = await orderBookFactory.findOrderBook(
+        const { symbol, intervalStart } = await orderBookFactory.findOrderBook(
             orderBooks[0].id,
         );
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/orderBooks`)
             .query(`exchangeNames[]=test`)
-            .query({ symbol })
+            .query({
+                symbol,
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -78,14 +65,17 @@ describe('[order-books]: List the records', () => {
 
     it('Should return an empty list if the market name is wrong', async () => {
         const { orderBooks } = await orderBookStory.setupOrderBooks();
-        const { exchangeName } = await orderBookFactory.findOrderBook(
-            orderBooks[0].id,
-        );
+        const { exchangeName, intervalStart } =
+            await orderBookFactory.findOrderBook(orderBooks[0].id);
 
         const activateResponse = await app.request
             .get(`/api/v1/crypto/orderBooks`)
             .query(`exchangeNames[]=${exchangeName}`)
-            .query({ symbol: 'test' })
+            .query({
+                symbol: 'test',
+                rangeDateStart: intervalStart,
+                rangeDateEnd: intervalStart,
+            })
             .set('Accept', 'application/json')
             .expect(200);
 

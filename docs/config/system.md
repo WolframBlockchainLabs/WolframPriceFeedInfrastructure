@@ -13,6 +13,8 @@
     -   Default: `3002`
 -   **app.mode**: The mode in which the application will run (e.g., development, production).
     -   Example: `"{{NODE_ENV}}"`
+-   **app.trustProxy**: Trust proxy level for the express (e.g. 1 - trust one proxy). Allows to forward ip and other original request data.
+    -   Example: `"{{APP_TRUST_PROXY}}"`
 
 #### URLs Settings
 
@@ -55,6 +57,13 @@
 -   **test-db.port**: The port of the test database.
     -   Example: `"{{TEST_DB_PORT}}"`
 
+### Redis Settings
+
+-   **redis.host**: The host of the Redis instance.
+    -   Example: `"{{REDIS_HOST}}"`
+-   **redis.password**: The password to connect to the Redis instance.
+    -   Example: `"{{REDIS_PASSWORD}}"`
+
 ### RabbitMQ Settings
 
 -   **rabbitmq.urls**: An array of URLs to connect to RabbitMQ.
@@ -91,14 +100,21 @@
 
 -   **amqpWorker.retryLimit**: limit on message processing failure retries
     -   Example: `12`
--   **amqpWorker.retryPeriodMs**: time to wait before next try
+-   **amqpWorker.retryPeriodMs**: time to wait before next try in milliseconds
     -   Example: `3600000`
 -   **amqpWorker.prefetchCount**: Set the prefetch count for this channel. The count given is the maximum number of messages sent over the channel that can be awaiting acknowledgement; once there are count messages outstanding, the server will not send more messages on this channel until one or more have been acknowledged. A falsey value for count indicates no such limit. The server will reply (with an empty object) if successful.
     -   Example: `100`
 
+### Use-Case LRU Cache Settings
+
+-   **useCaseLRUCache.ttl**: Cache record expiration time in milliseconds.
+    -   Example: `"{{USE_CASE_LRU_CACHE_TTL}}"`
+-   **useCaseLRUCache.maxCacheSize**: The maximum number of items that could be stored in cache.
+    -   Example: `"{{USE_CASE_LRU_CACHE_SIZE}}"`
+
 ### AggregateOHLCVEmitter Settings
 
--   **aggregateOHLCVEmitter.interval**: time to wait before emitting next message
+-   **aggregateOHLCVEmitter.interval**: time to wait in milliseconds before emitting next message
     -   Example: `"{{AGGREGATE_OHLCV_EMITTER_INTERVAL}}"`
 -   **aggregateOHLCVEmitter.exchanges**: An array exchanges to aggregate pairs from.
     -   Example:
@@ -121,6 +137,22 @@
         ```
         ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
         ```
+
+### AMQP Policies Settings
+
+#### Replica Discovery Policy Config
+
+-   **policiesConfigs.replicaDiscovery.initializationDelay**: Initial delay in milliseconds for starting collectors.
+    -   Example: `"{{REPLICA_DISCOVERY_INITIALIZATION_DELAY}}"`
+-   **policiesConfigs.replicaDiscovery.debounceDelay**: Debounce delay in milliseconds after getting STATUS message from other replicas. It is absolutely necessary that this delay is slower that ```initializationDelay``` to avoid race conditions.
+    -   Example: `"{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}"`
+
+### API Limits Settings
+
+-   **apiLimits.maxDateDiff**: Maximum difference in milliseconds between ```rangeDateStart``` and ```rangeDateEnd``` in a timeseries data list and aggregation endpoints.
+    -   Example: `"{{USE_CASE_LRU_CACHE_TTL}}"`
+-   **apiLimits.maxItemsRetrieved**: The maximum number of items that could be retrieved from list data endpoints.
+    -   Example: `"{{USE_CASE_LRU_CACHE_SIZE}}"`
 
 ---
 

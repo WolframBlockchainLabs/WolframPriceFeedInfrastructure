@@ -1,6 +1,6 @@
 # CCDB Application Architecture
 
-<img src="../../public/images/architecture/general_arch_v3_2.png" alt="General Architecture" height="500"/>
+<img src="../../public/images/architecture/EA_arch_v3.png" alt="General Architecture" height="500"/>
 
 ## Table of Contents
 
@@ -11,6 +11,7 @@
 5. [API Gateway](#api-gateway)
 6. [Continuous Integration and Deployment](#continuous-integration-and-deployment)
 7. [Scalability](#scalability)
+8. [Monitoring](#monitoring)
 
 ---
 
@@ -50,15 +51,21 @@ This section details the CI/CD pipeline utilized by the CCDB Application. It out
 
 ## Fault Tolerance
 
-Finally, the Scalability section discusses the strategies in place to ensure that the CCDB Application can handle growth in data volume, number of users, and transaction frequency without performance degradation.
+This section explores our strategies and solutions for ensuring Fault Tolerance in the CCDB Application. It highlights the methods and technologies we implement to maintain system stability and continuous operation, even in the face of unexpected errors, hardware failures, or other potential disruptions.
 
-🟢 [Details](./scalability.md)
+🟢 [Details](./fault_tolerance.md)
 
 ## Scalability
 
-Finally, the Scalability section discusses the strategies in place to ensure that the CCDB Application can handle growth in data volume, number of users, and transaction frequency without performance degradation.
+The Scalability section discusses the strategies in place to ensure that the CCDB Application can handle growth in data volume, number of users, and transaction frequency without performance degradation.
 
 🟢 [Details](./scalability.md)
+
+# Monitoring
+
+Finally, the Monitoring section delves into the mechanisms and tools we employ to continuously oversee the performance and health of the CCDB Application. It outlines our approach to tracking system metrics, user activity, and operational efficiency, ensuring the application remains reliable and responsive under varying loads and conditions.
+
+🟢 [Details](./monitoring.md)
 
 ---
 
