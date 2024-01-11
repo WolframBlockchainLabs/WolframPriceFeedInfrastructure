@@ -1,25 +1,19 @@
 ## ccxt-collectors.config
 
--   **rateLimit**: The global rate limit for the collectors.
+-   **rateLimit**: The global rate limit in milliseconds for the collectors.
 
     -   Default: `1000`
 
--   **rateLimitMargin**: The margin to consider while setting up rate limits.
+-   **rateLimitMargin**: The margin in milliseconds to consider while setting up rate limits.
 
     -   Example: `"{{CCXT_RATE_LIMIT_MARGIN}}"`
-
--   **replicaSize**: The size of the replica set.
-
-    -   Example: `"{{CCXT_REPLICA_SIZE}}"`
-
--   **instancePosition**: The position of this instance in the replica set.
-    -   Example: `"{{CCXT_INSTANCE_POSITION}}"`
 
 ## ccxt-exchange.config
 
 -   **id**: A unique identifier for the exchange.
 -   **name**: The display name of the exchange.
--   **rateLimit**: The rate limit specific to the exchange (overrides the global rate limit if specified).
+-   **rateLimit**: The rate limit in milliseconds specific to the exchange (overrides the global rate limit if specified).
+-   **minimalCycleDuration**: The minimal collectors fetch cycle duration in milliseconds.
 -   **symbols**: An array of symbols that are available on the exchange.
 
 #### Available Exchanges
