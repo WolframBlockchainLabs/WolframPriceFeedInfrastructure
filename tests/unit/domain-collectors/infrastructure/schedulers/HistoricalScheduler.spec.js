@@ -24,7 +24,6 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
             scheduleEndDate,
             baseRateLimit: 50,
             rateLimitMargin: 10,
-            operationsAmount: 4,
             queuePosition: 3,
             queueSize: 5,
             replicaSize: 2,

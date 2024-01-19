@@ -135,7 +135,8 @@
                                 "required",
                                 "positive_integer"
                             ],
-                            "debounceDelay": ["required", "positive_integer"]
+                            "debounceDelay": ["required", "positive_integer"],
+                            "discoveryInterval": ["required", "string"]
                         }
                     }
                 ]
