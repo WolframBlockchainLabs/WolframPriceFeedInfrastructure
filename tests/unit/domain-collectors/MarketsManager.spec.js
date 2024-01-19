@@ -102,7 +102,7 @@ describe('MarketsManager', () => {
         );
     });
 
-    describe('collectorsReload method', () => {
+    describe('reloadMarkets method', () => {
         test('acquires and releases mutex, updates rate limit, and logs success', async () => {
             const dynamicConfig = { rateLimit: 5 };
             const releaseMock = jest.fn();
@@ -114,14 +114,14 @@ describe('MarketsManager', () => {
 
             context.mockCollectorsManagersFactory.create.mockImplementation(
                 () => ({
-                    updateRateLimit: jest.fn().mockResolvedValue(),
+                    reloadScheduler: jest.fn().mockResolvedValue(),
                     getCollectorManagerTaskName: jest.fn(),
                 }),
             );
 
             context.marketsManager.initMarkets();
 
-            await context.marketsManager.collectorsReload(dynamicConfig);
+            await context.marketsManager.reloadMarkets(dynamicConfig);
 
             expect(reloadMutexMock.acquire).toHaveBeenCalled();
             expect(releaseMock).toHaveBeenCalled();
@@ -129,7 +129,7 @@ describe('MarketsManager', () => {
             context.marketsManager.collectorsManagers.forEach(
                 (collectorsManager) => {
                     expect(
-                        collectorsManager.updateRateLimit,
+                        collectorsManager.reloadScheduler,
                     ).toHaveBeenCalledWith(dynamicConfig);
                 },
             );
@@ -137,7 +137,7 @@ describe('MarketsManager', () => {
             expect(context.mockLogger.info).toHaveBeenCalled();
         });
 
-        test('logs error if updateRateLimit throws', async () => {
+        test('logs error if reloadScheduler throws', async () => {
             const dynamicConfig = { rateLimit: 5 };
             const releaseMock = jest.fn();
             const reloadMutexMock = {
@@ -148,14 +148,14 @@ describe('MarketsManager', () => {
             const error = new Error('Test error');
             context.mockCollectorsManagersFactory.create.mockImplementation(
                 () => ({
-                    updateRateLimit: jest.fn().mockRejectedValue(error),
+                    reloadScheduler: jest.fn().mockRejectedValue(error),
                     getCollectorManagerTaskName: jest.fn(),
                 }),
             );
 
             context.marketsManager.initMarkets();
 
-            await context.marketsManager.collectorsReload(dynamicConfig);
+            await context.marketsManager.reloadMarkets(dynamicConfig);
 
             expect(context.mockLogger.error).toHaveBeenCalled();
             expect(releaseMock).toHaveBeenCalled();

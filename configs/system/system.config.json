@@ -77,7 +77,8 @@
     "policiesConfigs": {
         "replicaDiscovery": {
             "initializationDelay": "{{REPLICA_DISCOVERY_INITIALIZATION_DELAY}}",
-            "debounceDelay": "{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}"
+            "debounceDelay": "{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}",
+            "discoveryInterval": "*/30 * * * *"
         }
     },
     "apiLimits": {

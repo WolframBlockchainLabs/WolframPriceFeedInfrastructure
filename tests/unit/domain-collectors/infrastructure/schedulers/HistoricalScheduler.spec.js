@@ -24,7 +24,6 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
             scheduleEndDate,
             baseRateLimit: 50,
             rateLimitMargin: 10,
-            operationsAmount: 4,
             queuePosition: 3,
             queueSize: 5,
             replicaSize: 2,
@@ -56,7 +55,7 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         const updateIntervalBoundsSpy = jest
             .spyOn(context.historicalScheduler, 'updateIntervalBounds')
             .mockImplementation(() => {});
-        context.historicalScheduler.setOperations([operation]);
+        context.historicalScheduler.operations = [operation];
 
         await context.historicalScheduler.runOperations();
 
@@ -74,7 +73,7 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         const stopSpy = jest
             .spyOn(context.historicalScheduler, 'stop')
             .mockImplementation(() => {});
-        context.historicalScheduler.setOperations([operation]);
+        context.historicalScheduler.operations = [operation];
 
         await context.historicalScheduler.runOperations();
 

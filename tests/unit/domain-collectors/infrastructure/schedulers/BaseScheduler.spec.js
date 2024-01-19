@@ -76,11 +76,8 @@ describe('BaseScheduler Tests', () => {
     });
 
     test('the "start" method should start initialization, setup a critical section.', async () => {
-        const setOperationsSpy = jest
-            .spyOn(context.baseScheduler, 'setOperations')
-            .mockImplementation(() => {});
-        const setMultiplierSpy = jest
-            .spyOn(context.baseScheduler, 'setMultiplier')
+        const setDynamicConfigSpy = jest
+            .spyOn(context.baseScheduler, 'setDynamicConfig')
             .mockImplementation(() => {});
         const initializeSchedulerSpy = jest
             .spyOn(context.baseScheduler, 'initializeScheduler')
@@ -88,8 +85,7 @@ describe('BaseScheduler Tests', () => {
 
         await context.baseScheduler.start({});
 
-        expect(setOperationsSpy).toHaveBeenCalledTimes(1);
-        expect(setMultiplierSpy).toHaveBeenCalledTimes(1);
+        expect(setDynamicConfigSpy).toHaveBeenCalledTimes(1);
         expect(initializeSchedulerSpy).toHaveBeenCalledTimes(1);
     });
 
@@ -184,41 +180,9 @@ describe('BaseScheduler Tests', () => {
         expect(context.setTimeoutStub).toHaveBeenCalledTimes(1);
     });
 
-    test('the "updateRateLimitMultiplier" method reloads cron if the new backoff multiplier is valid, and sets up a critical section', async () => {
-        const validateMultiplierSpy = jest
-            .spyOn(context.baseScheduler, 'validateMultiplier')
-            .mockReturnValue(true);
-        const reloadSpy = jest
-            .spyOn(context.baseScheduler, 'reload')
-            .mockImplementation(() => {});
-
-        await context.baseScheduler.updateRateLimitMultiplier({});
-
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
-        expect(validateMultiplierSpy).toHaveBeenCalledTimes(1);
-        expect(reloadSpy).toHaveBeenCalledTimes(1);
-    });
-
-    test('the "updateRateLimitMultiplier" method skips reload if the new backoff multiplier is not valid, and sets up a critical section', async () => {
-        const validateMultiplierSpy = jest
-            .spyOn(context.baseScheduler, 'validateMultiplier')
-            .mockReturnValue(false);
-        const reloadSpy = jest
-            .spyOn(context.baseScheduler, 'reload')
-            .mockImplementation(() => {});
-
-        await context.baseScheduler.updateRateLimitMultiplier({});
-
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
-        expect(validateMultiplierSpy).toHaveBeenCalledTimes(1);
-        expect(reloadSpy).not.toHaveBeenCalled();
-    });
-
     test('the "runOperations" method calls handler', async () => {
         const operations = [jest.fn()];
-        context.baseScheduler.setOperations(operations);
+        context.baseScheduler.operations = operations;
 
         await context.baseScheduler.runOperations();
 
@@ -226,12 +190,12 @@ describe('BaseScheduler Tests', () => {
     });
 
     test('the "getOperationsBatchDelay" method returns desync value', () => {
-        context.baseScheduler.setOperations([
+        context.baseScheduler.operations = [
             jest.fn(),
             jest.fn(),
             jest.fn(),
             jest.fn(),
-        ]);
+        ];
         context.baseScheduler.initializeScheduler();
         const desync = context.baseScheduler.getOperationsBatchDelay();
 
@@ -239,61 +203,16 @@ describe('BaseScheduler Tests', () => {
     });
 
     test('the "getOperationDelay" returns desync value for each operation', () => {
-        context.baseScheduler.setOperations([
+        context.baseScheduler.operations = [
             jest.fn(),
             jest.fn(),
             jest.fn(),
             jest.fn(),
-        ]);
+        ];
         context.baseScheduler.initializeScheduler();
         const desync = context.baseScheduler.getOperationDelay(1);
 
         expect(desync).toBe(300);
-    });
-
-    test('the "setOperations" method validates and sets handler', () => {
-        const operations = [jest.fn()];
-        context.baseScheduler.setOperations(operations);
-
-        expect(context.baseScheduler.operations).toBe(operations);
-    });
-
-    test('the "setOperations" throws if handler is not passed', () => {
-        expect(() => context.baseScheduler.setOperations()).toThrow();
-    });
-
-    test('the "validateMultiplier" returns false if multiplier is invalid', () => {
-        context.baseScheduler.setOperations([jest.fn()]);
-
-        const isValid = context.baseScheduler.validateMultiplier(0);
-
-        expect(isValid).toBe(false);
-    });
-
-    test('the "validateMultiplier" returns true if multiplier is valid', () => {
-        context.baseScheduler.setOperations([jest.fn()]);
-
-        const isValid = context.baseScheduler.validateMultiplier(2);
-
-        expect(isValid).toBe(true);
-    });
-
-    test('the "setMultiplier" sets a new multiplier if it is valid', () => {
-        const newMultiplier = 2;
-        context.baseScheduler.setOperations([jest.fn()]);
-        context.baseScheduler.setMultiplier(newMultiplier);
-
-        expect(context.baseScheduler.rateLimitMultiplier).toBe(newMultiplier);
-    });
-
-    test('the "setMultiplier" skips if a new multiplier is invalid', () => {
-        const newMultiplier = 0;
-        context.baseScheduler.setOperations([jest.fn()]);
-        context.baseScheduler.setMultiplier(newMultiplier);
-
-        expect(context.baseScheduler.rateLimitMultiplier).not.toBe(
-            newMultiplier,
-        );
     });
 
     test('the "getMultiplierBackoff" returns next multiplier', () => {
@@ -309,54 +228,56 @@ describe('BaseScheduler Tests', () => {
         expect(multiplier).toBe(context.baseScheduler.rateLimitMultiplier);
     });
 
-    test('"setReplicaConfig" should set replica size and instance position when config is provided', () => {
-        const replicaConfig = {
-            replicaSize: 10,
-            instancePosition: 5,
+    test('"setDynamicConfig" should set provided options when config is provided', () => {
+        const dynamicConfig = {
+            operations: [jest.fn],
+            rateLimitMultiplier: 5,
+            taskName: 'test',
+            replicaConfig: {
+                replicaSize: 10,
+                instancePosition: 5,
+            },
         };
 
-        context.baseScheduler.setReplicaConfig(replicaConfig);
+        context.baseScheduler.setDynamicConfig(dynamicConfig);
 
+        expect(context.baseScheduler.operations).toBe(dynamicConfig.operations);
+        expect(context.baseScheduler.rateLimitMultiplier).toBe(
+            dynamicConfig.rateLimitMultiplier,
+        );
+        expect(context.baseScheduler.taskName).toBe(dynamicConfig.taskName);
         expect(context.baseScheduler.replicaSize).toBe(
-            replicaConfig.replicaSize,
+            dynamicConfig.replicaConfig.replicaSize,
         );
         expect(context.baseScheduler.instancePosition).toBe(
-            replicaConfig.instancePosition,
+            dynamicConfig.replicaConfig.instancePosition,
         );
     });
 
-    test('"setReplicaConfig" should not alter replica size and instance position when config is not provided', () => {
-        context.baseScheduler.replicaSize = 1;
-        context.baseScheduler.instancePosition = 2;
+    test('"setDynamicConfig" should not set options if not provided', () => {
+        const dynamicConfig = {
+            operations: [jest.fn],
+            rateLimitMultiplier: 5,
+            taskName: 'test',
+            replicaConfig: {
+                replicaSize: 10,
+                instancePosition: 5,
+            },
+        };
 
-        context.baseScheduler.setReplicaConfig(null);
+        context.baseScheduler.setDynamicConfig(dynamicConfig);
+        context.baseScheduler.setDynamicConfig({});
 
-        expect(context.baseScheduler.replicaSize).toBe(1);
-        expect(context.baseScheduler.instancePosition).toBe(2);
-    });
-
-    test('"setTaskName" should set task name when task name is provided', () => {
-        const taskName = 'New Task';
-
-        context.baseScheduler.setTaskName(taskName);
-
-        expect(context.baseScheduler.taskName).toBe(taskName);
-    });
-
-    test('"setTaskName" should not alter task name when task name is not provided', () => {
-        const originalTaskName = 'Original Task';
-        context.baseScheduler.taskName = originalTaskName;
-
-        context.baseScheduler.setTaskName(null);
-
-        expect(context.baseScheduler.taskName).toBe(originalTaskName);
-
-        context.baseScheduler.setTaskName(undefined);
-
-        expect(context.baseScheduler.taskName).toBe(originalTaskName);
-
-        context.baseScheduler.setTaskName('');
-
-        expect(context.baseScheduler.taskName).toBe(originalTaskName);
+        expect(context.baseScheduler.operations).toBe(dynamicConfig.operations);
+        expect(context.baseScheduler.rateLimitMultiplier).toBe(
+            dynamicConfig.rateLimitMultiplier,
+        );
+        expect(context.baseScheduler.taskName).toBe(dynamicConfig.taskName);
+        expect(context.baseScheduler.replicaSize).toBe(
+            dynamicConfig.replicaConfig.replicaSize,
+        );
+        expect(context.baseScheduler.instancePosition).toBe(
+            dynamicConfig.replicaConfig.instancePosition,
+        );
     });
 });
