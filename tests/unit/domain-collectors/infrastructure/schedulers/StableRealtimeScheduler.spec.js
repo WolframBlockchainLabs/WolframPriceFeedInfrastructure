@@ -41,7 +41,7 @@ describe('[Scheduler]: StableRealtimeScheduler Tests Suite', () => {
             instancePosition: 1,
         });
 
-        context.scheduler.setOperations([context.operationStub]);
+        context.scheduler.operations = [context.operationStub];
     });
 
     afterEach(() => {

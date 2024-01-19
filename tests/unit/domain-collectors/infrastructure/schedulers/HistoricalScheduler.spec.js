@@ -55,7 +55,7 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         const updateIntervalBoundsSpy = jest
             .spyOn(context.historicalScheduler, 'updateIntervalBounds')
             .mockImplementation(() => {});
-        context.historicalScheduler.setOperations([operation]);
+        context.historicalScheduler.operations = [operation];
 
         await context.historicalScheduler.runOperations();
 
@@ -73,7 +73,7 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         const stopSpy = jest
             .spyOn(context.historicalScheduler, 'stop')
             .mockImplementation(() => {});
-        context.historicalScheduler.setOperations([operation]);
+        context.historicalScheduler.operations = [operation];
 
         await context.historicalScheduler.runOperations();
 

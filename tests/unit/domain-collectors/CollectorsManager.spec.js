@@ -13,7 +13,7 @@ describe('CollectorsManager Tests', () => {
             getMultiplierBackoff: jest.fn(),
             start: jest.fn(),
             autoUpdateRateLimitMultiplier: jest.fn(),
-            updateRateLimitMultiplier: jest.fn(),
+            reload: jest.fn(),
             getMultiplier: jest.fn(),
         };
 
@@ -203,17 +203,16 @@ describe('CollectorsManager Tests', () => {
         );
     });
 
-    test('the "updateRateLimit" method should call updateRateLimitMultiplier on the scheduler.', () => {
+    test('the "reloadScheduler" method should call reload on the scheduler.', () => {
         jest.spyOn(
             context.collectorsManager.collectorsScheduler,
-            'updateRateLimitMultiplier',
+            'reload',
         ).mockResolvedValue();
 
-        context.collectorsManager.updateRateLimit();
+        context.collectorsManager.reloadScheduler();
 
         expect(
-            context.collectorsManager.collectorsScheduler
-                .updateRateLimitMultiplier,
+            context.collectorsManager.collectorsScheduler.reload,
         ).toHaveBeenCalledTimes(1);
     });
 

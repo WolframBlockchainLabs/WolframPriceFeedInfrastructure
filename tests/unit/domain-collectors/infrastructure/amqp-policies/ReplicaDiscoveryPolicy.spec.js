@@ -1,4 +1,11 @@
 import ReplicaDiscoveryPolicy from '#domain-collectors/infrastructure/amqp-policies/ReplicaDiscoveryPolicy.js';
+import Cron from 'croner';
+
+jest.mock('croner', () => {
+    return jest.fn().mockImplementation(() => {
+        return {};
+    });
+});
 
 describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
     const context = {};
@@ -37,7 +44,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
     test('constructor initializes with modified rabbitGroupName and other properties', () => {
         jest.spyOn(
             ReplicaDiscoveryPolicy.prototype,
-            'validateReplicaDiscoveryConfig',
+            'validateConfig',
         ).mockImplementation(() => {});
 
         const replicaDiscoveryPolicy = new ReplicaDiscoveryPolicy({
@@ -48,199 +55,340 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         });
 
         expect(replicaDiscoveryPolicy.rabbitGroupName).toBe(
-            `${context.rabbitGroupName}::status`,
+            `${context.rabbitGroupName}::discovery`,
         );
         expect(replicaDiscoveryPolicy.replicaDiscovery).toBe(
             context.replicaDiscoveryConfig,
         );
-        expect(replicaDiscoveryPolicy.currentProtocolStatus).toBe(
-            ReplicaDiscoveryPolicy.PROTOCOL_STATUSES.INITIALIZING,
-        );
-        expect(
-            replicaDiscoveryPolicy.validateReplicaDiscoveryConfig,
-        ).toHaveBeenCalled();
+        expect(replicaDiscoveryPolicy.hasStarted).toBe(false);
+        expect(replicaDiscoveryPolicy.validateConfig).toHaveBeenCalled();
     });
 
-    test('start method initializes protocol status and broadcasts HELLO message', async () => {
-        jest.useFakeTimers();
-
-        const superStartSpy = jest
-            .spyOn(
-                Object.getPrototypeOf(ReplicaDiscoveryPolicy.prototype),
-                'start',
-            )
+    test('start method initializes protocol status and schedules tasks', async () => {
+        jest.spyOn(
+            Object.getPrototypeOf(ReplicaDiscoveryPolicy.prototype),
+            'start',
+        ).mockImplementation(() => {});
+        const scheduleGreetingSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'scheduleGreeting')
+            .mockImplementation(() => {});
+        const scheduleCronTaskSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'scheduleCronTask')
             .mockImplementation(() => {});
 
-        const broadcastSpy = jest
-            .spyOn(context.replicaDiscoveryPolicy, 'broadcast')
-            .mockImplementation(() => {});
+        context.replicaDiscoveryPolicy.startPromise = Promise.resolve();
 
         await context.replicaDiscoveryPolicy.start();
 
-        jest.advanceTimersByTime(
+        expect(scheduleGreetingSpy).toHaveBeenCalledWith(
             context.replicaDiscoveryConfig.initializationDelay,
         );
-
-        expect(superStartSpy).toHaveBeenCalled();
-        expect(broadcastSpy).toHaveBeenCalled();
-        expect(context.replicaDiscoveryPolicy.currentProtocolStatus).toBe(
-            ReplicaDiscoveryPolicy.PROTOCOL_STATUSES.DEBATING,
+        expect(scheduleCronTaskSpy).toHaveBeenCalledWith(
+            context.replicaDiscoveryConfig.discoveryInterval,
         );
+    });
+
+    test('consumer method correctly handles HELLO message type', async () => {
+        const message = JSON.stringify({
+            type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.HELLO,
+            data: { statusUpdateQueue: 'queue-address' },
+        });
+        context.amqpManagementTargetStub.getStatusHandler.mockResolvedValue({
+            someStatus: 'status',
+        });
+
+        await context.replicaDiscoveryPolicy.consumer({
+            content: Buffer.from(message),
+        });
+
+        expect(context.amqpClientStub.publish).toHaveBeenCalledWith(
+            'queue-address',
+            expect.objectContaining({
+                type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.STATUS,
+                data: expect.anything(),
+            }),
+        );
+    });
+
+    test('consumer method correctly handles STATUS message type', async () => {
+        jest.useFakeTimers();
+        jest.spyOn(global, 'setTimeout');
+        const messageData = {
+            status: { rateLimitMultiplier: 1 },
+            from: {
+                address: 'test',
+                identity: context.amqpManagementTargetStub.identity,
+            },
+        };
+        const message = JSON.stringify({
+            type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.STATUS,
+            data: messageData,
+        });
+        const handleStatusUpdateSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'handleStatusUpdate')
+            .mockImplementation(() => {});
+
+        await context.replicaDiscoveryPolicy.consumer({
+            content: Buffer.from(message),
+        });
+
+        jest.advanceTimersByTime(context.replicaDiscoveryConfig.debounceDelay);
+
+        expect(context.replicaDiscoveryPolicy.messageBuffer).toContainEqual(
+            messageData,
+        );
+        expect(setTimeout).toHaveBeenLastCalledWith(
+            expect.any(Function),
+            context.replicaDiscoveryConfig.debounceDelay,
+        );
+        expect(handleStatusUpdateSpy).toHaveBeenCalled();
         jest.useRealTimers();
     });
 
-    test('setProtocolStatus method updates currentProtocolStatus', () => {
-        const newStatus = ReplicaDiscoveryPolicy.PROTOCOL_STATUSES.RUNNING;
-        context.replicaDiscoveryPolicy.setProtocolStatus(newStatus);
+    test('consumer method correctly handles SHARE message type', async () => {
+        const messageData = {
+            status: {
+                rateLimitMultiplier: 10,
+                replicaMembers: ['other-address'],
+            },
+            from: {
+                address: 'other-address',
+                identity: context.amqpManagementTargetStub.identity,
+            },
+        };
+        const message = JSON.stringify({
+            type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.SHARE,
+            data: messageData,
+        });
 
-        expect(context.replicaDiscoveryPolicy.currentProtocolStatus).toBe(
-            newStatus,
+        context.replicaDiscoveryPolicy.hasStarted = true;
+        context.replicaDiscoveryPolicy.currentStatus = {
+            rateLimitMultiplier: 5,
+            replicaMembers: ['some-address'],
+        };
+        context.amqpManagementTargetStub.getStatusHandler.mockReturnValue({
+            rateLimitMultiplier: 5,
+        });
+
+        await context.replicaDiscoveryPolicy.consumer({
+            content: Buffer.from(message),
+        });
+
+        expect(
+            context.amqpManagementTargetStub.reloadHandler,
+        ).toHaveBeenCalledWith({
+            rateLimitMultiplier: messageData.status.rateLimitMultiplier,
+            replicaConfig: expect.anything(),
+        });
+    });
+
+    test('validateConfig throws error when initializationDelay is less than debounceDelay', () => {
+        const config = { initializationDelay: 50, debounceDelay: 100 };
+
+        expect(() => {
+            context.replicaDiscoveryPolicy.validateConfig(config);
+        }).toThrow(
+            'Initialization delay must be greater than or equal to debounce delay.',
         );
     });
 
-    test('validateReplicaDiscoveryConfig should throw if initializationDelay is lower than debounceDelay', () => {
-        expect(() => {
-            context.replicaDiscoveryPolicy.validateReplicaDiscoveryConfig({
-                initializationDelay: 10,
-                debounceDelay: 20,
-            });
-        }).toThrow(Error);
-    });
-
-    test('clears existing debounceTimeout before setting a new one', async () => {
-        const setTimeoutMock = jest
-            .spyOn(global, 'setTimeout')
-            .mockImplementation(() => 'mockTimeoutId');
-        const clearTimeoutMock = jest
-            .spyOn(global, 'clearTimeout')
+    test('scheduleGreeting schedules greeting after specified delay', () => {
+        jest.useFakeTimers();
+        jest.spyOn(global, 'setTimeout');
+        const broadcastHelloSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'broadcastHello')
             .mockImplementation(() => {});
 
-        context.replicaDiscoveryPolicy.debounceTimeout = 'existingTimeoutId';
+        context.replicaDiscoveryPolicy.scheduleGreeting(1000);
 
-        const data = { someData: 'data' };
-        await context.replicaDiscoveryPolicy.statusConsumer(data);
+        expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+        jest.advanceTimersByTime(1000);
 
-        expect(clearTimeoutMock).toHaveBeenCalledWith('existingTimeoutId');
-        expect(setTimeoutMock).toHaveBeenCalled();
+        expect(broadcastHelloSpy).toHaveBeenCalled();
+        jest.useRealTimers();
     });
 
-    describe('consumer method', () => {
-        test('handles HELLO message type', async () => {
-            const message = JSON.stringify({
+    test('scheduleCronTask schedules cron task with given interval', () => {
+        const interval = '* * * * *';
+        context.replicaDiscoveryPolicy.scheduleCronTask(interval);
+
+        expect(Cron).toHaveBeenCalledWith(interval, expect.any(Function));
+    });
+
+    test('handleStatusUpdate updates current status and calls necessary methods', async () => {
+        jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'calculateCurrentStatus',
+        ).mockReturnValue({ someStatus: 'status' });
+        const handleTargetStartSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'handleTargetStart')
+            .mockResolvedValue();
+        const broadcastShareSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'broadcastShare')
+            .mockResolvedValue();
+
+        await context.replicaDiscoveryPolicy.handleStatusUpdate();
+
+        expect(context.replicaDiscoveryPolicy.currentStatus).toEqual({
+            someStatus: 'status',
+        });
+        expect(context.replicaDiscoveryPolicy.messageBuffer).toEqual([]);
+        expect(handleTargetStartSpy).toHaveBeenCalledWith({
+            someStatus: 'status',
+        });
+        expect(broadcastShareSpy).toHaveBeenCalledWith({
+            someStatus: 'status',
+        });
+    });
+
+    test('handleTargetStart calls startHandler and updates state if not started', async () => {
+        context.replicaDiscoveryPolicy.hasStarted = false;
+        const status = { rateLimitMultiplier: 1 };
+        jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'getTargetState',
+        ).mockReturnValue({ someState: 'state' });
+
+        await context.replicaDiscoveryPolicy.handleTargetStart(status);
+
+        expect(
+            context.amqpManagementTargetStub.startHandler,
+        ).toHaveBeenCalledWith({ someState: 'state' });
+        expect(context.replicaDiscoveryPolicy.hasStarted).toBe(true);
+    });
+
+    test('broadcastHello sends correct HELLO message', async () => {
+        jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'broadcast',
+        ).mockImplementation(() => {});
+
+        await context.replicaDiscoveryPolicy.broadcastHello();
+
+        expect(context.replicaDiscoveryPolicy.broadcast).toHaveBeenCalledWith(
+            expect.objectContaining({
                 type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.HELLO,
-                data: { statusUpdateQueue: 'queue-address' },
-            });
-            context.amqpManagementTargetStub.getStatusHandler.mockResolvedValue(
-                { someStatus: 'status' },
-            );
+                data: expect.anything(),
+            }),
+        );
+    });
 
-            await context.replicaDiscoveryPolicy.consumer({
-                content: Buffer.from(message),
-            });
+    test('broadcastShare sends correct SHARE message', async () => {
+        jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'broadcast',
+        ).mockImplementation(() => {});
 
-            expect(context.amqpClientStub.publish).toHaveBeenCalledWith(
-                'queue-address',
-                expect.anything(),
-            );
-        });
+        const status = { rateLimitMultiplier: 1 };
+        await context.replicaDiscoveryPolicy.broadcastShare(status);
 
-        test('handles STATUS message type', async () => {
-            const message = JSON.stringify({
-                type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.STATUS,
-                data: {
-                    status: {
-                        rateLimitMultiplier: 1,
-                    },
-                    from: {
-                        address: 'test',
-                        identity: context.amqpManagementTargetStub.identity,
-                    },
-                },
-            });
+        expect(context.replicaDiscoveryPolicy.broadcast).toHaveBeenCalledWith(
+            expect.objectContaining({
+                type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.SHARE,
+                data: expect.objectContaining({
+                    status,
+                    from: expect.anything(),
+                }),
+            }),
+        );
+    });
 
-            const broadcastSpy = jest
-                .spyOn(context.replicaDiscoveryPolicy, 'broadcast')
-                .mockImplementation(() => {});
-
-            jest.useFakeTimers();
-            await context.replicaDiscoveryPolicy.consumer({
-                content: Buffer.from(message),
-            });
-
-            jest.advanceTimersByTime(
-                context.replicaDiscoveryConfig.debounceDelay,
-            );
-
-            return Promise.resolve().then(() => {
-                expect(broadcastSpy).toHaveBeenCalled();
-                expect(
-                    context.amqpManagementTargetStub.startHandler,
-                ).toHaveBeenCalled();
-                expect(
-                    context.replicaDiscoveryPolicy.messageBuffer,
-                ).toHaveLength(1);
-                jest.useRealTimers();
-            });
-        });
-
-        test('handles SHARE message type when conditions are met', async () => {
-            const messageData = {
-                status: {
-                    rateLimitMultiplier: 10,
-                    replicaMembers: ['other-address'],
-                },
+    test('calculateCurrentStatus computes the correct current status', () => {
+        context.replicaDiscoveryPolicy.messageBuffer = [
+            {
+                status: { rateLimitMultiplier: 2 },
+                from: { address: 'address1', identity: 'other-identity' },
+            },
+            {
+                status: { rateLimitMultiplier: 1 },
                 from: {
-                    address: 'other-address',
+                    address: 'address2',
                     identity: context.amqpManagementTargetStub.identity,
                 },
-            };
-            const message = JSON.stringify({
-                type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.SHARE,
-                data: messageData,
-            });
-            context.amqpManagementTargetStub.getStatusHandler.mockReturnValue({
-                rateLimitMultiplier: 5,
-            });
-            context.replicaDiscoveryPolicy.setProtocolStatus(
-                ReplicaDiscoveryPolicy.PROTOCOL_STATUSES.DEBATING,
-            );
-
-            await context.replicaDiscoveryPolicy.consumer({
-                content: Buffer.from(message),
-            });
-
-            expect(
-                context.amqpManagementTargetStub.reloadHandler,
-            ).toHaveBeenCalledWith({
-                rateLimitMultiplier: messageData.status.rateLimitMultiplier,
-                replicaConfig: expect.anything(),
-            });
-        });
-
-        test('handles SHARE message type when conditions are not met', async () => {
-            const messageData = {
-                status: { rateLimitMultiplier: 4 },
+            },
+            {
+                status: { rateLimitMultiplier: 3 },
                 from: {
-                    address:
-                        context.replicaDiscoveryPolicy.getPrivateQueueAddress(),
-                    identity: 'mock-identity',
+                    address: 'address3',
+                    identity: context.amqpManagementTargetStub.identity,
                 },
-            };
-            const message = JSON.stringify({
-                type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.SHARE,
-                data: messageData,
-            });
-            context.amqpManagementTargetStub.getStatusHandler.mockReturnValue({
-                rateLimitMultiplier: 5,
-            });
+            },
+        ];
 
-            await context.replicaDiscoveryPolicy.consumer({
-                content: Buffer.from(message),
-            });
+        const currentStatus =
+            context.replicaDiscoveryPolicy.calculateCurrentStatus();
 
-            expect(
-                context.amqpManagementTargetStub.reloadHandler,
-            ).not.toHaveBeenCalled();
+        expect(currentStatus.rateLimitMultiplier).toBe(3);
+
+        expect(currentStatus.replicaMembers).toEqual(['address2', 'address3']);
+    });
+
+    test('handleStatusMessage clears existing debounceTimeout and sets a new one', async () => {
+        jest.useFakeTimers();
+        const handleStatusUpdateSpy = jest
+            .spyOn(context.replicaDiscoveryPolicy, 'handleStatusUpdate')
+            .mockImplementation(() => {});
+
+        context.replicaDiscoveryPolicy.debounceTimeout = setTimeout(
+            () => {},
+            1000,
+        );
+        const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout');
+
+        const sampleData = {
+            status: { rateLimitMultiplier: 1 },
+            from: { address: 'address1', identity: 'identity1' },
+        };
+
+        context.replicaDiscoveryPolicy.handleStatusMessage(sampleData);
+
+        expect(clearTimeoutSpy).toHaveBeenCalled();
+
+        jest.advanceTimersByTime(
+            context.replicaDiscoveryPolicy.replicaDiscovery.debounceDelay,
+        );
+
+        expect(handleStatusUpdateSpy).toHaveBeenCalled();
+
+        jest.useRealTimers();
+    });
+
+    test('handleShareMessage processes message when shouldCallReloadHandler returns false', async () => {
+        jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'shouldCallReloadHandler',
+        ).mockReturnValue(false);
+
+        const sampleData = {
+            status: { rateLimitMultiplier: 1, replicaMembers: [] },
+        };
+        jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'getTargetState',
+        ).mockReturnValue({ someState: 'state' });
+
+        await context.replicaDiscoveryPolicy.handleShareMessage(sampleData);
+
+        expect(
+            context.amqpManagementTargetStub.reloadHandler,
+        ).not.toHaveBeenCalled();
+    });
+
+    test('handleTargetStart returns early if hasStarted is true', async () => {
+        context.replicaDiscoveryPolicy.hasStarted = true;
+
+        const getTargetStateSpy = jest.spyOn(
+            context.replicaDiscoveryPolicy,
+            'getTargetState',
+        );
+
+        await context.replicaDiscoveryPolicy.handleTargetStart({
+            someStatus: 'status',
         });
+
+        expect(getTargetStateSpy).not.toHaveBeenCalled();
+        expect(
+            context.amqpManagementTargetStub.startHandler,
+        ).not.toHaveBeenCalled();
     });
 });
