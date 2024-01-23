@@ -23,15 +23,14 @@ module.exports = {
             },
         });
 
-        await queryInterface.addConstraint('Markets', {
-            fields: ['symbol', 'exchangeId'],
-            type: 'unique',
+        await queryInterface.addIndex('Markets', ['symbol', 'exchangeId'], {
+            unique: true,
             name: 'unique_market_inside_exchange',
         });
     },
 
     down: async (queryInterface) => {
-        await queryInterface.removeConstraint(
+        await queryInterface.removeIndex(
             'Markets',
             'unique_market_inside_exchange',
         );
