@@ -9,7 +9,6 @@ module.exports = {
             externalExchangeId: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: true,
             },
             name: { type: Sequelize.STRING, allowNull: false },
         });
@@ -17,9 +16,19 @@ module.exports = {
         await queryInterface.addIndex('Exchanges', ['name'], {
             name: 'Exchanges_name_idx',
         });
+
+        await queryInterface.addIndex('Exchanges', ['externalExchangeId'], {
+            unique: true,
+            name: 'Exchanges_externalExchangeId_key',
+        });
     },
 
     down: async (queryInterface) => {
+        await queryInterface.removeIndex(
+            'Exchanges',
+            'Exchanges_externalExchangeId_key',
+        );
+
         await queryInterface.removeIndex('Exchanges', 'Exchanges_name_idx');
 
         await queryInterface.dropTable('Exchanges');
