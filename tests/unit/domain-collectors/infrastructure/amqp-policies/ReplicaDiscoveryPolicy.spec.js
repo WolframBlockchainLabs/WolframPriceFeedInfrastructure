@@ -216,10 +216,11 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
     });
 
     test('handleStatusUpdate updates current status and calls necessary methods', async () => {
+        const replicaStatus = { replicaMembers: ['test1', 'test2'] };
         jest.spyOn(
             context.replicaDiscoveryPolicy,
-            'calculateCurrentStatus',
-        ).mockReturnValue({ someStatus: 'status' });
+            'aggregateReplicaStatus',
+        ).mockReturnValue(replicaStatus);
         const handleTargetStartSpy = jest
             .spyOn(context.replicaDiscoveryPolicy, 'handleTargetStart')
             .mockResolvedValue();
@@ -229,16 +230,12 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
 
         await context.replicaDiscoveryPolicy.handleStatusUpdate();
 
-        expect(context.replicaDiscoveryPolicy.currentStatus).toEqual({
-            someStatus: 'status',
-        });
+        expect(context.replicaDiscoveryPolicy.replicaMembers).toEqual(
+            replicaStatus.replicaMembers,
+        );
         expect(context.replicaDiscoveryPolicy.messageBuffer).toEqual([]);
-        expect(handleTargetStartSpy).toHaveBeenCalledWith({
-            someStatus: 'status',
-        });
-        expect(broadcastShareSpy).toHaveBeenCalledWith({
-            someStatus: 'status',
-        });
+        expect(handleTargetStartSpy).toHaveBeenCalledWith(replicaStatus);
+        expect(broadcastShareSpy).toHaveBeenCalledWith(replicaStatus);
     });
 
     test('handleTargetStart calls startHandler and updates state if not started', async () => {
@@ -293,7 +290,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         );
     });
 
-    test('calculateCurrentStatus computes the correct current status', () => {
+    test('aggregateReplicaStatus computes the correct current status', () => {
         context.replicaDiscoveryPolicy.messageBuffer = [
             {
                 status: { rateLimitMultiplier: 2 },
@@ -316,7 +313,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         ];
 
         const currentStatus =
-            context.replicaDiscoveryPolicy.calculateCurrentStatus();
+            context.replicaDiscoveryPolicy.aggregateReplicaStatus();
 
         expect(currentStatus.rateLimitMultiplier).toBe(3);
 
@@ -365,7 +362,11 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         jest.spyOn(
             context.replicaDiscoveryPolicy,
             'getTargetState',
-        ).mockReturnValue({ someState: 'state' });
+        ).mockReturnValue({ rateLimitMultiplier: 1 });
+        jest.spyOn(
+            context.replicaDiscoveryPolicy.amqpManagementTarget,
+            'getStatusHandler',
+        ).mockReturnValue({ rateLimitMultiplier: 1 });
 
         await context.replicaDiscoveryPolicy.handleShareMessage(sampleData);
 
@@ -390,5 +391,23 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         expect(
             context.amqpManagementTargetStub.startHandler,
         ).not.toHaveBeenCalled();
+    });
+
+    test('shouldCallReloadHandler checks replica members and rate limit', async () => {
+        jest.spyOn(
+            context.replicaDiscoveryPolicy.amqpManagementTarget,
+            'getStatusHandler',
+        ).mockReturnValue({ rateLimitMultiplier: 1 });
+
+        context.replicaDiscoveryPolicy.replicaMembers = ['test'];
+        context.replicaDiscoveryPolicy.hasStarted = true;
+
+        const shouldReload =
+            context.replicaDiscoveryPolicy.shouldCallReloadHandler({
+                replicaMembers: context.replicaDiscoveryPolicy.replicaMembers,
+                rateLimitMultiplier: 2,
+            });
+
+        expect(shouldReload).toBe(true);
     });
 });
