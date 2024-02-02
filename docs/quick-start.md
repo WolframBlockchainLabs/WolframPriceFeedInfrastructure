@@ -34,13 +34,13 @@ Follow these steps to set up the project:
 
 Ensure the following before running containers:
 
-1. **Setup Completion**: Complete the setup guide, otherwise collectors will fail to launch.
+1. **Setup Completion**: Complete the ```Initial Setup Instructions``` guide, otherwise collectors will fail to launch.
 2. **Stopping Containers**: If containers are active, stop them before proceeding.
 3. **Local Launch**:
     - Uncomment necessary services in `./docker/docker-compose.yml`.
     - Don't forget to follow YAML indentation rules.
     - There you can find a bunch of commented services with a common root in names: `collectors`. Services for collectors are named like `ccxt-collectors`, `eth-collectors`, etc.
-    - The postfix number in container name indicates its order in the replica set. Learn about replica sets in [Fault Tolerance](./architecture/fault_tolerance.md).
+    - The ```replicas: 2``` field indicates replica size. Learn about replica sets in [Fault Tolerance](./architecture/fault_tolerance.md).
 4. **Service Configuration**: uncomment only those services that you've provided envs for in `./docker/env/.env.backend`. Some collectors require API keys for nodes and will not work unless keys were provided. Other services could be launched without keys like: CCXT, XRPL, and Tezos based collectos. Ethereum and Cardano will definitely require keys to be passed in envs, because default ones are just stubs and will not work. Look for configuration under `./configs` dir.
 5. **Rate Limit Caution**: Ensure your API keys meet the rate limits specified in the `./configs` directory for their respective service config.
 6. **Start Containers**: Execute `./scripts/start`.
@@ -52,7 +52,7 @@ To rollback the database:
 1. Use `npm run docker:migration:rollback:db`.
 2. Note: This will destroy all data and tables. Migrations and seeders will need to be rerun.
 
-# Stopping the Project
+## Stopping the Project
 
 To stop the project:
 
@@ -64,6 +64,20 @@ To stop the project:
 1. Start services with `./scripts/start`.
 2. Run database migration tests with `npm run docker:migration:test`.
 3. Execute tests using `npm run docker:test:jest` or `npm run docker:test:jest:coverage` for coverage reports.
+
+## Running Historical Collection
+
+Historical collection allows to retrieve historical CandleSticks records from CEX through CCXT API.
+
+1. Complete the ```Initial Setup Instructions``` guide, otherwise collectors will fail to launch.
+2. Start services with `./scripts/start`. It is not necessary to have ccxt-collectors container running. The script will be executed on the main server container.
+3. Execute collection script using `npm run docker:cli:ccxt-historical-collectors -- ${startDate} ${endDate}`.
+
+Example: 
+
+`npm run docker:cli:ccxt-historical-collectors -- '2024-02-01 09:45:20+0000' '2024-02-02 09:45:20+0000'`
+
+this command will fetch all CandleSticks for configured pairs under `./configs/ccxt/historical` directory, starting with `'2024-02-01 09:45:20+0000'` and ending with `'2024-02-02 09:45:20+0000'` date.
 
 ---
 
