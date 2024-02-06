@@ -15,14 +15,10 @@
         "**/domain-collectors/**",
         "**/ws-api/**",
         "**/workers/**",
-        "!**/tests/**",
-        "!**/use-cases/BaseCacheUseCase.js",
         "!**/use-cases/BaseUseCase.js",
         "!**/use-cases/utils/**",
-        "!**/use-cases/testing/**",
         "!**/ws-api/*.*",
-        "!**/workers/*.*",
-        "!**/workers/**/*worker.*"
+        "!**/workers/*.*"
     ],
     "coverageThreshold": {
         "global": {
