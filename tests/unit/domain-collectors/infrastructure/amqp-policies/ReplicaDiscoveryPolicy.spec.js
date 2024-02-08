@@ -358,6 +358,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
 
         const sampleData = {
             status: { rateLimitMultiplier: 1, replicaMembers: [] },
+            from: { identity: context.amqpManagementTargetStub.identity },
         };
         jest.spyOn(
             context.replicaDiscoveryPolicy,
