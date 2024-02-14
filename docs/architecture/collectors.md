@@ -11,11 +11,11 @@
 
 ## Overview
 
-Exchange Data Collectors are integral components of the CCDB Application designed to interface with cryptocurrency exchange APIs. They are simple, lightweight processes that operate at scheduled intervals, which are meticulously aligned with the rate limits imposed by each exchange's API. Their primary responsibilities are two-fold: retrieving data specific to their designated data types and forwarding this data to the application's messaging system, RabbitMQ.
+Exchange Data Collectors are integral components of the CCDB Application designed to interface with cryptocurrency exchange APIs. They are processes that operate at scheduled intervals, which are aligned with the rate limits imposed by each exchange's API. Their primary responsibilities are two-fold: retrieving data specific to their designated data types and forwarding this data to the application's data writing system, DatabaseWriter service.
 
 ## Functionality
 
--   **Data Fetching**: Each collector is tailored to fetch a particular type of data, such as order book snapshots, trades, tickers, candlestick charts, and exchange rates. This targeted approach ensures that the collectors remain efficient and focused, reducing overhead and the likelihood of encountering rate limit issues.
+-   **Data Fetching**: Each collector is tailored to fetch a particular type of data, such as order book snapshots, trades, tickers, candlestick charts, and exchange rates.
 
 -   **Rate Limit Compliance**: The collectors are programmed to respect the rate limits of the APIs they interact with. By adhering to these limits, the collectors avoid triggering any rate-limiting mechanisms that could lead to IP bans or data blackouts, ensuring a constant and reliable data stream.
 
@@ -23,7 +23,7 @@ Exchange Data Collectors are integral components of the CCDB Application designe
 
 ## Design
 
--   **Scalability**: Collectors are designed to be easily scalable. New instances can be deployed to accommodate additional data sources or to increase the frequency of data collection as needed.
+-   **Scalability**: Collectors are designed to be easily scalable. New instances can be deployed to accommodate additional data sources or to increase the reliability of data collection as needed.
 
 -   **Resilience**: Each collector operates independently, ensuring that the failure of one does not impact the others. This design enhances the overall robustness of the data collection layer.
 

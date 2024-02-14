@@ -19,7 +19,7 @@ The CCDB Application employs a robust Continuous Integration and Deployment (CI/
 
 ### Build and Deployment
 
--   **Docker Image Creation**: Upon successful completion of tests, the CI system proceeds to build a Docker image of the application. This includes compiling the code, including necessary dependencies, and preparing the application for deployment.
+-   **Docker Image Creation**: Upon successful completion of tests, the CI system proceeds to build a Docker image of the application. This includes bundling the code, including necessary dependencies, and preparing the application for deployment.
 -   **Docker Image Registry**: The newly created Docker image is then pushed to a Docker registry, a versioned repository that stores Docker images. This enables version control and rollback capabilities for deployments.
 
 ### Automation

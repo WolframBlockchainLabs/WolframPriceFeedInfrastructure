@@ -9,9 +9,8 @@
 3. [Database Writer Microservice](#database-writer-microservice)
 4. [TimescaleDB](#timescaledb)
 5. [API Gateway](#api-gateway)
-6. [Continuous Integration and Deployment](#continuous-integration-and-deployment)
-7. [Scalability](#scalability)
-8. [Monitoring](#monitoring)
+6. [Monitoring](#monitoring)
+7. [Continuous Integration and Deployment](#continuous-integration-and-deployment)
 
 ---
 
@@ -54,12 +53,6 @@ This section details the CI/CD pipeline utilized by the CCDB Application. It out
 This section explores our strategies and solutions for ensuring Fault Tolerance in the CCDB Application. It highlights the methods and technologies we implement to maintain system stability and continuous operation, even in the face of unexpected errors, hardware failures, or other potential disruptions.
 
 🟢 [Details](./fault_tolerance.md)
-
-## Scalability
-
-The Scalability section discusses the strategies in place to ensure that the CCDB Application can handle growth in data volume, number of users, and transaction frequency without performance degradation.
-
-🟢 [Details](./scalability.md)
 
 # Monitoring
 
