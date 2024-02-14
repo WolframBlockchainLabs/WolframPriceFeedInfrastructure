@@ -23,8 +23,8 @@ Fault tolerance within the CCDB Application is a paramount feature, ensuring tha
 
 ## Integration with Database Writer
 
--   **Metadata Fields**: The Database Writer microservice is designed to recognize and utilize metadata fields attached to each record. These metadata fields include unique identifiers that act as idempotency tokens, ensuring that even if data is collected multiple times due to collector redundancy, it is not duplicated in the database.
--   **Preventing Data Redundancy**: This idempotency mechanism is crucial for preventing data redundancy, as it allows the system to understand whether a particular piece of data has already been processed and stored.
+-   **Metadata Fields**: The Database Writer microservice is designed to recognize and utilize metadata fields attached to each record. These metadata fields include unique identifiers that act as idempotence tokens, ensuring that even if data is collected multiple times due to collector redundancy, it is not duplicated in the database.
+-   **Preventing Data Redundancy**: This idempotence mechanism is crucial for preventing data redundancy, as it allows the system to understand whether a particular piece of data has already been processed and stored.
 
 ## System-Wide Fault Tolerance
 
