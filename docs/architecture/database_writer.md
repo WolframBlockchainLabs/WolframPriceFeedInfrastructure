@@ -60,6 +60,8 @@ This service acts as a critical link between real-time data collection and long-
 - Data source agnostic, compatible with various Exchange Data Collectors.
 - Flexible to accommodate evolving database schemas.
 
+🟢 [Read More About Code Implementation](../codebase/workers-scripts-setup.md#database-writer)
+
 ## Conclusion
 
 The Database Writer Microservice is crucial in our data architecture, providing efficient, reliable, and secure market data handling. Its sophisticated design and comprehensive features make it essential for upholding the integrity and availability of vital trading data.
