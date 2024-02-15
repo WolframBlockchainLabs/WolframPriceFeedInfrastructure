@@ -7,7 +7,7 @@
 3. [Documentation](#3-documentation)
 4. [Library (Lib)](#4-library-lib)
     - [API](#41-api)
-    - [Collectors](#42-collectors)
+    - [Domain Collectors](#42-domain-collectors)
     - [Domain Model](#43-domain-model)
     - [Infrastructure](#44-infrastructure)
     - [Use Cases](#45-use-cases)
@@ -24,11 +24,15 @@
 
 ## 1. Configs
 
-This directory hosts `.json` configuration files for the system and individual collectors. These configurations are managed using `confme.js`. Each file's purpose and structure are detailed in the [Configuration files](../../README.md#configuration-guides) section.
+This directory hosts `.json` configuration files for the system and individual collectors. These configurations are managed using `confme.js`. Each file's purpose and structure are detailed in the `[Configuration Files]` section.
+
+🟢 [Configuration Files](../../README.md#configuration-guides)
 
 ## 2. Docker
 
 The `docker` directory comprises Docker-related configurations. The key file here is `docker-compose.yml`, which outlines the composition of services for the application. These services are containerized and can be initiated using the `npm run docker:up` command.
+
+🟢 [Docker Setup Details](./docker-setup.md)
 
 ## 3. Documentation
 
@@ -43,7 +47,7 @@ The `api` directory contains the `rest-api` and `ws-api` subdirectories:
 -   `rest-api` includes middleware, routes, and controllers that handle HTTP requests.
 -   `ws-api` defines WebSocket gateways for real-time data streaming.
 
-### 4.2 Collectors
+### 4.2 Domain Collectors
 
 The `collectors` directory encapsulates the logic for data retrieval from various exchanges. It utilizes the CCXT library and comprises collectors like `OrderBookCollector`, `CandleStickCollector`, `TradeCollector`, and `TickerCollector`.
 
@@ -51,13 +55,19 @@ The `collectors` directory encapsulates the logic for data retrieval from variou
 
 `domain-model` houses Sequelize entities representing the application's data models, such as `Exchange`, `Markets`, `OrderBook`, `CandleStick`, `Ticker`, `ExchangeRate`, and `Trade`.
 
+It also contains definitions of internal Exception models structure. 
+
 ### 4.4 Infrastructure
 
 Infrastructure components, including the AMQP client setup and application-wide logger, are found within the `infrastructure` directory.
 
+🟢 [Infrastructure Setup Details](./infrastructure-setup.md)
+
 ### 4.5 Use Cases
 
 The `use-cases` directory contains business logic for entity interaction and endpoint data validation.
+
+🟢 [Use Cases Setup Details](./use-cases-setup.md)
 
 ### 4.6 Utilities
 
@@ -66,6 +76,8 @@ Utility functions and helpers that are used across the application are located i
 ### 4.7 Workers
 
 `workers` includes service entry points like seeders or database refreshers that run independently of the main application process.
+
+🟢 [Workers Setup Details](./workers-scripts-setup.md)
 
 ## 5. Migrations
 
@@ -79,21 +91,27 @@ Dependencies and libraries installed via npm are contained in the `node_modules`
 
 The `public` directory serves static files, such as images, that are accessible to the client-side of the application.
 
-## 8. Scripts
+## 8. Bash Scripts
 
-Supporting scripts for tasks like database seeding or administrative operations are found in the `scripts` directory.
+Supporting scripts for tasks like service administrative operations are found in the `scripts` directory.
 
-## 9. Tests
+🟢 [Bash Scripts Setup Details](./bash-scripts-setup.md)
+
+## 9. NPM Scripts
+
+`package.json` contains a list of scripts defined for tasks like database seeding, migration, and service entrypoints.
+
+🟢 [NPM Scripts Setup Details](./npm-scripts-setup.md)
+
+## 10. Tests
 
 Comprehensive testing is conducted via the `tests` directory, which includes both unit and end-to-end tests to ensure application integrity and reliability.
 
-## 10. Environment Files
+🟢 [Tests Setup Details](./tests-setup.md)
 
-Environment-specific configurations are managed through files like `.env`, which are crucial for defining runtime environment variables.
+## 11. Environment Files
 
----
-
-Each section provides an overview of the respective directory's role within the project's ecosystem, ensuring maintainers and developers have a clear understanding of the codebase structure.
+The `.env` file, located in the root directory, includes definitions of environment variables for Docker Compose, such as image tags and registry links. On the other hand, the `.env.defaults` file is managed by the Confme JavaScript library and contains the default values for the application's environment variables.
 
 ---
 
