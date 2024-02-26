@@ -44,7 +44,7 @@ Utilizing web technologies compatible with WebSocket connections, the dashboard 
 
 ## Live Instance
 
--   🚀 [Realtime Dashboard](https://207.154.219.83/realtime-dashboard/)
+-   🚀 [Realtime Dashboard](https://min.ccdb.waexservices.com/realtime-dashboard/)
 
 ## Codebase
 
