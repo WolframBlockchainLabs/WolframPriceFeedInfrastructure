@@ -66,14 +66,14 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
 
     test('the "runOperations" method stops execution on the last cycle', async () => {
         const operation = jest.fn();
-        context.historicalScheduler.isFinalCycle = true;
+        context.historicalScheduler.cronTask = { stop: jest.fn() };
         const killSpy = jest
             .spyOn(process, 'kill')
             .mockImplementation(() => {});
 
         const updateIntervalBoundsSpy = jest
             .spyOn(context.historicalScheduler, 'updateIntervalBounds')
-            .mockImplementation(() => {});
+            .mockImplementation(() => true);
         const stopSpy = jest
             .spyOn(context.historicalScheduler, 'stop')
             .mockImplementation(() => {});
@@ -85,6 +85,9 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         expect(stopSpy).toHaveBeenCalledTimes(1);
         expect(operation).toHaveBeenCalledTimes(1);
         expect(killSpy).toHaveBeenCalledTimes(1);
+        expect(context.historicalScheduler.cronTask.stop).toHaveBeenCalledTimes(
+            1,
+        );
     });
 
     test('calculateLastCycleLimit should return remainingMinutes if it is not falsy', () => {

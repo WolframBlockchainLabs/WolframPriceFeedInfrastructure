@@ -1,6 +1,6 @@
 {
     "id": "okx",
     "name": "OKX",
-    "rateLimit": 60,
+    "rateLimit": 1000,
     "symbols": ["ETH/USDT", "ETH/USDC", "ETH/DAI", "ETH/BTC", "ETH/EURT"]
 }
