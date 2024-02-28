@@ -1,6 +1,6 @@
 {
     "id": "kraken",
     "name": "Kraken",
-    "rateLimit": 1000,
+    "rateLimit": 5000,
     "symbols": ["BTC/DAI", "BTC/USDC", "BTC/USDT", "BTC/EUR", "BTC/USD"]
 }

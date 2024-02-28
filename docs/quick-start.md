@@ -69,6 +69,10 @@ To stop the project:
 
 Historical collection allows to retrieve historical CandleSticks records from CEX through CCXT API.
 
+`ATTENTION! You can't run collectors for realtime and historical data at the same time for the same exchange.`
+
+Ability to collect historical data is entirely dictated by external exchange. If it does not allow to collect a year old data, then there is no way to get it except negotiating API keys with exchange that will allow this collection if its possible. 
+
 1. Complete the ```Initial Setup Instructions``` guide, otherwise collectors will fail to launch.
 2. Start services with `./scripts/start`. It is not necessary to have ccxt-collectors container running. The script will be executed on the main server container.
 3. Execute collection script using `npm run docker:cli:ccxt-historical-collectors -- ${startDate} ${endDate}`.
