@@ -38,6 +38,9 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
     });
 
     test('the "start" method should call parent start', async () => {
+        const killSpy = jest
+            .spyOn(process, 'kill')
+            .mockImplementation(() => {});
         const startSpy = jest
             .spyOn(
                 Object.getPrototypeOf(HistoricalScheduler.prototype),
@@ -48,6 +51,7 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         await context.historicalScheduler.start({});
 
         expect(startSpy).toHaveBeenCalledTimes(1);
+        expect(killSpy).toHaveBeenCalledTimes(1);
     });
 
     test('the "runOperations" method updates intervalBounds and calls handler', async () => {
@@ -66,10 +70,6 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
 
     test('the "runOperations" method stops execution on the last cycle', async () => {
         const operation = jest.fn();
-        context.historicalScheduler.cronTask = { stop: jest.fn() };
-        const killSpy = jest
-            .spyOn(process, 'kill')
-            .mockImplementation(() => {});
 
         const updateIntervalBoundsSpy = jest
             .spyOn(context.historicalScheduler, 'updateIntervalBounds')
@@ -84,10 +84,6 @@ describe('[domain-collectors/infrastructure/schedulers]: HistoricalScheduler Tes
         expect(updateIntervalBoundsSpy).toHaveBeenCalledTimes(1);
         expect(stopSpy).toHaveBeenCalledTimes(1);
         expect(operation).toHaveBeenCalledTimes(1);
-        expect(killSpy).toHaveBeenCalledTimes(1);
-        expect(context.historicalScheduler.cronTask.stop).toHaveBeenCalledTimes(
-            1,
-        );
     });
 
     test('calculateLastCycleLimit should return remainingMinutes if it is not falsy', () => {
