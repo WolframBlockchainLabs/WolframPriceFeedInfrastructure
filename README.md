@@ -67,13 +67,14 @@ CCDB supports a diverse range of data types:
 -   ⏱️ **Scheduling**: Maintains API rate limits.
 -   🔗 **Blockchain Integrations**:
 
-    | Blockchain                                                                                                | Integration                                      |
-    | :-------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
-    | [<img src="public/images/exchanges/cardano.png" alt="Cardano" height="60"/>](https://cardano.org/)        | [Cardano (ADA)](https://cardano.org/)            |
-    | [<img src="public/images/exchanges/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger (XRPL)](https://xrpl.org/index.html) |
-    | [<img src="public/images/exchanges/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/)              | [Tezos (XTZ)](https://tezos.com/)                |
-    | [<img src="public/images/exchanges/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/)     | [Ethereum (ETH)](https://ethereum.org/)          |
+    | Blockchain                                                                                                    | Integration                                      |
+    | :------------------------------------------------------------------------------------------------------------ | :----------------------------------------------- |
+    | [<img src="./public/images/blockchains/cardano.png" alt="Cardano" height="60"/>](https://cardano.org/)        | [Cardano (ADA)](https://cardano.org/)            |
+    | [<img src="./public/images/blockchains/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger (XRPL)](https://xrpl.org/index.html) |
+    | [<img src="./public/images/blockchains/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/)              | [Tezos (XTZ)](https://tezos.com/)                |
+    | [<img src="./public/images/blockchains/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/)     | [Ethereum (ETH)](https://ethereum.org/)          |
 
+-   📙 [Exchanges Integration Documentation](docs/exchanges/overview.md)
 -   📗 [Architecture Documentation](docs/architecture/overview.md)
 -   📒 [Codebase Structure Docs](docs/codebase/overview.md)
 
@@ -89,20 +90,20 @@ CCDB supports a diverse range of data types:
 
 ### CEX & DEX Collectors Configuration
 
-| Type |                                                  Service                                                  | Configuration                                       |
-| :--: | :-------------------------------------------------------------------------------------------------------: | :-------------------------------------------------- |
-| CEXs |      [<img src="public/images/exchanges/ccxt.jpeg" alt="CCXT" height="60"/>](https://docs.ccxt.com/)      | [CCXT Collectors Config](docs/config/ccxt.md)       |
-| DEXs |    [<img src="public/images/exchanges/cardano.png" alt="Cardano" height="60"/>](https://cardano.org/)     | [Cardano Collectors Config](docs/config/udex.md)    |
-| DEXs |   [<img src="public/images/exchanges/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/)   | [Ethereum Collectors Config](docs/config/udex.md)   |
-| DEXs |       [<img src="public/images/exchanges/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/)        | [Tezos Collectors Config](docs/config/udex.md)      |
-| DEXs | [<img src="public/images/exchanges/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl.md) |
+| Type |                                                    Service                                                    | Configuration                                       |
+| :--: | :-----------------------------------------------------------------------------------------------------------: | :-------------------------------------------------- |
+| CEXs |      [<img src="./public/images/blockchains/ccxt.jpeg" alt="CCXT" height="60"/>](https://docs.ccxt.com/)      | [CCXT Collectors Config](docs/config/ccxt.md)       |
+| DEXs |    [<img src="./public/images/blockchains/cardano.png" alt="Cardano" height="60"/>](https://cardano.org/)     | [Cardano Collectors Config](docs/config/udex.md)    |
+| DEXs |   [<img src="./public/images/blockchains/ethereum.png" alt="Ethereum" height="60"/>](https://ethereum.org/)   | [Ethereum Collectors Config](docs/config/udex.md)   |
+| DEXs |       [<img src="./public/images/blockchains/tezos.jpg" alt="Tezos" height="60"/>](https://tezos.com/)        | [Tezos Collectors Config](docs/config/udex.md)      |
+| DEXs | [<img src="./public/images/blockchains/xrpl.png" alt="XRP Ledger" height="60"/>](https://xrpl.org/index.html) | [XRP Ledger Collectors Config](docs/config/xrpl.md) |
 
 ## API Reference
 
 This section outlines the available API endpoints our service offers. We support two primary communication methods:
 
 1. [WebSocket API DOCS](docs/api/ws.md): Utilized for real-time data updates.
-2. [REST API DOCS](docs/api/rest.md): Offers flexibility with adjustable parameters for retrieving and aggregating realtime and historical data.
+2. [REST API DOCS](docs/api/rest/overview.md): Offers flexibility with adjustable parameters for retrieving and aggregating realtime and historical data.
 
 ## Community Contribution Guides
 
