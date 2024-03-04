@@ -2,5 +2,14 @@
     "id": "binance",
     "name": "Binance",
     "rateLimit": "{{BINANCE_RATE_LIMIT}}",
-    "symbols": ["BTC/USDT", "ETH/BTC", "ADA/BTC", "XRP/BTC", "XTZ/BTC"]
+    "symbols": [
+        "BTC/USDT",
+        "ETH/BTC",
+        "ADA/BTC",
+        "XRP/BTC",
+        "XTZ/BTC",
+        "ETH/USDC",
+        "ADA/USDC",
+        "SOL/USDC"
+    ]
 }
