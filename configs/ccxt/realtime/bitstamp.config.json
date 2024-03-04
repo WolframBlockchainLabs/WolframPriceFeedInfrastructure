@@ -3,5 +3,5 @@
     "name": "Bitstamp",
     "rateLimit": 100,
     "minimalCycleDuration": 60000,
-    "symbols": ["BTC/USDT", "ETH/BTC", "ADA/BTC", "XRP/BTC"]
+    "symbols": ["BTC/USDT", "ETH/BTC", "ADA/BTC", "XRP/BTC", "ETH/USDC"]
 }

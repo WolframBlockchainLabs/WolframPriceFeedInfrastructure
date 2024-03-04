@@ -3,5 +3,12 @@
     "name": "Kraken",
     "rateLimit": 1000,
     "minimalCycleDuration": 60000,
-    "symbols": ["BTC/USDT", "ETH/BTC", "ADA/BTC", "XRP/BTC", "XTZ/BTC"]
+    "symbols": [
+        "BTC/USDT",
+        "ETH/BTC",
+        "ADA/BTC",
+        "XRP/BTC",
+        "XTZ/BTC",
+        "ETH/USDC"
+    ]
 }

@@ -3,5 +3,12 @@
     "name": "Bitget",
     "rateLimit": 100,
     "minimalCycleDuration": 60000,
-    "symbols": ["BTC/USDT", "ETH/BTC", "XRP/BTC"]
+    "symbols": [
+        "BTC/USDT",
+        "ETH/BTC",
+        "XRP/BTC",
+        "ETH/USDC",
+        "ADA/USDC",
+        "SOL/USDC"
+    ]
 }
