@@ -9,7 +9,8 @@
     "urls": {
         "self": "{{SELF_URL}}",
         "main": "{{MAIN_URL}}",
-        "realtimeDashboard": "{{REALTIME_DASHBOARD_URL}}"
+        "realtimeDashboard": "{{REALTIME_DASHBOARD_URL}}",
+        "corsList": "{{CORS_URL_LIST}}"
     },
     "db": {
         "username": "{{DB_USERNAME}}",
