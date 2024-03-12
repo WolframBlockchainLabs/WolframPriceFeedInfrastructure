@@ -17,7 +17,8 @@
             "nested_object": {
                 "self": ["required", "string"],
                 "main": ["required", "string"],
-                "realtimeDashboard": ["required", "string"]
+                "realtimeDashboard": ["required", "string"],
+                "corsList": ["string", "stringified_list"]
             }
         }
     ],
