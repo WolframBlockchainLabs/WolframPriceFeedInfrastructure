@@ -34,7 +34,7 @@ module.exports = {
 
         await queryInterface.addIndex(
             'ExchangeRates',
-            ['intervalStart', 'intervalEnd', 'marketId'],
+            ['marketId', 'intervalStart', 'intervalEnd'],
             {
                 unique: true,
                 name: `ExchangeRates_unique_interval_market`,

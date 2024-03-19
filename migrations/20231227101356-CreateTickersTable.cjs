@@ -44,7 +44,7 @@ module.exports = {
 
         await queryInterface.addIndex(
             'Tickers',
-            ['intervalStart', 'intervalEnd', 'marketId'],
+            ['marketId', 'intervalStart', 'intervalEnd'],
             {
                 unique: true,
                 name: 'Tickers_unique_interval_market',
