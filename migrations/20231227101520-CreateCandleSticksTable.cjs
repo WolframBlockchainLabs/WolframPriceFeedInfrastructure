@@ -32,7 +32,7 @@ module.exports = {
 
         await queryInterface.addIndex(
             'CandleSticks',
-            ['intervalStart', 'intervalEnd', 'marketId'],
+            ['marketId', 'intervalStart', 'intervalEnd'],
             {
                 unique: true,
                 name: 'CandleSticks_unique_interval_market',
