@@ -2,7 +2,7 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('ExchangeRates', {
             id: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.BIGINT,
                 primaryKey: true,
                 autoIncrement: true,
             },
