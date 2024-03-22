@@ -10,6 +10,7 @@
         "ETH/USDC",
         "ADA/USDC",
         "SOL/USDC",
-        "XTZ/USDT"
+        "XTZ/USDT",
+        "ADA/USDT"
     ]
 }
