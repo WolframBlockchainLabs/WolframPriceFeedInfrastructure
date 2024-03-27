@@ -18,7 +18,22 @@
         "database": "{{DB_DATABASE}}",
         "dialect": "{{DB_DIALECT}}",
         "host": "{{DB_HOST}}",
-        "port": "{{DB_PORT}}"
+        "port": "{{DB_PORT}}",
+        "dialectOptions": {
+            "connectTimeout": "{{DB_DIALECT_TIMEOUT}}",
+            "timezone": "{{DB_DIALECT_TIMEZONE}}"
+        },
+        "pool": {
+            "min": "{{DB_POOL_MIN}}",
+            "max": "{{DB_POOL_MAX}}",
+            "idle": "{{DB_POOL_IDLE}}",
+            "acquire": "{{DB_POOL_ACQUIRE}}",
+            "evict": "{{DB_POOL_EVICT}}",
+            "maxUses": "{{DB_POOL_MAX_USES}}"
+        },
+        "retry": {
+            "max": "{{DB_RETRY_MAX}}"
+        }
     },
     "test-db": {
         "username": "{{TEST_DB_USERNAME}}",
@@ -26,7 +41,22 @@
         "database": "{{TEST_DB_DATABASE}}",
         "dialect": "{{TEST_DB_DIALECT}}",
         "host": "{{TEST_DB_HOST}}",
-        "port": "{{TEST_DB_PORT}}"
+        "port": "{{TEST_DB_PORT}}",
+        "dialectOptions": {
+            "connectTimeout": "{{TEST_DB_DIALECT_TIMEOUT}}",
+            "timezone": "{{TEST_DB_DIALECT_TIMEZONE}}"
+        },
+        "pool": {
+            "min": "{{TEST_DB_POOL_MIN}}",
+            "max": "{{TEST_DB_POOL_MAX}}",
+            "idle": "{{TEST_DB_POOL_IDLE}}",
+            "acquire": "{{TEST_DB_POOL_ACQUIRE}}",
+            "evict": "{{TEST_DB_POOL_EVICT}}",
+            "maxUses": "{{TEST_DB_POOL_MAX_USES}}"
+        },
+        "retry": {
+            "max": "{{TEST_DB_RETRY_MAX}}"
+        }
     },
     "redis": {
         "host": "{{REDIS_HOST}}",
