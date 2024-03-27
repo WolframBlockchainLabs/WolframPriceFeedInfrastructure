@@ -31,7 +31,37 @@
                 "database": ["required", "string"],
                 "dialect": ["required", "string"],
                 "host": ["required", "string"],
-                "port": ["required", "positive_integer"]
+                "port": ["required", "positive_integer"],
+                "dialectOptions": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "connectTimeout": ["required", "positive_integer"],
+                            "timezone": ["required", "string"]
+                        }
+                    }
+                ],
+                "pool": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "min": ["required", "positive_integer"],
+                            "max": ["required", "positive_integer"],
+                            "idle": ["required", "positive_integer"],
+                            "acquire": ["required", "positive_integer"],
+                            "evict": ["required", "positive_integer"],
+                            "maxUses": ["required", "positive_integer"]
+                        }
+                    }
+                ],
+                "retry": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "max": ["required", "positive_integer"]
+                        }
+                    }
+                ]
             }
         }
     ],
@@ -44,7 +74,37 @@
                 "database": ["required", "string"],
                 "dialect": ["required", "string"],
                 "host": ["required", "string"],
-                "port": ["required", "positive_integer"]
+                "port": ["required", "positive_integer"],
+                "dialectOptions": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "connectTimeout": ["required", "positive_integer"],
+                            "timezone": ["required", "string"]
+                        }
+                    }
+                ],
+                "pool": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "min": ["required", "positive_integer"],
+                            "max": ["required", "positive_integer"],
+                            "idle": ["required", "positive_integer"],
+                            "acquire": ["required", "positive_integer"],
+                            "evict": ["required", "positive_integer"],
+                            "maxUses": ["required", "positive_integer"]
+                        }
+                    }
+                ],
+                "retry": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "max": ["required", "positive_integer"]
+                        }
+                    }
+                ]
             }
         }
     ],
