@@ -66,7 +66,7 @@ To get more info about its role in CCDB architecture follow the link:
 To run a worker, you would typically invoke it through a script that ensures all dependencies are correctly provisioned by the provider. For instance:
 
 ```sh
-node --max-old-space-size=8192 ./lib/workers/database-writer/worker.js
+node --max-old-space-size=8192 ./lib/workers/amqp/database-writer/worker.js
 ```
 
 This command would initiate the `MetricsExporter` worker with the specified memory allocation, allowing it to export metrics efficiently.
