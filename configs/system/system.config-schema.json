@@ -215,7 +215,9 @@
                     {
                         "nested_object": {
                             "maxDateDiff": ["required", "positive_integer"],
-                            "asyncMaxDateDiff": ["required", "positive_integer"]
+                            "stepSize": ["required", "positive_integer"],
+                            "asyncMaxDateDiff": ["required", "positive_integer"],
+                            "asyncStepSize": ["required", "positive_integer"]
                         }
                     }
                 ]

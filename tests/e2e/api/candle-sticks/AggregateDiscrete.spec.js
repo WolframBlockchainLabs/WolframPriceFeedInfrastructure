@@ -1,7 +1,4 @@
-import {
-    MILLISECONDS_IN_AN_HOUR,
-    MILLISECONDS_IN_A_DAY,
-} from '#constants/timeframes.js';
+import { MILLISECONDS_IN_AN_HOUR } from '#constants/timeframes.js';
 import AppE2ETestProvider from '../../AppE2ETestProvider.js';
 import CandleStickFactory from '../../factories/market-records/CandleStickFactory.js';
 import CandleStickStory from '../../stories/market-records/CandleStickStory.js';
@@ -94,11 +91,11 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
 
         const rangeDateStart = new Date(
             new Date(targetCandleStick.intervalStart).getTime() -
-                MILLISECONDS_IN_A_DAY,
+                MILLISECONDS_IN_AN_HOUR,
         ).toISOString();
         const rangeDateEnd = new Date(
             new Date(targetCandleStick.intervalStart).getTime() +
-                MILLISECONDS_IN_A_DAY,
+                MILLISECONDS_IN_AN_HOUR,
         ).toISOString();
 
         const serverResponse = await app.request

@@ -117,7 +117,9 @@
         "maxItemsRetrieved": "{{API_LIMITS_MAX_ITEMS_RETRIEVED}}",
         "aggregations": {
             "maxDateDiff": "{{API_LIMITS_AGGREGATIONS_MAX_DATE_DIFF}}",
-            "asyncMaxDateDiff": "{{API_LIMITS_AGGREGATIONS_ASYNC_MAX_DATE_DIFF}}"
+            "stepSize": "{{API_LIMITS_AGGREGATIONS_STEP_SIZE}}",
+            "asyncMaxDateDiff": "{{API_LIMITS_AGGREGATIONS_ASYNC_MAX_DATE_DIFF}}",
+            "asyncStepSize": "{{API_LIMITS_AGGREGATIONS_ASYNC_STEP_SIZE}}"
         }
     }
 }

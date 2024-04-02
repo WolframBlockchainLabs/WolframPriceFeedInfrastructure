@@ -42,8 +42,10 @@ describe('[database-writer]: CandleStickWriter Tests Suite', () => {
             amqpClient: context.amqpClientStub,
             consumerConfig: {},
             config: {
-                retryLimit: 3,
-                retryPeriodMs: 3000,
+                amqpWorker: {
+                    retryLimit: 3,
+                    retryPeriodMs: 3000,
+                },
             },
         });
     });
