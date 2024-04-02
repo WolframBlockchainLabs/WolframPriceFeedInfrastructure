@@ -86,4 +86,75 @@ describe('[domain-collectors/collectors]: BaseCollector Tests Suite', () => {
 
         expect(context.amqpChannelStub.assertQueue).toHaveBeenCalledTimes(1);
     });
+
+    test('the "formatAggregationInterval" method should not change interval', () => {
+        const formattedInterval = context.collector.formatAggregationInterval({
+            intervalStart: collectorMeta.intervalStart,
+            intervalEnd: collectorMeta.intervalEnd,
+        });
+
+        expect(formattedInterval).toEqual({
+            intervalStart: collectorMeta.intervalStart,
+            intervalEnd: collectorMeta.intervalEnd,
+        });
+    });
+
+    test('start method incorporates formatted interval bounds', async () => {
+        jest.spyOn(
+            context.collector,
+            'formatAggregationInterval',
+        ).mockReturnValue({
+            intervalStart: collectorMeta.intervalStart + 1000,
+            intervalEnd: collectorMeta.intervalEnd + 1000,
+        });
+        jest.spyOn(context.collector, 'fetchData').mockReturnValue({});
+
+        await context.collector.start(collectorMeta);
+
+        expect(
+            context.collector.formatAggregationInterval,
+        ).toHaveBeenCalledWith({
+            intervalStart: collectorMeta.intervalStart,
+            intervalEnd: collectorMeta.intervalEnd,
+        });
+        expect(context.collector.fetchData).toHaveBeenCalledWith(
+            expect.objectContaining({
+                intervalStart: collectorMeta.intervalStart + 1000,
+                intervalEnd: collectorMeta.intervalEnd + 1000,
+            }),
+        );
+    });
+
+    test('start method logs error on fetchData failure', async () => {
+        jest.spyOn(context.collector, 'fetchData').mockRejectedValue(
+            new Error('Fetch error'),
+        );
+
+        await expect(context.collector.start(collectorMeta)).rejects.toThrow(
+            'Fetch error',
+        );
+        expect(context.loggerStub.error).toHaveBeenCalledWith(
+            expect.objectContaining({
+                message: expect.stringContaining(
+                    'Collector has finished with an error',
+                ),
+            }),
+        );
+    });
+
+    test('getName should return the class name', () => {
+        expect(context.collector.getName()).toEqual('BaseCollector');
+
+        class MockCollector extends Collector {}
+        const mockCollector = new MockCollector({
+            logger: context.loggerStub,
+            amqpClient: context.amqpClientStub,
+            exchange,
+            symbol,
+            marketId,
+            exchangeAPI: {},
+        });
+
+        expect(mockCollector.getName()).toEqual('MockCollector');
+    });
 });
