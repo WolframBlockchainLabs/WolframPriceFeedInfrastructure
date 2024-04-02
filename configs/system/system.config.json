@@ -114,6 +114,10 @@
     },
     "apiLimits": {
         "maxDateDiff": "{{API_LIMITS_MAX_DATE_DIFF}}",
-        "maxItemsRetrieved": "{{API_LIMITS_MAX_ITEMS_RETRIEVED}}"
+        "maxItemsRetrieved": "{{API_LIMITS_MAX_ITEMS_RETRIEVED}}",
+        "aggregations": {
+            "maxDateDiff": "{{API_LIMITS_AGGREGATIONS_MAX_DATE_DIFF}}",
+            "asyncMaxDateDiff": "{{API_LIMITS_AGGREGATIONS_ASYNC_MAX_DATE_DIFF}}"
+        }
     }
 }
