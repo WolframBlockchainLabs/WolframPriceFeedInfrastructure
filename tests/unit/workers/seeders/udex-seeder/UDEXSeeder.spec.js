@@ -1,6 +1,6 @@
-import UDEXSeeder from '#workers/udex-seeder/UDEXSeeder.js';
 import Exchange from '#domain-model/entities/Exchange.js';
 import Market from '#domain-model/entities/Market.js';
+import UDEXSeeder from '#workers/seeders/udex-seeder/UDEXSeeder.js';
 
 jest.mock('#domain-model/entities/Exchange.js');
 jest.mock('#domain-model/entities/Market.js');

@@ -1,8 +1,8 @@
+import CandleStick from '#domain-model/entities/market-records/CandleStick.js';
 import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
-import Trade from '#domain-model/entities/market-records/Trade.js';
-import TradeWriter from '#workers/database-writer/TradeWriter.js';
+import CandleStickWriter from '#workers/amqp/database-writer/CandleStickWriter.js';
 
-describe('[database-writer]: TradeWriter Tests Suite', () => {
+describe('[database-writer]: CandleStickWriter Tests Suite', () => {
     const context = {};
 
     const payload = {
@@ -24,9 +24,9 @@ describe('[database-writer]: TradeWriter Tests Suite', () => {
             getChannel: jest.fn().mockReturnValue(context.amqpChannelStub),
         };
 
-        context.TradeStub = {
+        context.CandleStickStub = {
             findOrCreate: jest
-                .spyOn(Trade, 'findOrCreate')
+                .spyOn(CandleStick, 'findOrCreate')
                 .mockResolvedValue([{ id: 1 }, true]),
         };
 
@@ -36,7 +36,7 @@ describe('[database-writer]: TradeWriter Tests Suite', () => {
             error: jest.fn(),
         };
 
-        context.tradeWriter = new TradeWriter({
+        context.candleStickWriter = new CandleStickWriter({
             logger: context.loggerStub,
             sequelize: {},
             amqpClient: context.amqpClientStub,
@@ -53,24 +53,27 @@ describe('[database-writer]: TradeWriter Tests Suite', () => {
     });
 
     test('the execute method saves incoming data if its not already saved', async () => {
-        await context.tradeWriter.execute({
+        await context.candleStickWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
             payload,
         });
 
-        expect(context.TradeStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.CandleStickStub.findOrCreate).toHaveBeenCalledTimes(1);
     });
 
     test('the execute method ignores incoming data if its already saved', async () => {
-        context.TradeStub.findOrCreate.mockResolvedValue([{ id: 1 }, false]);
+        context.CandleStickStub.findOrCreate.mockResolvedValue([
+            { id: 1 },
+            false,
+        ]);
 
-        await context.tradeWriter.execute({
+        await context.candleStickWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
             payload,
         });
 
-        expect(context.TradeStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.CandleStickStub.findOrCreate).toHaveBeenCalledTimes(1);
     });
 });

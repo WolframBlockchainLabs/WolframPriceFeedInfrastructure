@@ -1,8 +1,8 @@
 import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
-import ExchangeRate from '#domain-model/entities/market-records/ExchangeRate.js';
-import ExchangeRateWriter from '#workers/database-writer/ExchangeRateWriter.js';
+import OrderBook from '#domain-model/entities/market-records/OrderBook.js';
+import OrderBookWriter from '#workers/amqp/database-writer/OrderBookWriter.js';
 
-describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
+describe('[database-writer]: OrderBookWriter Tests Suite', () => {
     const context = {};
 
     const payload = {
@@ -24,9 +24,9 @@ describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
             getChannel: jest.fn().mockReturnValue(context.amqpChannelStub),
         };
 
-        context.ExchangeRateStub = {
+        context.OrderBookStub = {
             findOrCreate: jest
-                .spyOn(ExchangeRate, 'findOrCreate')
+                .spyOn(OrderBook, 'findOrCreate')
                 .mockResolvedValue([{ id: 1 }, true]),
         };
 
@@ -36,7 +36,7 @@ describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
             error: jest.fn(),
         };
 
-        context.exchangeRateWriter = new ExchangeRateWriter({
+        context.orderBookWriter = new OrderBookWriter({
             logger: context.loggerStub,
             sequelize: {},
             amqpClient: context.amqpClientStub,
@@ -53,27 +53,27 @@ describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
     });
 
     test('the execute method saves incoming data if its not already saved', async () => {
-        await context.exchangeRateWriter.execute({
+        await context.orderBookWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
             payload,
         });
 
-        expect(context.ExchangeRateStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.OrderBookStub.findOrCreate).toHaveBeenCalledTimes(1);
     });
 
     test('the execute method ignores incoming data if its already saved', async () => {
-        context.ExchangeRateStub.findOrCreate.mockResolvedValue([
+        context.OrderBookStub.findOrCreate.mockResolvedValue([
             { id: 1 },
             false,
         ]);
 
-        await context.exchangeRateWriter.execute({
+        await context.orderBookWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
             payload,
         });
 
-        expect(context.ExchangeRateStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.OrderBookStub.findOrCreate).toHaveBeenCalledTimes(1);
     });
 });

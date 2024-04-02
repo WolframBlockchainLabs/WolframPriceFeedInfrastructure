@@ -1,7 +1,6 @@
-import CCXTSeeder from '#workers/ccxt-seeder/CCXTSeeder.js';
 import Exchange from '#domain-model/entities/Exchange.js';
 import Market from '#domain-model/entities/Market.js';
-// eslint-disable-next-line import/no-unresolved
+import CCXTSeeder from '#workers/seeders/ccxt-seeder/CCXTSeeder.js';
 import ccxt from 'ccxt';
 
 jest.mock('ccxt', () => ({

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { faker } from '@faker-js/faker';
 import OrderBookCollector from '#domain-collectors/collectors/OrderBookCollector.js';
 

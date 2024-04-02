@@ -1,8 +1,8 @@
 import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
-import Ticker from '#domain-model/entities/market-records/Ticker.js';
-import TickerWriter from '#workers/database-writer/TickerWriter.js';
+import Trade from '#domain-model/entities/market-records/Trade.js';
+import TradeWriter from '#workers/amqp/database-writer/TradeWriter.js';
 
-describe('[database-writer]: TickerWriter Tests Suite', () => {
+describe('[database-writer]: TradeWriter Tests Suite', () => {
     const context = {};
 
     const payload = {
@@ -24,9 +24,9 @@ describe('[database-writer]: TickerWriter Tests Suite', () => {
             getChannel: jest.fn().mockReturnValue(context.amqpChannelStub),
         };
 
-        context.TickerStub = {
+        context.TradeStub = {
             findOrCreate: jest
-                .spyOn(Ticker, 'findOrCreate')
+                .spyOn(Trade, 'findOrCreate')
                 .mockResolvedValue([{ id: 1 }, true]),
         };
 
@@ -36,7 +36,7 @@ describe('[database-writer]: TickerWriter Tests Suite', () => {
             error: jest.fn(),
         };
 
-        context.tickerWriter = new TickerWriter({
+        context.tradeWriter = new TradeWriter({
             logger: context.loggerStub,
             sequelize: {},
             amqpClient: context.amqpClientStub,
@@ -53,24 +53,24 @@ describe('[database-writer]: TickerWriter Tests Suite', () => {
     });
 
     test('the execute method saves incoming data if its not already saved', async () => {
-        await context.tickerWriter.execute({
+        await context.tradeWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
             payload,
         });
 
-        expect(context.TickerStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.TradeStub.findOrCreate).toHaveBeenCalledTimes(1);
     });
 
     test('the execute method ignores incoming data if its already saved', async () => {
-        context.TickerStub.findOrCreate.mockResolvedValue([{ id: 1 }, false]);
+        context.TradeStub.findOrCreate.mockResolvedValue([{ id: 1 }, false]);
 
-        await context.tickerWriter.execute({
+        await context.tradeWriter.execute({
             exchange: 'binance',
             symbol: 'BTC/EUR',
             payload,
         });
 
-        expect(context.TickerStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.TradeStub.findOrCreate).toHaveBeenCalledTimes(1);
     });
 });
