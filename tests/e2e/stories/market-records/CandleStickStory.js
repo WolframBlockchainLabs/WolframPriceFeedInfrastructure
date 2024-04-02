@@ -8,10 +8,12 @@ class CandleStickStory extends BaseMarketRecordStory {
         this.candleStickFactory = new CandleStickFactory(this.appProvider);
     }
 
-    async setupCandleSticks() {
+    async setupCandleSticks({ recordsCount, chartsCount } = {}) {
         const { exchanges, markets } = await this.setupMarkets();
         const candleSticks = await this.candleStickFactory.createCandleSticks({
             markets,
+            recordsCount,
+            chartsCount,
         });
 
         return { exchanges, markets, candleSticks };

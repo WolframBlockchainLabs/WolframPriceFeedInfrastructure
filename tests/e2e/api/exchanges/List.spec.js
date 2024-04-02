@@ -21,12 +21,12 @@ describe('[exchanges]: List the records', () => {
     it('Should return exchanges list', async () => {
         const exchanges = await exchangeFactory.createExchanges();
 
-        const activateResponse = await app.request
+        const serverResponse = await app.request
             .get(`/api/v1/crypto/exchanges`)
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(exchanges.length);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(exchanges.length);
     });
 });

@@ -1,8 +1,12 @@
+import {
+    MILLISECONDS_IN_AN_HOUR,
+    MILLISECONDS_IN_A_DAY,
+} from '#constants/timeframes.js';
 import AppE2ETestProvider from '../../AppE2ETestProvider.js';
 import CandleStickFactory from '../../factories/market-records/CandleStickFactory.js';
 import CandleStickStory from '../../stories/market-records/CandleStickStory.js';
 
-describe('[candle-stick]: List the records', () => {
+describe('[candle-stick]: Aggregate the records discretely', () => {
     const app = new AppE2ETestProvider();
 
     const candleStickFactory = new CandleStickFactory(app);
@@ -20,66 +24,102 @@ describe('[candle-stick]: List the records', () => {
         await app.resetState();
     });
 
-    it('Should return candleSticks list for specified exchange, pair, and date range', async () => {
+    it('Should return an aggregate of the candleSticks list for specified exchanges and pairs', async () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
-            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
+            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
-                rangeDateEnd: targetCandleStick.intervalStart,
-                symbol: targetCandleStick.symbol,
+                rangeDateEnd: targetCandleStick.intervalEnd,
             })
+            .query(`symbols[]=${targetCandleStick.symbol}`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .set('Accept', 'application/json')
             .expect(200);
 
         expect(serverResponse.body.status).toEqual(1);
-        expect(serverResponse.body.data.length).toEqual(1);
-        expect(serverResponse.body.data[0]).toEqual(targetCandleStick);
+        expect(serverResponse.body.data).toMatchObject({
+            timeframeMinutes: 60,
+            rangeDateStart: '2023-11-15T09:50:00.000Z',
+            rangeDateEnd: '2023-11-15T09:51:00.000Z',
+            exchangeNames: ['Binance'],
+        });
     });
 
-    it('Should return an empty list if the exchange name is wrong', async () => {
+    it('Should handle discreteness specification', async () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
-        const { symbol, intervalStart } =
-            await candleStickFactory.findCandleStick(candleSticks[0].id);
+        const targetCandleStick = await candleStickFactory.findCandleStick(
+            candleSticks[0].id,
+        );
+
+        const rangeDateStart = new Date(
+            new Date(targetCandleStick.intervalStart).getTime() -
+                MILLISECONDS_IN_AN_HOUR,
+        ).toISOString();
+        const rangeDateEnd = new Date(
+            new Date(targetCandleStick.intervalStart).getTime() +
+                MILLISECONDS_IN_AN_HOUR,
+        ).toISOString();
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
-            .query(`exchangeNames[]=test`)
+            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
             .query({
-                symbol,
-                rangeDateStart: intervalStart,
-                rangeDateEnd: intervalStart,
+                rangeDateStart,
+                rangeDateEnd,
             })
+            .query(`symbols[]=${targetCandleStick.symbol}`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
+            .query(`timeframeMinutes=2`)
             .set('Accept', 'application/json')
             .expect(200);
 
         expect(serverResponse.body.status).toEqual(1);
-        expect(serverResponse.body.data.length).toEqual(0);
+        expect(serverResponse.body.data).toMatchObject({
+            timeframeMinutes: 2,
+            rangeDateStart,
+            rangeDateEnd,
+            exchangeNames: ['Binance'],
+        });
     });
 
-    it('Should return an empty list if the market name is wrong', async () => {
+    it('Should handle discreteness specification', async () => {
         const { candleSticks } = await candleStickStory.setupCandleSticks();
-        const { exchangeName, intervalStart } =
-            await candleStickFactory.findCandleStick(candleSticks[0].id);
+        const targetCandleStick = await candleStickFactory.findCandleStick(
+            candleSticks[0].id,
+        );
+
+        const rangeDateStart = new Date(
+            new Date(targetCandleStick.intervalStart).getTime() -
+                MILLISECONDS_IN_A_DAY,
+        ).toISOString();
+        const rangeDateEnd = new Date(
+            new Date(targetCandleStick.intervalStart).getTime() +
+                MILLISECONDS_IN_A_DAY,
+        ).toISOString();
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
-            .query(`exchangeNames[]=${exchangeName}`)
+            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
             .query({
-                symbol: 'test',
-                rangeDateStart: intervalStart,
-                rangeDateEnd: intervalStart,
+                rangeDateStart,
+                rangeDateEnd,
             })
+            .query(`symbols[]=${targetCandleStick.symbol}`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
+            .query(`timeframeMinutes=2`)
             .set('Accept', 'application/json')
             .expect(200);
 
         expect(serverResponse.body.status).toEqual(1);
-        expect(serverResponse.body.data.length).toEqual(0);
+        expect(serverResponse.body.data).toMatchObject({
+            timeframeMinutes: 2,
+            rangeDateStart,
+            rangeDateEnd,
+            exchangeNames: ['Binance'],
+        });
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
@@ -89,13 +129,13 @@ describe('[candle-stick]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
-            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
+            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
-                symbol: targetCandleStick.symbol,
             })
+            .query(`symbols[]=${targetCandleStick.symbol}`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .set('Accept', 'application/json')
             .expect(200);
 
@@ -113,13 +153,13 @@ describe('[candle-stick]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
-            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
+            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
-                symbol: targetCandleStick.symbol,
             })
+            .query(`symbols[]=${targetCandleStick.symbol}`)
+            .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .set('Accept', 'application/json')
             .expect(200);
 
