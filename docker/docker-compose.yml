@@ -57,6 +57,11 @@ services:
         container_name: ccdb-database-writer
         command: sh -c "npm run workers:database-writer:nodemon"
 
+    aggregator:
+        <<: *backend-body
+        container_name: ccdb-aggregator
+        command: sh -c "npm run workers:aggregator:nodemon"
+
     markets-refresher:
         <<: *backend-body
         container_name: ccdb-markets-refresher

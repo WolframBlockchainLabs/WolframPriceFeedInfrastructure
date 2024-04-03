@@ -41,6 +41,8 @@
         "workers:markets-refresher:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/markets-refresher/worker.js",
         "workers:database-writer:start": "node --max-old-space-size=8192 ./lib/workers/amqp/database-writer/worker.js",
         "workers:database-writer:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/amqp/database-writer/worker.js",
+        "workers:aggregator:start": "node --max-old-space-size=8192 ./lib/workers/amqp/aggregator/worker.js",
+        "workers:aggregator:nodemon": "nodemon --max-old-space-size=8192 ./lib/workers/amqp/aggregator/worker.js",
         "format": "prettier --write .",
         "test:lint": "eslint lib tests --ext js",
         "test:audit": "npm audit --audit-level=moderate",

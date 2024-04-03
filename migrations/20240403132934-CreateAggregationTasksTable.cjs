@@ -23,6 +23,14 @@ module.exports = {
                 allowNull: false,
                 defaultValue: 'PENDING',
             },
+            context: {
+                type: Sequelize.JSON,
+                allowNull: true,
+            },
+            error: {
+                type: Sequelize.JSON,
+                allowNull: true,
+            },
             createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false,

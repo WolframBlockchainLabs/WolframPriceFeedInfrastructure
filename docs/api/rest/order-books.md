@@ -7,7 +7,7 @@
 ## Get List of OrderBooks
 
 -   **Method**: GET
--   **Endpoint**: `/api/v1/crypto/orderBooks`
+-   **Endpoint**: `/api/v1/crypto/order-books`
 -   **Query**:
     -   `offset`: (integer) Pagination offset.
     -   `limit`: (integer) Number of records to return.
@@ -18,12 +18,12 @@
 
 **Description:**
 
-The /api/v1/crypto/orderBooks endpoint fetches real-time or historical order book data for specified cryptocurrency trading pairs from various exchanges. An order book is a list of buy (bids) and sell (asks) orders organized by price level and is essential for understanding market depth and liquidity. This endpoint provides detailed insights into market sentiment and potential price movements by returning the bids and asks at different price levels for selected intervals. It supports fine-tuned queries with parameters for pagination (offset, limit), time range (rangeDateStart, rangeDateEnd), exchange filters (exchangeNames[]), and specific trading pairs (symbol).
+The /api/v1/crypto/order-books endpoint fetches real-time or historical order book data for specified cryptocurrency trading pairs from various exchanges. An order book is a list of buy (bids) and sell (asks) orders organized by price level and is essential for understanding market depth and liquidity. This endpoint provides detailed insights into market sentiment and potential price movements by returning the bids and asks at different price levels for selected intervals. It supports fine-tuned queries with parameters for pagination (offset, limit), time range (rangeDateStart, rangeDateEnd), exchange filters (exchangeNames[]), and specific trading pairs (symbol).
 
 **Example with curl:**
 
 ```bash
-curl -X GET "http://example.com/api/v1/crypto/orderBooks?offset=0&limit=2&rangeDateStart=2023-12-11T15:25:00.000Z&rangeDateEnd=2023-12-11T15:27:00.000Z&exchangeNames[]=Binance&symbol=BTC/USDT"
+curl -X GET "http://example.com/api/v1/crypto/order-books?offset=0&limit=2&rangeDateStart=2023-12-11T15:25:00.000Z&rangeDateEnd=2023-12-11T15:27:00.000Z&exchangeNames[]=Binance&symbol=BTC/USDT"
 ```
 
 **Example Response Payload:**

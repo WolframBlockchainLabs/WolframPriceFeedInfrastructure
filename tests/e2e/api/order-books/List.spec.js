@@ -27,7 +27,7 @@ describe('[order-books]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
@@ -49,7 +49,7 @@ describe('[order-books]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=test`)
             .query({
                 symbol,
@@ -69,7 +69,7 @@ describe('[order-books]: List the records', () => {
             await orderBookFactory.findOrderBook(orderBooks[0].id);
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${exchangeName}`)
             .query({
                 symbol: 'test',
@@ -90,7 +90,7 @@ describe('[order-books]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
@@ -114,7 +114,7 @@ describe('[order-books]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,

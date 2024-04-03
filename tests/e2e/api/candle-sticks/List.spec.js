@@ -27,7 +27,7 @@ describe('[candle-stick]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
+            .get(`/api/v1/crypto/candle-sticks`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
@@ -48,7 +48,7 @@ describe('[candle-stick]: List the records', () => {
             await candleStickFactory.findCandleStick(candleSticks[0].id);
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
+            .get(`/api/v1/crypto/candle-sticks`)
             .query(`exchangeNames[]=test`)
             .query({
                 symbol,
@@ -68,7 +68,7 @@ describe('[candle-stick]: List the records', () => {
             await candleStickFactory.findCandleStick(candleSticks[0].id);
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
+            .get(`/api/v1/crypto/candle-sticks`)
             .query(`exchangeNames[]=${exchangeName}`)
             .query({
                 symbol: 'test',
@@ -89,7 +89,7 @@ describe('[candle-stick]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
+            .get(`/api/v1/crypto/candle-sticks`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
@@ -113,7 +113,7 @@ describe('[candle-stick]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks`)
+            .get(`/api/v1/crypto/candle-sticks`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,

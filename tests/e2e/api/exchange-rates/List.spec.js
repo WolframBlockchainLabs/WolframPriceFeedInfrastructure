@@ -27,7 +27,7 @@ describe('[exchange-rates]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/exchangeRates`)
+            .get(`/api/v1/crypto/exchange-rates`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
@@ -48,7 +48,7 @@ describe('[exchange-rates]: List the records', () => {
             await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/exchangeRates`)
+            .get(`/api/v1/crypto/exchange-rates`)
             .query(`exchangeNames[]=test`)
             .query({
                 symbol,
@@ -68,7 +68,7 @@ describe('[exchange-rates]: List the records', () => {
             await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/exchangeRates`)
+            .get(`/api/v1/crypto/exchange-rates`)
             .query(`exchangeNames[]=${exchangeName}`)
             .query({
                 symbol: 'test',
@@ -89,7 +89,7 @@ describe('[exchange-rates]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/exchangeRates`)
+            .get(`/api/v1/crypto/exchange-rates`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
@@ -113,7 +113,7 @@ describe('[exchange-rates]: List the records', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/exchangeRates`)
+            .get(`/api/v1/crypto/exchange-rates`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,

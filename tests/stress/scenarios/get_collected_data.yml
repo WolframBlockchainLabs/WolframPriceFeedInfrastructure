@@ -32,7 +32,7 @@ scenarios:
                 expect:
                     - statusCode: 200
           - get:
-                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/candleSticks'
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/candle-sticks'
                 qs:
                     offset: 0
                     limit: 5
@@ -41,7 +41,7 @@ scenarios:
                 expect:
                     - statusCode: 200
           - get:
-                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/exchangeRates'
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/exchange-rates'
                 qs:
                     offset: 0
                     limit: 5
@@ -50,7 +50,7 @@ scenarios:
                 expect:
                     - statusCode: 200
           - get:
-                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/orderBooks'
+                url: '/api/v1/exchanges/Binance/markets/BTC_EUR/order-books'
                 qs:
                     offset: 0
                     limit: 5

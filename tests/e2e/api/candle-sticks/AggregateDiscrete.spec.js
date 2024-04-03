@@ -28,7 +28,7 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
+            .get(`/api/v1/crypto/candle-sticks/aggregate-discrete`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalEnd,
@@ -63,7 +63,7 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
         ).toISOString();
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
+            .get(`/api/v1/crypto/candle-sticks/aggregate-discrete`)
             .query({
                 rangeDateStart,
                 rangeDateEnd,
@@ -99,7 +99,7 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
         ).toISOString();
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
+            .get(`/api/v1/crypto/candle-sticks/aggregate-discrete`)
             .query({
                 rangeDateStart,
                 rangeDateEnd,
@@ -126,7 +126,7 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
+            .get(`/api/v1/crypto/candle-sticks/aggregate-discrete`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
@@ -150,7 +150,7 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
         );
 
         const serverResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate-discrete`)
+            .get(`/api/v1/crypto/candle-sticks/aggregate-discrete`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
