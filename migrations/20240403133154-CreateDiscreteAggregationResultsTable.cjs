@@ -10,6 +10,14 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            processedCount: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            count: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
             rangeDateStart: {
                 type: Sequelize.DATE,
                 allowNull: false,
@@ -22,7 +30,7 @@ module.exports = {
                 type: Sequelize.SMALLINT,
                 allowNull: false,
             },
-            results: {
+            candles: {
                 type: Sequelize.JSON,
                 allowNull: false,
             },
@@ -35,10 +43,6 @@ module.exports = {
                 },
             },
             createdAt: {
-                type: Sequelize.DATE,
-                allowNull: false,
-            },
-            updatedAt: {
                 type: Sequelize.DATE,
                 allowNull: false,
             },
