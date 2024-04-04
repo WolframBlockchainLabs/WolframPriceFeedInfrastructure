@@ -38,6 +38,10 @@ class ExchangeFactory extends BaseFactory {
             return dumpExchange(exchange);
         });
     }
+
+    async bulkCreate(data) {
+        return Exchange.bulkCreate(data);
+    }
 }
 
 export default ExchangeFactory;

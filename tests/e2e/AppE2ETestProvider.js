@@ -44,6 +44,13 @@ class AppE2ETestProvider extends AppTestProvider {
         });
     }
 
+    initAMQPClient() {
+        return {
+            broadcast: jest.fn(),
+            publish: jest.fn(),
+        };
+    }
+
     getSequelizeOptions(config) {
         return {
             ...config['test-db'],
