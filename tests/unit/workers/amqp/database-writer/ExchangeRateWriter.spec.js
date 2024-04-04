@@ -2,7 +2,7 @@ import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
 import ExchangeRate from '#domain-model/entities/market-records/ExchangeRate.js';
 import ExchangeRateWriter from '#workers/amqp/database-writer/ExchangeRateWriter.js';
 
-describe('[database-writer]: ExchangeRateWriter Tests Suite', () => {
+describe('[workers/amqp/database-writer]: ExchangeRateWriter Tests Suite', () => {
     const context = {};
 
     const payload = {

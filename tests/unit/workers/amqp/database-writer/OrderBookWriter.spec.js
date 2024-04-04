@@ -2,7 +2,7 @@ import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
 import OrderBook from '#domain-model/entities/market-records/OrderBook.js';
 import OrderBookWriter from '#workers/amqp/database-writer/OrderBookWriter.js';
 
-describe('[database-writer]: OrderBookWriter Tests Suite', () => {
+describe('[workers/amqp/database-writer]: OrderBookWriter Tests Suite', () => {
     const context = {};
 
     const payload = {

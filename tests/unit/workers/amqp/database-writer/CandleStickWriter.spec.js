@@ -2,7 +2,7 @@ import CandleStick from '#domain-model/entities/market-records/CandleStick.js';
 import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
 import CandleStickWriter from '#workers/amqp/database-writer/CandleStickWriter.js';
 
-describe('[database-writer]: CandleStickWriter Tests Suite', () => {
+describe('[workers/amqp/database-writer]: CandleStickWriter Tests Suite', () => {
     const context = {};
 
     const payload = {

@@ -2,7 +2,7 @@ import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
 import Ticker from '#domain-model/entities/market-records/Ticker.js';
 import TickerWriter from '#workers/amqp/database-writer/TickerWriter.js';
 
-describe('[database-writer]: TickerWriter Tests Suite', () => {
+describe('[workers/amqp/database-writer]: TickerWriter Tests Suite', () => {
     const context = {};
 
     const payload = {
