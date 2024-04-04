@@ -26,8 +26,8 @@ describe('[order-books]: List the records', () => {
             orderBooks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
@@ -37,9 +37,9 @@ describe('[order-books]: List the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(1);
-        expect(activateResponse.body.data[0]).toEqual(targetCandleStick);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(1);
+        expect(serverResponse.body.data[0]).toEqual(targetCandleStick);
     });
 
     it('Should return an empty list if the exchange name is wrong', async () => {
@@ -48,8 +48,8 @@ describe('[order-books]: List the records', () => {
             orderBooks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=test`)
             .query({
                 symbol,
@@ -59,8 +59,8 @@ describe('[order-books]: List the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(0);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(0);
     });
 
     it('Should return an empty list if the market name is wrong', async () => {
@@ -68,8 +68,8 @@ describe('[order-books]: List the records', () => {
         const { exchangeName, intervalStart } =
             await orderBookFactory.findOrderBook(orderBooks[0].id);
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${exchangeName}`)
             .query({
                 symbol: 'test',
@@ -79,8 +79,8 @@ describe('[order-books]: List the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(0);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(0);
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
@@ -89,8 +89,8 @@ describe('[order-books]: List the records', () => {
             orderBooks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
@@ -100,9 +100,9 @@ describe('[order-books]: List the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(0);
-        expect(activateResponse.body.error.code).toEqual('FORMAT_ERROR');
-        expect(activateResponse.body.error.fields.rangeDateEnd).toEqual(
+        expect(serverResponse.body.status).toEqual(0);
+        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'INVALID_ISO_DATE_OR_TIMESTAMP',
         );
     });
@@ -113,8 +113,8 @@ describe('[order-books]: List the records', () => {
             orderBooks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/orderBooks`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/order-books`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
@@ -124,9 +124,9 @@ describe('[order-books]: List the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(0);
-        expect(activateResponse.body.error.code).toEqual('FORMAT_ERROR');
-        expect(activateResponse.body.error.fields.rangeDateEnd).toEqual(
+        expect(serverResponse.body.status).toEqual(0);
+        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'START_DATE_GREATER_THAN_END_DATE',
         );
     });

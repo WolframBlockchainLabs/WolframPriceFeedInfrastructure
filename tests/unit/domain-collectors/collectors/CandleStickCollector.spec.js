@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import CandleStickCollector from '#domain-collectors/collectors/CandleStickCollector.js';
+import { MILLISECONDS_IN_A_MINUTE } from '#constants/timeframes.js';
 
 describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () => {
     const exchange = 'binance';
@@ -74,6 +75,69 @@ describe('[domain-collectors/collectors]: CandleStickCollector Tests Suite', () 
             context.candleStickCollector.start(collectorMeta),
         ).rejects.toThrow();
         expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
+    });
+
+    test('formatAggregationInterval should adjust interval by subtracting a minute', () => {
+        const adjustedInterval =
+            context.candleStickCollector.formatAggregationInterval({
+                intervalStart: collectorMeta.intervalStart,
+                intervalEnd: collectorMeta.intervalEnd,
+            });
+
+        expect(adjustedInterval).toEqual({
+            intervalStart:
+                collectorMeta.intervalStart - MILLISECONDS_IN_A_MINUTE,
+            intervalEnd: collectorMeta.intervalEnd - MILLISECONDS_IN_A_MINUTE,
+        });
+    });
+
+    test('saveData should filter out fetched data not within the specified interval', async () => {
+        jest.spyOn(context.candleStickCollector, 'publish').mockImplementation(
+            () => {},
+        );
+
+        const fetchedData = [
+            [
+                collectorMeta.intervalStart - 1,
+                faker.number.float(),
+                faker.number.float(),
+                faker.number.float(),
+            ],
+            [
+                collectorMeta.intervalStart,
+                faker.number.float(),
+                faker.number.float(),
+                faker.number.float(),
+            ],
+            [
+                collectorMeta.intervalEnd,
+                faker.number.float(),
+                faker.number.float(),
+                faker.number.float(),
+            ],
+            [
+                collectorMeta.intervalEnd + 1,
+                faker.number.float(),
+                faker.number.float(),
+                faker.number.float(),
+            ],
+        ];
+
+        await context.candleStickCollector.saveData(fetchedData, collectorMeta);
+
+        expect(context.candleStickCollector.publish).toHaveBeenCalledWith(
+            {
+                charts: fetchedData.slice(1, 3),
+            },
+            collectorMeta,
+        );
+
+        expect(context.loggerStub.debug).toHaveBeenCalledWith({
+            message: expect.stringContaining(
+                `CandleStick for '${exchange} & ${symbol}' has been sent to the [${context.candleStickCollector.QUEUE_NAME}] queue`,
+            ),
+            context: expect.anything(),
+        });
     });
 
     test('getTimeframe should return seconds-precision timeframe if interval is less than a minute', async () => {

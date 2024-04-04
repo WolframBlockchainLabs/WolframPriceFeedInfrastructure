@@ -14,7 +14,10 @@ describe('[domain-collectors/integrations/tezos]: BaseETHDriver Tests Suite', ()
     test('the "getExchangeRate" should throw RateLimitExceededException when getReserves fails', async () => {
         jest.spyOn(BaseUDEXDriver.prototype, 'getReserves').mockImplementation(
             () => {
-                throw new Error();
+                throw {
+                    code: 'SERVER_ERROR',
+                    shortMessage: 'exceeded maximum retry limit',
+                };
             },
         );
 

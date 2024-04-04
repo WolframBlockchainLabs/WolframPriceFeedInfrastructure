@@ -21,13 +21,13 @@ describe('[markets]: List the records', () => {
     it('Should return markets list', async () => {
         const { markets } = await baseMarketRecord.setupMarkets();
 
-        const activateResponse = await app.request
+        const serverResponse = await app.request
             .get(`/api/v1/crypto/markets`)
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(markets.length);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(markets.length);
     });
 
     it('Should return markets list for specified exchange', async () => {
@@ -38,14 +38,14 @@ describe('[markets]: List the records', () => {
             (market) => market.exchangeId === targetExchange.id,
         );
 
-        const activateResponse = await app.request
+        const serverResponse = await app.request
             .get(`/api/v1/crypto/markets`)
             .query(`exchangeNames[]=${targetExchange.name}`)
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(targetMarkets.length);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(targetMarkets.length);
     });
 
     it('Should return markets list for specified exchange', async () => {
@@ -56,13 +56,13 @@ describe('[markets]: List the records', () => {
             return market.base === targetToken || market.quote === targetToken;
         });
 
-        const activateResponse = await app.request
+        const serverResponse = await app.request
             .get(`/api/v1/crypto/markets`)
             .query(`tokenNames[]=${targetToken}`)
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.length).toEqual(targetMarkets.length);
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.length).toEqual(targetMarkets.length);
     });
 });

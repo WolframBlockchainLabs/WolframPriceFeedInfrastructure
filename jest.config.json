@@ -18,7 +18,8 @@
         "!**/use-cases/BaseUseCase.js",
         "!**/use-cases/utils/**",
         "!**/ws-api/*.*",
-        "!**/workers/*.*"
+        "!**/workers/*.*",
+        "!**/workers/amqp/*.*"
     ],
     "coverageThreshold": {
         "global": {

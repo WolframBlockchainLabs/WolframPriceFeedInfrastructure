@@ -17,11 +17,11 @@ describe('[domain-collectors/collectors]: TradeCollector Tests Suite', () => {
             side: 'sell',
             price: 0.066754,
             amount: 0.055,
-            timestamp: 1684141361369,
+            timestamp: 1702384393936,
         },
     ];
 
-    const fetchedDataMap = [[1, 0.066754, 0.055, 1684141361369]];
+    const fetchedDataMap = [[1, 0.066754, 0.055, 1702384393936]];
 
     const context = {};
 

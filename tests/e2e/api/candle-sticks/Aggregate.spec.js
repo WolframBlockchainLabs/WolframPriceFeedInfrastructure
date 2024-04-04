@@ -26,8 +26,8 @@ describe('[candle-stick]: Aggregate the records', () => {
             candleSticks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/candle-sticks/aggregate`)
             .query({
                 rangeDateStart: targetCandleStick.intervalStart,
                 rangeDateEnd: targetCandleStick.intervalEnd,
@@ -37,17 +37,15 @@ describe('[candle-stick]: Aggregate the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(1);
-        expect(activateResponse.body.data.rangeDateStart).toEqual(
+        expect(serverResponse.body.status).toEqual(1);
+        expect(serverResponse.body.data.rangeDateStart).toEqual(
             targetCandleStick.intervalStart,
         );
-        expect(activateResponse.body.data.rangeDateEnd).toEqual(
+        expect(serverResponse.body.data.rangeDateEnd).toEqual(
             targetCandleStick.intervalEnd,
         );
         expect(
-            activateResponse.body.data.aggregatedPairs[
-                targetCandleStick.symbol
-            ],
+            serverResponse.body.data.aggregatedPairs[targetCandleStick.symbol],
         ).toBeTruthy();
     });
 
@@ -57,8 +55,8 @@ describe('[candle-stick]: Aggregate the records', () => {
             candleSticks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/candle-sticks/aggregate`)
             .query({
                 rangeDateStart: 'targetCandleStick.intervalEnd',
                 rangeDateEnd: 'targetCandleStick.intervalStart',
@@ -68,9 +66,9 @@ describe('[candle-stick]: Aggregate the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(0);
-        expect(activateResponse.body.error.code).toEqual('FORMAT_ERROR');
-        expect(activateResponse.body.error.fields.rangeDateEnd).toEqual(
+        expect(serverResponse.body.status).toEqual(0);
+        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'INVALID_ISO_DATE_OR_TIMESTAMP',
         );
     });
@@ -81,8 +79,8 @@ describe('[candle-stick]: Aggregate the records', () => {
             candleSticks[0].id,
         );
 
-        const activateResponse = await app.request
-            .get(`/api/v1/crypto/candleSticks/aggregate`)
+        const serverResponse = await app.request
+            .get(`/api/v1/crypto/candle-sticks/aggregate`)
             .query({
                 rangeDateStart: targetCandleStick.intervalEnd,
                 rangeDateEnd: targetCandleStick.intervalStart,
@@ -92,9 +90,9 @@ describe('[candle-stick]: Aggregate the records', () => {
             .set('Accept', 'application/json')
             .expect(200);
 
-        expect(activateResponse.body.status).toEqual(0);
-        expect(activateResponse.body.error.code).toEqual('FORMAT_ERROR');
-        expect(activateResponse.body.error.fields.rangeDateEnd).toEqual(
+        expect(serverResponse.body.status).toEqual(0);
+        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'START_DATE_GREATER_THAN_END_DATE',
         );
     });

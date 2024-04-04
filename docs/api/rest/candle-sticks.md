@@ -8,7 +8,7 @@
 ## Get List of CandleSticks
 
 -   **Method**: GET
--   **Endpoint**: `/api/v1/crypto/candleSticks`
+-   **Endpoint**: `/api/v1/crypto/candle-sticks`
 -   **Query**:
     -   `offset`: (integer) Pagination offset.
     -   `limit`: (integer) Number of records to return.
@@ -19,12 +19,12 @@
 
 **Description:**
 
-The /api/v1/crypto/candleSticks endpoint is designed to fetch historical candlestick data for a given cryptocurrency trading pair across specified exchanges. This data is crucial for technical analysis, allowing users to view price movements within a defined date range. The endpoint accommodates various query parameters to tailor the data request, including pagination controls (offset, limit), a date range for the data (rangeDateStart, rangeDateEnd), exchange names (exchangeNames[]), and the specific trading pair symbol (symbol).
+The /api/v1/crypto/candle-sticks endpoint is designed to fetch historical candlestick data for a given cryptocurrency trading pair across specified exchanges. This data is crucial for technical analysis, allowing users to view price movements within a defined date range. The endpoint accommodates various query parameters to tailor the data request, including pagination controls (offset, limit), a date range for the data (rangeDateStart, rangeDateEnd), exchange names (exchangeNames[]), and the specific trading pair symbol (symbol).
 
 **Example with curl:**
 
 ```bash
-curl -X GET "http://example.com/api/v1/crypto/candleSticks?offset=0&limit=4&rangeDateStart=2023-12-07T23:58:00.000Z&rangeDateEnd=2023-12-07T23:59:00.000Z&exchangeNames[]=Binance&symbol=BTC/USDT"
+curl -X GET "http://example.com/api/v1/crypto/candle-sticks?offset=0&limit=4&rangeDateStart=2023-12-07T23:58:00.000Z&rangeDateEnd=2023-12-07T23:59:00.000Z&exchangeNames[]=Binance&symbol=BTC/USDT"
 ```
 
 **Example Response Payload:**
@@ -106,7 +106,7 @@ curl -X GET "http://example.com/api/v1/crypto/candleSticks?offset=0&limit=4&rang
 ### Aggregate CandleSticks
 
 -   **Method**: GET
--   **Endpoint**: `/api/v1/crypto/candleSticks/aggregate`
+-   **Endpoint**: `/api/v1/crypto/candle-sticks/aggregate`
 -   **Query**:
     -   `offset`: (integer) Aggregation offset (skips specified amount of records from the beginning of time frame. Not particularly useful in a common use case, but might be in some complex corner cases).
     -   `limit`: (integer) Number of records to be used in an aggregation round (heavily influences execution time and memory usage. The more records will be aggregated in one round the more memory it will take, but the execution time will be faster because it will take less requests to the database).
@@ -117,12 +117,12 @@ curl -X GET "http://example.com/api/v1/crypto/candleSticks?offset=0&limit=4&rang
 
 **Description:**
 
-The /api/v1/crypto/candleSticks/aggregate endpoint is designed to provide aggregated candlestick data for specified cryptocurrency trading pairs over a chosen date range. This endpoint is particularly useful for summarizing market data, offering insights into the open, high, low, close, and volume metrics, as well as an aggregated average price for each trading pair. It supports extensive customization through its query parameters, allowing users to define the scope of data aggregation by specifying date ranges, symbols for trading pairs, and the exchanges to be included.
+The /api/v1/crypto/candle-sticks/aggregate endpoint is designed to provide aggregated candlestick data for specified cryptocurrency trading pairs over a chosen date range. This endpoint is particularly useful for summarizing market data, offering insights into the open, high, low, close, and volume metrics, as well as an aggregated average price for each trading pair. It supports extensive customization through its query parameters, allowing users to define the scope of data aggregation by specifying date ranges, symbols for trading pairs, and the exchanges to be included.
 
 **Example with curl:**
 
 ```bash
-curl -X GET "http://example.com/api/v1/crypto/candleSticks/aggregate?offset=0&limit=100&rangeDateStart=2023-11-0100:00:00.000Z&rangeDateEnd=2024-11-30&symbols[]=BTC/USDT&symbols[]=ETH/USDT&exchangeNames[]=Binance"
+curl -X GET "http://example.com/api/v1/crypto/candle-sticks/aggregate?offset=0&limit=100&rangeDateStart=2023-11-0100:00:00.000Z&rangeDateEnd=2024-11-30&symbols[]=BTC/USDT&symbols[]=ETH/USDT&exchangeNames[]=Binance"
 ```
 
 **Example Response Payload:**

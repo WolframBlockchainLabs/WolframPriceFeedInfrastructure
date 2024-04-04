@@ -3,7 +3,6 @@ import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceed
 import ccxt, {
     RateLimitExceeded as CCXTRateLimitExceeded,
     NetworkError,
-    // eslint-disable-next-line import/no-unresolved
 } from 'ccxt';
 
 describe('[domain-collectors/integrations/ccxt]: CCXTDriverWrapper Tests Suite', () => {
