@@ -19,7 +19,9 @@
         "!**/use-cases/utils/**",
         "!**/ws-api/*.*",
         "!**/workers/*.*",
-        "!**/workers/amqp/*.*"
+        "!**/workers/amqp/*.*",
+
+        "!**/use-cases/market-records/candle-sticks/*.*"
     ],
     "coverageThreshold": {
         "global": {
