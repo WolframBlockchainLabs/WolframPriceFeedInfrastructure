@@ -9,6 +9,7 @@
 5. [Order Books](./order-books.md)
 6. [Tickers](./tickers.md)
 7. [Trades](./trades.md)
+8. [Aggregation Tasks](./aggregation-tasks.md)
 
 ---
 
