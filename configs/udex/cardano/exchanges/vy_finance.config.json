@@ -5,6 +5,30 @@
         {
             "pair": {
                 "meta": {
+                    "pool": "addr1z9es6px68rlmwatqwg6qxwqf3szyz0n4lm0m2e5j38nu0062a6yhtrq8a4cxg2trrtzddev7v974nafzmx4xaegv2ngqky7khv"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "VYFI",
+                    "name": "VyFinance",
+                    "meta": {
+                        "address": "804f5544c1962a40546827cab750a88404dc7108c0f588b72964754f56594649",
+                        "decimals": 0
+                    }
+                }
+            },
+            "symbol": "ADA/VYFI"
+        },
+        {
+            "pair": {
+                "meta": {
                     "pool": "addr1zy36dpyufald7764k7st935hjuvmauwa5rdhncyajuen3znwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2sr488jg"
                 },
                 "in": {
@@ -25,6 +49,414 @@
                 }
             },
             "symbol": "ADA/MILK"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z9vgl40qezca5s8ajz6wnpuwevt98l3jqx2ce5nlu8h8nnw60wckas4haxwwclas0g39cc8cvt2r8yalrfa9e8vxx92qsss9sx"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "WMT",
+                    "name": "World Mobile Token",
+                    "meta": {
+                        "address": "1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e776f726c646d6f62696c65746f6b656e",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/WMT"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z9rgse8zkhc09qyjk8v8jfs3shfkht85frfall0yts4h3srwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2s49mtmx"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "AGIX",
+                    "name": "SingularityNet AGIX Token",
+                    "meta": {
+                        "address": "f43a62fdc3965df486de8a0d32fe800963589c41b38946602a0dc53541474958",
+                        "decimals": 8
+                    }
+                }
+            },
+            "symbol": "ADA/AGIX"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1zy3jcyykdnjd3enu96hp0w6hct85s499w5y6w5hmk0qzh50qy02w7ayk0lyyrf080l5zusdpkg8se9x7fcke6vaz42lqwjjflq"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "SNEK",
+                    "name": "Snek",
+                    "meta": {
+                        "address": "279c909f348e533da5808898f87f9a14bb2c3dfbbacccd631d927a3f534e454b",
+                        "decimals": 0
+                    }
+                }
+            },
+            "symbol": "ADA/SNEK"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z923yccpjgvf3lk2n3u4zl25vjm7227y5lswvyg2g6387z8qy02w7ayk0lyyrf080l5zusdpkg8se9x7fcke6vaz42lq7dg4ty"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "IAG",
+                    "name": "IAGON",
+                    "meta": {
+                        "address": "5d16cc1a177b5d9ba9cfa9793b07e60f1fb70fea1f8aef064415d114494147",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/IAG"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z82ker9gjrlunvsfc6gl6xzvlwrpk5wk4xcwfemcgdyv36rwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2sktfsg6"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "LENFI",
+                    "name": "Lenfi DAO token",
+                    "meta": {
+                        "address": "8fef2d34078659493ce161a6c7fba4b56afefa8535296a5743f6958741414441",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/LENFI"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z8muwml0lhf5ygucz7xxej7rpuuntgrllntgrheqw7xpcyrwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2sdfjg0w"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "iUSD",
+                    "name": "iUSD",
+                    "meta": {
+                        "address": "f66d78b4a3cb3d37afa0ec36461e51ecbde00f26c8f0a68f94b6988069555344",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/iUSD"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1zy4spxzea9gg4a5zp5u8e20zppn564zg272t9x8ww92prmrwy7w4xmdgekdc6w8788z9a960cq3t3juayh2r8ad5um2s8nn420"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "INDY",
+                    "name": "Indigo DAO Token",
+                    "meta": {
+                        "address": "533bb94a8850ee3ccbe483106489399112b74c905342cb1792a797a0494e4459",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/INDY"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1zym49sdmtc94xhn2crfknel905s7jh2v7c22x655mmtcr4x08470jem2z3k5yap4fddtxvykxxv2tmr83x06vklv5vysj8w320"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "NTX",
+                    "name": "NuNet Utility Token",
+                    "meta": {
+                        "address": "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e993444794e5458",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/NTX"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z85nas88ngr7dvlnpjxf78n0gclgvd3cfr66jmtx5hp9h2x08470jem2z3k5yap4fddtxvykxxv2tmr83x06vklv5vysntgj0h"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "MIN",
+                    "name": "Minswap",
+                    "meta": {
+                        "address": "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/MIN"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z9m2eqz78guuj35ky77tftdg285nt8z5gf6mczmxxnj7k59ksyd8pn7amnr48geat0yft0uezfunealzy4ghl0cayp4sy42s8y"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "FLDT",
+                    "name": "FLDT",
+                    "meta": {
+                        "address": "577f0b1342f8f8f4aed3388b80a8535812950c7a892495c0ecdf0f1e0014df10464c4454",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/FLDT"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z9tjkpp9kksyuysnjxjjuenfxv0ym0dlus3fxkfu8gmp34mend0q3h5twed567pu236a0sf6vfgruxgpr4rkxryyx0zq6367vh"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "BOOK",
+                    "name": "BOOK",
+                    "meta": {
+                        "address": "51a5e236c4de3af2b8020442e2a26f454fda3b04cb621c1294a0ef34424f4f4b",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/BOOK"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z8kkjw83qmz280rvqerqep7a7vgukxyfcxdh2xj0992frme8kq9dr3l47k6mfgvuugac48lc7p9zq25t6r4323hjux9qrzxrld"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "LQ",
+                    "name": "Liqwid DAO Token",
+                    "meta": {
+                        "address": "da8c30857834c6ae7203935b89278c532b3995245295456f993e1d244c51",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/LQ"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1zxurr04vwygz3qm8kjkmks46k4xxjpd82q3hkzpxq3y6thnend0q3h5twed567pu236a0sf6vfgruxgpr4rkxryyx0zqypxn6p"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "MELD",
+                    "name": "MELD",
+                    "meta": {
+                        "address": "a2944573e99d2ed3055b808eaa264f0bf119e01fc6b18863067c63e44d454c44",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/MELD"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z8xyxwkjr0yl704083928pu4y77pmlmgdhehcw4er2evczmend0q3h5twed567pu236a0sf6vfgruxgpr4rkxryyx0zqc8079e"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "FACT",
+                    "name": "Orcfax Token",
+                    "meta": {
+                        "address": "a3931691f5c4e65d01c429e473d0dd24c51afdb6daf88e632a6c1e516f7263666178746f6b656e",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/FACT"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z8qaqzruv8363uv9q8z653c9zae0ms74xfde35aslpncvxg9gczwem2qwpjcgh3dr055wfyznfc209ke40hayakfmavsax6gz6"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "C3",
+                    "name": "CHARLI3",
+                    "meta": {
+                        "address": "8e51398904a5d3fc129fbf4f1589701de23c7824d5c90fdb9490e15a434841524c4933",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/C3"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1zyl65mfwq2u9duf0h7paqsgg2zqesadtge944ldf6n082pg9gczwem2qwpjcgh3dr055wfyznfc209ke40hayakfmavsxzkxnc"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "NMKR",
+                    "name": "NMKR",
+                    "meta": {
+                        "address": "5dac8536653edc12f6f5e1045d8164b9f59998d3bdc300fc928434894e4d4b52",
+                        "decimals": 6
+                    }
+                }
+            },
+            "symbol": "ADA/NMKR"
+        },
+        {
+            "pair": {
+                "meta": {
+                    "pool": "addr1z84549cnjrpalhjsprnjynx3m0hkrgt6j23wfu2wl27fcww60wckas4haxwwclas0g39cc8cvt2r8yalrfa9e8vxx92qrznltm"
+                },
+                "in": {
+                    "symbol": "ADA",
+                    "name": "Cardano",
+                    "meta": {
+                        "address": "lovelace",
+                        "decimals": 6
+                    }
+                },
+                "out": {
+                    "symbol": "HOSKY",
+                    "name": "HOSKY Token",
+                    "meta": {
+                        "address": "a0028f350aaabe0545fdcb56b039bfb08e4bb4d8c4d7c3c7d481c235484f534b59",
+                        "decimals": 0
+                    }
+                }
+            },
+            "symbol": "ADA/HOSKY"
         }
     ]
 }
