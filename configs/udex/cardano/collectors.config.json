@@ -1,6 +1,6 @@
 {
     "groupName": "Cardano",
-    "rateLimit": 6000,
+    "rateLimit": 3000,
     "rateLimitMargin": "{{CARDANO_RATE_LIMIT_MARGIN}}",
     "apiSecret": "{{CARDANO_BLOCKFROST_PROJECT_ID}}"
 }
