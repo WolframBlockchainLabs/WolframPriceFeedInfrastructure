@@ -67,7 +67,7 @@
                     "symbol": "AGIX",
                     "name": "SingularityNet AGIX Token",
                     "meta": {
-                        "address": "f43a62fdc3965df486de8a0d32fe800963589c41b38946602a0dc535",
+                        "address": "f43a62fdc3965df486de8a0d32fe800963589c41b38946602a0dc53541474958",
                         "decimals": 8
                     }
                 }
@@ -341,7 +341,7 @@
         {
             "pair": {
                 "meta": {
-                    "pool": "addr1z8nvjzjeydcn4atcd93aac8allvrpjn7pjr2qsweukpnay2u7974yt3pr7dgjspq9tgutudr0ew7cvxavl6m02jchqaswth4q3"
+                    "pool": "addr1z8nvjzjeydcn4atcd93aac8allvrpjn7pjr2qsweukpnayg6pp9snyy9v7uwarxd7dqc5k52egtc49y5w5h3nqqdy6qs2nzs8y"
                 },
                 "in": {
                     "symbol": "ADA",
