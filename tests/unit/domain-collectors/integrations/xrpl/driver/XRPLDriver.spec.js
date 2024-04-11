@@ -10,6 +10,7 @@ describe('[domain-collectors/integrations/xrpl]: XRPLDriver Tests Suite', () => 
             connect: jest.fn(),
             disconnect: jest.fn(),
             request: jest.fn().mockReturnValue({ result: { offers: {} } }),
+            isConnected: jest.fn().mockReturnValue(false),
         };
 
         context.xrplDriver = new XRPLDriver('ws://test');
@@ -65,6 +66,38 @@ describe('[domain-collectors/integrations/xrpl]: XRPLDriver Tests Suite', () => 
                 [2, 2],
             ],
         });
+    });
+
+    test('the "fetchOrderBook" method should not call client.connect if connection exists', async () => {
+        context.xrplClientStub.isConnected.mockReturnValue(true);
+        const clientConnectSpy = jest.spyOn(context.xrplClientStub, 'connect');
+        const loadOrdersStub = jest
+            .spyOn(context.xrplDriver, 'loadOrders')
+            .mockReturnValue({
+                asks: [
+                    { quality: 1, TakerGets: { value: 1 } },
+                    { quality: 2, TakerGets: { value: 2 } },
+                ],
+                bids: [
+                    { quality: 1, TakerPays: { value: 1 } },
+                    { quality: 2, TakerPays: { value: 2 } },
+                ],
+            });
+
+        const result = await context.xrplDriver.fetchOrderBook({});
+
+        expect(loadOrdersStub).toHaveBeenCalledTimes(1);
+        expect(result).toEqual({
+            bids: [
+                [2, 2],
+                [1, 1],
+            ],
+            asks: [
+                [1, 1],
+                [2, 2],
+            ],
+        });
+        expect(clientConnectSpy).toHaveBeenCalledTimes(0);
     });
 
     test('the "loadOrders" should throw RateLimitExceededException when TimeoutError is thrown', async () => {
