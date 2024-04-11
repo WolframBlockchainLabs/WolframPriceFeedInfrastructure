@@ -115,7 +115,7 @@
         "socket.io": "^4.7.2",
         "umzug": "^3.5.0",
         "winston": "^3.11.0",
-        "xrpl": "^2.14.0"
+        "xrpl": "^3.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.23.6",
