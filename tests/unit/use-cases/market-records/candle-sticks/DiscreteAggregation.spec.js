@@ -1,3 +1,4 @@
+import { MILLISECONDS_IN_A_DAY } from '#constants/timeframes.js';
 import CandleStick from '#domain-model/entities/market-records/CandleStick.js';
 import BaseUseCase from '#use-cases/BaseUseCase.js';
 import DiscreteAggregation from '#use-cases/market-records/candle-sticks/DiscreteAggregation.js';
@@ -30,6 +31,24 @@ describe('[use-cases/market-records/candle-sticks]: DiscreteAggregation Tests Su
 
     afterEach(() => {
         jest.restoreAllMocks();
+    });
+
+    describe('shouldCache method', () => {
+        test('should return false if rangeDateEnd is greater then current time', async () => {
+            const result = await context.aggregateCandleSticks.shouldCache({
+                rangeDateEnd: Date.now() + MILLISECONDS_IN_A_DAY,
+            });
+
+            expect(result).toEqual(false);
+        });
+
+        test('should return true if rangeDateEnd is smaller then current time', async () => {
+            const result = await context.aggregateCandleSticks.shouldCache({
+                rangeDateEnd: Date.now() - MILLISECONDS_IN_A_DAY,
+            });
+
+            expect(result).toEqual(true);
+        });
     });
 
     describe('execute method', () => {

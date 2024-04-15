@@ -4,7 +4,8 @@
         "port": "{{PORT}}",
         "testPort": 3002,
         "mode": "{{NODE_ENV}}",
-        "trustProxy": "{{APP_TRUST_PROXY}}"
+        "trustProxy": "{{APP_TRUST_PROXY}}",
+        "cacheEnabled": "{{APP_CACHE_ENABLED}}"
     },
     "urls": {
         "self": "{{SELF_URL}}",
