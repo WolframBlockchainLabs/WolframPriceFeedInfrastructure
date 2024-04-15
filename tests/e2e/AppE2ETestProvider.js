@@ -35,6 +35,16 @@ class AppE2ETestProvider extends AppTestProvider {
         });
     }
 
+    initConfig(config) {
+        return {
+            ...config,
+            app: {
+                ...config.app,
+                cacheEnabled: false,
+            },
+        };
+    }
+
     initTestDBManager({ logger, sequelize }) {
         return new TestDBManager({
             sequelize,

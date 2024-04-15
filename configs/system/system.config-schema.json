@@ -7,7 +7,8 @@
                 "port": ["required", "positive_integer"],
                 "testPort": ["required", "positive_integer"],
                 "mode": ["required", "string"],
-                "trustProxy": ["required", "positive_integer"]
+                "trustProxy": ["required", "positive_integer"],
+                "cacheEnabled": ["required", "boolean"]
             }
         }
     ],
