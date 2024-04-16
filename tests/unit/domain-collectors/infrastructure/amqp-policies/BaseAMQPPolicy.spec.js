@@ -31,7 +31,9 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         jest.spyOn(
             context.baseAMQPPolicy,
             'configureRabbitMQChannel',
-        ).mockImplementation(() => {});
+        ).mockImplementation(() => {
+            context.baseAMQPPolicy.resolveConfigureChannelPromise();
+        });
 
         await context.baseAMQPPolicy.start();
 
@@ -43,6 +45,8 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
     });
 
     test('the "configureRabbitMQChannel" should call assertExchange, assertAndBindQueue, and setupConsumer', async () => {
+        context.baseAMQPPolicy.resolveConfigureChannelPromise = jest.fn();
+
         await context.baseAMQPPolicy.configureRabbitMQChannel(
             context.channelStub,
         );
@@ -55,6 +59,9 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         expect(context.channelStub.assertQueue).toHaveBeenCalledTimes(1);
         expect(context.channelStub.bindQueue).toHaveBeenCalledTimes(1);
         expect(context.channelStub.consume).toHaveBeenCalledTimes(1);
+        expect(
+            context.baseAMQPPolicy.resolveConfigureChannelPromise,
+        ).toHaveBeenCalledTimes(1);
     });
 
     test('the "broadcast" should publish a message to the channel', async () => {
