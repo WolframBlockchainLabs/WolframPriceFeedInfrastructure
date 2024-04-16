@@ -1,6 +1,6 @@
 {
     "groupName": "Tezos",
-    "rateLimit": 200,
+    "rateLimit": 3000,
     "rateLimitMargin": "{{TEZOS_RATE_LIMIT_MARGIN}}",
     "apiSecret": "{{TEZOS_PROVIDER_URL}}"
 }
