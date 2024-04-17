@@ -1,7 +1,7 @@
 {
     "id": "gemini",
     "name": "Gemini",
-    "rateLimit": 1000,
+    "rateLimit": "{{GEMINI_RATE_LIMIT}}",
     "minimalCycleDuration": 60000,
     "symbols": [
         "AAVE/USD",

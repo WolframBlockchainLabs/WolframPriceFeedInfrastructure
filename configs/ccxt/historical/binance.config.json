@@ -1,6 +1,6 @@
 {
     "id": "binance",
     "name": "Binance",
-    "rateLimit": 3000,
+    "rateLimit": "{{BINANCE_HISTORICAL_RATE_LIMIT}}",
     "symbols": ["BTC/USDT", "BTC/TUSD", "BTC/PAX", "BTC/USDC", "BTC/BUSD"]
 }

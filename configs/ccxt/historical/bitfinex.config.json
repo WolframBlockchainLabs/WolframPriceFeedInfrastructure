@@ -1,6 +1,6 @@
 {
     "id": "bitfinex",
     "name": "Bitfinex",
-    "rateLimit": 5000,
+    "rateLimit": "{{BITFINEX_HISTORICAL_RATE_LIMIT}}",
     "symbols": ["BTC/USD", "BTC/EUR", "BTC/USDT", "BTC/EURT", "BTC/MIM"]
 }

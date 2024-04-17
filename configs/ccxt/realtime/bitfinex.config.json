@@ -1,7 +1,7 @@
 {
     "id": "bitfinex",
     "name": "Bitfinex",
-    "rateLimit": 1000,
+    "rateLimit": "{{BITFINEX_RATE_LIMIT}}",
     "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/USD",

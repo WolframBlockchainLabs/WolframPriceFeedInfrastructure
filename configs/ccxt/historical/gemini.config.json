@@ -1,6 +1,6 @@
 {
     "id": "gemini",
     "name": "Gemini",
-    "rateLimit": 5000,
+    "rateLimit": "{{GEMINI_HISTORICAL_RATE_LIMIT}}",
     "symbols": ["ETH/BTC", "ETH/DAI", "ETH/EUR", "ETH/USD", "ETH/USDT"]
 }

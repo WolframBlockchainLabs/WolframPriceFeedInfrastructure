@@ -1,6 +1,6 @@
 {
     "id": "kucoin",
     "name": "KuCoin",
-    "rateLimit": 1000,
+    "rateLimit": "{{KUCOIN_HISTORICAL_RATE_LIMIT}}",
     "symbols": ["BTC/TUSD", "BTC/USDT", "BTC/DAI", "BTC/USDC", "BTC/EUR"]
 }

@@ -1,7 +1,7 @@
 {
     "id": "kucoin",
     "name": "KuCoin",
-    "rateLimit": 200,
+    "rateLimit": "{{KUCOIN_RATE_LIMIT}}",
     "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/TUSD",

@@ -1,6 +1,6 @@
 {
     "id": "bitget",
     "name": "Bitget",
-    "rateLimit": 1000,
+    "rateLimit": "{{BITGET_HISTORICAL_RATE_LIMIT}}",
     "symbols": ["USDT/EUR", "USDT/GBP", "BTC/EUR", "BTC/USDC", "BTC/USDT"]
 }

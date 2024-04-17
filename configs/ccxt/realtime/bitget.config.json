@@ -1,7 +1,7 @@
 {
     "id": "bitget",
     "name": "Bitget",
-    "rateLimit": 100,
+    "rateLimit": "{{BITGET_RATE_LIMIT}}",
     "minimalCycleDuration": 60000,
     "symbols": [
         "USDT/EUR",
