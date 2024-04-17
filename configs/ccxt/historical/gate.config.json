@@ -1,6 +1,6 @@
 {
     "id": "gate",
     "name": "Gate.io",
-    "rateLimit": 1000,
+    "rateLimit": "{{GATE_HISTORICAL_RATE_LIMIT}}",
     "symbols": ["ETH/BTC", "ETH/SGD", "ETH/TRY", "ETH/USDC", "ETH/USDT"]
 }

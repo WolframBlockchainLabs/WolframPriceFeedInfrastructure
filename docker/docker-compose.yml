@@ -9,7 +9,9 @@ x-backend-body: &backend-body
             condition: service_healthy
         rabbitmq:
             condition: service_healthy
-    env_file: ./env/.env.backend
+    env_file:
+        - ./env/.env.backend
+        - ./env/.env.collectors
     volumes:
         - ../:/app
         - /app/node_modules

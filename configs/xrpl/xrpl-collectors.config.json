@@ -1,5 +1,5 @@
 {
-    "rateLimit": 600,
+    "rateLimit": "{{XRPL_RATE_LIMIT}}",
     "rateLimitMargin": "{{XRPL_RATE_LIMIT_MARGIN}}",
     "serverUrl": "{{XRPL_SERVER_URL}}",
     "exchange": {

@@ -1,6 +1,6 @@
 {
     "groupName": "Ethereum",
-    "rateLimit": 6000,
+    "rateLimit": "{{ETH_RATE_LIMIT}}",
     "rateLimitMargin": "{{ETH_RATE_LIMIT_MARGIN}}",
     "apiSecret": "{{ETH_PROVIDER_URL}}"
 }
