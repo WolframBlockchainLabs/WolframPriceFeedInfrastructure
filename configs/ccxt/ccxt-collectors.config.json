@@ -1,4 +1,4 @@
 {
-    "rateLimit": 1000,
+    "rateLimit": "{{CCXT_RATE_LIMIT}}",
     "rateLimitMargin": "{{CCXT_RATE_LIMIT_MARGIN}}"
 }

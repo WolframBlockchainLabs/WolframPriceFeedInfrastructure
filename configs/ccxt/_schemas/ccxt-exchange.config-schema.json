@@ -1,8 +1,14 @@
 {
     "id": ["required", "string"],
     "name": ["required", "string"],
-    "apiKey": "string",
-    "apiSecret": "string",
+    "apiAccess": {
+        "nested_object": {
+            "apiKey": ["string"],
+            "secret": ["string"],
+            "uid": ["string"],
+            "password": ["string"]
+        }
+    },
     "rateLimit": "positive_integer",
     "minimalCycleDuration": "positive_integer",
     "symbols": ["required", { "list_of": "string" }]
