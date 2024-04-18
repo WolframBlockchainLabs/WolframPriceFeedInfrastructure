@@ -1,3 +1,4 @@
+import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
 import BackoffPolicy from '#domain-collectors/infrastructure/amqp-policies/BackoffPolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests Suite', () => {
@@ -13,9 +14,14 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests 
             publish: jest.fn().mockResolvedValue(),
         };
 
-        context.amqpClientStub = {
-            getChannel: jest.fn().mockReturnValue(context.channelStub),
-        };
+        class AMQPClient {
+            getChannel = jest.fn().mockReturnValue(context.channelStub);
+        }
+
+        context.amqpClientFactoryStub = new GenericClassFactory({
+            Class: AMQPClient,
+            defaultOptions: 'this.config.rabbitmq',
+        });
 
         context.amqpManagementTargetStub = {
             getStatusHandler: jest.fn(),
@@ -23,7 +29,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests 
         };
 
         context.backoffPolicy = new BackoffPolicy({
-            amqpClient: context.amqpClientStub,
+            amqpClientFactory: context.amqpClientFactoryStub,
             rabbitGroupName: 'testGroup',
             amqpManagementTarget: context.amqpManagementTargetStub,
         });
@@ -35,12 +41,15 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BackoffPolicy Tests 
     });
 
     test('BackoffPolicy constructor should initialize with modified rabbitGroupName', () => {
-        const amqpClient = {};
         const rabbitGroupName = 'testGroup';
 
-        const instance = new BackoffPolicy({ amqpClient, rabbitGroupName });
+        const instance = new BackoffPolicy({
+            amqpClientFactory: context.amqpClientFactoryStub,
+            rabbitGroupName,
+        });
 
         expect(instance.rabbitGroupName).toBe(`${rabbitGroupName}::backoff`);
+        expect(instance.prefetchCount).toBe(1);
     });
 
     test('broadcastRateLimitChange should call broadcast with the correct rateLimitMultiplier', async () => {
