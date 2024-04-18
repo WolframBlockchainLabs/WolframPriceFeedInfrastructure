@@ -1,3 +1,4 @@
+import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
 import ReplicaDiscoveryPolicy from '#domain-collectors/infrastructure/amqp-policies/ReplicaDiscoveryPolicy.js';
 import Cron from 'croner';
 
@@ -17,9 +18,25 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
             debounceDelay: 100,
         };
 
-        context.amqpClientStub = {
-            publish: jest.fn().mockResolvedValue(),
+        context.amqpChannelStub = {
+            assertQueue: jest.fn(),
+            consume: jest.fn(),
+            addSetup: jest.fn((func) => func(context.amqpChannelStub)),
+            ack: jest.fn(),
         };
+
+        context.publishStub = jest.fn().mockResolvedValue();
+
+        class AMQPClient {
+            initConnection = jest.fn();
+            publish = context.publishStub;
+            getChannel = jest.fn().mockReturnValue(context.amqpChannelStub);
+        }
+
+        context.amqpClientFactoryStub = new GenericClassFactory({
+            Class: AMQPClient,
+            defaultOptions: 'this.config.rabbitmq',
+        });
 
         context.amqpManagementTargetStub = {
             getStatusHandler: jest.fn(),
@@ -31,7 +48,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         context.replicaDiscoveryPolicy = new ReplicaDiscoveryPolicy({
             rabbitGroupName: context.rabbitGroupName,
             replicaDiscovery: context.replicaDiscoveryConfig,
-            amqpClient: context.amqpClientStub,
+            amqpClientFactory: context.amqpClientFactoryStub,
             amqpManagementTarget: context.amqpManagementTargetStub,
         });
     });
@@ -50,7 +67,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
         const replicaDiscoveryPolicy = new ReplicaDiscoveryPolicy({
             rabbitGroupName: context.rabbitGroupName,
             replicaDiscovery: context.replicaDiscoveryConfig,
-            amqpClient: context.amqpClientStub,
+            amqpClientFactory: context.amqpClientFactoryStub,
             amqpManagementTarget: context.amqpManagementTargetStub,
         });
 
@@ -101,7 +118,7 @@ describe('[ReplicaDiscoveryPolicy]: Test Suite', () => {
             content: Buffer.from(message),
         });
 
-        expect(context.amqpClientStub.publish).toHaveBeenCalledWith(
+        expect(context.publishStub).toHaveBeenCalledWith(
             'queue-address',
             expect.objectContaining({
                 type: ReplicaDiscoveryPolicy.MESSAGE_TYPES.STATUS,

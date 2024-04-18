@@ -1,3 +1,4 @@
+import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
 import BaseAMQPPolicy from '#domain-collectors/infrastructure/amqp-policies/BaseAMQPPolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests Suite', () => {
@@ -11,14 +12,23 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
             bindQueue: jest.fn().mockResolvedValue(),
             consume: jest.fn().mockResolvedValue(),
             publish: jest.fn().mockResolvedValue(),
+            prefetch: jest.fn().mockResolvedValue(),
         };
 
-        context.amqpClientStub = {
-            getChannel: jest.fn().mockReturnValue(context.channelStub),
-        };
+        context.getChannel = jest.fn().mockReturnValue(context.channelStub);
+
+        class AMQPClient {
+            initConnection = jest.fn();
+            getChannel = context.getChannel;
+        }
+
+        context.amqpClientFactoryStub = new GenericClassFactory({
+            Class: AMQPClient,
+            defaultOptions: 'this.config.rabbitmq',
+        });
 
         context.baseAMQPPolicy = new BaseAMQPPolicy({
-            amqpClient: context.amqpClientStub,
+            amqpClientFactory: context.amqpClientFactoryStub,
             rabbitGroupName: 'testGroup',
         });
     });
@@ -37,7 +47,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
 
         await context.baseAMQPPolicy.start();
 
-        expect(context.amqpClientStub.getChannel).toHaveBeenCalledTimes(1);
+        expect(context.getChannel).toHaveBeenCalledTimes(1);
         expect(context.channelStub.addSetup).toHaveBeenCalledTimes(1);
         expect(
             context.baseAMQPPolicy.configureRabbitMQChannel,
@@ -57,6 +67,8 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
             { durable: false },
         );
         expect(context.channelStub.assertQueue).toHaveBeenCalledTimes(1);
+        expect(context.channelStub.prefetch).toHaveBeenCalledTimes(1);
+        expect(context.channelStub.prefetch).toHaveBeenCalledWith(0);
         expect(context.channelStub.bindQueue).toHaveBeenCalledTimes(1);
         expect(context.channelStub.consume).toHaveBeenCalledTimes(1);
         expect(
