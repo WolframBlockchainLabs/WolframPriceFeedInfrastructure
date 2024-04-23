@@ -78,23 +78,23 @@
     -   Example: `"{{TEST_DB_HOST}}"`
 -   **test-db.port**: The port of the test database.
     -   Example: `"{{TEST_DB_PORT}}"`
--   **db.dialectOptions.connectTimeout**: Amount of milliseconds for waiting to establish a connection.
+-   **test-db.dialectOptions.connectTimeout**: Amount of milliseconds for waiting to establish a connection.
     -   Example: `"{{DB_DIALECT_TIMEOUT}}"`
--   **db.dialectOptions.timezone**: The timezone used for the connection.
+-   **test-db.dialectOptions.timezone**: The timezone used for the connection.
     -   Example: `"{{DB_DIALECT_TIMEZONE}}"`
--   **db.pool.min**: The minimum number of connections in the pool.
+-   **test-db.pool.min**: The minimum number of connections in the pool.
     -   Example: `"{{DB_POOL_MIN}}"`
--   **db.pool.max**: The maximum number of connections in the pool.
+-   **test-db.pool.max**: The maximum number of connections in the pool.
     -   Example: `"{{DB_POOL_MAX}}"`
--   **db.pool.idle**: The maximum time, in milliseconds, that a connection can be idle before being released.
+-   **test-db.pool.idle**: The maximum time, in milliseconds, that a connection can be idle before being released.
     -   Example: `"{{DB_POOL_IDLE}}"`
--   **db.pool.acquire**: The maximum time, in milliseconds, the pool will try to get a connection before throwing an error.
+-   **test-db.pool.acquire**: The maximum time, in milliseconds, the pool will try to get a connection before throwing an error.
     -   Example: `"{{DB_POOL_ACQUIRE}}"`
--   **db.pool.evict**: The maximum time, in milliseconds, that a connection can be idle before being evicted from the pool.
+-   **test-db.pool.evict**: The maximum time, in milliseconds, that a connection can be idle before being evicted from the pool.
     -   Example: `"{{DB_POOL_EVICT}}"`
--   **db.pool.maxUses**: The maximum number of times a connection can be used before being retired.
+-   **test-db.pool.maxUses**: The maximum number of times a connection can be used before being retired.
     -   Example: `"{{DB_POOL_MAX_USES}}"`
--   **db.retry.max**: The maximum number of retry attempts.
+-   **test-db.retry.max**: The maximum number of retry attempts.
     -   Example: `"{{DB_RETRY_MAX}}"`
 
 ### Redis Settings
