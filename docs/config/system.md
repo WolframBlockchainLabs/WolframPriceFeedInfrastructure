@@ -15,6 +15,8 @@
     -   Example: `"{{NODE_ENV}}"`
 -   **app.trustProxy**: Trust proxy level for the express (e.g. 1 - trust one proxy). Allows to forward ip and other original request data.
     -   Example: `"{{APP_TRUST_PROXY}}"`
+-   **app.cacheEnabled**: Boolean that indicates whether use-case level cache should be enabled.
+    -   Example: `"{{APP_CACHE_ENABLED}}"`
 
 #### URLs Settings
 
@@ -24,6 +26,8 @@
     -   Example: `"{{MAIN_URL}}"`
 -   **urls.realtimeDashboard**: URL of the realtime dashboard.
     -   Example: `"{{REALTIME_DASHBOARD_URL}}"`
+-   **urls.corsList**: List of URLs separated by comma which should be included in cors policy.
+    -   Example: `"{{CORS_URL_LIST}}"`
 
 ### Database Settings
 
@@ -41,6 +45,24 @@
     -   Example: `"{{DB_HOST}}"`
 -   **db.port**: The port of the main database.
     -   Example: `"{{DB_PORT}}"`
+-   **db.dialectOptions.connectTimeout**: Amount of milliseconds for waiting to establish a connection.
+    -   Example: `"{{DB_DIALECT_TIMEOUT}}"`
+-   **db.dialectOptions.timezone**: The timezone used for the connection.
+    -   Example: `"{{DB_DIALECT_TIMEZONE}}"`
+-   **db.pool.min**: The minimum number of connections in the pool.
+    -   Example: `"{{DB_POOL_MIN}}"`
+-   **db.pool.max**: The maximum number of connections in the pool.
+    -   Example: `"{{DB_POOL_MAX}}"`
+-   **db.pool.idle**: The maximum time, in milliseconds, that a connection can be idle before being released.
+    -   Example: `"{{DB_POOL_IDLE}}"`
+-   **db.pool.acquire**: The maximum time, in milliseconds, the pool will try to get a connection before throwing an error.
+    -   Example: `"{{DB_POOL_ACQUIRE}}"`
+-   **db.pool.evict**: The maximum time, in milliseconds, that a connection can be idle before being evicted from the pool.
+    -   Example: `"{{DB_POOL_EVICT}}"`
+-   **db.pool.maxUses**: The maximum number of times a connection can be used before being retired.
+    -   Example: `"{{DB_POOL_MAX_USES}}"`
+-   **db.retry.max**: The maximum number of retry attempts.
+    -   Example: `"{{DB_RETRY_MAX}}"`
 
 #### Test Database
 
@@ -56,6 +78,24 @@
     -   Example: `"{{TEST_DB_HOST}}"`
 -   **test-db.port**: The port of the test database.
     -   Example: `"{{TEST_DB_PORT}}"`
+-   **db.dialectOptions.connectTimeout**: Amount of milliseconds for waiting to establish a connection.
+    -   Example: `"{{DB_DIALECT_TIMEOUT}}"`
+-   **db.dialectOptions.timezone**: The timezone used for the connection.
+    -   Example: `"{{DB_DIALECT_TIMEZONE}}"`
+-   **db.pool.min**: The minimum number of connections in the pool.
+    -   Example: `"{{DB_POOL_MIN}}"`
+-   **db.pool.max**: The maximum number of connections in the pool.
+    -   Example: `"{{DB_POOL_MAX}}"`
+-   **db.pool.idle**: The maximum time, in milliseconds, that a connection can be idle before being released.
+    -   Example: `"{{DB_POOL_IDLE}}"`
+-   **db.pool.acquire**: The maximum time, in milliseconds, the pool will try to get a connection before throwing an error.
+    -   Example: `"{{DB_POOL_ACQUIRE}}"`
+-   **db.pool.evict**: The maximum time, in milliseconds, that a connection can be idle before being evicted from the pool.
+    -   Example: `"{{DB_POOL_EVICT}}"`
+-   **db.pool.maxUses**: The maximum number of times a connection can be used before being retired.
+    -   Example: `"{{DB_POOL_MAX_USES}}"`
+-   **db.retry.max**: The maximum number of retry attempts.
+    -   Example: `"{{DB_RETRY_MAX}}"`
 
 ### Redis Settings
 
@@ -146,13 +186,23 @@
     -   Example: `"{{REPLICA_DISCOVERY_INITIALIZATION_DELAY}}"`
 -   **policiesConfigs.replicaDiscovery.debounceDelay**: Debounce delay in milliseconds after getting STATUS message from other replicas. It is absolutely necessary that this delay is slower that ```initializationDelay``` to avoid race conditions.
     -   Example: `"{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}"`
+-   **policiesConfigs.replicaDiscovery.discoveryInterval**: Schedule for resynchronization in the cron format.
+    -   Example: `"*/30 * * * *"`
 
 ### API Limits Settings
 
--   **apiLimits.maxDateDiff**: Maximum difference in milliseconds between ```rangeDateStart``` and ```rangeDateEnd``` in a timeseries data list and aggregation endpoints.
-    -   Example: `"{{USE_CASE_LRU_CACHE_TTL}}"`
+-   **apiLimits.maxDateDiff**: Maximum difference in milliseconds between `rangeDateStart` and `rangeDateEnd` in timeseries data list.
+    -   Example: `"{{API_LIMITS_MAX_DATE_DIFF}}"`
 -   **apiLimits.maxItemsRetrieved**: The maximum number of items that could be retrieved from list data endpoints.
-    -   Example: `"{{USE_CASE_LRU_CACHE_SIZE}}"`
+    -   Example: `"{{API_LIMITS_MAX_ITEMS_RETRIEVED}}"`
+-   **apiLimits.aggregations.maxDateDiff**: Maximum time difference in milliseconds between `rangeDateStart` and `rangeDateEnd` for synchronous aggregation queries.
+    -   Example: `"{{API_LIMITS_AGGREGATIONS_MAX_DATE_DIFF}}"`
+-   **apiLimits.aggregations.stepSize**: The step size in milliseconds for breaking down the data during synchronous aggregation.
+    -   Example: `"{{API_LIMITS_AGGREGATIONS_STEP_SIZE}}"`
+-   **apiLimits.aggregations.asyncMaxDateDiff**: Maximum time difference in milliseconds between `rangeDateStart` and `rangeDateEnd` for asynchronous aggregation queries.
+    -   Example: `"{{API_LIMITS_AGGREGATIONS_ASYNC_MAX_DATE_DIFF}}"`
+-   **apiLimits.aggregations.asyncStepSize**: The step size in milliseconds for breaking down the data during asynchronous aggregation.
+    -   Example: `"{{API_LIMITS_AGGREGATIONS_ASYNC_STEP_SIZE}}"`
 
 ---
 
