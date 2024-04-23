@@ -39,9 +39,10 @@ Here's a brief look at how a market setup might look:
 
     -   **base**
         -   **currency**: The base currency in the pair (e.g., "XRP").
+        -   **issuer**: The issuer of the counter currency. ("XRP" does not have one)
     -   **counter**
         -   **currency**: The counter currency in the pair (e.g., "USD").
-        -   **issuer**: The issuer of the counter currency.
+        -   **issuer**: The issuer of the counter currency. ("XRP" does not have one)
 
 -   **symbol**: A representative string of the market pair (e.g., "XRP/Bitstamp-USD").
 
