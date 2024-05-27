@@ -2,5 +2,5 @@
     "id": "bitget",
     "name": "Bitget",
     "rateLimit": "{{BITGET_HISTORICAL_RATE_LIMIT}}",
-    "symbols": ["USDT/EUR", "USDT/GBP", "BTC/EUR", "BTC/USDC", "BTC/USDT"]
+    "symbols": ["USDT/EUR", "USDT/GBP", "BTC/EUR", "BTC/USDC", "BTC/USDT", "ADA/USDT"]
 }

@@ -2,5 +2,5 @@
     "id": "okx",
     "name": "OKX",
     "rateLimit": "{{OKX_HISTORICAL_RATE_LIMIT}}",
-    "symbols": ["ETH/USDT", "ETH/USDC", "ETH/DAI", "ETH/BTC", "ETH/EURT"]
+    "symbols": ["ETH/USDT", "ETH/USDC", "ETH/DAI", "ETH/BTC", "ETH/EURT", "ADA/USDT"]
 }

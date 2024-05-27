@@ -2,5 +2,5 @@
     "id": "bybit",
     "name": "Bybit",
     "rateLimit": "{{BYBIT_HISTORICAL_RATE_LIMIT}}",
-    "symbols": ["BTC/USDT", "BTC/USDC", "BTC/DAI", "BTC/BRZ", "BTC/EUR"]
+    "symbols": ["BTC/USDT", "BTC/USDC", "BTC/DAI", "BTC/BRZ", "BTC/EUR", "ADA/USDT"]
 }
