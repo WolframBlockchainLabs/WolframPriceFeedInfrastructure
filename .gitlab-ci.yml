@@ -24,7 +24,7 @@ docker_build_test:
     script:
         - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" build
         - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" up -d
-        - docker exec -i $BACKEND_CONTAINER_NAME npm run migration:test
+        - docker exec -i $BACKEND_CONTAINER_NAME npm run migration:db
         - docker exec -i $BACKEND_CONTAINER_NAME npm run test
         - docker compose --project-name "$PROJECT_NAME" --file "$PATH_TO_COMPOSE" down
     only:

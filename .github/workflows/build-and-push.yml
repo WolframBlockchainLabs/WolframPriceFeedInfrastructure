@@ -36,7 +36,7 @@ jobs:
 
             - name: Run database migrations
               run: |
-                  docker exec -i "${{ env.BACKEND_CONTAINER_NAME }}" npm run migration:test
+                  docker exec -i "${{ env.BACKEND_CONTAINER_NAME }}" npm run migration:db
 
             - name: Run tests
               run: |

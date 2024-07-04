@@ -62,8 +62,7 @@ To stop the project:
 ## Testing Procedures
 
 1. Start services with `./scripts/start`.
-2. Run database migration tests with `npm run docker:migration:test`.
-3. Execute tests using `npm run docker:test:jest` or `npm run docker:test:jest:coverage` for coverage reports.
+2. Execute tests using `npm run docker:test:jest` or `npm run docker:test:jest:coverage` for coverage reports.
 
 ## Running Historical Collection
 

@@ -48,7 +48,6 @@ Scripts for running linting, auditing, and testing with Jest.
 ## Database Migration Scripts
 Scripts to manage Sequelize database migrations.
 - `migration:db`: Runs migrations for the main database.
-- `migration:test`: Applies migrations to the test database.
 - The `migration:rollback:*` scripts roll back migrations.
 
 ## Docker Utility Scripts
