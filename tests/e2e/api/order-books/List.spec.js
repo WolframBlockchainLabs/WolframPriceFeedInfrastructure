@@ -21,9 +21,9 @@ describe('[order-books]: List the records', () => {
     });
 
     it('Should return orderBooks list for specified exchange, pair, and date range', async () => {
-        const { orderBooks } = await orderBookStory.setup();
+        const { marketRecords } = await orderBookStory.setup();
         const targetCandleStick = await orderBookFactory.findOrderBook(
-            orderBooks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -43,9 +43,9 @@ describe('[order-books]: List the records', () => {
     });
 
     it('Should return an empty list if the exchange name is wrong', async () => {
-        const { orderBooks } = await orderBookStory.setup();
+        const { marketRecords } = await orderBookStory.setup();
         const { symbol, intervalStart } = await orderBookFactory.findOrderBook(
-            orderBooks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -64,9 +64,9 @@ describe('[order-books]: List the records', () => {
     });
 
     it('Should return an empty list if the market name is wrong', async () => {
-        const { orderBooks } = await orderBookStory.setup();
+        const { marketRecords } = await orderBookStory.setup();
         const { exchangeName, intervalStart } =
-            await orderBookFactory.findOrderBook(orderBooks[0].id);
+            await orderBookFactory.findOrderBook(marketRecords[0].id);
 
         const serverResponse = await app.request
             .get(`/api/v1/crypto/order-books`)
@@ -84,9 +84,9 @@ describe('[order-books]: List the records', () => {
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
-        const { orderBooks } = await orderBookStory.setup();
+        const { marketRecords } = await orderBookStory.setup();
         const targetCandleStick = await orderBookFactory.findOrderBook(
-            orderBooks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -108,9 +108,9 @@ describe('[order-books]: List the records', () => {
     });
 
     it('Should return an error if the range end date is smaller then range start date', async () => {
-        const { orderBooks } = await orderBookStory.setup();
+        const { marketRecords } = await orderBookStory.setup();
         const targetCandleStick = await orderBookFactory.findOrderBook(
-            orderBooks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request

@@ -22,9 +22,9 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
     });
 
     it('Should return an aggregate of the candleSticks list for specified exchanges and pairs', async () => {
-        const { candleSticks } = await candleStickStory.setup();
+        const { marketRecords } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
-            candleSticks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -48,9 +48,9 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
     });
 
     it('Should handle discreteness specification', async () => {
-        const { candleSticks } = await candleStickStory.setup();
+        const { marketRecords } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
-            candleSticks[0].id,
+            marketRecords[0].id,
         );
 
         const rangeDateStart = new Date(
@@ -84,9 +84,9 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
-        const { candleSticks } = await candleStickStory.setup();
+        const { marketRecords } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
-            candleSticks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -108,9 +108,9 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
     });
 
     it('Should return an error if the range end date is smaller then range start date', async () => {
-        const { candleSticks } = await candleStickStory.setup();
+        const { marketRecords } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
-            candleSticks[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request

@@ -21,9 +21,9 @@ describe('[exchange-rates]: List the records', () => {
     });
 
     it('Should return exchangeRates list for specified exchange, pair, and date range', async () => {
-        const { exchangeRates } = await exchangeRateStory.setup();
+        const { marketRecords } = await exchangeRateStory.setup();
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
-            exchangeRates[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -43,9 +43,9 @@ describe('[exchange-rates]: List the records', () => {
     });
 
     it('Should return an empty list if the exchange name is wrong', async () => {
-        const { exchangeRates } = await exchangeRateStory.setup();
+        const { marketRecords } = await exchangeRateStory.setup();
         const { symbol, intervalStart } =
-            await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
+            await exchangeRateFactory.findExchangeRate(marketRecords[0].id);
 
         const serverResponse = await app.request
             .get(`/api/v1/crypto/exchange-rates`)
@@ -63,9 +63,9 @@ describe('[exchange-rates]: List the records', () => {
     });
 
     it('Should return an empty list if the market name is wrong', async () => {
-        const { exchangeRates } = await exchangeRateStory.setup();
+        const { marketRecords } = await exchangeRateStory.setup();
         const { exchangeName, intervalStart } =
-            await exchangeRateFactory.findExchangeRate(exchangeRates[0].id);
+            await exchangeRateFactory.findExchangeRate(marketRecords[0].id);
 
         const serverResponse = await app.request
             .get(`/api/v1/crypto/exchange-rates`)
@@ -83,9 +83,9 @@ describe('[exchange-rates]: List the records', () => {
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
-        const { exchangeRates } = await exchangeRateStory.setup();
+        const { marketRecords } = await exchangeRateStory.setup();
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
-            exchangeRates[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
@@ -107,9 +107,9 @@ describe('[exchange-rates]: List the records', () => {
     });
 
     it('Should return an error if the range end date is smaller then range start date', async () => {
-        const { exchangeRates } = await exchangeRateStory.setup();
+        const { marketRecords } = await exchangeRateStory.setup();
         const targetCandleStick = await exchangeRateFactory.findExchangeRate(
-            exchangeRates[0].id,
+            marketRecords[0].id,
         );
 
         const serverResponse = await app.request
