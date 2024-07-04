@@ -19,7 +19,7 @@ describe('[exchanges]: List the records', () => {
     });
 
     it('Should return exchanges list', async () => {
-        const exchanges = await exchangeFactory.createExchanges();
+        const exchanges = await exchangeFactory.create();
 
         const serverResponse = await app.request
             .get(`/api/v1/crypto/exchanges`)

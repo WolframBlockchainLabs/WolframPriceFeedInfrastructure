@@ -34,7 +34,8 @@
                     ["#domain-model", "./lib/domain-model"],
                     ["#use-cases", "./lib/use-cases"],
                     ["#utils", "./lib/utils"],
-                    ["#workers", "./lib/workers"]
+                    ["#workers", "./lib/workers"],
+                    ["#tests", "./tests"]
                 ],
                 "extensions": [".js", ".cjs"]
             }

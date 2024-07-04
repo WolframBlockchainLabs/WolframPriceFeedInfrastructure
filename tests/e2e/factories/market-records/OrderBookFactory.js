@@ -6,7 +6,7 @@ import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 class OrderBookFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createOrderBooks({
+    async create({
         markets = [],
         recordsCount = OrderBookFactory.DEFAULT_RECORDS_COUNT,
     }) {

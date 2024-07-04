@@ -2,21 +2,10 @@ import CandleStickFactory from '../../factories/market-records/CandleStickFactor
 import BaseMarketRecordStory from './BaseMarketRecordStory.js';
 
 class CandleStickStory extends BaseMarketRecordStory {
-    constructor(...args) {
-        super(...args);
+    constructor(options) {
+        super(options);
 
-        this.candleStickFactory = new CandleStickFactory(this.appProvider);
-    }
-
-    async setupCandleSticks({ recordsCount, chartsCount } = {}) {
-        const { exchanges, markets } = await this.setupMarkets();
-        const candleSticks = await this.candleStickFactory.createCandleSticks({
-            markets,
-            recordsCount,
-            chartsCount,
-        });
-
-        return { exchanges, markets, candleSticks };
+        this.marketRecordFactory = new CandleStickFactory(this);
     }
 }
 

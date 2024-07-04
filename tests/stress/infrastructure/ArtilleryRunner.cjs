@@ -1,22 +1,23 @@
 const { spawn } = require('child_process');
+const path = require('path');
 const fs = require('fs').promises;
 
 class ArtilleryRunner {
+    static SCENARIOS_DIR = path.join(__dirname, '..', 'scenarios');
+
     constructor(logger) {
         this.logger = logger;
     }
 
-    async execute(PORT) {
+    async execute(env) {
         try {
-            const scenarios = await fs.readdir(`${__dirname}/scenarios`, {
+            const scenarios = await fs.readdir(ArtilleryRunner.SCENARIOS_DIR, {
                 withFileTypes: true,
             });
 
             for (const scenario of scenarios) {
                 await this.callArtillery(scenario.name, {
-                    env: {
-                        PORT,
-                    },
+                    env,
                 });
             }
 
@@ -32,7 +33,12 @@ class ArtilleryRunner {
     async callArtillery(scenario, { env }) {
         return this.spawn(
             './node_modules/.bin/artillery',
-            ['run', `${__dirname}/scenarios/get_collected_data.yml`],
+            [
+                'run',
+                '-e',
+                env.TEST_ENV,
+                path.join(ArtilleryRunner.SCENARIOS_DIR, scenario),
+            ],
             {
                 env,
                 stdio: 'inherit',

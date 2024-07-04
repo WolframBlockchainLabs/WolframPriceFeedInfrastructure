@@ -20,7 +20,7 @@ describe('[aggregation-tasks]: Get the record', () => {
     });
 
     it('Should return aggregation-task by id', async () => {
-        const task = await aggregationTaskFactory.createTask();
+        const task = await aggregationTaskFactory.create();
 
         const serverResponse = await app.request
             .get(`/api/v1/crypto/aggregation-tasks/${task.id}`)

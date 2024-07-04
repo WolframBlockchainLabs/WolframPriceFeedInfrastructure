@@ -6,7 +6,7 @@ import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 class TickerFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createTickers({
+    async create({
         markets = [],
         recordsCount = TickerFactory.DEFAULT_RECORDS_COUNT,
     }) {

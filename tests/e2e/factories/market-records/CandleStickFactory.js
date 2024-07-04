@@ -10,7 +10,7 @@ class CandleStickFactory extends BaseMarketRecordFactory {
 
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createCandleSticks({
+    async create({
         markets = [],
         recordsCount = CandleStickFactory.DEFAULT_RECORDS_COUNT,
         chartsCount = CandleStickFactory.DEFAULT_CHARTS_COUNT,

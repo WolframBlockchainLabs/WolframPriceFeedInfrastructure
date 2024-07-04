@@ -22,7 +22,7 @@ class ExchangeFactory extends BaseFactory {
         },
     ];
 
-    async createExchanges() {
+    async create() {
         const exchangePromises = ExchangeFactory.EXCHANGES.map(
             ({ externalExchangeId, name }) => {
                 return Exchange.create({

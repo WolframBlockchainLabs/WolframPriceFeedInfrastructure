@@ -1,5 +1,5 @@
 config:
-    target: 'http://localhost:{{ $processEnvironment.PORT }}'
+    target: '{{ $processEnvironment.TEST_URL }}'
     phases:
         - duration: 60
           arrivalRate: 1

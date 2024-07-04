@@ -21,7 +21,7 @@ describe('[candle-stick]: List the records', () => {
     });
 
     it('Should return candleSticks list for specified exchange, pair, and date range', async () => {
-        const { candleSticks } = await candleStickStory.setupCandleSticks();
+        const { candleSticks } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
@@ -43,7 +43,7 @@ describe('[candle-stick]: List the records', () => {
     });
 
     it('Should return an empty list if the exchange name is wrong', async () => {
-        const { candleSticks } = await candleStickStory.setupCandleSticks();
+        const { candleSticks } = await candleStickStory.setup();
         const { symbol, intervalStart } =
             await candleStickFactory.findCandleStick(candleSticks[0].id);
 
@@ -63,7 +63,7 @@ describe('[candle-stick]: List the records', () => {
     });
 
     it('Should return an empty list if the market name is wrong', async () => {
-        const { candleSticks } = await candleStickStory.setupCandleSticks();
+        const { candleSticks } = await candleStickStory.setup();
         const { exchangeName, intervalStart } =
             await candleStickFactory.findCandleStick(candleSticks[0].id);
 
@@ -83,7 +83,7 @@ describe('[candle-stick]: List the records', () => {
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
-        const { candleSticks } = await candleStickStory.setupCandleSticks();
+        const { candleSticks } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );
@@ -107,7 +107,7 @@ describe('[candle-stick]: List the records', () => {
     });
 
     it('Should return an error if the range end date is smaller then range start date', async () => {
-        const { candleSticks } = await candleStickStory.setupCandleSticks();
+        const { candleSticks } = await candleStickStory.setup();
         const targetCandleStick = await candleStickFactory.findCandleStick(
             candleSticks[0].id,
         );

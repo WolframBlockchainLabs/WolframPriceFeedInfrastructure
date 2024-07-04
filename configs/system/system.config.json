@@ -99,5 +99,9 @@
             "asyncMaxDateDiff": "{{API_LIMITS_AGGREGATIONS_ASYNC_MAX_DATE_DIFF}}",
             "asyncStepSize": "{{API_LIMITS_AGGREGATIONS_ASYNC_STEP_SIZE}}"
         }
+    },
+    "stressTests": {
+        "testUrl": "{{STRESS_TEST_URL}}",
+        "testEnv": "{{STRESS_TEST_ENV}}"
     }
 }

@@ -181,5 +181,14 @@
                 ]
             }
         }
+    ],
+    "stressTests": [
+        "required",
+        {
+            "nested_object": {
+                "testUrl": ["required", "string"],
+                "testEnv": ["required", "string"]
+            }
+        }
     ]
 }

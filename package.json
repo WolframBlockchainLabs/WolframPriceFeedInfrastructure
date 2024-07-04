@@ -19,7 +19,8 @@
         "#domain-model/*": "./lib/domain-model/*",
         "#use-cases/*": "./lib/use-cases/*",
         "#utils/*": "./lib/utils/*",
-        "#workers/*": "./lib/workers/*"
+        "#workers/*": "./lib/workers/*",
+        "#tests/*": "./tests/*"
     },
     "scripts": {
         "start": "node --max-old-space-size=8192  ./lib/app.js",
@@ -49,7 +50,8 @@
         "test:jest": "LOGGER_LEVEL=emerg jest",
         "test:jest:watch": "LOGGER_LEVEL=emerg jest --watch",
         "test:jest:coverage": "LOGGER_LEVEL=emerg jest --coverage",
-        "test:stress:api": "node --max-old-space-size=8192 ./tests/stress/index.test.js",
+        "test:stress:api:local": "NODE_ENV=stress-test node --max-old-space-size=8192 ./tests/stress/local.test.js",
+        "test:stress:api:remote": "NODE_ENV=stress-test node --max-old-space-size=8192 ./tests/stress/remote.test.js",
         "test:stress:rabbitmq:start": "docker compose --file './docker/stress-compose.yml' up",
         "test:stress:rabbitmq:stop": "docker compose --file './docker/stress-compose.yml' down",
         "test": "npm run test:lint && npm run test:jest:coverage",
@@ -70,7 +72,8 @@
         "docker:test:jest": "docker exec -it ccdb-backend npm run test:jest",
         "docker:test:jest:watch": "docker exec -it ccdb-backend npm run test:jest:watch",
         "docker:test:jest:coverage": "docker exec -it ccdb-backend npm run test:jest:coverage",
-        "docker:test:stress:api": "docker exec -it ccdb-backend npm run test:stress:api",
+        "docker:test:stress:api:local": "docker exec -it ccdb-backend npm run test:stress:api:local",
+        "docker:test:stress:api:remote": "docker exec -it ccdb-backend npm run test:stress:api:remote",
         "docker:migration:db": "docker exec -it ccdb-backend npm run migration:db",
         "docker:migration:test": "docker exec -it ccdb-backend npm run migration:test",
         "docker:migration:rollback:db": "docker exec -it ccdb-backend npm run migration:rollback:db",

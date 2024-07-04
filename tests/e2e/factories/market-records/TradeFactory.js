@@ -10,7 +10,7 @@ class TradeFactory extends BaseMarketRecordFactory {
 
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createTrades({
+    async create({
         markets = [],
         recordsCount = TradeFactory.DEFAULT_RECORDS_COUNT,
         tradesCount = TradeFactory.DEFAULT_TRADES_COUNT,

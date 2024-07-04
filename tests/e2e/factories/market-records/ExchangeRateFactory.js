@@ -6,7 +6,7 @@ import BaseMarketRecordFactory from './BaseMarketRecordFactory.js';
 class ExchangeRateFactory extends BaseMarketRecordFactory {
     static DEFAULT_RECORDS_COUNT = 3;
 
-    async createExchangeRates({
+    async create({
         markets = [],
         recordsCount = ExchangeRateFactory.DEFAULT_RECORDS_COUNT,
     }) {

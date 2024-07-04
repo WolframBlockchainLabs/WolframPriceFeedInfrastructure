@@ -42,7 +42,7 @@ class MarketFactory extends BaseFactory {
         },
     ];
 
-    async createMarkets(exchanges = []) {
+    async create(exchanges = []) {
         const marketPromises = exchanges.flatMap((exchange) => {
             return MarketFactory.MARKETS.map((props) =>
                 Market.create({

@@ -21,7 +21,7 @@ describe('[trades]: List the records', () => {
     });
 
     it('Should return trades list for specified exchange, pair, and date range', async () => {
-        const { trades } = await tradeStory.setupTrades();
+        const { trades } = await tradeStory.setup();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
 
         const serverResponse = await app.request
@@ -41,7 +41,7 @@ describe('[trades]: List the records', () => {
     });
 
     it('Should return an empty list if the exchange name is wrong', async () => {
-        const { trades } = await tradeStory.setupTrades();
+        const { trades } = await tradeStory.setup();
         const { symbol, intervalStart } = await tradeFactory.findTrade(
             trades[0].id,
         );
@@ -62,7 +62,7 @@ describe('[trades]: List the records', () => {
     });
 
     it('Should return an empty list if the market name is wrong', async () => {
-        const { trades } = await tradeStory.setupTrades();
+        const { trades } = await tradeStory.setup();
         const { exchangeName, intervalStart } = await tradeFactory.findTrade(
             trades[0].id,
         );
@@ -83,7 +83,7 @@ describe('[trades]: List the records', () => {
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
-        const { trades } = await tradeStory.setupTrades();
+        const { trades } = await tradeStory.setup();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
 
         const serverResponse = await app.request
@@ -105,7 +105,7 @@ describe('[trades]: List the records', () => {
     });
 
     it('Should return an error if the range end date is smaller then range start date', async () => {
-        const { trades } = await tradeStory.setupTrades();
+        const { trades } = await tradeStory.setup();
         const targetCandleStick = await tradeFactory.findTrade(trades[0].id);
 
         const serverResponse = await app.request
