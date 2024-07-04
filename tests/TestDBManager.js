@@ -1,13 +1,12 @@
-import initModels from '#infrastructure/sequelize/initModels.js';
-import { SequelizeStorage, Umzug } from 'umzug';
 import { Sequelize } from 'sequelize';
+import { SequelizeStorage, Umzug } from 'umzug';
+import initSequelize from '#infrastructure/sequelize/initSequelize.js';
 
 class TestDBManager {
-    constructor({ sequelize, logger, testDBConfig, databaseName }) {
+    constructor({ sequelize, logger, config, databaseName }) {
         this.mainSequelize = sequelize;
         this.logger = logger;
-
-        this.testDBConfig = testDBConfig;
+        this.config = config;
         this.databaseName = databaseName;
 
         this.build();
@@ -23,8 +22,6 @@ class TestDBManager {
     }
 
     async createWorkerTestDatabase() {
-        if (!process.env.JEST_WORKER_ID) return;
-
         const dbExists = await this.workerSequelize.query(
             'SELECT 1 FROM pg_database WHERE datname = $databaseName',
             {
@@ -65,7 +62,7 @@ class TestDBManager {
     }
 
     build() {
-        this.workerSequelize = this.initDB(this.testDBConfig);
+        this.workerSequelize = this.initWorkerSequelize(this.config.db);
 
         this.umzug = this.initUmzug({
             sequelize: this.mainSequelize,
@@ -73,8 +70,8 @@ class TestDBManager {
         });
     }
 
-    initDB(testDBConfig) {
-        const { sequelize } = initModels(testDBConfig);
+    initWorkerSequelize(sequelizeOptions) {
+        const sequelize = initSequelize(sequelizeOptions);
 
         return sequelize;
     }

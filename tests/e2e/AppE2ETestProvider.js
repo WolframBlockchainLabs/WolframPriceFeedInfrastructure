@@ -1,6 +1,6 @@
 import AppTestProvider from '../AppTestProvider.js';
 import request from 'supertest';
-import TestDBManager from './TestDBManager.js';
+import TestDBManager from '../TestDBManager.js';
 
 class AppE2ETestProvider extends AppTestProvider {
     constructor(...args) {
@@ -32,6 +32,7 @@ class AppE2ETestProvider extends AppTestProvider {
         this.testDBManager = this.initTestDBManager({
             logger: this.logger,
             sequelize: this.sequelize,
+            config: this.config,
         });
     }
 
@@ -45,15 +46,6 @@ class AppE2ETestProvider extends AppTestProvider {
         };
     }
 
-    initTestDBManager({ logger, sequelize }) {
-        return new TestDBManager({
-            sequelize,
-            logger,
-            testDBConfig: this.config['test-db'],
-            databaseName: this.getDatabaseName(),
-        });
-    }
-
     initAMQPClient() {
         return {
             broadcast: jest.fn(),
@@ -61,17 +53,24 @@ class AppE2ETestProvider extends AppTestProvider {
         };
     }
 
+    initTestDBManager({ logger, sequelize, config }) {
+        return new TestDBManager({
+            sequelize,
+            logger,
+            config,
+            databaseName: this.getDatabaseName(),
+        });
+    }
+
     getSequelizeOptions(config) {
         return {
-            ...config['test-db'],
-            ...(process.env.JEST_WORKER_ID && {
-                database: this.getDatabaseName(),
-            }),
+            ...config.db,
+            database: this.getDatabaseName(),
         };
     }
 
     getDatabaseName() {
-        return `${this.config['test-db'].database}_${process.env.JEST_WORKER_ID}`;
+        return `${this.config.db.database}_test_${process.env.JEST_WORKER_ID}`;
     }
 }
 

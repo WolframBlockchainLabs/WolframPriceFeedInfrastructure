@@ -5,10 +5,6 @@ class AppTestProvider extends AppProvider {
         await super.start(this.getTestAppPort());
     }
 
-    getSequelizeOptions(config) {
-        return config['test-db'];
-    }
-
     getExpressApp() {
         return this.restApp.getExpressServer();
     }

@@ -36,29 +36,6 @@
             "max": "{{DB_RETRY_MAX}}"
         }
     },
-    "test-db": {
-        "username": "{{TEST_DB_USERNAME}}",
-        "password": "{{TEST_DB_PASSWORD}}",
-        "database": "{{TEST_DB_DATABASE}}",
-        "dialect": "{{TEST_DB_DIALECT}}",
-        "host": "{{TEST_DB_HOST}}",
-        "port": "{{TEST_DB_PORT}}",
-        "dialectOptions": {
-            "connectTimeout": "{{TEST_DB_DIALECT_TIMEOUT}}",
-            "timezone": "{{TEST_DB_DIALECT_TIMEZONE}}"
-        },
-        "pool": {
-            "min": "{{TEST_DB_POOL_MIN}}",
-            "max": "{{TEST_DB_POOL_MAX}}",
-            "idle": "{{TEST_DB_POOL_IDLE}}",
-            "acquire": "{{TEST_DB_POOL_ACQUIRE}}",
-            "evict": "{{TEST_DB_POOL_EVICT}}",
-            "maxUses": "{{TEST_DB_POOL_MAX_USES}}"
-        },
-        "retry": {
-            "max": "{{TEST_DB_RETRY_MAX}}"
-        }
-    },
     "redis": {
         "host": "{{REDIS_HOST}}",
         "password": "{{REDIS_PASSWORD}}"
