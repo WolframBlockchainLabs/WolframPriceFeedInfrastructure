@@ -10,6 +10,5 @@
         }
     },
     "rateLimit": "positive_integer",
-    "minimalCycleDuration": "positive_integer",
     "symbols": ["required", { "list_of": "string" }]
 }

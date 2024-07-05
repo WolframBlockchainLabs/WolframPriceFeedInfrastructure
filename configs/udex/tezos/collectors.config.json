@@ -2,5 +2,11 @@
     "groupName": "Tezos",
     "rateLimit": "{{TEZOS_RATE_LIMIT}}",
     "rateLimitMargin": "{{TEZOS_RATE_LIMIT_MARGIN}}",
-    "apiSecret": "{{TEZOS_PROVIDER_URL}}"
+    "baseSleepReloadTime": "{{TEZOS_BASE_SLEEP_RELOAD_TIME}}",
+    "apiSecret": "{{TEZOS_PROVIDER_URL}}",
+    "processAllocation": {
+        "potentialExchangeSize": "{{TEZOS_POTENTIAL_EXCHANGE_SIZE}}",
+        "tolerableProcessSize": "{{TEZOS_TOLERABLE_PROCESS_SIZE}}",
+        "tolerableParallelExchanges": "{{TEZOS_TOLERABLE_PARALLEL_EXCHANGES}}"
+    }
 }

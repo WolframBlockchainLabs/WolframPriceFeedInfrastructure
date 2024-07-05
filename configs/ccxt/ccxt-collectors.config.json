@@ -1,4 +1,11 @@
 {
     "rateLimit": "{{CCXT_RATE_LIMIT}}",
-    "rateLimitMargin": "{{CCXT_RATE_LIMIT_MARGIN}}"
+    "rateLimitMargin": "{{CCXT_RATE_LIMIT_MARGIN}}",
+    "processAllocation": {
+        "potentialExchangeSize": "{{CCXT_POTENTIAL_EXCHANGE_SIZE}}",
+        "tolerableProcessSize": "{{CCXT_TOLERABLE_PROCESS_SIZE}}",
+        "tolerableParallelExchanges": "{{CCXT_TOLERABLE_PARALLEL_EXCHANGES}}"
+    },
+    "baseSleepReloadTime": "{{CCXT_BASE_SLEEP_RELOAD_TIME}}",
+    "reloadCyclesBackoff": "{{CCXT_RELOAD_CYCLES_BACKOFF}}"
 }

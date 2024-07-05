@@ -2,7 +2,6 @@
     "id": "gate",
     "name": "Gate.io",
     "rateLimit": "{{GATE_RATE_LIMIT}}",
-    "minimalCycleDuration": 60000,
     "symbols": [
         "BTC/SGD",
         "BTC/TRY",

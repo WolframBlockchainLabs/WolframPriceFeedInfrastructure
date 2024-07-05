@@ -2,6 +2,17 @@
     "groupName": ["required", "string"],
     "rateLimit": ["required", "positive_integer"],
     "rateLimitMargin": ["required", "positive_integer"],
+    "baseSleepReloadTime": ["required", "positive_integer"],
     "apiSecret": ["required", "string"],
+    "processAllocation": [
+        "required",
+        {
+            "nested_object": {
+                "potentialExchangeSize": ["required", "positive_integer"],
+                "tolerableProcessSize": ["required", "positive_integer"],
+                "tolerableParallelExchanges": ["required", "positive_integer"]
+            }
+        }
+    ],
     "meta": ["any_object"]
 }

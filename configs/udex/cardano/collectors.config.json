@@ -2,5 +2,11 @@
     "groupName": "Cardano",
     "rateLimit": "{{CARDANO_RATE_LIMIT}}",
     "rateLimitMargin": "{{CARDANO_RATE_LIMIT_MARGIN}}",
-    "apiSecret": "{{CARDANO_BLOCKFROST_PROJECT_ID}}"
+    "baseSleepReloadTime": "{{CARDANO_BASE_SLEEP_RELOAD_TIME}}",
+    "apiSecret": "{{CARDANO_BLOCKFROST_PROJECT_ID}}",
+    "processAllocation": {
+        "potentialExchangeSize": "{{CARDANO_POTENTIAL_EXCHANGE_SIZE}}",
+        "tolerableProcessSize": "{{CARDANO_TOLERABLE_PROCESS_SIZE}}",
+        "tolerableParallelExchanges": "{{CARDANO_TOLERABLE_PARALLEL_EXCHANGES}}"
+    }
 }

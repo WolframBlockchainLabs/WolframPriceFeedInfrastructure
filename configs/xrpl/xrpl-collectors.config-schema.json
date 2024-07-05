@@ -1,6 +1,7 @@
 {
-    "rateLimit": ["required", "positive_integer"],
+    "baseRateLimit": ["required", "positive_integer"],
     "rateLimitMargin": ["required", "positive_integer"],
+    "baseSleepReloadTime": ["required", "positive_integer"],
     "serverUrl": ["required", "string"],
     "exchange": [
         "required",
@@ -20,21 +21,24 @@
                         "required",
                         {
                             "nested_object": {
-                                "base": [
+                                "meta": ["any_object"],
+                                "in": [
                                     "required",
                                     {
                                         "nested_object": {
-                                            "currency": ["required", "string"],
-                                            "issuer": ["string"]
+                                            "symbol": ["required", "string"],
+                                            "name": ["string"],
+                                            "meta": ["any_object"]
                                         }
                                     }
                                 ],
-                                "counter": [
+                                "out": [
                                     "required",
                                     {
                                         "nested_object": {
-                                            "currency": ["required", "string"],
-                                            "issuer": ["string"]
+                                            "symbol": ["required", "string"],
+                                            "name": ["string"],
+                                            "meta": ["any_object"]
                                         }
                                     }
                                 ]

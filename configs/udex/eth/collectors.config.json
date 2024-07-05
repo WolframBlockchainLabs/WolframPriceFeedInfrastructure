@@ -2,5 +2,11 @@
     "groupName": "Ethereum",
     "rateLimit": "{{ETH_RATE_LIMIT}}",
     "rateLimitMargin": "{{ETH_RATE_LIMIT_MARGIN}}",
-    "apiSecret": "{{ETH_PROVIDER_URL}}"
+    "baseSleepReloadTime": "{{ETH_BASE_SLEEP_RELOAD_TIME}}",
+    "apiSecret": "{{ETH_PROVIDER_URL}}",
+    "processAllocation": {
+        "potentialExchangeSize": "{{ETH_POTENTIAL_EXCHANGE_SIZE}}",
+        "tolerableProcessSize": "{{ETH_TOLERABLE_PROCESS_SIZE}}",
+        "tolerableParallelExchanges": "{{ETH_TOLERABLE_PARALLEL_EXCHANGES}}"
+    }
 }
