@@ -138,16 +138,45 @@
         "required",
         {
             "nested_object": {
+                "retryConfig": [
+                    "required",
+                    {
+                        "nested_object": {
+                            "retryLimit": ["required", "positive_integer"],
+                            "retryPeriodMs": ["required", "positive_integer"]
+                        }
+                    }
+                ],
                 "replicaDiscovery": [
                     "required",
                     {
                         "nested_object": {
                             "initializationDelay": [
                                 "required",
+                                "positive_integer",
+                                {
+                                    "greaterThanField": "statusDebounceDelay"
+                                }
+                            ],
+                            "statusDebounceDelay": [
+                                "required",
                                 "positive_integer"
                             ],
-                            "debounceDelay": ["required", "positive_integer"],
-                            "discoveryInterval": ["required", "string"]
+                            "shareDebounceDelay": [
+                                "required",
+                                "positive_integer"
+                            ],
+                            "closeDebounceDelay": [
+                                "required",
+                                "positive_integer",
+                                {
+                                    "greaterThanField": "shareDebounceDelay"
+                                }
+                            ],
+                            "discoveryInterval": [
+                                "required",
+                                "positive_integer"
+                            ]
                         }
                     }
                 ]

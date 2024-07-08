@@ -81,10 +81,16 @@
         "pairs": ["BTC/EUR", "BTC/USDT", "ETH/USDT", "ETH/EUR", "LTC/BTC"]
     },
     "policiesConfigs": {
+        "retryConfig": {
+            "retryLimit": "{{AMQP_POLICY_RETRY_LIMIT}}",
+            "retryPeriodMs": "{{AMQP_POLICY_RETRY_PERIOD_MS}}"
+        },
         "replicaDiscovery": {
             "initializationDelay": "{{REPLICA_DISCOVERY_INITIALIZATION_DELAY}}",
-            "debounceDelay": "{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}",
-            "discoveryInterval": "*/30 * * * *"
+            "statusDebounceDelay": "{{REPLICA_DISCOVERY_STATUS_DEBOUNCE_DELAY}}",
+            "shareDebounceDelay": "{{REPLICA_DISCOVERY_SHARE_DEBOUNCE_DELAY}}",
+            "closeDebounceDelay": "{{REPLICA_DISCOVERY_CLOSE_DEBOUNCE_DELAY}}",
+            "discoveryInterval": "{{REPLICA_DISCOVERY_INTERVAL}}"
         }
     },
     "apiLimits": {
