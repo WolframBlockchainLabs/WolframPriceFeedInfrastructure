@@ -50,6 +50,7 @@ class AppE2ETestProvider extends AppTestProvider {
         return {
             broadcast: jest.fn(),
             publish: jest.fn(),
+            sendToQueue: jest.fn(),
         };
     }
 

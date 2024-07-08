@@ -32,7 +32,7 @@ describe('[candle-stick]: Create discrete aggregation task', () => {
         expect(serverResponse.body.data.type).toEqual(
             AggregationTask.TYPE.CANDLES_DISCRETE_AGGREGATION,
         );
-        expect(app.amqpClient.publish).toHaveBeenCalled();
+        expect(app.amqpClient.sendToQueue).toHaveBeenCalled();
     });
 
     it('Should return an error if the date range is ill-formatted', async () => {
