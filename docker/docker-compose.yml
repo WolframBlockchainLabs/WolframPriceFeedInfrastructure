@@ -64,11 +64,6 @@ services:
         container_name: ccdb-aggregator
         command: sh -c "npm run workers:aggregator:nodemon"
 
-    markets-refresher:
-        <<: *backend-body
-        container_name: ccdb-markets-refresher
-        command: sh -c "npm run workers:markets-refresher:nodemon"
-
     timescale:
         image: timescale/timescaledb:2.11.1-pg15
         container_name: ccdb-timescale

@@ -131,11 +131,6 @@
         ]
         ```
 
-### Interval Settings
-
--   **intervals.marketsRefresher**: The interval at which the markets refresher function should run.
-    -   Example: `"{{MARKETS_REFRESHER_INTERVAL}}"`
-
 ### AMQP Worker Settings
 
 -   **amqpWorker.retryLimit**: limit on message processing failure retries

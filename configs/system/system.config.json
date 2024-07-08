@@ -55,9 +55,6 @@
             }
         ]
     },
-    "intervals": {
-        "marketsRefresher": "{{MARKETS_REFRESHER_INTERVAL}}"
-    },
     "amqpWorker": {
         "retryLimit": "{{AMQP_WORKER_RETRY_LIMIT}}",
         "retryPeriodMs": "{{AMQP_WORKER_RETRY_PERIOD_MS}}",

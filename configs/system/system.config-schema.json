@@ -105,14 +105,6 @@
             }
         }
     ],
-    "intervals": [
-        "required",
-        {
-            "nested_object": {
-                "marketsRefresher": ["required", "positive_integer"]
-            }
-        }
-    ],
     "amqpWorker": [
         "required",
         {

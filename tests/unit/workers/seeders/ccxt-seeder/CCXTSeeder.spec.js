@@ -1,6 +1,6 @@
 import Exchange from '#domain-model/entities/Exchange.js';
 import Market from '#domain-model/entities/Market.js';
-import CCXTSeeder from '#workers/seeders/ccxt-seeder/CCXTSeeder.js';
+import CCXTSeeder from '#workers/seeders/ccxt/CCXTSeeder.js';
 import ccxt from 'ccxt';
 
 jest.mock('ccxt', () => ({
