@@ -7,27 +7,32 @@ class ExchangeFactory extends BaseFactory {
         {
             externalExchangeId: 'binance',
             name: 'Binance',
+            dataSource: 'binance',
         },
         {
             externalExchangeId: 'kucoin',
             name: 'KuCoin',
+            dataSource: 'kucoin',
         },
         {
             externalExchangeId: 'gemini',
             name: 'Gemini',
+            dataSource: 'gemini',
         },
         {
             externalExchangeId: 'kraken',
             name: 'Kraken',
+            dataSource: 'kraken',
         },
     ];
 
     async create() {
         const exchangePromises = ExchangeFactory.EXCHANGES.map(
-            ({ externalExchangeId, name }) => {
+            ({ externalExchangeId, name, dataSource }) => {
                 return Exchange.create({
                     externalExchangeId,
                     name,
+                    dataSource,
                 });
             },
         );

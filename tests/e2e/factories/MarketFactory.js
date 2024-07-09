@@ -12,6 +12,7 @@ class MarketFactory extends BaseFactory {
             baseId: 'BTC',
             quoteId: 'EUR',
             active: true,
+            historical: false,
         },
         {
             externalMarketId: 'BTCUSDT',
@@ -21,6 +22,7 @@ class MarketFactory extends BaseFactory {
             baseId: 'BTC',
             quoteId: 'USDT',
             active: true,
+            historical: true,
         },
         {
             externalMarketId: 'ETHUSDT',
@@ -30,6 +32,7 @@ class MarketFactory extends BaseFactory {
             baseId: 'ETH',
             quoteId: 'USDT',
             active: false,
+            historical: true,
         },
         {
             externalMarketId: 'ETHEUR',
@@ -39,6 +42,7 @@ class MarketFactory extends BaseFactory {
             baseId: 'ETH',
             quoteId: 'EUR',
             active: false,
+            historical: true,
         },
     ];
 
