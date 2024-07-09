@@ -30,6 +30,22 @@ Follow these steps to set up the project:
     - Use `npm run docker:workers:collectors-seeder:start` to populate the database with preconfigured exchanges (e.g., Binance, Kraken, Gemini).
     - Refer to collectors config for the full list exchanges and markets.
 
+**ATTENTION!** If you have changed the collection configuration, you must perform the **Seed Database** step. If you've changed markets, added new ones, or deleted old ones, you should run the seeders again. Otherwise, the changes will not be applied since the infrastructure uses the database as a source of truth.
+
+To ensure that your configuration changes are properly applied, you need to run the relevant seeder scripts. Below are the available seeder scripts:
+
+- `docker:workers:ccxt-realtime-seeder:start`
+- `docker:workers:ccxt-historical-seeder:start`
+- `docker:workers:xrpl-seeder:start`
+- `docker:workers:udex-seeder:start`
+- `docker:workers:collectors-seeder:start`
+
+If you intend to extend or modify the configuration, follow these steps to seed the database and apply your changes:
+
+1. **Update your configuration**: Make the necessary changes to your collection configuration.
+2. **Run the appropriate seeder script(s)**: Depending on the type of data you have changed, run the corresponding seeder script from the list above.
+3. **Verify changes**: Ensure that the changes have been successfully applied and reflected in the system with available market or exchange list endpoints.
+
 ## Running Containers
 
 Ensure the following before running containers:
@@ -67,8 +83,6 @@ To stop the project:
 ## Running Historical Collection
 
 Historical collection allows to retrieve historical CandleSticks records from CEX through CCXT API.
-
-`ATTENTION! You can't run collectors for realtime and historical data at the same time for the same exchange.`
 
 Ability to collect historical data is entirely dictated by external exchange. If it does not allow to collect a year old data, then there is no way to get it except negotiating API keys with exchange that will allow this collection if its possible. 
 

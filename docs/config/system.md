@@ -64,39 +64,6 @@
 -   **db.retry.max**: The maximum number of retry attempts.
     -   Example: `"{{DB_RETRY_MAX}}"`
 
-#### Test Database
-
--   **test-db.username**: The username to connect to the test database.
-    -   Example: `"{{TEST_DB_USERNAME}}"`
--   **test-db.password**: The password to connect to the test database.
-    -   Example: `"{{TEST_DB_PASSWORD}}"`
--   **test-db.database**: The name of the test database.
-    -   Example: `"{{TEST_DB_DATABASE}}"`
--   **test-db.dialect**: The dialect of the test database (e.g., mysql, postgres).
-    -   Example: `"{{TEST_DB_DIALECT}}"`
--   **test-db.host**: The host of the test database.
-    -   Example: `"{{TEST_DB_HOST}}"`
--   **test-db.port**: The port of the test database.
-    -   Example: `"{{TEST_DB_PORT}}"`
--   **test-db.dialectOptions.connectTimeout**: Amount of milliseconds for waiting to establish a connection.
-    -   Example: `"{{DB_DIALECT_TIMEOUT}}"`
--   **test-db.dialectOptions.timezone**: The timezone used for the connection.
-    -   Example: `"{{DB_DIALECT_TIMEZONE}}"`
--   **test-db.pool.min**: The minimum number of connections in the pool.
-    -   Example: `"{{DB_POOL_MIN}}"`
--   **test-db.pool.max**: The maximum number of connections in the pool.
-    -   Example: `"{{DB_POOL_MAX}}"`
--   **test-db.pool.idle**: The maximum time, in milliseconds, that a connection can be idle before being released.
-    -   Example: `"{{DB_POOL_IDLE}}"`
--   **test-db.pool.acquire**: The maximum time, in milliseconds, the pool will try to get a connection before throwing an error.
-    -   Example: `"{{DB_POOL_ACQUIRE}}"`
--   **test-db.pool.evict**: The maximum time, in milliseconds, that a connection can be idle before being evicted from the pool.
-    -   Example: `"{{DB_POOL_EVICT}}"`
--   **test-db.pool.maxUses**: The maximum number of times a connection can be used before being retired.
-    -   Example: `"{{DB_POOL_MAX_USES}}"`
--   **test-db.retry.max**: The maximum number of retry attempts.
-    -   Example: `"{{DB_RETRY_MAX}}"`
-
 ### Redis Settings
 
 -   **redis.host**: The host of the Redis instance.
@@ -175,14 +142,23 @@
 
 ### AMQP Policies Settings
 
+#### Policies Common Retry Config
+
+-   **policiesConfigs.retryConfig.retryLimit**: The maximum number of retry attempts for operations.
+    -   Example: `"{{AMQP_POLICY_RETRY_LIMIT}}"`
+-   **policiesConfigs.retryConfig.retryPeriodMs**: The time in milliseconds between retry attempts.
+    -   Example: `"{{AMQP_POLICY_RETRY_PERIOD_MS}}"`
+
 #### Replica Discovery Policy Config
 
--   **policiesConfigs.replicaDiscovery.initializationDelay**: Initial delay in milliseconds for starting collectors.
+-   **policiesConfigs.replicaDiscovery.initializationDelay**: Initial delay in milliseconds for starting the replica discovery process.
     -   Example: `"{{REPLICA_DISCOVERY_INITIALIZATION_DELAY}}"`
--   **policiesConfigs.replicaDiscovery.debounceDelay**: Debounce delay in milliseconds after getting STATUS message from other replicas. It is absolutely necessary that this delay is slower that ```initializationDelay``` to avoid race conditions.
-    -   Example: `"{{REPLICA_DISCOVERY_DEBOUNCE_DELAY}}"`
--   **policiesConfigs.replicaDiscovery.discoveryInterval**: Schedule for resynchronization in the cron format.
-    -   Example: `"*/30 * * * *"`
+-   **policiesConfigs.replicaDiscovery.statusDebounceDelay**: Debounce delay in milliseconds after receiving a status update from other replicas. This delay helps manage multiple replicas sharing status simultaneously and avoid excessive state reloads.
+    -   Example: `"{{REPLICA_DISCOVERY_STATUS_DEBOUNCE_DELAY}}"`
+-   **policiesConfigs.replicaDiscovery.closeDebounceDelay**: Delay in milliseconds before marking a replica as closed if it becomes unavailable. This delay ensures that replica shutdowns do not lead to premature closure and will reload the scheduler as few times as possible.
+    -   Example: `"{{REPLICA_DISCOVERY_CLOSE_DEBOUNCE_DELAY}}"`
+-   **policiesConfigs.replicaDiscovery.discoveryInterval**: Interval in milliseconds for conducting ongoing discovery to check the status of replicas.
+    -   Example: `"{{REPLICA_DISCOVERY_INTERVAL}}"`
 
 ### API Limits Settings
 

@@ -18,15 +18,21 @@ To add a new market pair to the `xrpl-collectors.config.json`, follow the steps 
     ```json
     {
         "pair": {
-            "base": {
-                "currency": "BASE_CURRENCY"
+            "in": {
+                "symbol": "BASE_CURRENCY",
+                "meta": {
+                    "currency": "BASE_CURRENCY"
+                }
             },
-            "counter": {
-                "currency": "COUNTER_CURRENCY",
-                "issuer": "ISSUER_ADDRESS"
+            "out": {
+                "symbol": "COUNTER_CURRENCY",
+                "meta": {
+                    "currency": "COUNTER_CURRENCY",
+                    "issuer": "ISSUER_ADDRESS"
+                }
             }
         },
-        "symbol": "BASE_CURRENCY/COUNTER_CURRENCY:ISSUER_ADDRESS"
+        "symbol": "BASE_CURRENCY/ISSUER_ADDRESS:COUNTER_CURRENCY"
     }
     ```
 
@@ -38,15 +44,21 @@ To add a new market pair to the `xrpl-collectors.config.json`, follow the steps 
     ```json
     {
         "pair": {
-            "base": {
-                "currency": "XRP"
+            "in": {
+                "symbol": "XRP",
+                "meta": {
+                    "currency": "XRP"
+                }
             },
-            "counter": {
-                "currency": "USD",
-                "issuer": "rIssuerAddressForUSD"
+            "out": {
+                "symbol": "USD",
+                "meta": {
+                    "currency": "USD",
+                    "issuer": "rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq"
+                }
             }
         },
-        "symbol": "XRP/USD:rIssuerAddressForUSD"
+        "symbol": "XRP/GateHub:USD"
     }
     ```
 

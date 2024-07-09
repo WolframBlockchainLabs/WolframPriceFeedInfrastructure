@@ -2,13 +2,17 @@
 
 ### General Settings
 
--   **rateLimit**: The global rate limit in milliseconds for the collectors.
+-   **baseRateLimit**: The global rate limit in milliseconds for the collectors.
 
-    -   Default: `80`
+    -   Default: `"{{XRPL_RATE_LIMIT}}"`
 
 -   **rateLimitMargin**: The margin in milliseconds to consider while setting up rate limits.
 
     -   Example: `"{{XRPL_RATE_LIMIT_MARGIN}}"`
+
+-   **baseSleepReloadTime**: The time in milliseconds scheduler will sleep between reloads on demand.
+
+    -   Example: `"{{XRPL_BASE_SLEEP_RELOAD_TIME}}"`
 
 -   **serverUrl**: The URL of the XRPL server that the instance interacts with.
     -   Example: `"{{XRPL_SERVER_URL}}"`
@@ -37,12 +41,19 @@ Here's a brief look at how a market setup might look:
 
 -   **pair**
 
-    -   **base**
-        -   **currency**: The base currency in the pair (e.g., "XRP").
-        -   **issuer**: The issuer of the counter currency. ("XRP" does not have one)
-    -   **counter**
-        -   **currency**: The counter currency in the pair (e.g., "USD").
-        -   **issuer**: The issuer of the counter currency. ("XRP" does not have one)
+    -   **meta**: An object that contains any additional required data.
+    -   **in**: Information about the input token, including:
+        -   **meta**: An object that contains any additional required data.
+            -   **currency**: The base currency in the pair (e.g., "XRP").
+            -   **issuer**: The issuer of the counter currency. ("XRP" does not have one)
+        -   **symbol**: The symbol representing the input token.
+        -   **name**: The name of the input token.
+    -   **out**: Information about the output token, including:
+        -   **meta**: An object that contains any additional required data.
+            -   **currency**: The counter currency in the pair (e.g., "USD").
+            -   **issuer**: The issuer of the counter currency. ("XRP" does not have one)
+        -   **symbol**: The symbol representing the output token.
+        -   **name**: The name of the output token.
 
 -   **symbol**: A representative string of the market pair (e.g., "XRP/Bitstamp-USD").
 

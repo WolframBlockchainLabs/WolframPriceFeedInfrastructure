@@ -2,18 +2,38 @@
 
 -   **rateLimit**: The global rate limit in milliseconds for the collectors.
 
-    -   Default: `"{{CCXT_RATE_LIMIT}}"`
+    -   Default: `1000`
 
 -   **rateLimitMargin**: The margin in milliseconds to consider while setting up rate limits.
 
     -   Example: `"{{CCXT_RATE_LIMIT_MARGIN}}"`
+
+-   **baseSleepReloadTime**: The time in milliseconds scheduler will sleep between reloads on demand.
+
+    -   Example: `"{{CCXT_BASE_SLEEP_RELOAD_TIME}}"`
+
+-   **reloadCyclesBackoff**: The amount of cycles to refetch data for after the backoff or reload. Mostly useful in historical collectors.
+
+    -   Example: `"{{CCXT_RELOAD_CYCLES_BACKOFF}}"`
+
+#### Process Allocation Config
+
+-   **processAllocation.potentialExchangeSize**: Expected maximum amount of markets inside an exchange.
+
+    -   Example: `"{{CCXT_POTENTIAL_EXCHANGE_SIZE}}"`
+
+-   **processAllocation.tolerableProcessSize**: Expected maximum amount of markets per process.
+
+    -   Example: `"{{CCXT_TOLERABLE_PROCESS_SIZE}}"`
+
+-   **processAllocation.tolerableParallelExchanges**: Expected maximum amount of exchanges inside one process.
+    -   Example: `"{{CCXT_TOLERABLE_PARALLEL_EXCHANGES}}"`
 
 ## ccxt-exchange.config
 
 -   **id**: A unique identifier for the exchange.
 -   **name**: The display name of the exchange.
 -   **rateLimit**: The rate limit in milliseconds specific to the exchange (overrides the global rate limit if specified).
--   **minimalCycleDuration**: The minimal collectors fetch cycle duration in milliseconds.
 -   **symbols**: An array of symbols that are available on the exchange.
 -   **apiAccess**: A nested object that contains API credentials necessary for accessing the exchange. This includes:
     -   **apiKey**: A string representing the public API key provided by the exchange for accessing their services.
@@ -61,4 +81,4 @@ Please replace the placeholders (e.g., `{{CCXT_RATE_LIMIT_MARGIN}}`) with actual
 
 ---
 
-🟣 [Back to main doc file](../../../README.md)
+🟣 [Back to main doc file](../../README.md)

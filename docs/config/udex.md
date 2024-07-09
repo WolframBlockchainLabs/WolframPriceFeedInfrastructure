@@ -6,11 +6,15 @@
 
 -   **rateLimit**: The global rate limit in milliseconds for the collectors.
 
-    -   Default: `6000`
+    -   Default: `"{{CARDANO_RATE_LIMIT}}"`
 
 -   **rateLimitMargin**: The margin in milliseconds to consider while setting up rate limits.
 
     -   Example: `"{{CARDANO_RATE_LIMIT_MARGIN}}"`
+
+-   **baseSleepReloadTime**: The time in milliseconds scheduler will sleep between reloads on demand.
+
+    -   Example: `"{{CARDANO_BASE_SLEEP_RELOAD_TIME}}"`
 
 -   **apiSecret**: The secret used in any driver to connect to the remote RPC endpoint or API server.
 
@@ -18,6 +22,19 @@
 
 -   **meta**: An object that contains any additional required data for driver's initialization.
     -   Example: `{ requestTTL: 3000 }`
+
+#### Process Allocation Config
+
+-   **processAllocation.potentialExchangeSize**: Expected maximum amount of markets inside an exchange.
+
+    -   Example: `"{{CARDANO_POTENTIAL_EXCHANGE_SIZE}}"`
+
+-   **processAllocation.tolerableProcessSize**: Expected maximum amount of markets per process.
+
+    -   Example: `"{{CARDANO_TOLERABLE_PROCESS_SIZE}}"`
+
+-   **processAllocation.tolerableParallelExchanges**: Expected maximum amount of exchanges inside one process.
+    -   Example: `"{{CARDANO_TOLERABLE_PARALLEL_EXCHANGES}}"`
 
 ## udex-exchange.config
 
