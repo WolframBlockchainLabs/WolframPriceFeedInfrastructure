@@ -3,139 +3,14 @@
     "name": "Gate.io",
     "rateLimit": "{{GATE_RATE_LIMIT}}",
     "symbols": [
-        "BTC/SGD",
-        "BTC/TRY",
-        "BTC/USDC",
         "BTC/USDT",
-
         "ETH/BTC",
-        "ETH/SGD",
-        "ETH/TRY",
-        "ETH/USDC",
-        "ETH/USDT",
-
-        "XRP/BTC",
-        "XRP/SGD",
-        "XRP/TRY",
-        "XRP/USDC",
-        "XRP/USDT",
-
-        "USDT/CNYX",
-        "USDT/TRY",
-        "USDT/USD",
-
-        "BNB/BTC",
-        "BNB/TRY",
-        "BNB/USDC",
-        "BNB/USDT",
-
-        "USDC/USDT",
-
-        "STETH/ETH",
-        "STETH/USDT",
-
-        "SOL/TRY",
-        "SOL/USDC",
-        "SOL/USDT",
-
-        "GMMT/USDT",
-
-        "DOGE/BTC",
-        "DOGE/TRY",
-        "DOGE/USDC",
-        "DOGE/USDT",
-
         "ADA/BTC",
-        "ADA/TRY",
-        "ADA/USDT",
-
-        "CHEEL/USDT",
-
-        "TRX/ETH",
-        "TRX/TRY",
-        "TRX/USDC",
-        "TRX/USDT",
-
-        "LINK/ETH",
-        "LINK/TRY",
-        "LINK/USDT",
-
-        "CRO/USDT",
-
-        "MATIC/ETH",
-        "MATIC/TRY",
-        "MATIC/USDC",
-        "MATIC/USDT",
-
-        "WBTC/BTC",
-        "WBTC/TRY",
-        "WBTC/USDT",
-
-        "DOT/BTC",
-        "DOT/TRY",
-        "DOT/USDT",
-
-        "LTC/BTC",
-        "LTC/SGD",
-        "LTC/TRY",
-        "LTC/USDC",
-        "LTC/USDT",
-
-        "BCH/BTC",
-        "BCH/SGD",
-        "BCH/TRY",
-        "BCH/USDT",
-
-        "SHIB/TRY",
-        "SHIB/USDC",
-        "SHIB/USDT",
-
-        "SUI/TRY",
-        "SUI/USDC",
-        "SUI/USDT",
-
-        "DAI/TRY",
-        "DAI/USDT",
-
-        "AVAX/ETH",
-        "AVAX/TRY",
-        "AVAX/USDC",
-        "AVAX/USDT",
-
-        "LEO/BTC",
-        "LEO/USDT",
-
-        "TUSD/USDT",
-
-        "OCEAN/USDT",
-
-        "XLM/BTC",
-        "XLM/ETH",
-        "XLM/TRY",
-        "XLM/USDT",
-
-        "UNI/ETH",
-        "UNI/TRY",
-        "UNI/USDT",
-
-        "XMR/BTC",
-        "XMR/USDT",
-
-        "LAND/USDT",
-
-        "OKB/USDT",
-
-        "ATOM/BTC",
-        "ATOM/TRY",
-        "ATOM/USDT",
-
-        "ETC/BTC",
-        "ETC/ETH",
-        "ETC/SGD",
-        "ETC/TRY",
-        "ETC/USDT",
-
-        "BUSD/ETH",
-        "BUSD/USDT"
+        "XRP/BTC",
+        "XTZ/BTC",
+        "ETH/USDC",
+        "SOL/USDC",
+        "XTZ/USDT",
+        "ADA/USDT"
     ]
 }
