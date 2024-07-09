@@ -21,6 +21,7 @@ describe('[workers/amqp/database-writer]: ExchangeRateWriter Tests Suite', () =>
 
         context.amqpClientStub = {
             publish: jest.fn(),
+            sendToQueue: jest.fn(),
             getChannel: jest.fn().mockReturnValue(context.amqpChannelStub),
         };
 

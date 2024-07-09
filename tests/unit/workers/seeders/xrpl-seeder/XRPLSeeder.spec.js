@@ -1,93 +1,64 @@
-import Exchange from '#domain-model/entities/Exchange.js';
-import Market from '#domain-model/entities/Market.js';
+import BaseCryptoConfigSeeder from '#workers/seeders/BaseCryptoConfigSeeder.js';
 import XRPLSeeder from '#workers/seeders/xrpl/XRPLSeeder.js';
 
-const udexConf = {
-    exchange: {
-        id: 'xrpl',
-        name: 'XRPL',
-    },
-    markets: [
-        {
-            pair: {
-                base: {
-                    currency: 'XRP',
-                },
-                counter: {
-                    currency: 'USD',
-                    issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B',
-                },
-            },
-            symbol: 'XRP/Bitstamp-USD',
-        },
-    ],
-};
-
-describe('[xrpl-seeder]: XRPLSeeder Tests Suite', () => {
+describe('[seeders/xrpl-seeder]: XRPLSeeder Tests Suite', () => {
     const context = {};
 
     beforeEach(() => {
-        context.ExchangeStub = {
-            findOrCreate: jest
-                .spyOn(Exchange, 'findOrCreate')
-                .mockResolvedValue([{ id: 1 }, true]),
-        };
-        context.MarketStub = {
-            findOrCreate: jest
-                .spyOn(Market, 'findOrCreate')
-                .mockResolvedValue([{ id: 1 }, true]),
-        };
-
-        context.loggerStub = {
-            info: jest.fn(),
-            error: jest.fn(),
-        };
-
+        context.loggerStub = { info: jest.fn(), error: jest.fn() };
         context.xrplSeeder = new XRPLSeeder({
             logger: context.loggerStub,
-            sequelize: {},
         });
+
+        context.setupExchangeSpy = jest
+            .spyOn(BaseCryptoConfigSeeder.prototype, 'setupExchange')
+            .mockResolvedValue();
     });
 
     afterEach(() => {
-        jest.restoreAllMocks();
+        jest.clearAllMocks();
     });
 
-    test('the execute method passes symbols to the loadMarkets method if exchange was created', async () => {
-        const loadMarketsSpy = jest.spyOn(context.xrplSeeder, 'loadMarkets');
+    test('execute method calls setupExchange with correct parameters', async () => {
+        const exchange = {
+            id: 'xrpl',
+            name: 'XRPL Exchange',
+        };
+        const markets = [
+            {
+                pair: { in: { name: 'XRP' }, out: { name: 'USD' } },
+                symbol: 'XRP/USD',
+            },
+        ];
 
-        await context.xrplSeeder.execute(udexConf);
+        await context.xrplSeeder.execute({ exchange, markets });
 
-        expect(context.ExchangeStub.findOrCreate).toHaveBeenCalledTimes(1);
-        expect(loadMarketsSpy).toHaveBeenCalledTimes(1);
+        expect(context.setupExchangeSpy).toHaveBeenCalledWith({
+            groupName: 'xrpl',
+            exchangeConfig: { ...exchange, markets },
+        });
     });
 
-    test('the execute method passes symbols to the loadMarkets method if exchange was found', async () => {
-        context.ExchangeStub.findOrCreate.mockResolvedValue([{ id: 1 }, false]);
-        const loadMarketsSpy = jest.spyOn(context.xrplSeeder, 'loadMarkets');
-
-        await context.xrplSeeder.execute(udexConf);
-
-        expect(context.ExchangeStub.findOrCreate).toHaveBeenCalledTimes(1);
-        expect(loadMarketsSpy).toHaveBeenCalledTimes(1);
-    });
-
-    test('the loadMarkets method tries to create a markets if they are not found', async () => {
-        await context.xrplSeeder.loadMarkets(
-            udexConf.exchange,
-            udexConf.markets,
+    test('execute method handles errors in setupExchange', async () => {
+        context.setupExchangeSpy.mockRejectedValue(
+            new Error('Failed to set up exchange'),
         );
 
-        expect(context.MarketStub.findOrCreate).toHaveBeenCalledTimes(1);
-    });
+        const exchange = {
+            id: 'xrpl',
+            name: 'XRPL Exchange',
+        };
+        const markets = [
+            {
+                pair: { in: { name: 'XRP' }, out: { name: 'USD' } },
+                symbol: 'XRP/USD',
+            },
+        ];
 
-    test('the loadMarkets method will not create market if it was found', async () => {
-        context.MarketStub.findOrCreate.mockResolvedValue([{ id: 1 }, false]);
-        await context.xrplSeeder.loadMarkets(
-            udexConf.exchange,
-            udexConf.markets,
-        );
+        await expect(
+            context.xrplSeeder.execute({ exchange, markets }),
+        ).rejects.toThrow('Failed to set up exchange');
 
-        expect(context.MarketStub.findOrCreate).toHaveBeenCalledTimes(1);
+        expect(context.setupExchangeSpy).toHaveBeenCalled();
     });
 });
