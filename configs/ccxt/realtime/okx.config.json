@@ -3,138 +3,14 @@
     "name": "OKX",
     "rateLimit": "{{OKX_RATE_LIMIT}}",
     "symbols": [
-        "BTC/EUR",
         "BTC/USDT",
-        "BTC/USDC",
-        "BTC/DAI",
-        "BTC/EURT",
-
-        "ETH/USDT",
-        "ETH/USDC",
-        "ETH/DAI",
         "ETH/BTC",
-        "ETH/EURT",
-
-        "USDT/USDC",
-
-        "USDC/USDT",
-
-        "BNB/USDT",
-        "BNB/USDC",
-
-        "XRP/USDT",
-        "XRP/USDC",
-        "XRP/BTC",
-        "XRP/ETH",
-
-        "STETH/USDT",
-        "STETH/ETH",
-
-        "SOL/USDT",
-        "SOL/USDC",
-        "SOL/BTC",
-        "SOL/ETH",
-
-        "OKB/USDT",
-        "OKB/USDC",
-        "OKB/BTC",
-        "OKB/ETH",
-
-        "ADA/USDT",
-        "ADA/USDC",
         "ADA/BTC",
-        "ADA/ETH",
-
-        "DOGE/USDT",
-        "DOGE/USDC",
-        "DOGE/BTC",
-        "DOGE/ETH",
-
-        "TRX/USDT",
-        "TRX/USDC",
-        "TRX/BTC",
-        "TRX/ETH",
-
-        "TON/USDT",
-        "TON/USDC",
-
-        "LINK/USDT",
-        "LINK/USDC",
-        "LINK/BTC",
-        "LINK/ETH",
-
-        "MATIC/USDT",
-        "MATIC/USDC",
-        "MATIC/BTC",
-
-        "WBTC/USDT",
-        "WBTC/BTC",
-
-        "DOT/USDT",
-        "DOT/USDC",
-        "DOT/BTC",
-
-        "LTC/USDT",
-        "LTC/USDC",
-        "LTC/BTC",
-        "LTC/ETH",
-
-        "BCH/USDT",
-        "BCH/USDC",
-        "BCH/BTC",
-
-        "SHIB/USDT",
-        "SHIB/USDC",
-        "SHIB/BTC",
-
-        "AVAX/USDT",
-        "AVAX/USDC",
-        "AVAX/BTC",
-
-        "DAI/USDT",
-
-        "LEO/USDT",
-
-        "UNI/USDT",
-        "UNI/USDC",
-        "UNI/BTC",
-
-        "XLM/USDT",
-        "XLM/USDC",
-        "XLM/BTC",
-
-        "XMR/USDT",
-        "XMR/USDC",
-        "XMR/BTC",
-        "XMR/ETH",
-
-        "ETC/USDT",
-        "ETC/USDC",
-        "ETC/BTC",
-
-        "ATOM/USDT",
-        "ATOM/USDC",
-        "ATOM/BTC",
-        "ATOM/ETH",
-
-        "HBAR/USDT",
-        "HBAR/USDC",
-        "HBAR/BTC",
-
-        "FIL/USDT",
-        "FIL/USDC",
-        "FIL/BTC",
-        "FIL/ETH",
-
-        "LDO/USDT",
-
-        "APT/USDT",
-        "APT/USDC",
-
-        "CRO/USDT",
-        "CRO/USDC",
-        "CRO/BTC",
-
-        "MKR/USDT"
+        "XRP/BTC",
+        "ETH/USDC",
+        "SOL/USDC",
+        "ADA/USDC",
+        "XTZ/USDT",
+        "ADA/USDT"
     ]
 }
