@@ -1,3 +1,4 @@
+import Market from '#domain-model/entities/Market.js';
 import BaseCryptoConfigSeeder from '#workers/seeders/BaseCryptoConfigSeeder.js';
 import XRPLSeeder from '#workers/seeders/xrpl/XRPLSeeder.js';
 
@@ -60,5 +61,45 @@ describe('[seeders/xrpl-seeder]: XRPLSeeder Tests Suite', () => {
         ).rejects.toThrow('Failed to set up exchange');
 
         expect(context.setupExchangeSpy).toHaveBeenCalled();
+    });
+
+    test('updateOrCreateMarket method is called with correct parameters', async () => {
+        const marketUpdateOrCreateSpy = jest
+            .spyOn(Market, 'updateOrCreate')
+            .mockResolvedValue([{ id: 1, externalMarketId: 'XRP/USD' }, true]);
+
+        const exchange = {
+            id: 'xrpl',
+            name: 'XRPL Exchange',
+        };
+        const pair = {
+            in: { symbol: 'XRP', meta: {} },
+            out: { symbol: 'USD', meta: {} },
+        };
+        const symbol = 'XRP/USD';
+
+        await context.xrplSeeder.updateOrCreateMarket({
+            symbol,
+            exchange,
+            pair,
+        });
+
+        expect(marketUpdateOrCreateSpy).toHaveBeenCalledWith(
+            {
+                externalMarketId: symbol,
+                exchangeId: exchange.id,
+            },
+            {
+                symbol,
+                meta: pair.meta,
+                active: true,
+                base: pair.in.symbol,
+                baseId: 'XRP',
+                baseMeta: pair.in.meta,
+                quote: pair.out.symbol,
+                quoteId: 'USD',
+                quoteMeta: pair.out.meta,
+            },
+        );
     });
 });

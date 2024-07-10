@@ -1,3 +1,4 @@
+import Market from '#domain-model/entities/Market.js';
 import BaseCryptoConfigSeeder from '#workers/seeders/BaseCryptoConfigSeeder.js';
 import UDEXSeeder from '#workers/seeders/udex/UDEXSeeder.js';
 
@@ -96,5 +97,45 @@ describe('[seeders/udex-seeder]: UDEXSeeder Tests Suite', () => {
         ).rejects.toThrow('Failed to set up exchange');
 
         expect(context.setupExchangeSpy).toHaveBeenCalled();
+    });
+
+    test('updateOrCreateMarket method is called with correct parameters', async () => {
+        const marketUpdateOrCreateSpy = jest
+            .spyOn(Market, 'updateOrCreate')
+            .mockResolvedValue([{ id: 1, externalMarketId: 'XRP/USD' }, true]);
+
+        const exchange = {
+            id: 'xrpl',
+            name: 'XRPL Exchange',
+        };
+        const pair = {
+            in: { symbol: 'XRP', meta: {}, name: 'XRP1' },
+            out: { symbol: 'USD', meta: {}, name: 'USD1' },
+        };
+        const symbol = 'XRP/USD';
+
+        await context.udexSeeder.updateOrCreateMarket({
+            symbol,
+            exchange,
+            pair,
+        });
+
+        expect(marketUpdateOrCreateSpy).toHaveBeenCalledWith(
+            {
+                externalMarketId: symbol,
+                exchangeId: exchange.id,
+            },
+            {
+                symbol,
+                meta: pair.meta,
+                active: true,
+                base: pair.in.symbol,
+                baseId: pair.in.name,
+                baseMeta: pair.in.meta,
+                quote: pair.out.symbol,
+                quoteId: pair.out.name,
+                quoteMeta: pair.out.meta,
+            },
+        );
     });
 });

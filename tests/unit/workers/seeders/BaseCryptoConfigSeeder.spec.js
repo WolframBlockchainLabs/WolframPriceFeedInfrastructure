@@ -109,24 +109,6 @@ describe('[seeders/base-crypto-seeder]: BaseCryptoConfigSeeder Tests Suite', () 
         expect(resetMarketStatusesSpy).toHaveBeenCalledWith(exchange);
     });
 
-    test('seedMarket method handles market creation errors', async () => {
-        Market.updateOrCreate.mockRejectedValue(
-            new Error('Failed to create market'),
-        );
-
-        await context.baseCryptoConfigSeeder.seedMarket({
-            groupName,
-            exchange: { id: 1, name: 'Uniswap_v3' },
-            marketConfig: exchangeConfig.markets[0],
-        });
-
-        expect(context.loggerStub.error).toHaveBeenCalledWith(
-            expect.objectContaining({
-                message: `Error creating market [${groupName}/${exchangeConfig.name} :: WETH/USDC]`,
-            }),
-        );
-    });
-
     test('setupExchange method logs correctly when exchange is found', async () => {
         Exchange.updateOrCreate.mockResolvedValue([
             { id: 1, name: 'Uniswap_v3' },
@@ -150,11 +132,10 @@ describe('[seeders/base-crypto-seeder]: BaseCryptoConfigSeeder Tests Suite', () 
         );
     });
 
-    test('seedMarket method logs when market is found', async () => {
-        Market.updateOrCreate.mockResolvedValue([
-            { id: 1, externalMarketId: 'WETH/USDC' },
-            false,
-        ]);
+    test('seedMarket method handles market creation errors', async () => {
+        context.baseCryptoConfigSeeder.updateOrCreateMarket = jest
+            .fn()
+            .mockRejectedValue(new Error('Failed to create market'));
 
         await context.baseCryptoConfigSeeder.seedMarket({
             groupName,
@@ -162,7 +143,30 @@ describe('[seeders/base-crypto-seeder]: BaseCryptoConfigSeeder Tests Suite', () 
             marketConfig: exchangeConfig.markets[0],
         });
 
-        expect(Market.updateOrCreate).toHaveBeenCalled();
+        expect(context.loggerStub.error).toHaveBeenCalledWith(
+            expect.objectContaining({
+                message: `Error creating market [${groupName}/${exchangeConfig.name} :: WETH/USDC]`,
+            }),
+        );
+    });
+
+    test('seedMarket method logs when market is found', async () => {
+        context.baseCryptoConfigSeeder.updateOrCreateMarket = jest
+            .fn()
+            .mockResolvedValue([
+                { id: 1, externalMarketId: 'WETH/USDC' },
+                false,
+            ]);
+
+        await context.baseCryptoConfigSeeder.seedMarket({
+            groupName,
+            exchange: { id: 1, name: 'Uniswap_v3' },
+            marketConfig: exchangeConfig.markets[0],
+        });
+
+        expect(
+            context.baseCryptoConfigSeeder.updateOrCreateMarket,
+        ).toHaveBeenCalled();
         expect(context.loggerStub.info).toHaveBeenCalledWith(
             expect.stringContaining(
                 `Market for [${groupName}/Uniswap_v3 :: WETH/USDC] has been updated successfully`,
@@ -171,10 +175,12 @@ describe('[seeders/base-crypto-seeder]: BaseCryptoConfigSeeder Tests Suite', () 
     });
 
     test('seedMarket method logs when market is created', async () => {
-        Market.updateOrCreate.mockResolvedValue([
-            { id: 1, externalMarketId: 'WETH/USDC' },
-            true,
-        ]);
+        context.baseCryptoConfigSeeder.updateOrCreateMarket = jest
+            .fn()
+            .mockResolvedValue([
+                { id: 1, externalMarketId: 'WETH/USDC' },
+                true,
+            ]);
 
         await context.baseCryptoConfigSeeder.seedMarket({
             groupName,
@@ -182,11 +188,32 @@ describe('[seeders/base-crypto-seeder]: BaseCryptoConfigSeeder Tests Suite', () 
             marketConfig: exchangeConfig.markets[0],
         });
 
-        expect(Market.updateOrCreate).toHaveBeenCalled();
+        expect(
+            context.baseCryptoConfigSeeder.updateOrCreateMarket,
+        ).toHaveBeenCalled();
         expect(context.loggerStub.info).toHaveBeenCalledWith(
             expect.stringContaining(
                 `Market for [${groupName}/Uniswap_v3 :: WETH/USDC] has been created successfully`,
             ),
         );
+    });
+
+    test('updateOrCreateMarket method is called with correct parameters', async () => {
+        const updateOrCreateMarketSpy = jest.spyOn(
+            context.baseCryptoConfigSeeder,
+            'updateOrCreateMarket',
+        );
+
+        await context.baseCryptoConfigSeeder.seedMarket({
+            groupName,
+            exchange: { id: 1, name: 'Uniswap_v3' },
+            marketConfig: exchangeConfig.markets[0],
+        });
+
+        expect(updateOrCreateMarketSpy).toHaveBeenCalledWith({
+            symbol: 'WETH/USDC',
+            exchange: { id: 1, name: 'Uniswap_v3' },
+            pair: { in: { name: 'WETH' }, out: { name: 'USDC' } },
+        });
     });
 });
