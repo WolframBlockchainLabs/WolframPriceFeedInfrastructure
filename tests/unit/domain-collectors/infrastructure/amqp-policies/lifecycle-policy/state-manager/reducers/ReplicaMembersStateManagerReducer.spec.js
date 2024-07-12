@@ -7,9 +7,15 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state
         context.mockMarketsManager = {
             getIdentity: jest.fn().mockReturnValue('mock-identity'),
         };
+        context.replicaDiscoveryPolicy = {
+            getPrivateQueueAddress() {
+                return 'test-address';
+            },
+        };
+
         context.replicaMembersPlugin = new ReplicaMembersStateManagerReducer({
             marketsManager: context.mockMarketsManager,
-            address: 'test-address',
+            replicaDiscoveryPolicy: context.replicaDiscoveryPolicy,
         });
     });
 

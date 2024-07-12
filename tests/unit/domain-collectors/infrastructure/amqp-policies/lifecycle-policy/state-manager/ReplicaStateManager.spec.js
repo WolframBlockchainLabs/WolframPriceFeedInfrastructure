@@ -10,12 +10,16 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state
             BaseReplicaStateManagerReducer,
         ];
         context.mockMarketsManager = {};
-        context.address = 'test-address';
+        context.replicaDiscoveryPolicy = {
+            getPrivateQueueAddress() {
+                return 'test-address';
+            },
+        };
 
         context.replicaStateManager = new ReplicaStateManager({
             Reducers: context.mockReducers,
             marketsManager: context.mockMarketsManager,
-            address: context.address,
+            replicaDiscoveryPolicy: context.replicaDiscoveryPolicy,
         });
     });
 
@@ -30,7 +34,9 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state
         expect(context.replicaStateManager.marketsManager).toBe(
             context.mockMarketsManager,
         );
-        expect(context.replicaStateManager.address).toBe(context.address);
+        expect(context.replicaStateManager.replicaDiscoveryPolicy).toBe(
+            context.replicaDiscoveryPolicy,
+        );
         expect(context.replicaStateManager.reducers.length).toBe(
             context.mockReducers.length,
         );

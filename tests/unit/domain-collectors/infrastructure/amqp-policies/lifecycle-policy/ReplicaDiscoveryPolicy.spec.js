@@ -614,17 +614,11 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
     });
 
     test('initStateManager initializes stateManager correctly', () => {
-        const mockAddress = 'mock-address';
-        jest.spyOn(
-            context.replicaDiscoveryPolicy,
-            'getPrivateQueueAddress',
-        ).mockReturnValue(mockAddress);
-
         context.replicaDiscoveryPolicy.initStateManager();
 
         expect(context.stateManagerFactory.create).toHaveBeenCalledWith({
             marketsManager: context.replicaDiscoveryPolicy.marketsManager,
-            address: mockAddress,
+            replicaDiscoveryPolicy: context.replicaDiscoveryPolicy,
         });
         expect(context.replicaDiscoveryPolicy.stateManager).toBeDefined();
     });

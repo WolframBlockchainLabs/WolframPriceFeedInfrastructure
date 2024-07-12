@@ -12,9 +12,15 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state
                 .fn()
                 .mockReturnValue(context.mockInternalScheduler),
         };
+        context.replicaDiscoveryPolicy = {
+            getPrivateQueueAddress() {
+                return 'test-address';
+            },
+        };
+
         context.rateLimitPlugin = new RateLimitStateManagerReducer({
             marketsManager: context.mockMarketsManager,
-            address: 'test-address',
+            replicaDiscoveryPolicy: context.replicaDiscoveryPolicy,
         });
     });
 

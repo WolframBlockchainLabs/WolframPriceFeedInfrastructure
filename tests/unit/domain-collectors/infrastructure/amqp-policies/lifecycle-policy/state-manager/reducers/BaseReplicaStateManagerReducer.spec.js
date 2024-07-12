@@ -3,12 +3,16 @@ import BaseReplicaStateManagerReducer from '#domain-collectors/infrastructure/am
 describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state-manager/reducers]: BaseReplicaStateManagerReducer Tests Suite', () => {
     let basePlugin;
     const mockMarketsManager = {};
-    const address = 'test-address';
+    const replicaDiscoveryPolicy = {
+        getPrivateQueueAddress() {
+            return 'test-address';
+        },
+    };
 
     beforeEach(() => {
         basePlugin = new BaseReplicaStateManagerReducer({
             marketsManager: mockMarketsManager,
-            address: address,
+            replicaDiscoveryPolicy,
         });
     });
 
@@ -18,7 +22,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state
 
     test('constructor initializes properties correctly', () => {
         expect(basePlugin.marketsManager).toBe(mockMarketsManager);
-        expect(basePlugin.address).toBe(address);
+        expect(basePlugin.replicaDiscoveryPolicy).toBe(replicaDiscoveryPolicy);
     });
 
     test('getCurrentState returns an empty object', () => {

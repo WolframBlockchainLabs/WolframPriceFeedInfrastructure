@@ -11,9 +11,16 @@ describe('[domain-collectors/infrastructure]: ClusterMembersStateManagerReducer 
             }),
             getIdentity: jest.fn().mockReturnValue('mock-identity'),
         };
+
+        context.replicaDiscoveryPolicy = {
+            getPrivateQueueAddress() {
+                return 'test-address';
+            },
+        };
+
         context.clusterMembersPlugin = new ClusterMembersStateManagerReducer({
             marketsManager: context.mockMarketsManager,
-            address: 'test-address',
+            replicaDiscoveryPolicy: context.replicaDiscoveryPolicy,
         });
     });
 
