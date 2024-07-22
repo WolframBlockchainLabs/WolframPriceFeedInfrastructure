@@ -1,6 +1,6 @@
 import Market from '#domain-model/entities/Market';
 import Exchange from '#domain-model/entities/Exchange';
-import CryptoMarketRepository from '#domain-collectors/infrastructure/repositories/market-repositories/CryptoMarketRepository.js';
+import CryptoMarketRepository from '#domain-collectors/infrastructure/repositories/market/CryptoMarketRepository.js';
 
 describe('[domain-collectors/repositories/market-repositories]: CryptoMarketRepository Tests Suite', () => {
     const context = {};

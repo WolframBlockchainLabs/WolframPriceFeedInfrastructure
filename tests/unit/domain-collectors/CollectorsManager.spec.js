@@ -1,6 +1,7 @@
 import CollectorsManager from '#domain-collectors/CollectorsManager.js';
 import CandleStickCollector from '#domain-collectors/collectors/CandleStickCollector.js';
-import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
+import RateLimitExceededException from '#domain-model/exceptions/collectors/RateLimitExceededException.js';
+import CollectorsManagerException from '#domain-model/exceptions/collectors/control-plane/CollectorsManagerException.js';
 
 describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
     const context = {};
@@ -45,6 +46,7 @@ describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
         context.loggerStub = {
             info: jest.fn(),
             error: jest.fn(),
+            debug: jest.fn(),
         };
 
         context.amqpClientStub = {
@@ -94,7 +96,7 @@ describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
         expect(startSchedulerSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('the "start" method should log errors.', async () => {
+    test('the "start" method should wrap errors.', async () => {
         const loadMarketContextSpy = jest
             .spyOn(context.collectorsManager, 'loadMarketContext')
             .mockResolvedValue();
@@ -105,12 +107,13 @@ describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
             .spyOn(context.collectorsManager, 'startScheduler')
             .mockRejectedValue();
 
-        await context.collectorsManager.start();
+        await expect(() =>
+            context.collectorsManager.start(),
+        ).rejects.toBeInstanceOf(CollectorsManagerException);
 
         expect(loadMarketContextSpy).toHaveBeenCalledTimes(1);
         expect(connectCollectorsSpy).toHaveBeenCalledTimes(1);
         expect(startSchedulerSpy).toHaveBeenCalledTimes(1);
-        expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 
     test('the "stop" method should call stop on the scheduler.', async () => {
@@ -126,18 +129,19 @@ describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
         ).toHaveBeenCalledTimes(1);
     });
 
-    test('the "stop" method should log errors.', async () => {
+    test('the "stop" method should wrap errors.', async () => {
         jest.spyOn(
             context.collectorsManager.collectorsScheduler,
             'stop',
         ).mockRejectedValue();
 
-        await context.collectorsManager.stop();
+        await expect(() =>
+            context.collectorsManager.stop(),
+        ).rejects.toBeInstanceOf(CollectorsManagerException);
 
         expect(
             context.collectorsManager.collectorsScheduler.stop,
         ).toHaveBeenCalledTimes(1);
-        expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 
     test('the "reload" method should call stop and start.', async () => {
@@ -150,15 +154,16 @@ describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
         expect(context.collectorsManager.start).toHaveBeenCalledTimes(1);
     });
 
-    test('the "reload" method should log errors.', async () => {
+    test('the "reload" method should wrap errors.', async () => {
         jest.spyOn(context.collectorsManager, 'stop').mockResolvedValue();
         jest.spyOn(context.collectorsManager, 'start').mockRejectedValue();
 
-        await context.collectorsManager.reload();
+        await expect(() =>
+            context.collectorsManager.reload(),
+        ).rejects.toBeInstanceOf(CollectorsManagerException);
 
         expect(context.collectorsManager.stop).toHaveBeenCalledTimes(1);
         expect(context.collectorsManager.start).toHaveBeenCalledTimes(1);
-        expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 
     test('the "reloadActive" method should call reload on the scheduler.', async () => {
@@ -174,18 +179,19 @@ describe('[domain-collectors]: CollectorsManager Tests Suite', () => {
         ).toHaveBeenCalledTimes(1);
     });
 
-    test('the "reloadActive" method should log errors.', async () => {
+    test('the "reloadActive" method should wrap errors.', async () => {
         jest.spyOn(
             context.collectorsManager.collectorsScheduler,
             'reload',
         ).mockRejectedValue();
 
-        await context.collectorsManager.reloadActive();
+        await expect(() =>
+            context.collectorsManager.reloadActive(),
+        ).rejects.toBeInstanceOf(CollectorsManagerException);
 
         expect(
             context.collectorsManager.collectorsScheduler.reload,
         ).toHaveBeenCalledTimes(1);
-        expect(context.loggerStub.error).toHaveBeenCalledTimes(1);
     });
 
     test('the "startCollector" method should start and handle errors.', async () => {

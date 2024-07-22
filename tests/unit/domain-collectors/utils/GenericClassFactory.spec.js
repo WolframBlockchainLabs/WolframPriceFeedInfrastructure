@@ -1,4 +1,4 @@
-import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory.js';
+import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory.js';
 
 describe('[domain-collectors]: GenericClassFactory Tests Suite', () => {
     class MockClass {

@@ -1,4 +1,5 @@
-import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
+import { MARKET_EVENTS_DICT } from '#constants/collectors/market-events.js';
+import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory';
 import BackoffPolicy from '#domain-collectors/infrastructure/amqp-policies/stateless-policies/BackoffPolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies/stateless-policies]: BackoffPolicy Tests Suite', () => {
@@ -26,6 +27,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/stateless-policies]: B
         context.mockInternalScheduler = {
             getRateLimitMultiplier: jest.fn(),
         };
+
         context.mockMarketsManager = {
             getInternalScheduler: jest
                 .fn()
@@ -33,10 +35,15 @@ describe('[domain-collectors/infrastructure/amqp-policies/stateless-policies]: B
             reloadActive: jest.fn(),
         };
 
+        context.marketEventManagerStub = {
+            emitAsync: jest.fn(),
+        };
+
         context.backoffPolicy = new BackoffPolicy({
             amqpClientFactory: context.amqpClientFactoryStub,
             rabbitGroupName: 'testGroup',
             marketsManager: context.mockMarketsManager,
+            marketEventManager: context.marketEventManagerStub,
             policiesConfigs: {
                 retryConfig: {
                     retryLimit: 3,
@@ -66,7 +73,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/stateless-policies]: B
         });
 
         expect(instance.rabbitGroupName).toBe(
-            `${rabbitGroupName}::BackoffPolicy`,
+            `${BackoffPolicy.AMQP_NETWORK_PREFIX}::${rabbitGroupName}::BackoffPolicy`,
         );
         expect(instance.prefetchCount).toBe(1);
     });
@@ -96,6 +103,9 @@ describe('[domain-collectors/infrastructure/amqp-policies/stateless-policies]: B
         expect(
             context.backoffPolicy.marketsManager.reloadActive,
         ).not.toHaveBeenCalled();
+        expect(
+            context.marketEventManagerStub.emitAsync,
+        ).not.toHaveBeenCalledWith(MARKET_EVENTS_DICT.RELOAD_CLUSTER);
     });
 
     test('"process" should call reloadActive with correct parameters if rateLimitMultiplier is greater', async () => {
@@ -111,5 +121,8 @@ describe('[domain-collectors/infrastructure/amqp-policies/stateless-policies]: B
             rateLimitMultiplier: 15,
             shouldSleep: true,
         });
+        expect(context.marketEventManagerStub.emitAsync).toHaveBeenCalledWith(
+            MARKET_EVENTS_DICT.RELOAD_CLUSTER,
+        );
     });
 });

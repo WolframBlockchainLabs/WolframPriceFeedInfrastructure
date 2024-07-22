@@ -1,4 +1,4 @@
-const ProcessAllocator = require('#domain-collectors/infrastructure/ProcessAllocator.cjs');
+const ProcessAllocator = require('#domain-collectors/utils/ProcessAllocator.cjs');
 const os = require('os');
 
 jest.mock('os');

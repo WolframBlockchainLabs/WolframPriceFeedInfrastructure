@@ -1,4 +1,5 @@
 import MarketsManager from '#domain-collectors/MarketsManager.js';
+import MarketManagerException from '#domain-model/exceptions/collectors/control-plane/MarketManagerException.js';
 
 describe('[domain-collectors]: MarketsManager Tests Suite', () => {
     const context = {};
@@ -23,6 +24,7 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
                 getQueueSize: jest.fn().mockReturnValue(2),
                 getInstancePosition: jest.fn().mockReturnValue(0),
                 setQueueSize: jest.fn(),
+                getReloadSleepTime: jest.fn().mockReturnValue(2000),
             })),
         };
         context.collectorsManagersFactoryStub = {
@@ -103,7 +105,7 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         );
     });
 
-    test('the "start" method should handle errors when starting collectors', async () => {
+    test('the "start" method should wrap errors when starting collectors', async () => {
         const mockError = new Error('Test error');
         const collectorsManagersMock = [
             { start: jest.fn().mockResolvedValue() },
@@ -117,17 +119,14 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         };
         jest.spyOn(context.marketsManager, 'loadMarkets').mockResolvedValue();
 
-        await context.marketsManager.start();
+        await expect(() =>
+            context.marketsManager.start(),
+        ).rejects.toBeInstanceOf(MarketManagerException);
 
         collectorsManagersMock.forEach((manager) => {
             expect(manager.start).toHaveBeenCalledWith({});
         });
 
-        expect(context.loggerStub.error).toHaveBeenCalledWith({
-            message: `${MarketsManager.name} failed to start`,
-            context: context.marketsManager.getLogContext(),
-            error: mockError,
-        });
         expect(context.marketsManager.loadMarkets).toHaveBeenCalledTimes(1);
     });
 
@@ -152,16 +151,12 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         ];
         context.marketsManager.collectorsManagers = collectorsManagersMock;
 
-        await context.marketsManager.stop();
+        await expect(() =>
+            context.marketsManager.stop(),
+        ).rejects.toBeInstanceOf(MarketManagerException);
 
         collectorsManagersMock.forEach((manager) => {
             expect(manager.stop).toHaveBeenCalled();
-        });
-
-        expect(context.loggerStub.error).toHaveBeenCalledWith({
-            message: `${MarketsManager.name} failed to stop`,
-            context: context.marketsManager.getLogContext(),
-            error: mockError,
         });
     });
 
@@ -186,15 +181,12 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
             mockError,
         );
 
-        await context.marketsManager.reload();
+        await expect(() =>
+            context.marketsManager.reload(),
+        ).rejects.toBeInstanceOf(MarketManagerException);
 
         expect(context.marketsManager.stop).toHaveBeenCalledTimes(1);
         expect(context.marketsManager.start).toHaveBeenCalledWith({});
-        expect(context.loggerStub.error).toHaveBeenCalledWith({
-            message: `${MarketsManager.name} failed to reload`,
-            context: context.marketsManager.getLogContext(),
-            error: mockError,
-        });
     });
 
     test('the "reloadActive" method should reload active markets with new configuration', async () => {
@@ -219,16 +211,12 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         ];
         context.marketsManager.collectorsManagers = collectorsManagersMock;
 
-        await context.marketsManager.reloadActive();
+        await expect(() =>
+            context.marketsManager.reloadActive(),
+        ).rejects.toBeInstanceOf(MarketManagerException);
 
         collectorsManagersMock.forEach((manager) => {
             expect(manager.reloadActive).toHaveBeenCalled();
-        });
-
-        expect(context.loggerStub.error).toHaveBeenCalledWith({
-            message: `${MarketsManager.name}'s active markets failed to reload`,
-            context: context.marketsManager.getLogContext(),
-            error: mockError,
         });
     });
 

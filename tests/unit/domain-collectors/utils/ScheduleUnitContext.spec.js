@@ -6,7 +6,7 @@ import {
     MINUTES_IN_AN_HOUR,
     SECONDS_IN_A_MINUTE,
 } from '#constants/timeframes.js';
-import ScheduleUnitContext from '#domain-collectors/infrastructure/ScheduleUnitContext.js';
+import ScheduleUnitContext from '#domain-collectors/utils/ScheduleUnitContext.js';
 
 describe('[domain-collectors]: ScheduleUnitContext Tests Suite', () => {
     test('getContext should return SECOND context for intervals less than a minute', () => {

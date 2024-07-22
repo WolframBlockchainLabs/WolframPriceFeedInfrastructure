@@ -1,4 +1,4 @@
-import ClusterMember from '#domain-collectors/infrastructure/ClusterMember.js';
+import ClusterMember from '#domain-collectors/utils/ClusterMember.js';
 
 describe('[domain-collectors]: ClusterMember Tests Suite', () => {
     test('should create an instance with interval and type', () => {

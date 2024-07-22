@@ -1,4 +1,4 @@
-import CryptoExchangeRepository from '#domain-collectors/infrastructure/repositories/exchange-repositories/CryptoExchangeRepository';
+import CryptoExchangeRepository from '#domain-collectors/infrastructure/repositories/exchange/CryptoExchangeRepository';
 import Exchange from '#domain-model/entities/Exchange.js';
 
 describe('[domain-collectors/repositories/exchange-repositories]: CryptoExchangeRepository Tests Suite', () => {

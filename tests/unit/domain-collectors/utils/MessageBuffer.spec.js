@@ -1,4 +1,4 @@
-import MessageBuffer from '#domain-collectors/infrastructure/amqp-policies/lifecycle-policy/MessageBuffer.js';
+import MessageBuffer from '#domain-collectors/utils/MessageBuffer.js';
 
 describe('[domain-collectors/infrastructure]: MessageBuffer Tests Suite', () => {
     const delay = 100;

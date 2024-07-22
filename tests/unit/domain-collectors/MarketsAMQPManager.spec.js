@@ -1,5 +1,5 @@
 import MarketsAMQPManager from '#domain-collectors/MarketsAMQPManager.js';
-import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
+import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory';
 
 describe('[domain-collectors]: MarketsAMQPManager Tests Suite', () => {
     const context = {};

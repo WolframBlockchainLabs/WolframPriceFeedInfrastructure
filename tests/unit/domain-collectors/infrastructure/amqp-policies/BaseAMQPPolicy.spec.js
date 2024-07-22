@@ -1,5 +1,5 @@
-import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
-import BaseAMQPPolicy from '#domain-collectors/infrastructure/amqp-policies/BaseAMQPPolicy.js';
+import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory';
+import BaseAMQPPolicy from '#domain-collectors/infrastructure/amqp-policies/BroadcastAMQPPolicy.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests Suite', () => {
     const context = {};
@@ -33,8 +33,13 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
             defaultOptions: 'this.config.rabbitmq',
         });
 
+        context.mockMarketsManager = {
+            getIdentity: jest.fn().mockReturnValue('identity'),
+        };
+
         context.baseAMQPPolicy = new BaseAMQPPolicy({
             amqpClientFactory: context.amqpClientFactoryStub,
+            marketsManager: context.mockMarketsManager,
             rabbitGroupName: 'testGroup',
             policiesConfigs: {
                 retryConfig: {
@@ -74,7 +79,7 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         );
 
         expect(context.channelStub.assertExchange).toHaveBeenCalledWith(
-            'testGroup::BaseAMQPPolicy',
+            `${BaseAMQPPolicy.AMQP_NETWORK_PREFIX}::testGroup::BaseAMQPPolicy`,
             'fanout',
             { durable: false },
         );
@@ -86,20 +91,6 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         expect(
             context.baseAMQPPolicy.resolveConfigureChannelPromise,
         ).toHaveBeenCalledTimes(1);
-    });
-
-    test('the "broadcast" should publish a message to the channel', async () => {
-        const rateLimitMultiplier = 2;
-        await context.baseAMQPPolicy.broadcast({ rateLimitMultiplier });
-
-        const expectedMessage = Buffer.from(
-            JSON.stringify({ rateLimitMultiplier }),
-        );
-        expect(context.channelStub.publish).toHaveBeenCalledWith(
-            'testGroup::BaseAMQPPolicy',
-            '',
-            expectedMessage,
-        );
     });
 
     test('consumer should be implemented by extending classes and throw an error if not', async () => {
@@ -149,5 +140,29 @@ describe('[domain-collectors/infrastructure/amqp-policies]: BaseAMQPPolicy Tests
         expect(context.channelStub.cancel).not.toHaveBeenCalled();
         expect(context.channelStub.unbindQueue).not.toHaveBeenCalled();
         expect(context.channelStub.deleteQueue).not.toHaveBeenCalled();
+    });
+
+    test('generatePrivateQueueName should generate a queue name with prefix, group name, identity, class name, and id', async () => {
+        const mockId = '12345';
+        const mockIdentity = 'testIdentity';
+        const mockPrefix = 'AMQP_NETWORK_PREFIX';
+
+        jest.spyOn(
+            context.baseAMQPPolicy,
+            'generatePrivateQueueId',
+        ).mockResolvedValue(mockId);
+        context.mockMarketsManager.getIdentity.mockReturnValue(mockIdentity);
+        context.baseAMQPPolicy.constructor.AMQP_NETWORK_PREFIX = mockPrefix;
+        context.baseAMQPPolicy.initialGroupName = 'testGroup';
+
+        const result = await context.baseAMQPPolicy.generatePrivateQueueName();
+
+        expect(result).toBe(
+            `${mockPrefix}::testGroup::${mockIdentity}::BaseAMQPPolicy::${mockId}`,
+        );
+        expect(
+            context.baseAMQPPolicy.generatePrivateQueueId,
+        ).toHaveBeenCalledTimes(1);
+        expect(context.mockMarketsManager.getIdentity).toHaveBeenCalledTimes(1);
     });
 });

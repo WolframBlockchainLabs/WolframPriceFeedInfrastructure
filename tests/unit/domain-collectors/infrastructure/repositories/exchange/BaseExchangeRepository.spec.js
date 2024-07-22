@@ -1,4 +1,4 @@
-import BaseExchangeRepository from '#domain-collectors/infrastructure/repositories/exchange-repositories/BaseExchangeRepository.js';
+import BaseExchangeRepository from '#domain-collectors/infrastructure/repositories/exchange/BaseExchangeRepository.js';
 
 class TestExchangeRepository extends BaseExchangeRepository {}
 

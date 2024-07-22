@@ -1,6 +1,6 @@
 import { TimeoutError, ValidationError } from 'xrpl';
 import XRPLDriver from '#domain-collectors/integrations/xrpl/driver/XRPLDriver.js';
-import RateLimitExceededException from '#domain-model/exceptions/RateLimitExceededException.js';
+import RateLimitExceededException from '#domain-model/exceptions/collectors/RateLimitExceededException.js';
 
 describe('[domain-collectors/integrations/xrpl]: XRPLDriver Tests Suite', () => {
     const context = {};

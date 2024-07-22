@@ -1,4 +1,4 @@
-import BaseMarketRepository from '#domain-collectors/infrastructure/repositories/market-repositories/BaseMarketRepository.js';
+import BaseMarketRepository from '#domain-collectors/infrastructure/repositories/market/BaseMarketRepository.js';
 
 class TestMarketRepository extends BaseMarketRepository {}
 

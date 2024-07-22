@@ -1,4 +1,4 @@
-import ClusterMember from '#domain-collectors/infrastructure/ClusterMember.js';
+import ClusterMember from '#domain-collectors/utils/ClusterMember.js';
 import ClusterMembersStateManagerReducer from '#domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state-manager/reducers/ClusterMembersStateManagerReducer.js';
 
 describe('[domain-collectors/infrastructure]: ClusterMembersStateManagerReducer Tests Suite', () => {
@@ -124,14 +124,14 @@ describe('[domain-collectors/infrastructure]: ClusterMembersStateManagerReducer 
 
     test('sanitizeShareState returns the correct cluster members data', () => {
         const clusterMembers = [
-            { identity: 'id1', interval: 2000 },
-            { identity: 'id2', interval: 1500 },
+            { identity: 'id1', address: 'test-address', interval: 2000 },
+            { identity: 'id2', address: 'test-address-1', interval: 1500 },
         ];
 
         const sanitizedMessage =
-            context.clusterMembersPlugin.sanitizeShareState(clusterMembers);
+            context.clusterMembersPlugin.sanitizeShareState({ clusterMembers });
 
-        expect(sanitizedMessage).toEqual(clusterMembers);
+        expect(sanitizedMessage).toEqual({ clusterMembers });
     });
 
     test('shouldReload returns true if clusterMembers have changed', () => {

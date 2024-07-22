@@ -1,4 +1,4 @@
-import RealtimeCryptoMarketRepository from '#domain-collectors/infrastructure/repositories/market-repositories/RealtimeCryptoMarketRepository.js';
+import RealtimeCryptoMarketRepository from '#domain-collectors/infrastructure/repositories/market/RealtimeCryptoMarketRepository.js';
 import Market from '#domain-model/entities/Market.js';
 
 describe('[domain-collectors/repositories/market-repositories]: RealtimeCryptoMarketRepository Tests Suite', () => {

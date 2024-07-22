@@ -28,7 +28,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy/state
     });
 
     test('sanitizeShareState returns same object', () => {
-        const state = { replicaMembers: ['member1', 'member2'] };
+        const state = { replicaMembers: ['test-address', 'member2'] };
 
         const sanitizedMessage =
             context.replicaMembersPlugin.sanitizeShareState(state);

@@ -4,10 +4,10 @@ import {
     MILLISECONDS_IN_A_SECOND,
     SECONDS_IN_A_MINUTE,
 } from '#constants/timeframes.js';
-import ScheduleUnitContext from '#domain-collectors/infrastructure/ScheduleUnitContext.js';
+import ScheduleUnitContext from '#domain-collectors/utils/ScheduleUnitContext.js';
 
 jest.mock('croner');
-jest.mock('#domain-collectors/infrastructure/ScheduleUnitContext.js');
+jest.mock('#domain-collectors/utils/ScheduleUnitContext.js');
 
 describe('[domain-collectors/infrastructure/schedulers]: RestrictedRealtimeScheduler Tests Suite', () => {
     const context = {};

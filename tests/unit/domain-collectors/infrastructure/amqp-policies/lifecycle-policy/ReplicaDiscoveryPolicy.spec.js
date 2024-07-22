@@ -1,4 +1,4 @@
-import GenericClassFactory from '#domain-collectors/infrastructure/GenericClassFactory';
+import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory';
 import ReplicaDiscoveryPolicy from '#domain-collectors/infrastructure/amqp-policies/lifecycle-policy/ReplicaDiscoveryPolicy.js';
 import { Mutex } from 'async-mutex';
 
@@ -10,7 +10,9 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
         context.replicaDiscoveryConfig = {
             initializationDelay: 200,
             statusDebounceDelay: 100,
+            shareDebounceDelay: 100,
             closeDebounceDelay: 150,
+            phaseReleaseDelay: 1000,
             discoveryInterval: 5000,
         };
         context.StateManagers = [];

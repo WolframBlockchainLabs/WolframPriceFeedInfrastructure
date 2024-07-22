@@ -1,4 +1,4 @@
-import { MARKET_EVENTS_DICT } from '#constants/market-events.js';
+import { MARKET_EVENTS_DICT } from '#constants/collectors/market-events.js';
 import BackoffPolicy from '#domain-collectors/infrastructure/amqp-policies/stateless-policies/BackoffPolicy.js';
 import RateLimitExceededEventHandler from '#domain-collectors/infrastructure/market-events/event-handlers/RateLimitExceededEventHandler.js';
 

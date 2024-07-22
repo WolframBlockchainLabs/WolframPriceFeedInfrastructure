@@ -1,4 +1,5 @@
 import BaseScheduler from '#domain-collectors/infrastructure/schedulers/BaseScheduler.js';
+import CollectorsSchedulerException from '#domain-model/exceptions/collectors/control-plane/CollectorsSchedulerException.js';
 import 'croner';
 
 jest.mock('croner', () => {
@@ -32,13 +33,6 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
             debug: jest.fn(),
         };
 
-        const mutexReleaseStub = jest.fn();
-
-        context.mutexStub = {
-            acquire: jest.fn().mockResolvedValue(mutexReleaseStub),
-            release: mutexReleaseStub,
-        };
-
         context.baseScheduler = new BaseScheduler({
             logger: context.loggerStub,
             baseRateLimit: 50,
@@ -48,14 +42,6 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
             replicaSize: 2,
             instancePosition: 1,
         });
-
-        context.baseScheduler.startMutex = context.mutexStub;
-        context.baseScheduler.stopMutex = context.mutexStub;
-        context.baseScheduler.reloadMutex = context.mutexStub;
-        context.baseScheduler.updateRTMMutex = context.mutexStub;
-        context.baseScheduler.startAssertionMutex = context.mutexStub;
-        context.baseScheduler.stopAssertionMutex = context.mutexStub;
-        context.baseScheduler.startStopMutex = context.mutexStub;
     });
 
     afterEach(() => {
@@ -88,11 +74,9 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
 
         expect(setDynamicConfigSpy).toHaveBeenCalledTimes(1);
         expect(initializeSchedulerSpy).toHaveBeenCalledTimes(1);
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(2);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(2);
     });
 
-    test('the "start" method should handle errors and log them', async () => {
+    test('the "start" method should handle errors and wrap them', async () => {
         const mockError = new Error('Test Error');
 
         jest.spyOn(
@@ -102,17 +86,9 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
             throw mockError;
         });
 
-        await context.baseScheduler.start({});
-
-        expect(context.baseScheduler.logger.error).toHaveBeenCalledWith(
-            expect.objectContaining({
-                message: expect.stringContaining(
-                    `${context.baseScheduler.constructor.name} failed to start for:`,
-                ),
-                context: context.baseScheduler.getLogContext(),
-                error: mockError,
-            }),
-        );
+        await expect(() =>
+            context.baseScheduler.start({}),
+        ).rejects.toBeInstanceOf(CollectorsSchedulerException);
     });
 
     test('the "stop" method should destroy a schedule, setup a critical section.', async () => {
@@ -122,12 +98,10 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
 
         await context.baseScheduler.stop();
 
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(2);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(2);
         expect(destroyScheduleSpy).toHaveBeenCalledTimes(1);
     });
 
-    test('the "stop" method should handle errors and log them', async () => {
+    test('the "stop" method should handle errors and wrap them', async () => {
         const mockError = new Error('Test Error');
 
         jest.spyOn(
@@ -137,17 +111,9 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
             throw mockError;
         });
 
-        await context.baseScheduler.stop({});
-
-        expect(context.baseScheduler.logger.error).toHaveBeenCalledWith(
-            expect.objectContaining({
-                message: expect.stringContaining(
-                    `${context.baseScheduler.constructor.name} failed to stop for:`,
-                ),
-                context: context.baseScheduler.getLogContext(),
-                error: mockError,
-            }),
-        );
+        await expect(() =>
+            context.baseScheduler.stop({}),
+        ).rejects.toBeInstanceOf(CollectorsSchedulerException);
     });
 
     test('the "reload" method calls stop and then start method, sets up a critical section', async () => {
@@ -160,8 +126,6 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
 
         await context.baseScheduler.reload({});
 
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
         expect(startSpy).toHaveBeenCalledTimes(1);
         expect(stopSpy).toHaveBeenCalledTimes(1);
     });
@@ -176,8 +140,6 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
 
         await context.baseScheduler.reload({ shouldSleep: true });
 
-        expect(context.mutexStub.acquire).toHaveBeenCalledTimes(1);
-        expect(context.mutexStub.release).toHaveBeenCalledTimes(1);
         expect(startSpy).toHaveBeenCalledTimes(1);
         expect(stopSpy).toHaveBeenCalledTimes(1);
         expect(context.setTimeoutStub).toHaveBeenCalledTimes(1);

@@ -1,4 +1,4 @@
-import HistoricalCryptoMarketRepository from '#domain-collectors/infrastructure/repositories/market-repositories/HistoricalCryptoMarketRepository.js';
+import HistoricalCryptoMarketRepository from '#domain-collectors/infrastructure/repositories/market/HistoricalCryptoMarketRepository.js';
 import Market from '#domain-model/entities/Market.js';
 
 describe('[domain-collectors/repositories/market-repositories]: HistoricalCryptoMarketRepository Tests Suite', () => {
