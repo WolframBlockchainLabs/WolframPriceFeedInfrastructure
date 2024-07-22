@@ -1,3 +1,4 @@
+import EXCEPTION_CODES from '#constants/exceptions/exception-codes.js';
 import { MILLISECONDS_IN_AN_HOUR } from '#constants/timeframes.js';
 import AppE2ETestProvider from '../../AppE2ETestProvider.js';
 import CandleStickFactory from '../../factories/market-records/CandleStickFactory.js';
@@ -98,10 +99,12 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
             .query(`symbols[]=${targetCandleStick.symbol}`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(400);
 
         expect(serverResponse.body.status).toEqual(0);
-        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.code).toEqual(
+            EXCEPTION_CODES.FORMAT_ERROR,
+        );
         expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'INVALID_ISO_DATE_OR_TIMESTAMP',
         );
@@ -122,10 +125,12 @@ describe('[candle-stick]: Aggregate the records discretely', () => {
             .query(`symbols[]=${targetCandleStick.symbol}`)
             .query(`exchangeNames[]=${targetCandleStick.exchangeName}`)
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(400);
 
         expect(serverResponse.body.status).toEqual(0);
-        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.code).toEqual(
+            EXCEPTION_CODES.FORMAT_ERROR,
+        );
         expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'START_DATE_GREATER_THAN_END_DATE',
         );

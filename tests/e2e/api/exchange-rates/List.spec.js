@@ -1,3 +1,4 @@
+import EXCEPTION_CODES from '#constants/exceptions/exception-codes.js';
 import AppE2ETestProvider from '../../AppE2ETestProvider.js';
 import ExchangeRateFactory from '../../factories/market-records/ExchangeRateFactory.js';
 import ExchangeRateStory from '../../stories/market-records/ExchangeRateStory.js';
@@ -97,10 +98,12 @@ describe('[exchange-rates]: List the records', () => {
                 symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(400);
 
         expect(serverResponse.body.status).toEqual(0);
-        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.code).toEqual(
+            EXCEPTION_CODES.FORMAT_ERROR,
+        );
         expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'INVALID_ISO_DATE_OR_TIMESTAMP',
         );
@@ -121,10 +124,12 @@ describe('[exchange-rates]: List the records', () => {
                 symbol: targetCandleStick.symbol,
             })
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(400);
 
         expect(serverResponse.body.status).toEqual(0);
-        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.code).toEqual(
+            EXCEPTION_CODES.FORMAT_ERROR,
+        );
         expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'START_DATE_GREATER_THAN_END_DATE',
         );

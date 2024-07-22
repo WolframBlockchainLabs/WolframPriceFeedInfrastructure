@@ -1,3 +1,4 @@
+import EXCEPTION_CODES from '#constants/exceptions/exception-codes.js';
 import dumpAggregationTask from '#use-cases/utils/dumps/dumpAggregationTask.js';
 import AppE2ETestProvider from '../../AppE2ETestProvider.js';
 import DiscreteCandlesAggregationTaskStory from '../../stories/DiscreteCandlesAggregationTaskStory.js';
@@ -121,11 +122,11 @@ describe('[candle-stick]: Get discrete aggregation task results', () => {
         const serverResponse = await app.request
             .get(`/api/v1/crypto/candle-sticks/aggregate-discrete/results/1`)
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(404);
 
         expect(serverResponse.body.status).toEqual(0);
         expect(serverResponse.body.error.code).toEqual(
-            'AGGREGATIONTASK_NOT_FOUND',
+            EXCEPTION_CODES.ENTITY_NOT_FOUND,
         );
     });
 });

@@ -1,3 +1,4 @@
+import EXCEPTION_CODES from '#constants/exceptions/exception-codes.js';
 import AggregationTask from '#domain-model/entities/AggregationTask.js';
 import AppE2ETestProvider from '../../AppE2ETestProvider.js';
 
@@ -45,10 +46,12 @@ describe('[candle-stick]: Create discrete aggregation task', () => {
                 exchangeNames: ['Binance'],
             })
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(400);
 
         expect(serverResponse.body.status).toEqual(0);
-        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.code).toEqual(
+            EXCEPTION_CODES.FORMAT_ERROR,
+        );
         expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'INVALID_ISO_DATE_OR_TIMESTAMP',
         );
@@ -64,10 +67,12 @@ describe('[candle-stick]: Create discrete aggregation task', () => {
                 exchangeNames: ['Binance'],
             })
             .set('Accept', 'application/json')
-            .expect(200);
+            .expect(400);
 
         expect(serverResponse.body.status).toEqual(0);
-        expect(serverResponse.body.error.code).toEqual('FORMAT_ERROR');
+        expect(serverResponse.body.error.code).toEqual(
+            EXCEPTION_CODES.FORMAT_ERROR,
+        );
         expect(serverResponse.body.error.fields.rangeDateEnd).toEqual(
             'START_DATE_GREATER_THAN_END_DATE',
         );
