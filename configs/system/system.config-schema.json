@@ -173,6 +173,18 @@
                                     "greaterThanField": "shareDebounceDelay"
                                 }
                             ],
+                            "phaseReleaseDelay": [
+                                "required",
+                                "positive_integer",
+                                {
+                                    "greaterThanFieldsSum": [
+                                        "initializationDelay",
+                                        "statusDebounceDelay",
+                                        "shareDebounceDelay",
+                                        "closeDebounceDelay"
+                                    ]
+                                }
+                            ],
                             "discoveryInterval": [
                                 "required",
                                 "positive_integer"

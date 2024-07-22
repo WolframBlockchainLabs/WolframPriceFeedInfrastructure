@@ -90,6 +90,7 @@
             "statusDebounceDelay": "{{REPLICA_DISCOVERY_STATUS_DEBOUNCE_DELAY}}",
             "shareDebounceDelay": "{{REPLICA_DISCOVERY_SHARE_DEBOUNCE_DELAY}}",
             "closeDebounceDelay": "{{REPLICA_DISCOVERY_CLOSE_DEBOUNCE_DELAY}}",
+            "phaseReleaseDelay": "{{REPLICA_DISCOVERY_PHASE_RELEASE_DELAY}}",
             "discoveryInterval": "{{REPLICA_DISCOVERY_INTERVAL}}"
         }
     },
