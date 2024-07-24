@@ -5,7 +5,8 @@
         "testPort": 3002,
         "mode": "{{NODE_ENV}}",
         "trustProxy": "{{APP_TRUST_PROXY}}",
-        "cacheEnabled": "{{APP_CACHE_ENABLED}}"
+        "cacheEnabled": "{{APP_CACHE_ENABLED}}",
+        "terminationTimeout": "{{APP_TERMINATION_TIMEOUT}}"
     },
     "urls": {
         "self": "{{SELF_URL}}",

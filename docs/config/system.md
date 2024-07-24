@@ -17,6 +17,8 @@
     -   Example: `"{{APP_TRUST_PROXY}}"`
 -   **app.cacheEnabled**: Boolean that indicates whether use-case level cache should be enabled.
     -   Example: `"{{APP_CACHE_ENABLED}}"`
+-   **app.terminationTimeout**: The amount of milliseconds before process exits forcefully on shutdown. Allows to avoid deadlocks during shutdowns.
+    -   Example: `"{{APP_TERMINATION_TIMEOUT}}"`
 
 #### URLs Settings
 
