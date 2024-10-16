@@ -231,4 +231,18 @@ describe('[domain-collectors/infrastructure/schedulers]: RestrictedRealtimeSched
             1,
         );
     });
+
+    test('getPreciseInterval should return correct interval size', () => {
+        const intervalContext = {
+            clusterIntervalInMilliseconds: 300,
+            unit: SECONDS_IN_A_MINUTE,
+            timeUnitDivisor: MILLISECONDS_IN_A_SECOND,
+            cronString: '* * * * *',
+        };
+
+        context.scheduler.setupInterval(intervalContext);
+        const interval = context.scheduler.getPreciseInterval();
+
+        expect(interval).toBe(1000);
+    });
 });

@@ -1,6 +1,6 @@
-import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory';
 import ReplicaDiscoveryPolicy from '#domain-collectors/infrastructure/amqp-policies/lifecycle-policy/ReplicaDiscoveryPolicy.js';
-import { Mutex } from 'async-mutex';
+import GenericClassFactory from '#domain-collectors/utils/GenericClassFactory';
+import TimeoutMutex from '#domain-collectors/utils/TimeoutMutex.js';
 
 describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: ReplicaDiscoveryPolicy Tests Suite', () => {
     const context = {};
@@ -42,6 +42,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
             stop: jest.fn(),
             reloadActive: jest.fn(),
             getIdentity: jest.fn().mockReturnValue('mock-identity'),
+            getReloadTime: jest.fn().mockReturnValue(1000),
         };
 
         context.stateManager = {
@@ -78,6 +79,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
         context.replicaDiscoveryPolicy.interPhaseMutex = {
             acquire: jest.fn(),
             release: jest.fn(),
+            addTimeout: jest.fn(),
         };
     });
 
@@ -271,7 +273,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
     test('handleShareMessage processes message and updates state if reload is allowed', async () => {
         const message = {};
 
-        context.replicaDiscoveryPolicy.interPhaseMutex = new Mutex();
+        context.replicaDiscoveryPolicy.interPhaseMutex = new TimeoutMutex(1000);
 
         jest.spyOn(context.stateManager, 'aggregateShareState').mockReturnValue(
             {},
@@ -283,6 +285,10 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
         jest.spyOn(
             context.replicaDiscoveryPolicy.interPhaseMutex,
             'acquire',
+        ).mockResolvedValue();
+        jest.spyOn(
+            context.replicaDiscoveryPolicy.interPhaseMutex,
+            'addTimeout',
         ).mockResolvedValue();
         jest.spyOn(context.replicaDiscoveryPolicy.interPhaseMutex, 'release');
 
@@ -298,6 +304,9 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
             context.replicaDiscoveryPolicy.interPhaseMutex.acquire,
         ).toHaveBeenCalled();
         expect(
+            context.replicaDiscoveryPolicy.interPhaseMutex.addTimeout,
+        ).toHaveBeenCalledWith(1000);
+        expect(
             context.replicaDiscoveryPolicy.interPhaseMutex.release,
         ).toHaveBeenCalled();
     });
@@ -305,7 +314,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
     test('handleShareMessage processes message and and avoids state update if not needed', async () => {
         const message = {};
 
-        context.replicaDiscoveryPolicy.interPhaseMutex = new Mutex();
+        context.replicaDiscoveryPolicy.interPhaseMutex = new TimeoutMutex(1000);
 
         jest.spyOn(context.stateManager, 'aggregateShareState').mockReturnValue(
             {},
@@ -337,7 +346,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
     });
 
     test('broadcastHello sends a HELLO message', async () => {
-        context.replicaDiscoveryPolicy.interPhaseMutex = new Mutex();
+        context.replicaDiscoveryPolicy.interPhaseMutex = new TimeoutMutex(1000);
 
         jest.spyOn(
             context.replicaDiscoveryPolicy.interPhaseMutex,
@@ -369,7 +378,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
     });
 
     test('broadcastShare sends a SHARE message', async () => {
-        context.replicaDiscoveryPolicy.interPhaseMutex = new Mutex();
+        context.replicaDiscoveryPolicy.interPhaseMutex = new TimeoutMutex(1000);
 
         jest.spyOn(
             context.replicaDiscoveryPolicy.interPhaseMutex,
@@ -468,7 +477,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
         const normalizedState = {};
         const statusBuffer = [{}];
 
-        context.replicaDiscoveryPolicy.interPhaseMutex = new Mutex();
+        context.replicaDiscoveryPolicy.interPhaseMutex = new TimeoutMutex(1000);
 
         jest.spyOn(
             context.replicaDiscoveryPolicy.closeMessageBuffer,
@@ -487,6 +496,10 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
 
         jest.spyOn(
             context.replicaDiscoveryPolicy.interPhaseMutex,
+            'addTimeout',
+        ).mockResolvedValue();
+        jest.spyOn(
+            context.replicaDiscoveryPolicy.interPhaseMutex,
             'acquire',
         ).mockResolvedValue();
         jest.spyOn(context.replicaDiscoveryPolicy.interPhaseMutex, 'release');
@@ -496,6 +509,9 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
         expect(
             context.replicaDiscoveryPolicy.interPhaseMutex.acquire,
         ).toHaveBeenCalled();
+        expect(
+            context.replicaDiscoveryPolicy.interPhaseMutex.addTimeout,
+        ).toHaveBeenCalledWith(1000);
         expect(context.stateManager.aggregateCloseState).toHaveBeenCalledWith(
             statusBuffer,
         );
@@ -611,7 +627,7 @@ describe('[domain-collectors/infrastructure/amqp-policies/lifecycle-policy]: Rep
             Promise,
         );
         expect(context.replicaDiscoveryPolicy.interPhaseMutex).toBeInstanceOf(
-            Mutex,
+            TimeoutMutex,
         );
     });
 
