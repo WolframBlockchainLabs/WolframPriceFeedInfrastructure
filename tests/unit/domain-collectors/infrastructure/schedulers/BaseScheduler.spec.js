@@ -213,4 +213,12 @@ describe('[domain-collectors/infrastructure/schedulers]: BaseScheduler Tests', (
         context.baseScheduler.setQueueSize(newQueueSize);
         expect(context.baseScheduler.queueSize).toBe(newQueueSize);
     });
+
+    test('getPreciseInterval should throw a "not implemented" error', () => {
+        expect(() => {
+            context.baseScheduler.getPreciseInterval();
+        }).toThrowError(
+            `[${context.baseScheduler.constructor.name}]: getPreciseInterval method is not implemented`,
+        );
+    });
 });

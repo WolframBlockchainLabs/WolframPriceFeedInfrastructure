@@ -23,6 +23,7 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
                 getDynamicConfig: jest.fn().mockReturnValue({}),
                 getQueueSize: jest.fn().mockReturnValue(2),
                 getInstancePosition: jest.fn().mockReturnValue(0),
+                getPreciseInterval: jest.fn().mockReturnValue(2),
                 setQueueSize: jest.fn(),
                 getReloadSleepTime: jest.fn().mockReturnValue(2000),
             })),
@@ -94,6 +95,7 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         const dynamicConfig = { rateLimitMultiplier: 2 };
         context.marketsManager.internalScheduler = {
             getDynamicConfig: jest.fn().mockReturnValue(dynamicConfig),
+            getPreciseInterval: jest.fn().mockReturnValue(2),
             setDynamicConfig: jest.fn(),
         };
 
@@ -115,6 +117,7 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         const dynamicConfig = { rateLimitMultiplier: 2 };
         context.marketsManager.internalScheduler = {
             getDynamicConfig: jest.fn().mockReturnValue(dynamicConfig),
+            getPreciseInterval: jest.fn().mockReturnValue(2),
             setDynamicConfig: jest.fn(),
         };
         jest.spyOn(context.marketsManager, 'loadMarkets').mockResolvedValue();
@@ -429,5 +432,15 @@ describe('[domain-collectors]: MarketsManager Tests Suite', () => {
         context.marketsManager.internalScheduler = { some: 'scheduler' };
         const internalScheduler = context.marketsManager.getInternalScheduler();
         expect(internalScheduler).toEqual({ some: 'scheduler' });
+    });
+
+    test('getReloadTime should return the internal scheduler reload sleep time', () => {
+        context.marketsManager.internalScheduler = {
+            getReloadSleepTime: jest.fn().mockReturnValue(10000),
+        };
+
+        const reloadTime = context.marketsManager.getReloadTime();
+
+        expect(reloadTime).toEqual(10000);
     });
 });
